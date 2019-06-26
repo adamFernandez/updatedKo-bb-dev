@@ -1,6 +1,6 @@
-<div class="component-content" id="button">
+<div class="component-content" id="component-name">
   <div class="component-header">
-    <h2 class="component-title">Button</h2>
+    <h2 class="component-title">Comoponent Name</h2>
     <p>Select your options:</p>
   </div>
   <div class="component-body container">
@@ -8,15 +8,15 @@
       <div class="options container col-md-8">
         <div class="option row">
           <div class="col-md-3">
-            <h3 class="option-title btn-text">Button Text</h3>
+            <h3 class="option-title btn-text">Option Title</h3>
           </div>
           <div class="row col-md-9 option-select">
-            <input type="text" id="btn-text" name="btn-text" placeholder="Button Text">
+            <input type="text" id="btn-input" class="btn-input" name="btn-text" onfocus="if(this.value == 'value') { this.value = ''; }" placeholder="Type something...">
           </div> 
         </div>
         <div class="option row">
           <div class="col-md-3">
-            <h3 class="option-title">Button Style</h3>
+            <h3 class="option-title">Option Title</h3>
           </div>
           <div class="row option-select col-md-9">
             <div class="btn-group-toggle" data-toggle="buttons">
@@ -31,14 +31,14 @@
         </div>
         <div class="option row">
           <div class="col-md-3">
-            <h3 class="option-title">Button Width</h3>
+            <h3 class="option-title">Option Title</h3>
           </div>
           <div class="row option-select col-md-9">
             <div class="btn-group-toggle btn-group-block" data-toggle="buttons">
-              <label class="btn btn-primary btn-width btn-std-width active">
+              <label class="btn btn-primary btn-std-width active">
                 <input type="radio" name="options" id="width-standard" autocomplete="off" checked>Standard
               </label>
-              <label class="btn btn-primary btn-width btn-block col-md-12">
+              <label class="btn btn-primary btn-block col-md-12">
                 <input type="radio" name="options" id="width-full" autocomplete="off">Full-width
               </label>
             </div>
@@ -46,15 +46,15 @@
         </div>
         <div class="option row">
           <div class="col-md-3">
-            <h3 class="option-title">Tags</h3>
+            <h3 class="option-title">Option Title</h3>
             <p>Description</p>
           </div>
           <div class="row option-select col-md-9">
             <div class="btn-group-toggle" data-toggle="buttons">
-              <label class="btn btn-outline-dashed tag-type tag-button active">
+              <label class="btn btn-outline-dashed tag-type tag-button active" value="test">
                 <input type="radio" name="options" id="tag-button" autocomplete="off"checked>&lt;button&gt;
               </label>
-              <label class="btn btn-outline-dashed tag-type tag-a">
+              <label class="btn btn-outline-dashed tag-type tag-a" id="tag-a-label">
                 <input type="radio" name="options" id="tag-a" autocomplete="off">&lt;a&gt;
               </label>
               <label class="btn btn-outline-dashed tag-type tag-input">
@@ -62,14 +62,14 @@
               </label>
             </div>
             <div class="input-set" id="tag-link">
-              <label for="btn-link" class="no-margin">Link: </label>
-              <input type="text" id="btn-link" "name="btn-link" placeholder="#" value="">
+              <label class="no-margin">Link: </label>
+              <input type="text" class="link-text" name="btn-link-text" placeholder="#" value="">
             </div>
           </div>
         </div>
         <div class="option row">
           <div class="col-md-3">
-            <h3 class="option-title">Button Icons</h3>
+            <h3 class="option-title">Option Title</h3>
           </div>
           <div class="row option-select col-md-9">
             <div class="input-group">
@@ -94,17 +94,17 @@
       <div class="col-md-4 container" id="button">
         <div class="preview">
           <h2 class="preview-title">Preview</h2>
-          <div id="btn-preview-pane">
+          <div class="preview-pane">
             <button type="button" class="btn btn-primary" disabled>Button Text</button>
           </div>
         </div>
         <div class="component-code">
           <h2 class="code-title">And here's the code...</h2>
           <div class="code-box">
-            <pre class="code-text">
-<span id="btn-print-code"><span id="code-open-tag">&lt;<span class="code-btn-tag">button</span>&#32;<span id="code-btn-type">type&#61;&#34;<span id="code-btn-type-value">button</span>&#34;&#32;</span><span id="code-btn-link">href&#61;&#34;<span id="code-btn-link-text">#</span>&#34;&#32;</span>class&#61;&#34;<span id="code-btn-class-style">btn&#32;btn&#45;primary</span><span id="code-btn-class-width"></span>&#34;<span id="code-btn-value">&#32;value&#61;&#34;<span class="code-btn-text"></span>&#34;</span>&gt;</span>
-  <span class="code-btn-text" id="code-btn-text">Button Text</span>
-<span id="code-close-tag">&lt;&#47;<span class="code-btn-tag">button</span>&gt;</span></span>
+            <pre>
+<span id="print-code"><span class="tp">&lt;</span><span class="code-tag">button</span><span class="tp">&#32;</span><span class="code-type-pre">type="</span><span class="code-type">button</span><span class="code-link"></span><span class="tp">&#34;&#32;</span><span class="code-class-pre">class="<span class="code-class-style">btn btn-primary</span><span class="code-class-width"></span><span class="tp">&#34;</span></span><span class="code-input-value"><span class="code-input-value-open"> value="</span><span class="code-input-value-text"></span><span class="code-input-value-close">"</span></span><span class="tp">&gt;</span>  
+  <span id="btn-text">Button Text</span>
+<span class="code-close-tag"><span id="tp">&lt;&#47;</span><span class="code-tag">button</span><span id="token punctuation">&gt;</span></span></span>
             </pre>
           </div>
         </div>

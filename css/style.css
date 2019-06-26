@@ -29,7 +29,6 @@ h2 {
 .component-content.selected {
   display: block;
 }
-
 .option {
   border-top: 1px solid rgba(0,0,0,.125);  
   align-items: center;
@@ -40,8 +39,11 @@ h2 {
 .btn.active {
   border: 2px solid #000 !important;
 }
-.btn, input {
+.btn, input, textarea {
   margin: 5px;
+}
+textarea {
+  width: 100%
 }
 .btn.btn-outline-dashed {
    border: 1px dashed rgba(0,0,0,.125);
@@ -63,9 +65,7 @@ h2 {
   margin-left: 20px;
 }
 
-.code-title, .code-box {
-  font-family: 'PT Mono', monospace;
-}
+/* preview styles */
 .preview-title {
   position: absolute;
   top: -50px;
@@ -74,10 +74,30 @@ h2 {
 .preview-pane {
   border: 1px solid rgba(0,0,0,.125);
 }
+
+/* code box styles */
+.code-title, .code-box, .copy-btn {
+  font-family: 'PT Mono', monospace;
+}
 .code-title {
   font-size: 24px;
 }
 .code-box {
   border: 1px solid rgba(0,0,0,.125);  
   font-size: 12px;
+}
+
+/* embed styles */
+.embed-responsive {
+  position: relative;
+  overflow: hidden;
+}
+.embed-responsive-608by402 {
+  padding-top: calc(402%/6.08);
+}
+.embed-responsive-400by285 {
+  padding-top: calc(285%/4);
+}
+.embed-responsive-304by231 {
+  padding-top: calc(231%/3.04);
 }

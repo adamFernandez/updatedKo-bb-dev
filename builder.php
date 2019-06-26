@@ -15,7 +15,7 @@
         <select id="component-select">
           <option value="" disabled selected>Select a component</option>
           <?php 
-            $components = array('Button', 'Carousel', 'Collapse', 'Timeline', 'Card', 'Grid', 'Table');
+            $components = array('Button', 'Carousel', 'Collapse', 'Timeline', 'Card', 'Grid', 'Table', 'Transcript', 'Embed');
             sort($components);
             foreach ($components as $component) {
               $value = strtolower(str_replace(' ','',$component));
@@ -31,8 +31,10 @@
           <?php include('components/carousel.php'); ?>
           <?php include('components/collapse.php'); ?>
           <?php include('components/grid.php'); ?>
+          <?php include('components/embed.php'); ?>
           <?php include('components/table.php'); ?>
           <?php include('components/timeline.php'); ?>
+          <?php include('components/transcript.php'); ?>
         </div>   
       </section>
       <section style="display:none;">

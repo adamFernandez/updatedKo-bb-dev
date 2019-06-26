@@ -1,124 +1,136 @@
 $(document).ready(function() {
-  $(".preview-pane").html("<button class=\"btn btn-primary\">Button Text</button>");
-  $("#tag-link, .code-input-value").hide();
-  $("#btn-text").text("Button Text");
-  $(".code-link").empty();
+  $("#tag-link, #code-btn-value, #code-btn-link, #btn-value").hide();
 });
 
-//Display component card upon select
+// display component card upon select
 $("#component-select").change(function() {
   $("#component-builder").show();
   $(".component-content").each(function() {
     $(this).hide();
   });
   $("#" + $(this).val()).show();
+  preview("btn");
 });
 
-//Generates button text from input
-$(".btn-input").keyup(function() {
-  if (!$(".tag-input").hasClass("active")) {
-    if ($(this).val() == "") {
-      $("#btn-text").text("Button Text");
-    } else {
-      $("#btn-text").text($(this).val());
-    }   
-  }
-  else {
-    $("#btn-text").empty();
-  }
-  disablePreview();
-}).keyup();
+/*
+ * button
+ */
 
-//Sets button style
+// sets button style
 $(".btn-style").click(function() {
-  $(".code-class-style").text("btn btn-"+$.trim($(this).text().toLowerCase()));
+  $("#code-btn-class-style").text("btn btn-"+$.trim($(this).text().toLowerCase()));
+  preview("btn");
 });
 
-//Sets button width 
-$(".btn-std-width").click(function() {
-  $(".code-class-width").empty();
-});
-$(".btn-block").click(function() {
-  $(".code-class-width").text(" btn-block");
+// sets button width 
+$(".btn-width").click(function() {
+  $(this).hasClass("btn-block") ?  $("#code-btn-class-width").text(" btn-block") : $("#code-btn-class-width").text("");
+  preview("btn");
 });
 
-//Sets tags
+// sets tags
 $(".tag-type").click(function() {
   var taglessText = ($(this).text()).replace(/\<|\>/g,"");
   var trimmedText = $.trim(taglessText);
-  $(".code-tag").text(trimmedText);
+  $(".code-btn-tag").text(trimmedText);
 });
 
-// Toggles link input display on anchor tag select
+// generates button text from input
+$("#btn-text").keyup(function() {
+  (!$(this).val() == "") ? (
+    $(".code-btn-text").text($(this).val()),
+    ($(".tag-input").hasClass("active") ? $("#code-btn-text").text("") : null ) 
+  ) : ($(".tag-input").hasClass("active") ? $(".code-btn-text").text("Button Value") : $(".code-btn-text").text("Button Text"))
+  preview("btn")
+}).keyup();
+
+// generates link text from input
+updateText("btn", "#btn-link", "#code-btn-link-text", "#");
+
+// toggles field display on tag select
 $(".tag-type").click(function() {
-  if ($(this).hasClass("tag-a")) {
-    $("#tag-link").show();
-    $(".code-type-pre").text("href=\"");
-    $(".code-type").text("");
-    if ($(".link-text").val() == "") {
-      $(".code-link").text("#");    
-    } else {
-      $(".code-link").text($(".link-text").val());
-    }
-  } else {
-    $("#tag-link").hide();
-    $(".code-type-pre").text("type=\"");
-    $(".code-link").empty();
-    $(".code-type").text("button");
-  }
+  $(this).hasClass("tag-a") ? displayA()
+  : $(this).hasClass("tag-input") ? displayInput()
+  : displayButton();
+  preview("btn");
+});
+function displayButton() {
+  $("#tag-link, #code-btn-link, #code-btn-value").hide();
+  $("#code-btn-type, #code-btn-text, #code-close-tag").show();    
+  (!$("#btn-text").val() == "") ? $(".code-btn-text").text($("#btn-text").val()) : $(".code-btn-text").text("Button Text");
+}
+function displayA() {
+  $("#tag-link, #code-btn-link, #code-btn-text, #code-close-tag").show();
+  $("#code-btn-type, #code-btn-value").hide();
+  (!$("#btn-text").val() == "") ? $(".code-btn-text").text($("#btn-text").val()) : $(".code-btn-text").text("Button Text");
+
+}
+function displayInput() {
+  $("#tag-link, #code-btn-link, #code-btn-text, #code-close-tag").hide();
+  $("#code-btn-type, #code-btn-value").show();
+  (!$("#btn-text").val() == "") ? $(".code-btn-text").text($("#btn-text").val()) : $(".code-btn-text").text("Button Value");
+  $("#code-btn-text").text("");
+}
+
+// copy code onto clipboard
+$(".copy-btn").click(function() {
+  $(".component-title").select();
+  document.execCommand("copy");
+  alert ("Copied" + $(".preview-pane").html());
 });
 
-// Generates link text from input
-$(".link-text").keyup(function() {
-  if (!$(this).val() == "") {
-    $(".code-link").text($(this).val());
-  } else {
-    $(".code-link").text("#");
-  }
-}).keyup();
+/*
+ * transcript
+ */ 
+updateText("ts", "#ts-title", "#code-ts-title", "Transcript title");
+updateText("ts", "#ts-id", ".code-ts-id", "modname-unitno-transcript");
+updateText("ts", "#ts-link", "#code-ts-link", "#");
+updateText("ts", "#ts-body", "#code-ts-body", "Transcript body...");
 
-// Generates input value text
-$(".btn-input").keyup(function () {
-  if ($(".btn-input").val() == "") {
-    $(".code-input-value-text").text("Button Value");
-  } else { 
-    $(".code-input-value-text").text($(this).val());
-  } 
-  text = $("#print-code").text();
-  $(".preview-pane").html(text);
-  disablePreview();
-}).keyup();
+function updateText(component, input, outputText, defaultText) {
+  $(input).keyup(function() {
+    (!$(this).val() == "") ? $(outputText).text($(this).val()) : $(outputText).text(defaultText);
+    text = $("#" + component + "-print-code").text();
+    $("#" + component + "-preview-pane").html(text);
+  }).keyup();
+}
 
-// On option select
-$(".btn:not(.btn-icon)").click(function() {
-  if ($(this).hasClass("tag-input") || ($(".tag-input").hasClass("active") && !$(this).hasClass("tag-type"))) {
-    $(".option-title.btn-text").text("Button Value");
-    $(".code-input-value").show();
-    $(".code-close-tag").hide();
-    $("#btn-text").empty().hide();  
-    // Sets input value attribute 
-    if ($(".btn-input").val() == "") {
-      $(".code-input-value-text").text("Button Value");
-    } else {
-      $(".code-input-value-text").text($(".btn-input").val());
-    }
-  } else {
-    $(".option-title.btn-text").text("Button Text");
-    $(".code-input-value").hide();
-    $(".code-input-value-text").empty();
-    $(".code-close-tag").show();
-    $("#btn-text").show();
-    // Sets button text    
-    if ($(".btn-input").val() == "") {
-      $("#btn-text").text("Button Text");
-    } else {
-      $("#btn-text").text($(".btn-input").val());  
-    }
+// toggle view close transcript button 
+$(".view-close-transcript").click(function() {
+  $(this).text($(this).text() == 'View transcript' ? 'Close transcript' : 'View transcript');
+});
+
+/*
+ * embed
+ */
+
+// change responsive ratio on size select
+$("#em-player-size").change(function() {
+  $("#code-em-player-size").text($(this).val());
+  if (!$("#em-embed").val() == "") preview("em");
+});
+
+// generate embed code
+updateText("em", "#em-embed", "#code-em-embed", "<iframe></iframe>");
+$("#em-embed").keyup(function() {
+  preview("em");
+});
+
+/*
+ * general functions
+ */
+
+// generate preview
+function preview(component) {
+  text = $("#" + component + "-print-code").text();
+  if (component == "em") {
+    text = text.replace('" width',
+      '&amp;flashvars[infoScreen.plugin]=false&amp;flashvars[titleLabel.plugin]=false&amp;flashvars[related.plugin]=false&amp;flashvars[closedCaptions.displayCaptions]=false&amp;flashvars[closedCaptions.layout]=below&amp;flashvars[IframeCustomPluginCss1]=https:\/\/git.iddkingsonline.com\/kaltura\/kaltura.css" width');  
+    $("#em-print-code").text(text);
   }
-  text = $("#print-code").text();
-  $(".preview-pane").html(text);
-  disablePreview();
-}); 
+  $("#" + component + "-preview-pane").html(text);
+  if (component == "btn") disablePreview();
+}
 
 //disable preview button
 function disablePreview() {
