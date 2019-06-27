@@ -117,6 +117,35 @@ $("#em-embed").keyup(function() {
 });
 
 /*
+ * collapse
+ */
+
+$("#col-card-no").change(function() {
+  maxCards = $(this).val();
+  $(".col-card").each(function(i, card) {
+    $(this).hide();
+    if ( i < maxCards ) {
+      $(this).show();
+    }
+  });
+  $(".code-col-card").each(function(i, card) {
+    $(this).hide();
+    if ( i < maxCards ) {
+      $(this).show();
+    }
+  });
+});
+
+// generate card text
+updateText("col", "#collapse-1-heading", "#code-col-collapse-1-heading", "Collapse card #1 heading");
+updateText("col", "#collapse-1-body", "#code-col-collapse-1-body", "Collapse card #1 body");
+updateText("col", "#collapse-2-heading", "#code-col-collapse-2-heading", "Collapse card #2 heading");
+updateText("col", "#collapse-2-body", "#code-col-collapse-2-body", "Collapse card #2 body");
+updateText("col", "#collapse-3-heading", "#code-col-collapse-3-heading", "Collapse card #3 heading");
+updateText("col", "#collapse-3-body", "#code-col-collapse-3-body", "Collapse card #3 body");
+updateText("col", "#col-id", ".code-col-id", "modname-unitno-collapse-no");
+
+/*
  * general functions
  */
 

@@ -25,6 +25,7 @@ h2 {
 }
 .component-content {
   display: none;
+  margin: 1.5rem 0;
 }
 .component-content.selected {
   display: block;
@@ -39,7 +40,7 @@ h2 {
 .btn.active {
   border: 2px solid #000 !important;
 }
-.btn, input, textarea {
+div#button .btn, div#button input, div#button textarea {
   margin: 5px;
 }
 textarea {
@@ -85,6 +86,9 @@ textarea {
 .code-box {
   border: 1px solid rgba(0,0,0,.125);  
   font-size: 12px;
+}
+.code-text {
+  max-height:25rem;
 }
 
 /* embed styles */
