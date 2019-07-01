@@ -1,5 +1,6 @@
 $(document).ready(function() {
-  $("#tag-link, #code-btn-value, #code-btn-link, #btn-value").hide();
+  $("#tag-link, #code-btn-value, #code-btn-link, #btn-value, #btn-link-field").hide();
+  createAllCollapseCards(3);
 });
 
 // display component card upon select
@@ -9,79 +10,77 @@ $("#component-select").change(function() {
     $(this).hide();
   });
   $("#" + $(this).val()).show();
-  preview("btn");
+//  preview("btn");
 });
 
-/*
- * button
- */
+/**********************************
+ * button                         *
+ **********************************/
 
 // sets button style
-$(".btn-style").click(function() {
-  $("#code-btn-class-style").text("btn btn-"+$.trim($(this).text().toLowerCase()));
+$("#btn-style").change(function() {
+  $("#code-btn-class-style").text("btn btn-" + $(this).val());
   preview("btn");
 });
 
-// sets button width 
-$(".btn-width").click(function() {
-  $(this).hasClass("btn-block") ?  $("#code-btn-class-width").text(" btn-block") : $("#code-btn-class-width").text("");
+// sets button width
+$("#btn-width").change(function() {
+  $("#code-btn-class-width").text($(this).val());
   preview("btn");
 });
 
 // sets tags
-$(".tag-type").click(function() {
-  var taglessText = ($(this).text()).replace(/\<|\>/g,"");
-  var trimmedText = $.trim(taglessText);
-  $(".code-btn-tag").text(trimmedText);
+$("#btn-tag").change(function() {
+  $(".code-btn-tag").text($(this).val());
+  $(this).val() == "a" ?  ($(
+    "#btn-link-field, #code-btn-link").show(),
+    $("#code-btn-type, #code-btn-value").hide(),
+    updateBtnText()
+  ) : (
+    $("#btn-link-field, #code-btn-link").hide(),
+    $("#code-btn-type").show(),
+    (
+      $(this).val() == "input" ? (
+        $("#code-close-tag").hide(),
+        $("#code-btn-value").show(),
+        updateBtnValue()
+      ) : (
+        $("#code-close-tag").show(),
+        $("#code-btn-value").hide(),
+        updateBtnText()
+      )
+    )
+  )
+  preview("btn");
 });
 
 // generates button text from input
+function updateBtnText() {
+  updateText("btn", "#btn-text", "#code-btn-text", "Button Text");
+}
+
+function updateBtnValue() {
+  updateText("btn", "#btn-text", "#code-btn-value-text", "Button Text");
+  $("#code-btn-text").text("");
+}
+
 $("#btn-text").keyup(function() {
-  (!$(this).val() == "") ? (
-    $(".code-btn-text").text($(this).val()),
-    ($(".tag-input").hasClass("active") ? $("#code-btn-text").text("") : null ) 
-  ) : ($(".tag-input").hasClass("active") ? $(".code-btn-text").text("Button Value") : $(".code-btn-text").text("Button Text"))
-  preview("btn")
+  if ( $(".code-btn-tag").html() === "input" ) {
+   $("#code-btn-text").text("");
+  } else {
+    (!$(this).val() == "") ? $("#code-btn-text").text($(this).val()) : $("#code-btn-text").text("Button Text");
+  }
+  preview("btn");
 }).keyup();
 
 // generates link text from input
 updateText("btn", "#btn-link", "#code-btn-link-text", "#");
+ 
 
-// toggles field display on tag select
-$(".tag-type").click(function() {
-  $(this).hasClass("tag-a") ? displayA()
-  : $(this).hasClass("tag-input") ? displayInput()
-  : displayButton();
-  preview("btn");
-});
-function displayButton() {
-  $("#tag-link, #code-btn-link, #code-btn-value").hide();
-  $("#code-btn-type, #code-btn-text, #code-close-tag").show();    
-  (!$("#btn-text").val() == "") ? $(".code-btn-text").text($("#btn-text").val()) : $(".code-btn-text").text("Button Text");
-}
-function displayA() {
-  $("#tag-link, #code-btn-link, #code-btn-text, #code-close-tag").show();
-  $("#code-btn-type, #code-btn-value").hide();
-  (!$("#btn-text").val() == "") ? $(".code-btn-text").text($("#btn-text").val()) : $(".code-btn-text").text("Button Text");
+/**********************************
+ * transcript                     *
+ **********************************/
 
-}
-function displayInput() {
-  $("#tag-link, #code-btn-link, #code-btn-text, #code-close-tag").hide();
-  $("#code-btn-type, #code-btn-value").show();
-  (!$("#btn-text").val() == "") ? $(".code-btn-text").text($("#btn-text").val()) : $(".code-btn-text").text("Button Value");
-  $("#code-btn-text").text("");
-}
-
-// copy code onto clipboard
-$(".copy-btn").click(function() {
-  $(".component-title").select();
-  document.execCommand("copy");
-  alert ("Copied" + $(".preview-pane").html());
-});
-
-/*
- * transcript
- */ 
 updateText("ts", "#ts-title", "#code-ts-title", "Transcript title");
 updateText("ts", "#ts-id", ".code-ts-id", "modname-unitno-transcript");
 updateText("ts", "#ts-link", "#code-ts-link", "#");
@@ -100,9 +99,9 @@ $(".view-close-transcript").click(function() {
   $(this).text($(this).text() == 'View transcript' ? 'Close transcript' : 'View transcript');
 });
 
-/*
- * embed
- */
+/**********************************
+ * embed                          *
+ **********************************/
 
 // change responsive ratio on size select
 $("#em-player-size").change(function() {
@@ -112,29 +111,48 @@ $("#em-player-size").change(function() {
 
 // generate embed code
 updateText("em", "#em-embed", "#code-em-embed", "<iframe></iframe>");
-$("#em-embed").keyup(function() {
-  preview("em");
-});
 
-/*
- * collapse
- */
+/**********************************
+ * collapse                       *
+ **********************************/
 
+// on selet change, show only the required no of cards to edit, update code and preview
 $("#col-card-no").change(function() {
-  maxCards = $(this).val();
+  maxCollapseCards = $(this).val();
   $(".col-card").each(function(i, card) {
     $(this).hide();
-    if ( i < maxCards ) {
+    if ( i < maxCollapseCards ) {
       $(this).show();
     }
   });
-  $(".code-col-card").each(function(i, card) {
-    $(this).hide();
-    if ( i < maxCards ) {
-      $(this).show();
-    }
-  });
+  createAllCollapseCards(maxCollapseCards);
 });
+
+function createAllCollapseCards(maxCollapseCards) {
+  $("#code-col-cards").empty();
+  for (let i = 1; i <= maxCollapseCards; i++) {
+    card = createCollapseCard(i);
+    $("#code-col-cards").append(card);
+  }
+  preview("col");
+}
+
+function createCollapseCard(i) {
+  return `<span class="code-col-card"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;card&#34;&gt;</span>
+    <span class="code-open-tag">&lt;div&#32;class&#61;&#34;card&#45;header&#32;p&#45;0&#34;&#32;id&#61;&#34;<span class="code-col-id">modname&#45;unitno&#45;collapse&#45;no</span>&#45;heading&#45;<span class="code-col-card-no">${i}</span>&#34;&gt;</span>
+      <span class="code-open-tag">&lt;button&#32;class&#61;&#34;btn&#32;btn&#45;link&#32;collapsed&#32;btn&#45;block&#32;text&#45;left&#32;px&#45;3&#34;&#32;data&#45;toggle&#61;&#34;collapse&#34;&#32;data&#45;target&#61;&#34;#<span class="code-col-id">modname&#45;unitno&#45;collapse&#45;no</span>&#45;collapse&#45;${i}&#34;&#32;aria&#45;expanded&#61;&#34;false&#34;&#32;aria&#45;controls&#61;&#34;<span class="code-col-id">modname&#45;unitno&#45;collapse&#45;no</span>&#45;collapse&#45;${i}&#34;&gt;</span>
+        <span class="code-open-tag">&lt;h3&#32class&#61;&#34;h5&#34;&gt;</span>
+          <span id="code-col-collapse-${i}-heading">Collapse card #${i} heading</span>
+        <span class="code-close-tag">&lt;&#47;h3&gt;</span>
+      <span class="code-close-tag">&lt;&#47;button&gt;</span>
+    <span class="code-close-tag">&lt;&#47;div&gt;</span>
+    <span class="code-open-tag">&lt;div&#32;class&#61;&#34;collapse&#34;&#32;id&#61;&#34;<span class="code-col-id">modname&#45;unitno&#45;collapse&#45;no</span>&#45;collapse&#45;${i}&#34;&#32;aria&#45;labelledby&#61;&#34;<span class="code-col-id">modname&#45;unitno&#45;collapse&#45;no</span>&#45;heading&#45;${i}&#34;&#32;data&#45;parent&#61;&#34;#<span class="code-col-id">modname&#45;unitno&#45;collapse&#45;no</span>&#34;&gt;</span>
+      <span class="code-open-tag">&lt;div&#32;class&#61;&#34;card&#45;body&#34;&gt;</span>
+        <span id="code-col-collapse-${i}-body">Collapse card #${i} body</span>
+      <span class="code-close-tag">&lt;&#47;div&gt;</span>
+    <span class="code-close-tag">&lt;&#47;div&gt;</span>
+  <span class="code-close-tag">&lt;&#47;div&gt;</span></span>`;
+}
 
 // generate card text
 updateText("col", "#collapse-1-heading", "#code-col-collapse-1-heading", "Collapse card #1 heading");
@@ -145,9 +163,9 @@ updateText("col", "#collapse-3-heading", "#code-col-collapse-3-heading", "Collap
 updateText("col", "#collapse-3-body", "#code-col-collapse-3-body", "Collapse card #3 body");
 updateText("col", "#col-id", ".code-col-id", "modname-unitno-collapse-no");
 
-/*
- * general functions
- */
+/**********************************
+ * general functions              *
+ **********************************/
 
 // generate preview
 function preview(component) {
@@ -161,9 +179,16 @@ function preview(component) {
   if (component == "btn") disablePreview();
 }
 
-//disable preview button
+// disable preview button
 function disablePreview() {
   $(".preview-pane").children().click(function (e) {
     e.preventDefault();
   });
 };
+
+// copy code onto clipboard
+$(".copy-btn").click(function() {
+  $(".component-title").select();
+  document.execCommand("copy");
+  alert ("Copied" + $(".preview-pane").html());
+});
