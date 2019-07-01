@@ -47,14 +47,14 @@ This is the second paragraph." rows="6"></textarea>
           <h2 class="code-title">And here's the code...</h2>
           <div class="code-box">
             <pre class="code-text">
-<span id="ts-print-code"><span class="code-open-tag">&lt;div&#32class&#61;&#34;transcript&#45;container&#34;&gt;</span>
-  <span class="code-open-tag">&lt;div&#32class&#61;&#34;transcript&#45;button&#45;group&#34;&gt;</span>
-    <span class="code-open-tag">&lt;a&#32class&#61;&#34;btn&#32;btn&#45;primary&#32;view&#45;close&#45;transcript&#32collapsed&#34;&#32;href&#61;&#34;&#35;<span class="code-ts-id">modname-unitno-transcript</span>&#34;&#32;data&#45;toggle&#61;&#34;collapse&#34;&#32;role&#61;&#34;button&#34;&#32;aria&#45;expanded&#61;&#34;false&#34;&#32;aria&#45;controls&#61;&#34;<span class="code-ts-id">modname-unitno-transcript</span>&#34;&gt;</span>View transcript<span class="code-close-tag">&lt;&#47;a&gt;</span>
-    <span class="code-open-tag">&lt;a&#32class&#61;&#34;btn&#32;btn&#45;primary&#34;&#32;href&#61;&#34;<span id="code-ts-link">www.example.com/transcript.pdf</span>&#34;&#32;role&#61;&#34;button&#34;&#32;target&#61;&#34;&#95;blank&#34;&gt;</span>Download transcript<span class="code-close-tag">&lt;&#47;a&gt;</span>
+<span id="ts-print-code"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;transcript&#45;container&#34;&gt;</span>
+  <span class="code-open-tag">&lt;div&#32;class&#61;&#34;transcript&#45;button&#45;group&#34;&gt;</span>
+    <span class="code-open-tag">&lt;a&#32;class&#61;&#34;btn&#32;btn&#45;primary&#32;view&#45;close&#45;transcript&#32;collapsed&#34;&#32;href&#61;&#34;&#35;<span class="code-ts-id">modname-unitno-transcript</span>&#34;&#32;data&#45;toggle&#61;&#34;collapse&#34;&#32;role&#61;&#34;button&#34;&#32;aria&#45;expanded&#61;&#34;false&#34;&#32;aria&#45;controls&#61;&#34;<span class="code-ts-id">modname-unitno-transcript</span>&#34;&gt;</span>View transcript<span class="code-close-tag">&lt;&#47;a&gt;</span>
+    <span class="code-open-tag">&lt;a&#32;class&#61;&#34;btn&#32;btn&#45;primary&#34;&#32;href&#61;&#34;<span id="code-ts-link">www.example.com/transcript.pdf</span>&#34;&#32;role&#61;&#34;button&#34;&#32;target&#61;&#34;&#95;blank&#34;&gt;</span>Download transcript<span class="code-close-tag">&lt;&#47;a&gt;</span>
   <span class="code-close-tag">&lt;&#47;div&gt;</span>
-  <span class="code-open-tag">&lt;div&#32class&#61;&#34;transcript&#45;card&#32;card&#32;collapse&#34;&#32;id&#61;&#34;<span class="code-ts-id">modname-unitno-transcript</span>&#34;&gt;</span>
-    <span class="code-open-tag">&lt;div&#32class&#61;&#34;card&#45;body&#34;&gt;</span>
-      <span class="code-open-tag">&lt;h3&#32class&#61;&#34;card&#45;title&#34;&gt;</span><span id="code-ts-title">Transcript title</span><span class="code-close-tag">&lt;&#47;h3&gt;</span>
+  <span class="code-open-tag">&lt;div&#32;class&#61;&#34;transcript&#45;card&#32;card&#32;collapse&#34;&#32;id&#61;&#34;<span class="code-ts-id">modname-unitno-transcript</span>&#34;&gt;</span>
+    <span class="code-open-tag">&lt;div&#32;class&#61;&#34;card&#45;body&#34;&gt;</span>
+      <span class="code-open-tag">&lt;h3&#32;class&#61;&#34;card&#45;title&#34;&gt;</span><span id="code-ts-title">Transcript title</span><span class="code-close-tag">&lt;&#47;h3&gt;</span>
       <span class="code-open-tag">&lt;p&gt;</span><span id="code-ts-body">Transcript body...</span><span class="code-close-tag">&lt;&#47;p&gt;</span>
     <span class="code-close-tag">&lt;&#47;div&gt;</span>
   <span class="code-close-tag">&lt;&#47;div&gt;</span>
