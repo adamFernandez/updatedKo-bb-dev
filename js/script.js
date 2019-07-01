@@ -1,5 +1,6 @@
 $(document).ready(function() {
   $("#tag-link, #code-btn-value, #code-btn-link, #btn-value, #btn-link-field").hide();
+// set collapse to show 3 cards by default
   createAllCollapseCards(3);
   createAllCollapseEditorCards(3);
 });
@@ -102,8 +103,14 @@ $("#em-player-size").change(function() {
   if (!$("#em-embed").val() == "") preview("em");
 });
 
-// generate embed code
-updateText("em", "#em-embed", "#code-em-embed", "<iframe></iframe>");
+// add variables and generate embed code
+$("#em-embed").keyup(function() {
+  embedText = $(this).val();
+  embedText = embedText.replace('" width',
+     '&amp;flashvars[infoScreen.plugin]=false&amp;flashvars[titleLabel.plugin]=false&amp;flashvars[related.plugin]=false&amp;flashvars[closedCaptions.displayCaptions]=false&amp;flashvars[closedCaptions.layout]=below&amp;flashvars[IframeCustomPluginCss1]=https:\/\/git.iddkingsonline.com\/kaltura\/kaltura.css" width');  
+  (!embedText == "") ? $("#code-em-embed").text(embedText) : $("#code-em-embed").text("<iframe></iframe>");
+  preview("em");
+}).keyup();
 
 /**********************************
  * collapse                       *
@@ -195,18 +202,6 @@ function updateCollapseText(collapseCardLimit) {
  * general functions              *
  **********************************/
 
-// generate preview
-function preview(component) {
-  text = $("#" + component + "-print-code").text();
-  if (component == "em") {
-    text = text.replace('" width',
-      '&amp;flashvars[infoScreen.plugin]=false&amp;flashvars[titleLabel.plugin]=false&amp;flashvars[related.plugin]=false&amp;flashvars[closedCaptions.displayCaptions]=false&amp;flashvars[closedCaptions.layout]=below&amp;flashvars[IframeCustomPluginCss1]=https:\/\/git.iddkingsonline.com\/kaltura\/kaltura.css" width');  
-    $("#em-print-code").text(text);
-  }
-  $("#" + component + "-preview-pane").html(text);
-  if (component == "btn") disablePreview();
-}
-
 // disable preview button
 function disablePreview() {
   $(".preview-pane").children().click(function (e) {
@@ -218,8 +213,7 @@ function disablePreview() {
 function updateText(component, input, outputText, defaultText) {
   $(input).keyup(function() {
     (!$(this).val() == "") ? $(outputText).text($(this).val()) : $(outputText).text(defaultText);
-    text = $("#" + component + "-print-code").text();
-    $("#" + component + "-preview-pane").html(text);
+    preview(component);
   }).keyup();
 }
 
@@ -227,9 +221,16 @@ function updateText(component, input, outputText, defaultText) {
 function updateText2(component, input, outputText, defaultText) {
   $(document).on('keyup', input, function (event) {
     (!$(this).val() == "") ? $(outputText).text($(this).val()) : $(outputText).text(defaultText);
-    text = $("#" + component + "-print-code").text();
-    $("#" + component + "-preview-pane").html(text);
+    preview(component);
   }).keyup();
+}
+
+
+// generate preview
+function preview(component) {
+  text = $("#" + component + "-print-code").text();
+  $("#" + component + "-preview-pane").html(text);
+  if (component == "btn") disablePreview();
 }
 
 // copy code onto clipboard
