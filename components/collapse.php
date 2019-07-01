@@ -17,6 +17,11 @@
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3" selected>3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
                 </select>
               </div>
             </div>
@@ -31,65 +36,6 @@
           </div>
         </form>
         <div id="col-collapse">
-          <div class="card col-card" id="col-card-1">
-            <div class="card-header p-0" id="col-card-heading-1">
-              <button class="btn btn-link btn-block text-left px-3" data-toggle="collapse" data-target="#collapse-1" aria-expanded="true" aria-controls="collapse-1">
-                <h3 class="h5" style="margin-bottom:0 !important">Card #1</h3>
-              </button>
-            </div>
-            <div id="collapse-1" class="collapse show" aria-labelledby="col-card-heading-1" data-parent="#col-collapse">
-              <div class="card-body">
-                <form>
-                  <div class="form-group">
-                    <label for="collapse-1-heading">Heading</label>
-                    <input type="text" class="form-control" id="collapse-1-heading" placeholder="Collapse card #1 heading">
-                  </div>
-                  <div class="form-group">
-                    <label for="collapse-1-body">Body</label>
-                    <textarea class="form-control" id="collapse-1-body" placeholder="Collapse card #1 body" rows="6"></textarea>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-          <div class="card col-card" id="col-card-2">
-            <div class="card-header p-0" id="col-card-heading-2">
-              <button class="btn btn-link btn-block text-left px-3" data-toggle="collapse" data-target="#collapse-2" aria-expanded="true" aria-controls="collapse-2">
-                <h3 class="h5" style="margin-bottom:0 !important">Card #2</h3>
-              </button>
-            </div>
-            <div id="collapse-2" class="collapse" aria-labelledby="col-card-heading-2" data-parent="#col-collapse">
-              <div class="card-body">
-                  <div class="form-group">
-                    <label for="collapse-2-heading">Heading</label>
-                    <input type="text" class="form-control" id="collapse-2-heading" placeholder="Collapse card #2 heading">
-                  </div>
-                  <div class="form-group">
-                    <label for="collapse-2-body">Body</label>
-                    <textarea class="form-control" id="collapse-2-body" placeholder="Collapse card #2 body" rows="6"></textarea>
-                  </div>
-              </div>
-            </div>
-          </div>
-          <div class="card col-card" id="col-card-3">
-            <div class="card-header p-0" id="col-card-heading-3">
-              <button class="btn btn-link btn-block text-left px-3" data-toggle="collapse" data-target="#collapse-3" aria-expanded="true" aria-controls="collapse-3">
-                <h3 class="h5" style="margin-bottom:0 !important">Card #3</h3>
-              </button>
-            </div>
-            <div id="collapse-3" class="collapse" aria-labelledby="col-card-heading-3" data-parent="#col-collapse">
-              <div class="card-body">
-                  <div class="form-group">
-                    <label for="collapse-3-heading">Heading</label>
-                    <input type="text" class="form-control" id="collapse-3-heading" placeholder="Collapse card #3 heading">
-                  </div>
-                  <div class="form-group">
-                    <label for="collapse-3-body">Body</label>
-                    <textarea class="form-control" id="collapse-3-body" placeholder="Collapse card #2 body" rows="6"></textarea>
-                  </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
       <div class="col-md-6 container">

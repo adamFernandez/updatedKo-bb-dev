@@ -1,6 +1,7 @@
 $(document).ready(function() {
   $("#tag-link, #code-btn-value, #code-btn-link, #btn-value, #btn-link-field").hide();
   createAllCollapseCards(3);
+  createAllCollapseEditorCards(3);
 });
 
 // display component card upon select
@@ -86,14 +87,6 @@ updateText("ts", "#ts-id", ".code-ts-id", "modname-unitno-transcript");
 updateText("ts", "#ts-link", "#code-ts-link", "#");
 updateText("ts", "#ts-body", "#code-ts-body", "Transcript body...");
 
-function updateText(component, input, outputText, defaultText) {
-  $(input).keyup(function() {
-    (!$(this).val() == "") ? $(outputText).text($(this).val()) : $(outputText).text(defaultText);
-    text = $("#" + component + "-print-code").text();
-    $("#" + component + "-preview-pane").html(text);
-  }).keyup();
-}
-
 // toggle view close transcript button 
 $(".view-close-transcript").click(function() {
   $(this).text($(this).text() == 'View transcript' ? 'Close transcript' : 'View transcript');
@@ -119,15 +112,11 @@ updateText("em", "#em-embed", "#code-em-embed", "<iframe></iframe>");
 // on selet change, show only the required no of cards to edit, update code and preview
 $("#col-card-no").change(function() {
   maxCollapseCards = $(this).val();
-  $(".col-card").each(function(i, card) {
-    $(this).hide();
-    if ( i < maxCollapseCards ) {
-      $(this).show();
-    }
-  });
   createAllCollapseCards(maxCollapseCards);
+  createAllCollapseEditorCards(maxCollapseCards)
 });
 
+// create all collapse card code
 function createAllCollapseCards(maxCollapseCards) {
   $("#code-col-cards").empty();
   for (let i = 1; i <= maxCollapseCards; i++) {
@@ -137,16 +126,27 @@ function createAllCollapseCards(maxCollapseCards) {
   preview("col");
 }
 
+//create all collapse editor cards
+function createAllCollapseEditorCards(maxCollapseCards) {
+  $("#col-collapse").empty();
+  for (let i = 1; i <= maxCollapseCards; i++) {
+    card = createCollapseEditorCard(i);
+    $("#col-collapse").append(card);
+  }
+  preview("col");
+}
+
+// create single collapse card code, shows first card and collapses all others
 function createCollapseCard(i) {
   return `<span class="code-col-card"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;card&#34;&gt;</span>
     <span class="code-open-tag">&lt;div&#32;class&#61;&#34;card&#45;header&#32;p&#45;0&#34;&#32;id&#61;&#34;<span class="code-col-id">modname&#45;unitno&#45;collapse&#45;no</span>&#45;heading&#45;<span class="code-col-card-no">${i}</span>&#34;&gt;</span>
-      <span class="code-open-tag">&lt;button&#32;class&#61;&#34;btn&#32;btn&#45;link&#32;collapsed&#32;btn&#45;block&#32;text&#45;left&#32;px&#45;3&#34;&#32;data&#45;toggle&#61;&#34;collapse&#34;&#32;data&#45;target&#61;&#34;#<span class="code-col-id">modname&#45;unitno&#45;collapse&#45;no</span>&#45;collapse&#45;${i}&#34;&#32;aria&#45;expanded&#61;&#34;false&#34;&#32;aria&#45;controls&#61;&#34;<span class="code-col-id">modname&#45;unitno&#45;collapse&#45;no</span>&#45;collapse&#45;${i}&#34;&gt;</span>
+      <span class="code-open-tag">&lt;button&#32;class&#61;&#34;btn&#32;btn&#45;link&#32;collapsed&#32;btn&#45;block&#32;text&#45;left&#32;px&#45;3${ i == 1 ? "" : "collapsed" }&#34;&#32;data&#45;toggle&#61;&#34;collapse&#34;&#32;data&#45;target&#61;&#34;#<span class="code-col-id">modname&#45;unitno&#45;collapse&#45;no</span>&#45;collapse&#45;${i}&#34;&#32;aria&#45;expanded&#61;&#34;false&#34;&#32;aria&#45;controls&#61;&#34;<span class="code-col-id">modname&#45;unitno&#45;collapse&#45;no</span>&#45;collapse&#45;${i}&#34;&gt;</span>
         <span class="code-open-tag">&lt;h3&#32class&#61;&#34;h5&#34;&gt;</span>
           <span id="code-col-collapse-${i}-heading">Collapse card #${i} heading</span>
         <span class="code-close-tag">&lt;&#47;h3&gt;</span>
       <span class="code-close-tag">&lt;&#47;button&gt;</span>
     <span class="code-close-tag">&lt;&#47;div&gt;</span>
-    <span class="code-open-tag">&lt;div&#32;class&#61;&#34;collapse&#34;&#32;id&#61;&#34;<span class="code-col-id">modname&#45;unitno&#45;collapse&#45;no</span>&#45;collapse&#45;${i}&#34;&#32;aria&#45;labelledby&#61;&#34;<span class="code-col-id">modname&#45;unitno&#45;collapse&#45;no</span>&#45;heading&#45;${i}&#34;&#32;data&#45;parent&#61;&#34;#<span class="code-col-id">modname&#45;unitno&#45;collapse&#45;no</span>&#34;&gt;</span>
+    <span class="code-open-tag">&lt;div&#32;class&#61;&#34;${ i == 1 ? "collapse show" : "collapse" }&#34;&#32;id&#61;&#34;<span class="code-col-id">modname&#45;unitno&#45;collapse&#45;no</span>&#45;collapse&#45;${i}&#34;&#32;aria&#45;labelledby&#61;&#34;<span class="code-col-id">modname&#45;unitno&#45;collapse&#45;no</span>&#45;heading&#45;${i}&#34;&#32;data&#45;parent&#61;&#34;#<span class="code-col-id">modname&#45;unitno&#45;collapse&#45;no</span>&#34;&gt;</span>
       <span class="code-open-tag">&lt;div&#32;class&#61;&#34;card&#45;body&#34;&gt;</span>
         <span id="code-col-collapse-${i}-body">Collapse card #${i} body</span>
       <span class="code-close-tag">&lt;&#47;div&gt;</span>
@@ -154,14 +154,42 @@ function createCollapseCard(i) {
   <span class="code-close-tag">&lt;&#47;div&gt;</span></span>`;
 }
 
-// generate card text
-updateText("col", "#collapse-1-heading", "#code-col-collapse-1-heading", "Collapse card #1 heading");
-updateText("col", "#collapse-1-body", "#code-col-collapse-1-body", "Collapse card #1 body");
-updateText("col", "#collapse-2-heading", "#code-col-collapse-2-heading", "Collapse card #2 heading");
-updateText("col", "#collapse-2-body", "#code-col-collapse-2-body", "Collapse card #2 body");
-updateText("col", "#collapse-3-heading", "#code-col-collapse-3-heading", "Collapse card #3 heading");
-updateText("col", "#collapse-3-body", "#code-col-collapse-3-body", "Collapse card #3 body");
-updateText("col", "#col-id", ".code-col-id", "modname-unitno-collapse-no");
+// create single collapse editor card, shows first card and collapses all others
+function createCollapseEditorCard(i) {
+  return `
+    <div class="card col-card" id="col-card-${i}">
+      <div class="card-header p-0" id="col-card-heading-${i}">
+        <button class="btn btn-link btn-block text-left px-3 ${ i == 1 ? "" : "collapsed" }" data-toggle="collapse" data-target="#collapse-${i}" aria-expanded="true" aria-controls="collapse-${i}">
+          <h3 class="h5" style="margin-bottom:0 !important">Card #${i}</h3>
+        </button>
+      </div>
+      <div id="collapse-${i}" class="${ i == 1 ? "collapse show" : "collapse" }" aria-labelledby="col-card-heading-${i}" data-parent="#col-collapse">
+        <div class="card-body">
+          <form>
+            <div class="form-group">
+              <label for="collapse-${i}-heading">Heading</label>
+              <input type="text" class="form-control" id="collapse-${i}-heading" placeholder="Collapse card #${i} heading">
+            </div>
+            <div class="form-group">
+              <label for="collapse-${i}-body">Body</label>
+              <textarea class="form-control" id="collapse-${i}-body" placeholder="Collapse card #${i} body" rows="6"></textarea>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// generate card text from input
+updateCollapseText(8);
+
+function updateCollapseText(collapseCardLimit) {
+  for (let i = 1; i <= collapseCardLimit; i++) {
+    updateText2("col", "#collapse-" + i + "-heading", "#code-col-collapse-" + i + "-heading", "Collapse card #" + i + "heading");
+    updateText2("col", "#collapse-" + i + "-body", "#code-col-collapse-" + i + "-body", "Collapse card #" + i + "body");
+  }
+}
 
 /**********************************
  * general functions              *
@@ -185,6 +213,24 @@ function disablePreview() {
     e.preventDefault();
   });
 };
+
+// update text from input
+function updateText(component, input, outputText, defaultText) {
+  $(input).keyup(function() {
+    (!$(this).val() == "") ? $(outputText).text($(this).val()) : $(outputText).text(defaultText);
+    text = $("#" + component + "-print-code").text();
+    $("#" + component + "-preview-pane").html(text);
+  }).keyup();
+}
+
+// similar to updateText function but allows elements added to the DOM after page load to be identified
+function updateText2(component, input, outputText, defaultText) {
+  $(document).on('keyup', input, function (event) {
+    (!$(this).val() == "") ? $(outputText).text($(this).val()) : $(outputText).text(defaultText);
+    text = $("#" + component + "-print-code").text();
+    $("#" + component + "-preview-pane").html(text);
+  }).keyup();
+}
 
 // copy code onto clipboard
 $(".copy-btn").click(function() {
