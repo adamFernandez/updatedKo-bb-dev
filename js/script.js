@@ -105,12 +105,24 @@ $("#em-player-size").change(function() {
 
 // add variables and generate embed code
 $("#em-embed").keyup(function() {
+  embedId = $("#em-id").val();
   embedText = $(this).val();
+  // update the id if provided
+  if (!embedId == "") embedText = embedText.replace('iframe id="kaltura_player', 'iframe id="'+ embedId);
   embedText = embedText.replace('" width',
      '&amp;flashvars[infoScreen.plugin]=false&amp;flashvars[titleLabel.plugin]=false&amp;flashvars[related.plugin]=false&amp;flashvars[closedCaptions.displayCaptions]=false&amp;flashvars[closedCaptions.layout]=below&amp;flashvars[IframeCustomPluginCss1]=https:\/\/git.iddkingsonline.com\/kaltura\/kaltura.css" width');  
   (!embedText == "") ? $("#code-em-embed").text(embedText) : $("#code-em-embed").text("<iframe></iframe>");
   preview("em");
 }).keyup();
+
+// update the id, do not refresh preview
+$("#em-id").keyup(function() {
+  embedId = $(this).val();
+  embedText = $("#em-embed").val();
+  if (!embedText == "") embedText = embedText.replace('iframe id="kaltura_player', 'iframe id="'+ embedId);  
+  (!embedText == "") ? $("#code-em-embed").text(embedText) : $("#code-em-embed").text("<iframe></iframe>");
+}).keyup();
+
 
 /**********************************
  * collapse                       *

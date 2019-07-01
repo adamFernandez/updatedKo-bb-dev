@@ -7,15 +7,27 @@
     <div class="row">
       <div class="options container col-md-6">
         <form>
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-               <label class="input-group-text" for="em-player-size">Player Size</label>
+          <div class="form-row">
+            <div class="form group col-md-5">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                   <label class="input-group-text" for="em-player-size">Player Size</label>
+                </div>
+                <select class="custom-select" id="em-player-size">
+                  <option value="608by402"selected>608x402</option>
+                  <option value="400by285">400x285</option>
+                  <option value="304by231">304x231</option>
+                </select>
+              </div>
             </div>
-            <select class="custom-select" id="em-player-size">
-              <option value="608by402"selected>608x402</option>
-              <option value="400by285">400x285</option>
-              <option value="304by231">304x231</option>
-            </select>
+            <div class="form-group col-md-7">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="em-id">Unique ID</label>
+                </div>
+                <input type="text" class="form-control" id="em-id" aria-label="col-id" placeholder="modname-unitno-embed-no" aria-describedby="embed-unique-id">
+              </div>
+            </div>
           </div>
           <div class="form-group">
             <label for="em-embed">Embed code</label>
