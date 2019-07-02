@@ -14,8 +14,8 @@
                    <label class="input-group-text" for="em-player-size">Player Size</label>
                 </div>
                 <select class="custom-select" id="em-player-size">
-                  <option value="608by402"selected>608x402</option>
-                  <option value="400by285">400x285</option>
+                  <option value="608by402">608x402</option>
+                  <option value="400by285" selected>400x285</option>
                   <option value="304by231">304x231</option>
                 </select>
               </div>
@@ -45,7 +45,7 @@
         <div class="component-code">
           <h2 class="code-title">And here's the code...</h2>
           <div class="code-box">
-            <pre class="code-text"><span id="em-print-code"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;embed&#45;responsive&#32;embed&#45;responsive&#45;<span id="code-em-player-size">608by402</span>&#34;&gt;</span>
+            <pre class="code-text"><span id="em-print-code"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;embed&#45;responsive&#32;embed&#45;responsive&#45;<span id="code-em-player-size">400by285</span>&#34;&gt;</span>
   <span id="code-em-embed"></span>
 <span class="code-close-tag">&lt;&#47;div&gt;</span></pre>
           </div>
