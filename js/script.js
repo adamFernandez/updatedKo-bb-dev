@@ -203,6 +203,8 @@ function createCollapseEditorCard(i) {
 // generate card text from input
 updateCollapseText(8);
 
+updateText2("col", "#col-id", ".code-col-id", "modname-unitno-collapse-no");
+
 function updateCollapseText(collapseCardLimit) {
   for (let i = 1; i <= collapseCardLimit; i++) {
     updateText2("col", "#collapse-" + i + "-heading", "#code-col-collapse-" + i + "-heading", "Collapse card #" + i + "heading");
