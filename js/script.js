@@ -202,17 +202,27 @@ function updateListItems(listItemLimit) {
  **********************************/
 
 // on selet change, show only the required no of cards to edit, update code and preview
-$("#cd-card-no").on('focus', function() {
-  $(this).data("previous",$(this).val());
-  $("#cd-card-no").change(function(data){
+//$("#cd-card-no").on('focus', function() {
+//  $(this).data("previous",$(this).val());
+//  $("#cd-card-no").change(function(data){
 //    alert($(this).data("previous"));
 //    $(this).data("previous",$(this).val());
+  $("#cd-card-no").change(function(){
     maxCardCards = $(this).val();
-    $(this).blur();
+    if (maxCardCards == 1) $("#cd-layout").val("block").change();
+//    $(this).blur();
 //    if ( $(this).data("previous") > maxCardCards ) alert("foo");
     createAllCardCards(maxCardCards);
     createAllCardEditorCards(maxCardCards)
   });
+//});
+
+$("#cd-layout").change(function(data){
+  $(this).val() == "deck" 
+    ? ($("#code-cd-deck-open").text('<div class="card-deck">'),
+      $("#code-cd-deck-close").text('</div>'))
+    : ($("#code-cd-deck-open").empty(), $("#code-cd-deck-close").empty());
+  preview("cd");  
 });
 
 // create all card card code
@@ -235,18 +245,17 @@ function createAllCardEditorCards(maxCardCards) {
   }
   preview("cd");
 }
-
+ 
 // create single card card code, shows first card and collapses all others
 function createCardCard(i) {
-  return `<pre>  <span class="code-cd-card"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;card&#34;&gt;</span>
-${$("#cd-1-check-header").hasClass("unchecked") ? "foo" : "BAR"}
-    <span id="code-cd-${i}-header"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;card&#45;header&#34;&gt;</span>
+  return `<pre>  <span class="code-cd-card"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;card&#32;mb&#45;3&#34;&gt;</span><span id="code-cd-${i}-header">
+    <span>&lt;div&#32;class&#61;&#34;card&#45;header&#34;&gt;</span>
       <span id="code-cd-${i}-header-text">Card #${i} header</span>
-    <span class="code-close-tag">&lt;&#47;div&gt;</span></span>
-    <span class="code-open-tag">&lt;div&#32;class&#61;&#34;card&#45;body&#34;&gt;</span>
-      <span id="code-cd-${i}-title"><span class="code-open-tag">&lt;h5&#32;class&#61;&#34;card&#45;title&#34;&gt;</span>
+    <span>&lt;&#47;div&gt;</span></span>
+    <span class="code-open-tag">&lt;div&#32;class&#61;&#34;card&#45;body&#34;&gt;</span><span id="code-cd-${i}-title">
+      <span>&lt;h5&#32;class&#61;&#34;card&#45;title&#34;&gt;</span>
         <span id="code-cd-${i}-title-text">Card #${i} title</span>
-      <span class="code-close-tag">&lt;&#47;h5&gt;</span></span>
+      <span>&lt;&#47;h5&gt;</span></span>
       <span class="code-open-tag">&lt;p&#32;class&#61;&#34;card&#45;text&#34;&gt;</span>
         <span id="code-cd-${i}-text">Card #${i} text</span>
       <span class="code-close-tag">&lt;&#47;p&gt;</span>
@@ -259,11 +268,11 @@ function createCardEditorCard(i) {
   return `
     <div class="card cd-card" id="cd-card-${i}">
       <div class="card-header p-0" id="cd-card-heading-${i}">
-        <button class="btn btn-link btn-block text-left px-3 ${ i == 1 ? "" : "collapsed" }" data-toggle="collapse" data-target="#collapse-${i}" aria-expanded="true" aria-controls="collapse-${i}">
+        <button class="btn btn-link btn-block text-left px-3 ${ i == 1 ? "" : "collapsed" }" data-toggle="collapse" data-target="#cd-collapse-${i}" aria-expanded="true" aria-controls="collapse-${i}">
           <h5 style="margin-bottom:0 !important">Card #${i}</h5>
         </button>
       </div>
-      <div id="collapse-${i}" class="${ i == 1 ? "collapse show" : "collapse" }" aria-labelledby="cd-card-heading-${i}" data-parent="#cd-collapse">
+      <div id="cd-collapse-${i}" class="${ i == 1 ? "collapse show" : "collapse" }" aria-labelledby="cd-card-heading-${i}" data-parent="#cd-collapse">
         <div class="card-body">
           <form>
             <div class="custom-control custom-checkbox">
@@ -299,23 +308,36 @@ updateCards(4);
 function updateCards(cardCardLimit) {
   for (let i = 1; i <= cardCardLimit; i++) {
     // toggle optional input fields
-    toggleDisplay("cd", "#cd-" + i + "-check-header", "#cd-" + i + "-header-form, #code-cd-" + i + "-header");
-    toggleDisplay("cd", "#cd-" + i + "-check-title", "#cd-" + i + "-title-form, #code-cd-" + i + "-title");
-    // updateText3("cd", "#cd-" + i + "-header", "#code-cd-" + i + "-header", "&lt;div&#32;class&#61;&#34;card&#45;header&#34;&gt;", "&lt;&#47;div&gt;");
-    updateText("cd", "#cd-" + i + "-header", "#code-cd-" + i + "-header-text", "Card #" + i + "header");
-    updateText("cd", "#cd-" + i + "-title", "#code-cd-" + i + "-title-text", "Card #" + i + "title");
-    updateText("cd", "#cd-" + i + "-text", "#code-cd-" + i + "-text", "Card #" + i + "text");
+    toggleCheckbox("cd", "#cd-" + i + "-check-header", "#cd-" + i + "-header-form");
+    toggleCheckbox("cd", "#cd-" + i + "-check-title", "#cd-" + i + "-title-form, #code-cd-" + i + "-title");
+    // toggle header code
+    $(document).on('click', "#cd-" + i + "-check-header", function (event) {
+      $("#cd-" + i + "-check-header").hasClass("checked")
+        ? $("#code-cd-" + i + "-header").html('\n    <span class="code-cd-header-open"></span>\n      <span id="code-cd-' + i + '-header-text"></span>\n    <span class="code-cd-header-close"></span>')
+        : $("#code-cd-" + i + "-header").text("");
+      $(".code-cd-header-open").text('<div class="card-header">');
+      $("#cd-" + i + "-header").val() !== "" ? $("#code-cd-" + i + "-header-text").text($("#cd-" + i + "-header").val()) : $("#code-cd-" + i + "-header-text").text("Card #" + i + " header");
+      $(".code-cd-header-close").text('</div>');
+      preview("cd");
+    });
+    // toggle title code
+    $(document).on('click', "#cd-" + i + "-check-title", function (event) {
+      $("#cd-" + i + "-check-title").hasClass("checked")
+        ? $("#code-cd-" + i + "-title").html('\n    <span class="code-cd-title-open"></span>\n      <span id="code-cd-' + i + '-title-text"></span>\n    <span class="code-cd-title-close"></span>')
+        : $("#code-cd-" + i + "-title").text("");
+      $(".code-cd-title-open").text('<h5 class="card-title">');
+      $("#cd-" + i + "-title").val() !== "" ? $("#code-cd-" + i + "-title-text").text($("#cd-" + i + "-title").val()) : $("#code-cd-" + i + "-title-text").text("Card #" + i + " title");
+      $(".code-cd-title-close").text('</h5>');
+      preview("cd");
+    });
+    // update text
+    updateText("cd", "#cd-" + i + "-header", "#code-cd-" + i + "-header-text", "Card #" + i + " header");
+    updateText("cd", "#cd-" + i + "-title", "#code-cd-" + i + "-title-text", "Card #" + i + " title");
+    updateText("cd", "#cd-" + i + "-text", "#code-cd-" + i + "-text", "Card #" + i + " text");
   }
 }
 
-function updateText3(component, input, outputWrapper, outputOpen, outputClose) {
-  $(document).on('keyup', input, function (event) {
-    (!$(this).val() == "") ? $(outputWrapper).html(outputOpen + $(this).val() + outputClose) : $(outputWrapper).empty();
-    preview(component);
-  }).keyup();
-}
-
-function toggleDisplay(component, input, target) {
+function toggleCheckbox(component, input, target) {
   $(document).on('click', input, function (event) {
     $(target).toggle(this.checked);
     $(input).toggleClass("unchecked").toggleClass("checked");
