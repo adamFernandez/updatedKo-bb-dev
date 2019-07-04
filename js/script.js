@@ -190,16 +190,10 @@ function createListItemEditorCard(i) {
 updateListItems(8);
 
 updateTextOrHide("ls", "#ls-custom-class", "&#32;class&#61;&#34", "#code-ls-custom-class", "&#34;" );
-function updateTextOrHide(component, input, open, output, close) {
-  $(document).on('keyup', input, function (event) {
-    (!$(this).val() == "") ?  $(output).html(open + $(this).val() + close) : $(output).empty();
-    preview(component);
-  }).keyup();
-}
 
 function updateListItems(listItemLimit) {
   for (let i = 1; i <= listItemLimit; i++) {
-    updateText2("ls", "#ls-item-" + i + "-text", "#code-ls-item-" + i + "-text", "List item #" + i + " text");
+    updateText("ls", "#ls-item-" + i + "-text", "#code-ls-item-" + i + "-text", "List item #" + i + " text");
   }
 }
 
@@ -308,9 +302,9 @@ function updateCards(cardCardLimit) {
     toggleDisplay("cd", "#cd-" + i + "-check-header", "#cd-" + i + "-header-form, #code-cd-" + i + "-header");
     toggleDisplay("cd", "#cd-" + i + "-check-title", "#cd-" + i + "-title-form, #code-cd-" + i + "-title");
     // updateText3("cd", "#cd-" + i + "-header", "#code-cd-" + i + "-header", "&lt;div&#32;class&#61;&#34;card&#45;header&#34;&gt;", "&lt;&#47;div&gt;");
-    updateText2("cd", "#cd-" + i + "-header", "#code-cd-" + i + "-header-text", "Card #" + i + "header");
-    updateText2("cd", "#cd-" + i + "-title", "#code-cd-" + i + "-title-text", "Card #" + i + "title");
-    updateText2("cd", "#cd-" + i + "-text", "#code-cd-" + i + "-text", "Card #" + i + "text");
+    updateText("cd", "#cd-" + i + "-header", "#code-cd-" + i + "-header-text", "Card #" + i + "header");
+    updateText("cd", "#cd-" + i + "-title", "#code-cd-" + i + "-title-text", "Card #" + i + "title");
+    updateText("cd", "#cd-" + i + "-text", "#code-cd-" + i + "-text", "Card #" + i + "text");
   }
 }
 
@@ -408,12 +402,12 @@ function createCollapseEditorCard(i) {
 // generate card text from input
 updateCollapseText(8);
 
-updateText2("col", "#col-id", ".code-col-id", "modname-unitno-collapse-no");
+updateText("col", "#col-id", ".code-col-id", "modname-unitno-collapse-no");
 
 function updateCollapseText(collapseCardLimit) {
   for (let i = 1; i <= collapseCardLimit; i++) {
-    updateText2("col", "#collapse-" + i + "-heading", "#code-col-collapse-" + i + "-heading", "Collapse card #" + i + "heading");
-    updateText2("col", "#collapse-" + i + "-body", "#code-col-collapse-" + i + "-body", "Collapse card #" + i + "body");
+    updateText("col", "#collapse-" + i + "-heading", "#code-col-collapse-" + i + "-heading", "Collapse card #" + i + "heading");
+    updateText("col", "#collapse-" + i + "-body", "#code-col-collapse-" + i + "-body", "Collapse card #" + i + "body");
   }
 }
 
@@ -428,22 +422,21 @@ function disablePreview() {
   });
 };
 
-// update text from input
+// update text from input, allows elements added to the DOM after page load to be identified
 function updateText(component, input, outputText, defaultText) {
-  $(input).keyup(function() {
-    (!$(this).val() == "") ? $(outputText).text($(this).val()) : $(outputText).text(defaultText);
-    preview(component);
-  }).keyup();
-}
-
-// similar to updateText function but allows elements added to the DOM after page load to be identified
-function updateText2(component, input, outputText, defaultText) {
   $(document).on('keyup', input, function (event) {
     (!$(this).val() == "") ? $(outputText).text($(this).val()) : $(outputText).text(defaultText);
     preview(component);
   }).keyup();
 }
 
+// update text from input, or hide container if empty
+function updateTextOrHide(component, input, open, output, close) {
+  $(document).on('keyup', input, function (event) {
+    (!$(this).val() == "") ?  $(output).html(open + $(this).val() + close) : $(output).empty();
+    preview(component);
+  }).keyup();
+}
 
 // generate preview
 function preview(component) {
