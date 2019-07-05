@@ -393,7 +393,7 @@ function createCarouselIndicator(i) {
 // create single carousel slide code
 function createCarouselSlide(i) {
   return `<span class="code-crsl-slide"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;carousel&#45;item${ i == 1 ? " active" : "" }&#34;&gt;</span><span id="code-crsl-slide-${i}-img">
-    <span class="code-open-tag">&lt;img&#32;src&#61;&#34;<span id="code-crsl-slide-${i}-img-src">https:&#47;&#47;placekitten.com&#47;800&#47;300</span>&#34;&#32;class&#61;&#34;w&#45;100&#34;&#32;alt&#61;&#34;<span id="code-crsl-slide-${i}-img-alt">An adorable kitten</span>&#34;&gt;</span></span>
+    <span class="code-open-tag">&lt;img&#32;src&#61;&#34;<span id="code-crsl-slide-${i}-img-src">https:&#47;&#47;placekitten.com&#47;800&#47;400</span>&#34;&#32;class&#61;&#34;w&#45;100&#34;&#32;alt&#61;&#34;<span id="code-crsl-slide-${i}-img-alt">An adorable kitten</span>&#34;&gt;</span></span>
     <span class="code-open-tag">&lt;div&#32;class&#61;&#34;carousel&#45;caption&#34;&gt;</span>
       <span class="code-open-tag">&lt;h5&gt;</span>
         <span id="code-crsl-slide-${i}-title">Carousel slide #${i} title</span>
@@ -457,14 +457,13 @@ function updateCarouselSlides(carouselSlideLimit) {
     // toggle image code
     $(document).on('click', "#crsl-slide-" + i + "-check-img", function (event) {
       $("#crsl-slide-" + i + "-check-img").hasClass("checked")
-        ? $("#code-crsl-slide-" + i + "-img").html('\n    <span class="code-crsl-slide-img-open"></span><span id="code-crsl-slide-' + i + '-img-src"></span><span class="code-crsl-slide-img-middle"></span><span id="code-crsl-slide-' + i + '-img-alt"></span><span class="code-crsl-slide-img-close"></span>')
-        : $("#code-crsl-slide-" + i + "-img").text("");
+        ? ($("#code-crsl-slide-" + i + "-img").html('\n    <span class="code-crsl-slide-img-open"></span><span id="code-crsl-slide-' + i + '-img-src"></span><span class="code-crsl-slide-img-middle"></span><span id="code-crsl-slide-' + i + '-img-alt"></span><span class="code-crsl-slide-img-close"></span>'), $("#code-crsl-text-only").text(""))
+        : ($("#code-crsl-slide-" + i + "-img").text(""), $("#code-crsl-text-only").text(" text-only"));
       $(".code-crsl-slide-img-open").text('<img src="');
-      $("#crsl-slide-" + i + "-img-src").val() !== "" ? $("#code-crsl-slide-" + i + "-img-src").text($("#crsl-slide-" + i + "-img-src").val()) : $("#code-crsl-slide-" + i + "-img-src").text("https://placekitten.com/800/300");
+      $("#crsl-slide-" + i + "-img-src").val() !== "" ? $("#code-crsl-slide-" + i + "-img-src").text($("#crsl-slide-" + i + "-img-src").val()) : $("#code-crsl-slide-" + i + "-img-src").text("https://placekitten.com/800/400");
       $(".code-crsl-slide-img-middle").text('" class="w-100" alt="');
       $("#crsl-slide-" + i + "-img-alt").val() !== "" ? $("#code-crsl-slide-" + i + "-img-alt").text($("#crsl-slide-" + i + "-img-alt").val()) : $("#code-crsl-slide-" + i + "-img-alt").text("An adorable kitten");
       $(".code-crsl-slide-img-close").text('">');
-      $("#code-crsl-text-only").text(" text-only");
       preview("crsl");
     });
     // update carousel text

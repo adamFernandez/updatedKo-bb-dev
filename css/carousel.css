@@ -1,0 +1,52 @@
+@font-face {
+  font-family: 'KingsBureauGrot';
+  src: url('https://git.iddkingsonline.com/assets/fonts/KingsBureauGrot-ThreeSeven.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+.carousel {
+  margin-bottom: 4rem;
+}
+.carousel.text-only .carousel-caption {
+  position: unset;
+}
+.carousel-caption {
+  font-family: 'KingsBureauGrot' !important;
+  font-size: 23px;
+  background-color: rgba(11, 45, 80, 0.85);
+  right: unset;
+  left: unset;
+  width: 100%;
+  bottom: 0;
+  padding: 2.4% 11%;
+}
+.carousel-caption h5 {
+  font-size: 32px;
+}
+.carousel-indicators {
+  bottom: -32;
+  margin: 0;
+  width: 100%;
+  background-color: rgba(11, 45, 80, 1);
+}
+.carousel-indicators li {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  margin: 10px 11px;
+}
+.carousel-control-prev, .carousel-control-next {
+  opacity: 1;
+}
+.carousel-control {
+  background-color: rgba(11, 45, 80, 0.5);
+  padding: 0 15px;
+  border-radius: 4px;
+}
+.carousel-control:hover {
+  background-color: rgba(11, 45, 80, 1);
+}
+.carousel-control i {
+  font-size: 60px;
+}

@@ -60,11 +60,11 @@
     <span id="code-crsl-slides"></span>
   <span class="code-close-tag">&lt;&#47;div&gt;</span>
   <span class="code-open-tag">&lt;a&#32;class&#61;&#34;carousel&#45;control&#45;prev&#34;&#32;href&#61;&#34;&#35;<span class="code-crsl-id">modname&#45;unitno&#45;carousel&#45;no</span>&#34;&#32;role&#61;&#34;button&#34;&#32;data&#45;slide&#61;&#34;prev&#34;&gt;</span>
-    <span class="code-open-tag">&lt;span&#32;class&#61;&#34;carousel-control-prev-icon&#34;&#32;aria-hidden&#61;&#34;true&#34;&gt;</span><span class="code-close-tag">&lt;&#47;span&gt;</span>
+    <span class="code-open-tag">&lt;span&#32;class&#61;&#34;carousel&#45;control&#32;prev&#45;icon&#34;&#32;aria&#45;hidden&#61;&#34;true&#34;&gt;<span class="code-crsl-i">&lt;i&#32;class&#61;&#34;fas&#32;fa&#45;angle&#45;left&#34;&gt;&lt;&#47;i&gt;</span></span><span class="code-close-tag">&lt;&#47;span&gt;</span>
     <span class="code-open-tag">&lt;span&#32;class&#61;&#34;sr-only&#34;&gt;</span>Previous<span class="code-close-tag">&lt;&#47;span&gt;</span>
   <span class="code-close-tag">&lt;&#47;a&gt;</span>
   <span class="code-open-tag">&lt;a&#32;class&#61;&#34;carousel&#45;control&#45;next&#34;&#32;href&#61;&#34;&#35;<span class="code-crsl-id">modname&#45;unitno&#45;carousel&#45;no</span>&#34;&#32;role&#61;&#34;button&#34;&#32;data&#45;slide&#61;&#34;next&#34;&gt;</span>
-    <span class="code-open-tag">&lt;span&#32;class&#61;&#34;carousel&#45;control&#45;next&#45;icon&#34;&#32;aria&#45;hidden&#61;&#34;true&#34;&gt;</span><span class="code-close-tag">&lt;&#47;span&gt;</span>
+    <span class="code-open-tag">&lt;span&#32;class&#61;&#34;carousel&#45;control&#32;next&#45;icon&#34;&#32;aria&#45;hidden&#61;&#34;true&#34;&gt;<span class="code-crsl-i">&lt;i&#32;class&#61;&#34;fas&#32;fa&#45;angle&#45;right&#34;&gt;&lt;&#47;i&gt;</span></span><span class="code-close-tag">&lt;&#47;span&gt;</span>
     <span class="code-open-tag">&lt;span&#32;class&#61;&#34;sr&#45;only&#34;&gt;</span>Next<span class="code-close-tag">&lt;&#47;span&gt;</span>
   <span class="code-close-tag">&lt;&#47;a&gt;</span>
 <span class="code-close-tag">&lt;&#47;div&gt;</span></span></pre>
