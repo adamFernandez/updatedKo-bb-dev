@@ -3,6 +3,11 @@ $(document).ready(function() {
   // set card to show 1 card by default
   createAllCardCards(1);
   createAllCardEditorCards(1);
+  // set carousel to show 3 slides by default
+  maxSlides = 3;
+  createAllCarouselIndicators(maxSlides);
+  createAllCarouselSlides(maxSlides);
+  createAllCarouselEditorCards(maxSlides);
   // set collapse to show 3 cards by default
   createAllCollapseCards(3);
   createAllCollapseEditorCards(3);
@@ -23,7 +28,6 @@ $("#component-select").change(function() {
     $(this).hide();
   });
   $("#" + $(this).val()).show();
-//  preview("btn");
 });
 
 /**********************************
@@ -339,12 +343,136 @@ function updateCards(cardCardLimit) {
   }
 }
 
-function toggleCheckbox(component, input, target) {
-  $(document).on('click', input, function (event) {
-    $(target).toggle(this.checked);
-    $(input).toggleClass("unchecked").toggleClass("checked");
-    preview(component);
-  });
+/**********************************
+ * carousel                       *
+ **********************************/
+
+// on selet change, show only the required no of cards to edit, update code and preview
+$("#crsl-slide-no").change(function() {
+  maxSlides = $(this).val();
+  createAllCarouselIndicators(maxSlides);
+  createAllCarouselSlides(maxSlides);
+  createAllCarouselEditorCards(maxSlides)
+});
+
+// create all collapse card code
+function createAllCarouselIndicators(maxSlides) {
+  $("#code-crsl-indicators").empty();
+  for (let i = 1; i <= maxSlides; i++) {
+    indicator = createCarouselIndicator(i);
+    $("#code-crsl-indicators").append(indicator);
+  }
+  preview("crsl");
+}
+
+// create all collapse card code
+function createAllCarouselSlides(maxSlides) {
+  $("#code-crsl-slides").empty();
+  for (let i = 1; i <= maxSlides; i++) {
+    slide = createCarouselSlide(i);
+    $("#code-crsl-slides").append(slide);
+  }
+  preview("crsl");
+}
+
+//create all carousel editor slides
+function createAllCarouselEditorCards(maxSlides) {
+  $("#crsl-collapse").empty();
+  for (let i = 1; i <= maxSlides; i++) {
+    card = createCarouselEditorCard(i);
+    $("#crsl-collapse").append(card);
+  }
+  preview("crsl");
+}
+
+// create single carousel slide indicator code
+function createCarouselIndicator(i) {
+  return `<span class="code-open-tag">&lt;li&#32;data&#45;target&#61;&#34;&#35;<span class="code-crsl-id">modname&#45;unitno&#45;carousel&#45;no</span>&#34;&#32;data&#45;slide&#45;to&#61;&#34;${ i - 1 }&#34;${ i == 1 ? "&#32;class&#61;&#34;active&#34;" : "" }&gt;</span><span class="code-close-tag">&lt;&#47;li&gt;</span>${ i == maxSlides ? "" : "\n    " }`;
+}
+
+// create single carousel slide code
+function createCarouselSlide(i) {
+  return `<span class="code-crsl-slide"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;carousel&#45;item${ i == 1 ? " active" : "" }&#34;&gt;</span><span id="code-crsl-slide-${i}-img">
+    <span class="code-open-tag">&lt;img&#32;src&#61;&#34;<span id="code-crsl-slide-${i}-img-src">https:&#47;&#47;placekitten.com&#47;800&#47;300</span>&#34;&#32;class&#61;&#34;w&#45;100&#34;&#32;alt&#61;&#34;<span id="code-crsl-slide-${i}-img-alt">An adorable kitten</span>&#34;&gt;</span></span>
+    <span class="code-open-tag">&lt;div&#32;class&#61;&#34;carousel&#45;caption&#34;&gt;</span>
+      <span class="code-open-tag">&lt;h5&gt;</span>
+        <span id="code-crsl-slide-${i}-title">Carousel slide #${i} title</span>
+      <span class="code-close-tag">&lt;&#47;h5&gt;</span>
+      <span class="code-open-tag">&lt;p&gt;</span>
+        <span id="code-crsl-slide-${i}-text">Carousel slide #${i} text</span>
+      <span class="code-close-tag">&lt;&#47;p&gt;</span>
+    <span class="code-close-tag">&lt;&#47;div&gt;</span>
+  <span class="code-close-tag">&lt;&#47;div&gt;</span></span>`;
+}
+
+// create single collapse editor card, shows first card and collapses all others
+function createCarouselEditorCard(i) {
+  return `
+    <div class="card crsl-card" id="crsl-card-${i}">
+      <div class="card-header p-0" id="crsl-card-heading-${i}">
+        <button class="btn btn-link btn-block text-left px-3 ${ i == 1 ? "" : "collapsed" }" data-toggle="collapse" data-target="#collapse-${i}" aria-expanded="true" aria-controls="collapse-${i}">
+          <h5 style="margin-bottom:0 !important">Slide #${i}</h5>
+        </button>
+      </div>
+      <div id="collapse-${i}" class="${ i == 1 ? "collapse show" : "collapse" }" aria-labelledby="col-card-heading-${i}" data-parent="#col-collapse">
+        <div class="card-body">
+          <form>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input checked" id="crsl-slide-${i}-check-img" checked>
+              <label class="custom-control-label" for="crsl-slide-${i}-check-img">Image</label>
+            </div>
+            <div class="form-group crsl-slide-${i}-img-form">
+              <label for="crsl-slide-${i}-img-src">Image source</label>
+              <input type="text" class="form-control" id="crsl-slide-${i}-img-src" placeholder="https://moodle.iddkingsonline.com/file.php/123/images/image.jpg">
+              <small id="crsl-img-src-help" class="form-text text-muted">The image must first be uploaded to Keats, where the generated link can be copied and pasted from.</small>
+            </div>
+            <div class="form-group crsl-slide-${i}-img-form">
+              <label for="crsl-slide-${i}-img-alt">Alternative text</label>
+              <textarea class="form-control" id="crsl-slide-${i}-img-alt" placeholder="Description of image" rows="2"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="crsl-slide-${i}-title">Caption title</label>
+              <input type="text" class="form-control" id="crsl-slide-${i}-title" placeholder="Carousel slide #${i} title">
+            </div>
+            <div class="form-group">
+              <label for="crsl-slide-${i}-text">Caption text</label>
+              <textarea class="form-control" id="crsl-slide-${i}-text" placeholder="Carousel slide #${i} text" rows="4"></textarea>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// generate carousel text from input
+updateCarouselSlides(8);
+
+updateText("crsl", "#crsl-id", ".code-crsl-id", "modname-unitno-carousel-no");
+
+function updateCarouselSlides(carouselSlideLimit) {
+  for (let i = 1; i <= carouselSlideLimit; i++) {
+    // toggle optional image input field 
+    toggleCheckbox("crsl", "#crsl-slide-" + i + "-check-img", ".crsl-slide-" + i + "-img-form");
+    // toggle image code
+    $(document).on('click', "#crsl-slide-" + i + "-check-img", function (event) {
+      $("#crsl-slide-" + i + "-check-img").hasClass("checked")
+        ? $("#code-crsl-slide-" + i + "-img").html('\n    <span class="code-crsl-slide-img-open"></span><span id="code-crsl-slide-' + i + '-img-src"></span><span class="code-crsl-slide-img-middle"></span><span id="code-crsl-slide-' + i + '-img-alt"></span><span class="code-crsl-slide-img-close"></span>')
+        : $("#code-crsl-slide-" + i + "-img").text("");
+      $(".code-crsl-slide-img-open").text('<img src="');
+      $("#crsl-slide-" + i + "-img-src").val() !== "" ? $("#code-crsl-slide-" + i + "-img-src").text($("#crsl-slide-" + i + "-img-src").val()) : $("#code-crsl-slide-" + i + "-img-src").text("https://placekitten.com/800/300");
+      $(".code-crsl-slide-img-middle").text('" class="w-100" alt="');
+      $("#crsl-slide-" + i + "-img-alt").val() !== "" ? $("#code-crsl-slide-" + i + "-img-alt").text($("#crsl-slide-" + i + "-img-alt").val()) : $("#code-crsl-slide-" + i + "-img-alt").text("An adorable kitten");
+      $(".code-crsl-slide-img-close").text('">');
+      $("#code-crsl-text-only").text(" text-only");
+      preview("crsl");
+    });
+    // update carousel text
+    updateText("crsl", "#crsl-slide-" + i + "-img-src", "#code-crsl-slide-" + i + "-img-src", "https://placekitten.com/800/300");
+    updateText("crsl", "#crsl-slide-" + i + "-img-alt", "#code-crsl-slide-" + i + "-img-alt", "An adorable kitten");
+    updateText("crsl", "#crsl-slide-" + i + "-title", "#code-crsl-slide-" + i + "-title", "Carousel slide #" + i + "title");
+    updateText("crsl", "#crsl-slide-" + i + "-text", "#code-crsl-slide-" + i + "-text", "Carousel slide #" + i + "text");
+  }
 }
 
 /**********************************
@@ -462,6 +590,15 @@ function updateTextOrHide(component, input, open, output, close) {
   }).keyup();
 }
 
+// toggles display of option field upon checkbox click
+function toggleCheckbox(component, input, target) {
+  $(document).on('click', input, function (event) {
+    $(target).toggle(this.checked);
+    $(input).toggleClass("unchecked").toggleClass("checked");
+    preview(component);
+  });
+}
+
 // generate preview
 function preview(component) {
   text = $("#" + component + "-print-code").text();
@@ -472,6 +609,7 @@ function preview(component) {
 
 copyCode("btn");
 copyCode("cd");
+copyCode("crsl");
 copyCode("col");
 copyCode("em");
 copyCode("ls");
