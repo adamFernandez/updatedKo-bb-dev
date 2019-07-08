@@ -16,7 +16,6 @@
                     <label class="input-group-text" for="crsl-slide-no">No. of slides</label>
                   </div>
                   <select class="custom-select" id="crsl-slide-no">
-                    <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3" selected>3</option>
                     <option value="4">4</option>
@@ -35,6 +34,10 @@
                   <input type="text" class="form-control" id="crsl-id" aria-label="crsl-id" placeholder="modname-unitno-carousel-no" aria-describedby="carousel-unique-id">
                 </div>
               </div>
+            </div>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input checked" id="crsl-check-img" checked>
+              <label class="custom-control-label" for="crsl-check-img">With image</label>
             </div>
           </form>
           <div id="crsl-collapse">
