@@ -5,7 +5,6 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
     <link href="https://git.iddkingsonline.com/kaltura/kaltura.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-    <link href="css/carousel.css" rel="stylesheet">
   </head>
   <body>
     <main>
