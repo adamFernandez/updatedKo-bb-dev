@@ -417,16 +417,12 @@ function createCarouselEditorCard(i) {
       <div id="collapse-${i}" class="${ i == 1 ? "collapse show" : "collapse" }" aria-labelledby="col-card-heading-${i}" data-parent="#col-collapse">
         <div class="card-body">
           <form>
-            <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input checked" id="crsl-slide-${i}-check-img" checked>
-              <label class="custom-control-label" for="crsl-slide-${i}-check-img">Image</label>
-            </div>
-            <div class="form-group crsl-slide-${i}-img-form">
+            <div class="form-group crsl-slide-img-form">
               <label for="crsl-slide-${i}-img-src">Image source</label>
               <input type="text" class="form-control" id="crsl-slide-${i}-img-src" placeholder="https://moodle.iddkingsonline.com/file.php/123/images/image.jpg">
               <small id="crsl-img-src-help" class="form-text text-muted">The image must first be uploaded to Keats, where the generated link can be copied and pasted from.</small>
             </div>
-            <div class="form-group crsl-slide-${i}-img-form">
+            <div class="form-group crsl-slide-img-form">
               <label for="crsl-slide-${i}-img-alt">Alternative text</label>
               <textarea class="form-control" id="crsl-slide-${i}-img-alt" placeholder="Description of image" rows="2"></textarea>
             </div>
@@ -450,22 +446,32 @@ updateCarouselSlides(8);
 
 updateText("crsl", "#crsl-id", ".code-crsl-id", "modname-unitno-carousel-no");
 
+
+// toggle image code
+$(document).on('click', "#crsl-check-img", function(event) {
+  $("#crsl-check-img").toggleClass("unchecked").toggleClass("checked");
+  $("#code-crsl-text-only").text($("#code-crsl-text-only").text() == "" ? " text-only" : "");
+  carouselToggleImage(8);
+});
+
+function carouselToggleImage(carouselSlideLimit) {
+  for (let i = 1; i <= carouselSlideLimit; i++) {
+  $("#crsl-check-img").hasClass("checked")
+    ? $("#code-crsl-slide-" + i + "-img").html('\n    <span class="code-crsl-slide-img-open"></span><span id="code-crsl-slide-' + i + '-img-src"></span><span class="code-crsl-slide-img-middle"></span><span id="code-crsl-slide-' + i + '-img-alt"></span><span class="code-crsl-slide-img-close"></span>')
+    : $("#code-crsl-slide-" + i + "-img").text("");
+  $(".code-crsl-slide-img-open").text('<img src="');
+  $("#crsl-slide-" + i + "-img-src").val() !== "" ? $("#code-crsl-slide-" + i + "-img-src").text($("#crsl-slide-" + i + "-img-src").val()) : $("#code-crsl-slide-" + i + "-img-src").text("https://placekitten.com/800/400");
+  $(".code-crsl-slide-img-middle").text('" class="w-100" alt="');
+  $("#crsl-slide-" + i + "-img-alt").val() !== "" ? $("#code-crsl-slide-" + i + "-img-alt").text($("#crsl-slide-" + i + "-img-alt").val()) : $("#code-crsl-slide-" + i + "-img-alt").text("An adorable kitten");
+  $(".code-crsl-slide-img-close").text('">');
+  preview("crsl");
+  }
+};
+
 function updateCarouselSlides(carouselSlideLimit) {
   for (let i = 1; i <= carouselSlideLimit; i++) {
     // toggle optional image input field 
-    toggleCheckbox("crsl", "#crsl-slide-" + i + "-check-img", ".crsl-slide-" + i + "-img-form");
-    // toggle image code
-    $(document).on('click', "#crsl-slide-" + i + "-check-img", function (event) {
-      $("#crsl-slide-" + i + "-check-img").hasClass("checked")
-        ? ($("#code-crsl-slide-" + i + "-img").html('\n    <span class="code-crsl-slide-img-open"></span><span id="code-crsl-slide-' + i + '-img-src"></span><span class="code-crsl-slide-img-middle"></span><span id="code-crsl-slide-' + i + '-img-alt"></span><span class="code-crsl-slide-img-close"></span>'), $("#code-crsl-text-only").text(""))
-        : ($("#code-crsl-slide-" + i + "-img").text(""), $("#code-crsl-text-only").text(" text-only"));
-      $(".code-crsl-slide-img-open").text('<img src="');
-      $("#crsl-slide-" + i + "-img-src").val() !== "" ? $("#code-crsl-slide-" + i + "-img-src").text($("#crsl-slide-" + i + "-img-src").val()) : $("#code-crsl-slide-" + i + "-img-src").text("https://placekitten.com/800/400");
-      $(".code-crsl-slide-img-middle").text('" class="w-100" alt="');
-      $("#crsl-slide-" + i + "-img-alt").val() !== "" ? $("#code-crsl-slide-" + i + "-img-alt").text($("#crsl-slide-" + i + "-img-alt").val()) : $("#code-crsl-slide-" + i + "-img-alt").text("An adorable kitten");
-      $(".code-crsl-slide-img-close").text('">');
-      preview("crsl");
-    });
+    toggleCheckbox("crsl", "#crsl-check-img", ".crsl-slide-img-form");
     // update carousel text
     updateText("crsl", "#crsl-slide-" + i + "-img-src", "#code-crsl-slide-" + i + "-img-src", "https://placekitten.com/800/300");
     updateText("crsl", "#crsl-slide-" + i + "-img-alt", "#code-crsl-slide-" + i + "-img-alt", "An adorable kitten");
