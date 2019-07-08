@@ -394,10 +394,10 @@ function createCarouselIndicator(i) {
 function createCarouselSlide(i) {
   return `<span class="code-crsl-slide"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;carousel&#45;item${ i == 1 ? " active" : "" }&#34;&gt;</span><span id="code-crsl-slide-${i}-img">
     <span class="code-open-tag">&lt;img&#32;src&#61;&#34;<span id="code-crsl-slide-${i}-img-src">https:&#47;&#47;placekitten.com&#47;800&#47;400</span>&#34;&#32;class&#61;&#34;w&#45;100&#34;&#32;alt&#61;&#34;<span id="code-crsl-slide-${i}-img-alt">An adorable kitten</span>&#34;&gt;</span></span>
-    <span class="code-open-tag">&lt;div&#32;class&#61;&#34;carousel&#45;caption&#34;&gt;</span>
+    <span class="code-open-tag">&lt;div&#32;class&#61;&#34;carousel&#45;caption&#34;&gt;</span><span id="code-crsl-slide-${i}-title">
       <span class="code-open-tag">&lt;h5&gt;</span>
-        <span id="code-crsl-slide-${i}-title">Carousel slide #${i} title</span>
-      <span class="code-close-tag">&lt;&#47;h5&gt;</span>
+        <span id="code-crsl-slide-${i}-title-text">Carousel slide #${i} title</span>
+      <span class="code-close-tag">&lt;&#47;h5&gt;</span></span>
       <span class="code-open-tag">&lt;p&gt;</span>
         <span id="code-crsl-slide-${i}-text">Carousel slide #${i} text</span>
       <span class="code-close-tag">&lt;&#47;p&gt;</span>
@@ -426,9 +426,9 @@ function createCarouselEditorCard(i) {
               <label for="crsl-slide-${i}-img-alt">Alternative text</label>
               <textarea class="form-control" id="crsl-slide-${i}-img-alt" placeholder="Description of image" rows="2"></textarea>
             </div>
-            <div class="form-group">
+            <div class="form-group crsl-slide-title-form">
               <label for="crsl-slide-${i}-title">Caption title</label>
-              <input type="text" class="form-control" id="crsl-slide-${i}-title" placeholder="Carousel slide #${i} title">
+              <input type="text" class="form-control" id="crsl-slide-${i}-title-text" placeholder="Carousel slide #${i} title">
             </div>
             <div class="form-group">
               <label for="crsl-slide-${i}-text">Caption text</label>
@@ -446,9 +446,8 @@ updateCarouselSlides(8);
 
 updateText("crsl", "#crsl-id", ".code-crsl-id", "modname-unitno-carousel-no");
 
-
-// toggle image code
-$(document).on('click', "#crsl-check-img", function(event) {
+// toggle carousel image code
+$(document).on("click", "#crsl-check-img", function(event) {
   $("#crsl-check-img").toggleClass("unchecked").toggleClass("checked");
   $("#code-crsl-text-only").text($("#code-crsl-text-only").text() == "" ? " text-only" : "");
   carouselToggleImage(8);
@@ -468,14 +467,34 @@ function carouselToggleImage(carouselSlideLimit) {
   }
 };
 
+//toggle carousel caption title code
+$(document).on("click", "#crsl-check-title", function(event) {
+  $("#crsl-check-title").toggleClass("unchecked").toggleClass("checked");
+
+  carouselToggleTitle(8);
+});
+
+function carouselToggleTitle(carouselSlideLimit) {
+  for (let i = 1; i <= carouselSlideLimit; i++) {
+  $("#crsl-check-title").hasClass("checked")
+    ? $("#code-crsl-slide-" + i + "-title").html('\n      <span class="code-crsl-slide-title-open"></span>\n        <span id="code-crsl-slide-' + i + '-title-text"></span>\n      <span class="code-crsl-slide-title-close"></span>')
+    : $("#code-crsl-slide-" + i + "-title").text("");
+  $(".code-crsl-slide-title-open").text('<h5>');
+  $("#crsl-slide-" + i + "-title-text").val() !== "" ? $("#code-crsl-slide-" + i + "-title-text").text($("#crsl-slide-" + i + "-title-text").val()) : $("#code-crsl-slide-" + i + "-title-text").text("Carousel slide #" + i + " title");
+  $(".code-crsl-slide-title-close").text('</h5>');
+  preview("crsl");
+  }
+};
+
 function updateCarouselSlides(carouselSlideLimit) {
   for (let i = 1; i <= carouselSlideLimit; i++) {
     // toggle optional image input field 
     toggleCheckbox("crsl", "#crsl-check-img", ".crsl-slide-img-form");
+    toggleCheckbox("crsl", "#crsl-check-title", ".crsl-slide-title-form");
     // update carousel text
     updateText("crsl", "#crsl-slide-" + i + "-img-src", "#code-crsl-slide-" + i + "-img-src", "https://placekitten.com/800/300");
     updateText("crsl", "#crsl-slide-" + i + "-img-alt", "#code-crsl-slide-" + i + "-img-alt", "An adorable kitten");
-    updateText("crsl", "#crsl-slide-" + i + "-title", "#code-crsl-slide-" + i + "-title", "Carousel slide #" + i + "title");
+    updateText("crsl", "#crsl-slide-" + i + "-title-text", "#code-crsl-slide-" + i + "-title-text", "Carousel slide #" + i + "title");
     updateText("crsl", "#crsl-slide-" + i + "-text", "#code-crsl-slide-" + i + "-text", "Carousel slide #" + i + "text");
   }
 }

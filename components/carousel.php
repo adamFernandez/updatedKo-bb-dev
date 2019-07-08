@@ -39,6 +39,10 @@
               <input type="checkbox" class="custom-control-input checked" id="crsl-check-img" checked>
               <label class="custom-control-label" for="crsl-check-img">With image</label>
             </div>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input checked" id="crsl-check-title" checked>
+              <label class="custom-control-label" for="crsl-check-title">With caption title</label>
+            </div>
           </form>
           <div id="crsl-collapse">
           </div>
