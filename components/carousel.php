@@ -3,14 +3,17 @@
     <h2 class="component-title">Carousel</h2>
   </div>
   <div class="component-body container">
+    <div class="alert alert-info" role="alert">
+      Don't forget to add the css file!
+    </div>
     <div class="row">
-      <div class="options container col-md-6">
+      <div class="options container col-md-5">
         <section class="options">
           <h3>Options</h3>
           <p>Complete the following fields:</p>
           <form>
             <div class="form-row">
-              <div class="form-group col-md-4">
+              <div class="form-group col-md-5">
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <label class="input-group-text" for="crsl-slide-no">No. of slides</label>
@@ -26,7 +29,7 @@
                   </select>
                 </div>
               </div>
-              <div class="form-group col-md-8">
+              <div class="form-group col-md-7">
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <label class="input-group-text" for="crsl-id">Unique ID</label>
@@ -40,7 +43,7 @@
               <label class="custom-control-label" for="crsl-check-img">With image</label>
             </div>
             <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input checked" id="crsl-check-title" checked>
+              <input type="checkbox" class="custom-control-input unchecked" id="crsl-check-title">
               <label class="custom-control-label" for="crsl-check-title">With caption title</label>
             </div>
           </form>
@@ -48,7 +51,7 @@
           </div>
         </section>
       </div>
-      <div class="col-md-6 container">
+      <div class="col-md-7 container">
         <section class="preview">
           <h3 class="preview-title">Preview</h3>
           <div id="crsl-preview-pane"></div>
