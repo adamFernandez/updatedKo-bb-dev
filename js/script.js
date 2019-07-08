@@ -394,10 +394,7 @@ function createCarouselIndicator(i) {
 function createCarouselSlide(i) {
   return `<span class="code-crsl-slide"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;carousel&#45;item${ i == 1 ? " active" : "" }&#34;&gt;</span><span id="code-crsl-slide-${i}-img">
     <span class="code-open-tag">&lt;img&#32;src&#61;&#34;<span id="code-crsl-slide-${i}-img-src">https:&#47;&#47;placekitten.com&#47;800&#47;400</span>&#34;&#32;class&#61;&#34;w&#45;100&#34;&#32;alt&#61;&#34;<span id="code-crsl-slide-${i}-img-alt">An adorable kitten</span>&#34;&gt;</span></span>
-    <span class="code-open-tag">&lt;div&#32;class&#61;&#34;carousel&#45;caption&#34;&gt;</span><span id="code-crsl-slide-${i}-title">
-      <span class="code-open-tag">&lt;h5&gt;</span>
-        <span id="code-crsl-slide-${i}-title-text">Carousel slide #${i} title</span>
-      <span class="code-close-tag">&lt;&#47;h5&gt;</span></span>
+    <span class="code-open-tag">&lt;div&#32;class&#61;&#34;carousel&#45;caption&#34;&gt;</span><span id="code-crsl-slide-${i}-title"></span>
       <span class="code-open-tag">&lt;p&gt;</span>
         <span id="code-crsl-slide-${i}-text">Carousel slide #${i} text</span>
       <span class="code-close-tag">&lt;&#47;p&gt;</span>
@@ -426,13 +423,13 @@ function createCarouselEditorCard(i) {
               <label for="crsl-slide-${i}-img-alt">Alternative text</label>
               <textarea class="form-control" id="crsl-slide-${i}-img-alt" placeholder="Description of image" rows="2"></textarea>
             </div>
-            <div class="form-group crsl-slide-title-form">
+            <div class="form-group crsl-slide-title-form" style="display:none">
               <label for="crsl-slide-${i}-title">Caption title</label>
-              <input type="text" class="form-control" id="crsl-slide-${i}-title-text" placeholder="Carousel slide #${i} title">
+              <input type="text" class="form-control" id="crsl-slide-${i}-title-text" placeholder="Carousel slide #${i} title" maxlength="65">
             </div>
             <div class="form-group">
               <label for="crsl-slide-${i}-text">Caption text</label>
-              <textarea class="form-control" id="crsl-slide-${i}-text" placeholder="Carousel slide #${i} text" rows="4"></textarea>
+              <textarea class="form-control" id="crsl-slide-${i}-text" placeholder="Carousel slide #${i} text" rows="4" maxlength="215"></textarea>
             </div>
           </form>
         </div>
@@ -495,7 +492,7 @@ function updateCarouselSlides(carouselSlideLimit) {
     updateText("crsl", "#crsl-slide-" + i + "-img-src", "#code-crsl-slide-" + i + "-img-src", "https://placekitten.com/800/300");
     updateText("crsl", "#crsl-slide-" + i + "-img-alt", "#code-crsl-slide-" + i + "-img-alt", "An adorable kitten");
     updateText("crsl", "#crsl-slide-" + i + "-title-text", "#code-crsl-slide-" + i + "-title-text", "Carousel slide #" + i + "title");
-    updateText("crsl", "#crsl-slide-" + i + "-text", "#code-crsl-slide-" + i + "-text", "Carousel slide #" + i + "text");
+    updateText("crsl", "#crsl-slide-" + i + "-text", "#code-crsl-slide-" + i + "-text", "Carousel slide #" + i + " text");
   }
 }
 
