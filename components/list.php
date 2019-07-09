@@ -27,7 +27,6 @@
                     <label class="input-group-text" for="ls-item-no">No. of list items</label>
                   </div>
                   <select class="custom-select" id="ls-item-no">
-                    <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3" selected>3</option>
                     <option value="4">4</option>
