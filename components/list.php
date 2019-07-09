@@ -54,7 +54,7 @@
       <div class="col-md-6 container">
         <section class="preview">
           <h3 class="preview-title">Preview</h3>
-          <div id="ls-preview-pane"></div>
+          <div class="card" id="ls-preview-pane"></div>
         </section>
         <section class="component-code">
           <div class="code-header">
@@ -62,8 +62,7 @@
             <button class="btn btn-outline-primary" id="copy-ls-code">Copy Code</button>
           </div>
           <div class="code-box">
-<pre class="code-text"><span id="ls-print-code"><span class="code-open-tag">&lt;<span class="code-ls-tag">ul</span><span id="code-ls-custom-class"></span>&gt;</span>
-  <span id="code-ls-items"></span>
+<pre class="code-text"><span id="ls-print-code"><span class="code-open-tag">&lt;<span class="code-ls-tag">ul</span><span id="code-ls-custom-class"></span>&gt;</span><span id="code-ls-items"></span>
 <span class="code-close-tag">&lt;&#47;<span class="code-ls-tag">ul</span>&gt;</span></span></pre>
           </div>
         </section>

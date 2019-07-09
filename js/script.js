@@ -143,12 +143,35 @@ $("#em-id").keyup(function() {
  * list                           *
  **********************************/
 
-// on selet change, show only the required no of cards to edit, update code and preview
-$("#ls-item-no").change(function(data){
-  maxListItems = $(this).val();
-  createAllListItems(maxListItems);
-  createAllListItemEditorCards(maxListItems)
+// on select change, show only the required no of list items to edit, update code and preview
+$("#ls-item-no").on('focus', function() {
+  $(this).data("previous",$(this).val());
+  $("#ls-item-no").change(function(data){
+    newMax = Number(($(this).val()));
+    oldMax = Number(($(this).data("previous")));
+    // compare old and new max list item value
+    newMax > oldMax
+    for (let i = oldMax; i < newMax; i++) {
+      if (newMax > oldMax)
+        // add new items
+        listItem = createListItem(i+1);
+        $("#code-ls-items").append(listItem);
+        card = createListItemEditorCard(i+1);
+        $("#ls-items").append(card);
+    }
+    for (let i = newMax; i < oldMax; i++) {
+      if (oldMax > newMax)
+        // remove items
+        $("#code-ls-item-"+(i+1)).remove();
+        $("#ls-item-"+(i+1)+"-card").remove();
+    }
+    // reset previous value
+    $(this).data("previous", newMax);
+    preview("ls");
+  });
 });
+
+// change list type
 $("#ls-type").change(function(data){
   type = $(this).val();
   $(".code-ls-tag").text(type);
@@ -174,23 +197,44 @@ function createAllListItemEditorCards(maxListItems) {
   }
   preview("ls");
 }
+
 // create single list item code, shows first card and collapses all others
 function createListItem(i) {
-  return `${ i == 1 ? "" : "  "}<span class="code-ls-item"><span class="code-open-tag">&lt;li&gt;</span>
-    <span id="code-ls-item-${i}-text">List item #${i} text</span>
-  <span class="code-close-tag">&lt;&#47;li&gt;</span></span>${ i == maxListItems ? "" : "\n"}`;
+  return `${ i == 1 ? "" : "  "}<span class="code-ls-item" id="code-ls-item-${i}"><span class="code-open-tag">\n  &lt;li&gt;</span>
+    <span id="code-ls-item-${i}-text">${ !$("#ls-item-" + i + "-text").val() == "" ? $("#ls-item-" + i + "-text").val() : "List item #" + i + " text"}</span>
+  <span class="code-close-tag">&lt;&#47;li&gt;</span></span>`;
 }
 
 // create single card editor card, shows first card and collapses all others
 function createListItemEditorCard(i) {
   return `
-<div class="input-group mb-3">
+<div class="input-group mb-3" id="ls-item-${i}-card">
   <div class="input-group-prepend">
     <span class="input-group-text">${i}</span>
   </div>
   <input type="text" class="form-control" id="ls-item-${i}-text" aria-label="List item text">
 </div>`;
 }
+
+/*
+${ i == maxListItems ? "" : "\n"}
+<div class="row">
+  <div class="col-md-9">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">${i}</span>
+      </div>
+      <input type="text" class="form-control" id="ls-item-${i}-text" aria-label="List item text">
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input" id="ls-item-${i}-check-sublist">
+      <label class="custom-control-label" for="ls-item-${i}-check-sublist">Sublist</label>
+    </div>
+  </div>
+</div>`;
+*/
 
 // generate card text from input
 updateListItems(8);
@@ -199,6 +243,7 @@ updateTextOrHide("ls", "#ls-custom-class", "&#32;class&#61;&#34", "#code-ls-cust
 
 function updateListItems(listItemLimit) {
   for (let i = 1; i <= listItemLimit; i++) {
+//    toggleCheckbox("ls", "#ls-item-${i}-check-sublist", "#ls-item-${i}-sublist-form");
     updateText("ls", "#ls-item-" + i + "-text", "#code-ls-item-" + i + "-text", "List item #" + i + " text");
   }
 }
@@ -208,20 +253,12 @@ function updateListItems(listItemLimit) {
  **********************************/
 
 // on selet change, show only the required no of cards to edit, update code and preview
-//$("#cd-card-no").on('focus', function() {
-//  $(this).data("previous",$(this).val());
-//  $("#cd-card-no").change(function(data){
-//    alert($(this).data("previous"));
-//    $(this).data("previous",$(this).val());
-  $("#cd-card-no").change(function(){
-    maxCardCards = $(this).val();
-    if (maxCardCards == 1) $("#cd-layout").val("block").change();
-//    $(this).blur();
-//    if ( $(this).data("previous") > maxCardCards ) alert("foo");
-    createAllCardCards(maxCardCards);
-    createAllCardEditorCards(maxCardCards)
-  });
-//});
+$("#cd-card-no").change(function(){
+  maxCardCards = $(this).val();
+  if (maxCardCards == 1) $("#cd-layout").val("block").change();
+  createAllCardCards(maxCardCards);
+  createAllCardEditorCards(maxCardCards)
+});
 
 $("#cd-layout").change(function(data){
   $(this).val() == "deck" 
@@ -417,7 +454,7 @@ function createCarouselEditorCard(i) {
             <div class="form-group crsl-slide-img-form">
               <label for="crsl-slide-${i}-img-src">Image source</label>
               <input type="text" class="form-control" id="crsl-slide-${i}-img-src" placeholder="https://moodle.iddkingsonline.com/file.php/123/images/image.jpg">
-              <small id="crsl-img-src-help" class="form-text text-muted">The image must first be uploaded to Keats, where the generated link can be copied and pasted from.</small>
+              <small id="crsl-img-src-help" class="form-text text-muted">Select an image with 2:1 ratio (i.e 800 x 400px). The image must first be uploaded to Keats, where the generated link can be copied and pasted from.</small>
             </div>
             <div class="form-group crsl-slide-img-form">
               <label for="crsl-slide-${i}-img-alt">Alternative text</label>
