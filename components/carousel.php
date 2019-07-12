@@ -4,7 +4,7 @@
   </div>
   <div class="component-body container">
     <div class="alert alert-info" role="alert">
-      Don't forget to add the css file!
+      Don't forget to link to the css file! - https://git.iddkingsonline.com/designsystem/base.css
     </div>
     <div class="row">
       <div class="options container col-md-5">
@@ -47,7 +47,7 @@
               <label class="custom-control-label" for="crsl-check-title">With caption title</label>
             </div>
           </form>
-          <div id="crsl-collapse">
+          <div id="carousel-slides">
           </div>
         </section>
       </div>
@@ -63,8 +63,7 @@
           </div>
           <div class="code-box">
 <pre class="code-text"><span id="crsl-print-code"><span class="code-open-tag">&lt;div&#32;id&#61;&#34;<span class="code-crsl-id">modname&#45;unitno&#45;carousel&#45;no</span>&#34;&#32;class&#61;&#34;carousel&#32;slide<span id="code-crsl-text-only"></span>&#34;&#32;data&#45;interval&#61;&#34;false&#34;&#32;data&#45;wrap&#61;&#34;false&#34;&gt;</span>
-  <span class="code-open-tag">&lt;ol&#32;class&#61;&#34;carousel&#45;indicators&#34;></span>
-    <span id="code-crsl-indicators"></span>
+  <span class="code-open-tag">&lt;ol&#32;class&#61;&#34;carousel&#45;indicators&#34;></span><span id="code-crsl-indicators"></span>
   <span class="code-close-tag">&lt;&#47;ol&gt;</span>
   <span class="code-open-tag">&lt;div&#32;class&#61;&#34;carousel&#45;inner&#34;></span>
     <span id="code-crsl-slides"></span>

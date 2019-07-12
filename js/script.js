@@ -1,20 +1,17 @@
 $(document).ready(function() {
   $("#tag-link, #code-btn-value, #code-btn-link, #btn-value, #btn-link-field").hide();
   // set card to show 1 card by default
-  createAllCardCards(1);
-  createAllCardEditorCards(1);
+  maxCards = 1;
+  initialCards(maxCards);
   // set carousel to show 3 slides by default
   maxSlides = 3;
-  createAllCarouselIndicators(maxSlides);
-  createAllCarouselSlides(maxSlides);
-  createAllCarouselEditorCards(maxSlides);
+  initialCarouselSlides(maxSlides);
   // set collapse to show 3 cards by default
-  createAllCollapseCards(3);
-  createAllCollapseEditorCards(3);
+  maxCollapseCards = 3;
+  initialCollapseCards(maxCollapseCards);
   // set list to show 3 items by default
   maxListItems = 3;
-  createAllListItems(maxListItems);
-  createAllListItemEditorCards(maxListItems);
+  initialListItems(maxListItems);
   // default embed preview on load
   $("#em-preview-pane").html('<div class="embed-responsive embed-responsive-400by285"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2368101/sp/236810100/embedIframeJs/uiconf_id/42876062/partner_id/2368101?iframeembed=true&playerId=kaltura_player&entry_id=0_m83muzm5&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_fejlyov0&amp;flashvars[infoScreen.plugin]=false&amp;flashvars[titleLabel.plugin]=false&amp;flashvars[related.plugin]=false&amp;flashvars[closedCaptions.displayCaptions]=false&amp;flashvars[closedCaptions.layout]=below&amp;flashvars[IframeCustomPluginCss1]=https://git.iddkingsonline.com/kaltura/kaltura.css" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" frameborder="0" title="Kaltura Player"></iframe></div>');
   // transcript preview
@@ -92,172 +89,42 @@ $("#btn-text").keyup(function() {
 
 // generates link text from input
 updateText("btn", "#btn-link", "#code-btn-link-text", "#");
- 
-
-/**********************************
- * transcript                     *
- **********************************/
-
-updateText("ts", "#ts-title", "#code-ts-title", "Transcript title");
-updateText("ts", "#ts-id", ".code-ts-id", "modname-unitno-transcript");
-updateText("ts", "#ts-link", "#code-ts-link", "#");
-updateText("ts", "#ts-body", "#code-ts-body", "Transcript body...");
-
-// toggle view close transcript button 
-$(".view-close-transcript").click(function() {
-  $(this).text($(this).text() == 'View transcript' ? 'Close transcript' : 'View transcript');
-});
-
-/**********************************
- * embed                          *
- **********************************/
-
-// change responsive ratio on size select
-$("#em-player-size").change(function() {
-  $("#code-em-player-size").text($(this).val());
-  if (!$("#em-embed").val() == "") preview("em");
-});
-
-// add variables and generate embed code
-$("#em-embed").keyup(function() {
-  embedId = $("#em-id").val();
-  embedText = $(this).val();
-  // update the id if provided
-  if (!embedId == "") embedText = embedText.replace('iframe id="kaltura_player', 'iframe id="'+ embedId);
-  embedText = embedText.replace('" width',
-     '&amp;flashvars[infoScreen.plugin]=false&amp;flashvars[titleLabel.plugin]=false&amp;flashvars[related.plugin]=false&amp;flashvars[closedCaptions.displayCaptions]=false&amp;flashvars[closedCaptions.layout]=below&amp;flashvars[IframeCustomPluginCss1]=https:\/\/git.iddkingsonline.com\/kaltura\/kaltura.css" width');  
-  (!embedText == "") ? $("#code-em-embed").text(embedText) : $("#code-em-embed").text("<iframe></iframe>");
-  preview("em");
-}).keyup();
-
-// update the id, do not refresh preview
-$("#em-id").keyup(function() {
-  embedId = $(this).val();
-  embedText = $("#em-embed").val();
-  if (!embedText == "") embedText = embedText.replace('iframe id="kaltura_player', 'iframe id="'+ embedId);  
-  (!embedText == "") ? $("#code-em-embed").text(embedText) : $("#code-em-embed").text("<iframe></iframe>");
-}).keyup();
-
-
-/**********************************
- * list                           *
- **********************************/
-
-// on select change, show only the required no of list items to edit, update code and preview
-$("#ls-item-no").on('focus', function() {
-  $(this).data("previous",$(this).val());
-  $("#ls-item-no").change(function(data){
-    newMax = Number(($(this).val()));
-    oldMax = Number(($(this).data("previous")));
-    // compare old and new max list item value
-    newMax > oldMax
-    for (let i = oldMax; i < newMax; i++) {
-      if (newMax > oldMax)
-        // add new items
-        listItem = createListItem(i+1);
-        $("#code-ls-items").append(listItem);
-        card = createListItemEditorCard(i+1);
-        $("#ls-items").append(card);
-    }
-    for (let i = newMax; i < oldMax; i++) {
-      if (oldMax > newMax)
-        // remove items
-        $("#code-ls-item-"+(i+1)).remove();
-        $("#ls-item-"+(i+1)+"-card").remove();
-    }
-    // reset previous value
-    $(this).data("previous", newMax);
-    preview("ls");
-  });
-});
-
-// change list type
-$("#ls-type").change(function(data){
-  type = $(this).val();
-  $(".code-ls-tag").text(type);
-  preview("ls");
-});
-
-// create all list item code
-function createAllListItems(maxListItems) {
-  $("#code-ls-items").empty();
-  for (let i = 1; i <= maxListItems; i++) {
-    listItem = createListItem(i);
-    $("#code-ls-items").append(listItem);
-  }
-  preview("ls");
-}
-
-//create all card editor cards
-function createAllListItemEditorCards(maxListItems) {
-  $("#ls-items").empty();
-  for (let i = 1; i <= maxListItems; i++) {
-    card = createListItemEditorCard(i);
-    $("#ls-items").append(card);
-  }
-  preview("ls");
-}
-
-// create single list item code, shows first card and collapses all others
-function createListItem(i) {
-  return `${ i == 1 ? "" : "  "}<span class="code-ls-item" id="code-ls-item-${i}"><span class="code-open-tag">\n  &lt;li&gt;</span>
-    <span id="code-ls-item-${i}-text">${ !$("#ls-item-" + i + "-text").val() == "" ? $("#ls-item-" + i + "-text").val() : "List item #" + i + " text"}</span>
-  <span class="code-close-tag">&lt;&#47;li&gt;</span></span>`;
-}
-
-// create single card editor card, shows first card and collapses all others
-function createListItemEditorCard(i) {
-  return `
-<div class="input-group mb-3" id="ls-item-${i}-card">
-  <div class="input-group-prepend">
-    <span class="input-group-text">${i}</span>
-  </div>
-  <input type="text" class="form-control" id="ls-item-${i}-text" aria-label="List item text">
-</div>`;
-}
-
-/*
-${ i == maxListItems ? "" : "\n"}
-<div class="row">
-  <div class="col-md-9">
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text">${i}</span>
-      </div>
-      <input type="text" class="form-control" id="ls-item-${i}-text" aria-label="List item text">
-    </div>
-  </div>
-  <div class="col-md-3">
-    <div class="custom-control custom-checkbox">
-      <input type="checkbox" class="custom-control-input" id="ls-item-${i}-check-sublist">
-      <label class="custom-control-label" for="ls-item-${i}-check-sublist">Sublist</label>
-    </div>
-  </div>
-</div>`;
-*/
-
-// generate card text from input
-updateListItems(8);
-
-updateTextOrHide("ls", "#ls-custom-class", "&#32;class&#61;&#34", "#code-ls-custom-class", "&#34;" );
-
-function updateListItems(listItemLimit) {
-  for (let i = 1; i <= listItemLimit; i++) {
-//    toggleCheckbox("ls", "#ls-item-${i}-check-sublist", "#ls-item-${i}-sublist-form");
-    updateText("ls", "#ls-item-" + i + "-text", "#code-ls-item-" + i + "-text", "List item #" + i + " text");
-  }
-}
 
 /**********************************
  * card                           *
  **********************************/
 
 // on selet change, show only the required no of cards to edit, update code and preview
-$("#cd-card-no").change(function(){
-  maxCardCards = $(this).val();
-  if (maxCardCards == 1) $("#cd-layout").val("block").change();
-  createAllCardCards(maxCardCards);
-  createAllCardEditorCards(maxCardCards)
+$("#cd-card-no").on('focus', function() {
+  $(this).data("previous",$(this).val());
+  $(this).blur();
+  $("#cd-card-no").change(function(){
+    newMax = Number(($(this).val()));
+    oldMax = Number(($(this).data("previous")));
+    // set layout to block for single card
+    if (newMax == 1) $("#cd-layout").val("block").change();
+    // remove card deck container for block layout
+    ($("#cd-layout").val() == "block" || newMax == 1) ? $(".code-cd-deck").hide() : $(".code-cd-deck").show() ;
+    // compare old and new max list item value
+    if (newMax > oldMax) {
+      for (let i = oldMax; i < newMax; i++) {
+        // add new items
+        card = createCard(i+1);
+        $("#code-cd-cards").append(card);
+        cdCard = createCardEditorCard(i+1);
+        $("#cards").append(cdCard);
+      }
+    } else {
+      for (let i = newMax; i < oldMax; i++) {
+        // remove items
+        $("#code-cd-card-"+(i+1)).remove();
+        $("#cd-card-"+(i+1)).remove();
+      }
+    }
+    // reset previous value
+    $(this).removeData("previous");
+    preview("cd");
+  });
 });
 
 $("#cd-layout").change(function(data){
@@ -268,30 +135,20 @@ $("#cd-layout").change(function(data){
   preview("cd");  
 });
 
-// create all card card code
-function createAllCardCards(maxCardCards) {
-  ($("#cd-layout").val() == "block" || maxCardCards == 1) ? $(".code-cd-deck").hide() : $(".code-cd-deck").show() ;
-  $("#code-cd-cards").empty();
-  for (let i = 1; i <= maxCardCards; i++) {
-    card = createCardCard(i);
+// create all card editor cards and code on page load
+function initialCards(maxCards) {
+  for (let i = 1; i <= maxCards; i++) {
+    card = createCard(i);
     $("#code-cd-cards").append(card);
+    cdCard = createCardEditorCard(i);
+    $("#cards").append(cdCard);
   }
   preview("cd");
 }
 
-//create all card editor cards
-function createAllCardEditorCards(maxCardCards) {
-  $("#cd-collapse").empty();
-  for (let i = 1; i <= maxCardCards; i++) {
-    card = createCardEditorCard(i);
-    $("#cd-collapse").append(card);
-  }
-  preview("cd");
-}
- 
 // create single card card code, shows first card and collapses all others
-function createCardCard(i) {
-  return `<pre>  <span class="code-cd-card"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;card&#32;mb&#45;3&#34;&gt;</span><span id="code-cd-${i}-header">
+function createCard(i) {
+  return `<span id="code-cd-card-${i}"><pre>  <span class="code-open-tag">&lt;div&#32;class&#61;&#34;card&#32;mb&#45;3&#34;&gt;</span><span id="code-cd-${i}-header">
     <span>&lt;div&#32;class&#61;&#34;card&#45;header&#34;&gt;</span>
       <span id="code-cd-${i}-header-text">Card #${i} header</span>
     <span>&lt;&#47;div&gt;</span></span>
@@ -303,7 +160,7 @@ function createCardCard(i) {
         <span id="code-cd-${i}-text">Card #${i} text</span>
       <span class="code-close-tag">&lt;&#47;p&gt;</span>
     <span class="code-close-tag">&lt;&#47;div&gt;</span>
-  <span class="code-close-tag">&lt;&#47;div&gt;</span></span></pre>`;
+  <span class="code-close-tag">&lt;&#47;div&gt;</span></pre></span>`;
 }
 
 // create single card editor card, shows first card and collapses all others
@@ -315,7 +172,7 @@ function createCardEditorCard(i) {
           <h5 style="margin-bottom:0 !important">Card #${i}</h5>
         </button>
       </div>
-      <div id="cd-collapse-${i}" class="${ i == 1 ? "collapse show" : "collapse" }" aria-labelledby="cd-card-heading-${i}" data-parent="#cd-collapse">
+      <div id="cd-collapse-${i}" class="${ i == 1 ? "collapse show" : "collapse" }" aria-labelledby="cd-card-heading-${i}" data-parent="#cards">
         <div class="card-body">
           <form>
             <div class="custom-control custom-checkbox">
@@ -385,51 +242,59 @@ function updateCards(cardCardLimit) {
  **********************************/
 
 // on selet change, show only the required no of cards to edit, update code and preview
-$("#crsl-slide-no").change(function() {
-  maxSlides = $(this).val();
-  createAllCarouselIndicators(maxSlides);
-  createAllCarouselSlides(maxSlides);
-  createAllCarouselEditorCards(maxSlides)
+$("#crsl-slide-no").on('focus', function() {
+  $(this).data("previous",$(this).val());
+  $(this).blur();
+  $("#crsl-slide-no").change(function(){
+    newMax = Number(($(this).val()));
+    oldMax = Number(($(this).data("previous")));
+    // compare old and new max list item value
+    if (newMax > oldMax) {
+      for (let i = oldMax; i < newMax; i++) {
+        // add new items
+        indicator = createCarouselIndicator(i+1);
+        $("#code-crsl-indicators").append(indicator);
+        slide = createCarouselSlide(i+1);
+        $("#code-crsl-slides").append(slide);
+        crslCard = createCarouselEditorCard(i+1);
+        $("#carousel-slides").append(crslCard);
+      }
+    } else {
+      for (let i = newMax; i < oldMax; i++) {
+        // remove items
+        $("#code-crsl-indicator-"+(i+1)).remove();
+        $("#code-crsl-slide-"+(i+1)).remove();
+        $("#crsl-card-"+(i+1)).remove();
+      }
+    }
+    // reset previous value
+    $(this).removeData("previous");
+    preview("crsl");
+  });
 });
 
-// create all collapse card code
-function createAllCarouselIndicators(maxSlides) {
-  $("#code-crsl-indicators").empty();
+// create all carousel editor cards and code on page load
+function initialCarouselSlides(maxSlides) {
   for (let i = 1; i <= maxSlides; i++) {
     indicator = createCarouselIndicator(i);
     $("#code-crsl-indicators").append(indicator);
-  }
-  preview("crsl");
-}
-
-// create all collapse card code
-function createAllCarouselSlides(maxSlides) {
-  $("#code-crsl-slides").empty();
-  for (let i = 1; i <= maxSlides; i++) {
     slide = createCarouselSlide(i);
     $("#code-crsl-slides").append(slide);
-  }
-  preview("crsl");
-}
-
-//create all carousel editor slides
-function createAllCarouselEditorCards(maxSlides) {
-  $("#crsl-collapse").empty();
-  for (let i = 1; i <= maxSlides; i++) {
-    card = createCarouselEditorCard(i);
-    $("#crsl-collapse").append(card);
+    crslCard = createCarouselEditorCard(i);
+    $("#carousel-slides").append(crslCard);
   }
   preview("crsl");
 }
 
 // create single carousel slide indicator code
 function createCarouselIndicator(i) {
-  return `<span class="code-open-tag">&lt;li&#32;data&#45;target&#61;&#34;&#35;<span class="code-crsl-id">modname&#45;unitno&#45;carousel&#45;no</span>&#34;&#32;data&#45;slide&#45;to&#61;&#34;${ i - 1 }&#34;${ i == 1 ? "&#32;class&#61;&#34;active&#34;" : "" }&gt;</span><span class="code-close-tag">&lt;&#47;li&gt;</span>${ i == maxSlides ? "" : "\n    " }`;
+  return `<span id="code-crsl-indicator-${i}">\n    <span class="code-open-tag">&lt;li&#32;data&#45;target&#61;&#34;&#35;<span class="code-crsl-id">modname&#45;unitno&#45;carousel&#45;no</span>&#34;&#32;data&#45;slide&#45;to&#61;&#34;${ i - 1 }&#34;${ i == 1 ? "&#32;class&#61;&#34;active&#34;" : "" }&gt;</span><span class="code-close-tag">&lt;&#47;li&gt;</span></span>`;
+//  return `<span id="code-crsl-indicator-${i}"><span class="code-open-tag">&lt;li&#32;data&#45;target&#61;&#34;&#35;<span class="code-crsl-id">modname&#45;unitno&#45;carousel&#45;no</span>&#34;&#32;data&#45;slide&#45;to&#61;&#34;${ i - 1 }&#34;${ i == 1 ? "&#32;class&#61;&#34;active&#34;" : "" }&gt;</span><span class="code-close-tag">&lt;&#47;li&gt;</span>${ i == maxSlides ? "" : "\n    " }</span>`;
 }
 
 // create single carousel slide code
 function createCarouselSlide(i) {
-  return `<span class="code-crsl-slide"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;carousel&#45;item${ i == 1 ? " active" : "" }&#34;&gt;</span><span id="code-crsl-slide-${i}-img">
+  return `<span id="code-crsl-slide-${i}"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;carousel&#45;item${ i == 1 ? " active" : "" }&#34;&gt;</span><span id="code-crsl-slide-${i}-img">
     <span class="code-open-tag">&lt;img&#32;src&#61;&#34;<span id="code-crsl-slide-${i}-img-src">https:&#47;&#47;placekitten.com&#47;800&#47;400</span>&#34;&#32;class&#61;&#34;w&#45;100&#34;&#32;alt&#61;&#34;<span id="code-crsl-slide-${i}-img-alt">An adorable kitten</span>&#34;&gt;</span></span>
     <span class="code-open-tag">&lt;div&#32;class&#61;&#34;carousel&#45;caption&#34;&gt;</span><span id="code-crsl-slide-${i}-title"></span>
       <span class="code-open-tag">&lt;p&gt;</span>
@@ -448,7 +313,7 @@ function createCarouselEditorCard(i) {
           <h5 style="margin-bottom:0 !important">Slide #${i}</h5>
         </button>
       </div>
-      <div id="collapse-${i}" class="${ i == 1 ? "collapse show" : "collapse" }" aria-labelledby="col-card-heading-${i}" data-parent="#col-collapse">
+      <div id="collapse-${i}" class="${ i == 1 ? "collapse show" : "collapse" }" aria-labelledby="col-card-heading-${i}" data-parent="#carousel-slides">
         <div class="card-body">
           <form>
             <div class="form-group crsl-slide-img-form">
@@ -538,35 +403,48 @@ function updateCarouselSlides(carouselSlideLimit) {
  **********************************/
 
 // on selet change, show only the required no of cards to edit, update code and preview
-$("#col-card-no").change(function() {
-  maxCollapseCards = $(this).val();
-  createAllCollapseCards(maxCollapseCards);
-  createAllCollapseEditorCards(maxCollapseCards)
+$("#col-card-no").on('focus', function() {
+  $(this).data("previous",$(this).val());
+  $(this).blur();
+  $("#col-card-no").change(function(){
+    newMax = Number(($(this).val()));
+    oldMax = Number(($(this).data("previous")));
+    // compare old and new max list item value
+    if (newMax > oldMax) {
+      for (let i = oldMax; i < newMax; i++) {
+        // add new items
+        collapseCard = createCollapseCard(i+1);
+        $("#code-col-cards").append(collapseCard);
+        colCard = createCollapseEditorCard(i+1);
+        $("#collapse-cards").append(colCard);
+      }
+    } else {
+      for (let i = newMax; i < oldMax; i++) {
+        // remove items
+        $("#code-col-card-"+(i+1)).remove();
+        $("#col-card-"+(i+1)).remove();
+      }
+    }
+    // reset previous value
+    $(this).removeData("previous");
+    preview("col");
+  });
 });
 
-// create all collapse card code
-function createAllCollapseCards(maxCollapseCards) {
-  $("#code-col-cards").empty();
+// create all collapse editor cards and code on page load
+function initialCollapseCards(maxCollapseCards) {
   for (let i = 1; i <= maxCollapseCards; i++) {
-    card = createCollapseCard(i);
-    $("#code-col-cards").append(card);
-  }
-  preview("col");
-}
-
-//create all collapse editor cards
-function createAllCollapseEditorCards(maxCollapseCards) {
-  $("#col-collapse").empty();
-  for (let i = 1; i <= maxCollapseCards; i++) {
-    card = createCollapseEditorCard(i);
-    $("#col-collapse").append(card);
+    collapseCard = createCollapseCard(i);
+    $("#code-col-cards").append(collapseCard);
+    colCard = createCollapseEditorCard(i);
+    $("#collapse-cards").append(colCard);
   }
   preview("col");
 }
 
 // create single collapse card code, shows first card and collapses all others
 function createCollapseCard(i) {
-  return `<span class="code-col-card"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;card&#34;&gt;</span>
+  return `<span id="code-col-card-${i}"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;card&#34;&gt;</span>
     <span class="code-open-tag">&lt;div&#32;class&#61;&#34;card&#45;header&#32;p&#45;0&#34;&#32;id&#61;&#34;<span class="code-col-id">modname&#45;unitno&#45;collapse&#45;no</span>&#45;heading&#45;<span class="code-col-card-no">${i}</span>&#34;&gt;</span>
       <span class="code-open-tag">&lt;button&#32;class&#61;&#34;btn&#32;btn&#45;link&#32;collapsed&#32;btn&#45;block&#32;text&#45;left&#32;px&#45;3${ i == 1 ? "" : "collapsed" }&#34;&#32;data&#45;toggle&#61;&#34;collapse&#34;&#32;data&#45;target&#61;&#34;#<span class="code-col-id">modname&#45;unitno&#45;collapse&#45;no</span>&#45;collapse&#45;${i}&#34;&#32;aria&#45;expanded&#61;&#34;false&#34;&#32;aria&#45;controls&#61;&#34;<span class="code-col-id">modname&#45;unitno&#45;collapse&#45;no</span>&#45;collapse&#45;${i}&#34;&gt;</span>
         <span class="code-open-tag">&lt;h5&gt;</span>
@@ -591,7 +469,7 @@ function createCollapseEditorCard(i) {
           <h5 style="margin-bottom:0 !important">Card #${i}</h5>
         </button>
       </div>
-      <div id="collapse-${i}" class="${ i == 1 ? "collapse show" : "collapse" }" aria-labelledby="col-card-heading-${i}" data-parent="#col-collapse">
+      <div id="collapse-${i}" class="${ i == 1 ? "collapse show" : "collapse" }" aria-labelledby="col-card-heading-${i}" data-parent="#collapse-cards">
         <div class="card-body">
           <form>
             <div class="form-group">
@@ -620,6 +498,151 @@ function updateCollapseText(collapseCardLimit) {
     updateText("col", "#collapse-" + i + "-body", "#code-col-collapse-" + i + "-body", "Collapse card #" + i + "body");
   }
 }
+
+/**********************************
+ * embed                          *
+ **********************************/
+
+// change responsive ratio on size select
+$("#em-player-size").change(function() {
+  $("#code-em-player-size").text($(this).val());
+  if (!$("#em-embed").val() == "") preview("em");
+});
+
+// add variables and generate embed code
+$("#em-embed").keyup(function() {
+  embedId = $("#em-id").val();
+  embedText = $(this).val();
+  // update the id if provided
+  if (!embedId == "") embedText = embedText.replace('iframe id="kaltura_player', 'iframe id="'+ embedId);
+  embedText = embedText.replace('" width',
+     '&amp;flashvars[infoScreen.plugin]=false&amp;flashvars[titleLabel.plugin]=false&amp;flashvars[related.plugin]=false&amp;flashvars[closedCaptions.displayCaptions]=false&amp;flashvars[closedCaptions.layout]=below&amp;flashvars[IframeCustomPluginCss1]=https:\/\/git.iddkingsonline.com\/kaltura\/kaltura.css" width');  
+  (!embedText == "") ? $("#code-em-embed").text(embedText) : $("#code-em-embed").text("<iframe></iframe>");
+  preview("em");
+}).keyup();
+
+// update the id, do not refresh preview
+$("#em-id").keyup(function() {
+  embedId = $(this).val();
+  embedText = $("#em-embed").val();
+  if (!embedText == "") embedText = embedText.replace('iframe id="kaltura_player', 'iframe id="'+ embedId);  
+  (!embedText == "") ? $("#code-em-embed").text(embedText) : $("#code-em-embed").text("<iframe></iframe>");
+}).keyup();
+
+/**********************************
+ * list                           *
+ **********************************/
+
+// on select change, show only the required no of list items to edit, update code and preview
+$("#ls-item-no").on('focus', function() {
+  $(this).data("previous",$(this).val());
+  $(this).blur();
+  $("#ls-item-no").change(function(data){
+    newMax = Number(($(this).val()));
+    oldMax = Number(($(this).data("previous")));
+    // compare old and new max list item value
+    if (newMax > oldMax) {
+      for (let i = oldMax; i < newMax; i++) {
+        // add new items
+        listItem = createListItem(i+1);
+        $("#code-ls-items").append(listItem);
+        card = createListItemEditorCard(i+1);
+        $("#ls-items").append(card);
+      }
+    } else {
+      for (let i = newMax; i < oldMax; i++) {
+        // remove items
+        $("#code-ls-item-"+(i+1)).remove();
+        $("#ls-item-"+(i+1)+"-card").remove();
+      }
+    }
+    // reset previous value
+    $(this).removeData("previous");
+    preview("ls");
+  });
+});
+
+// change list type
+$("#ls-type").change(function(data){
+  type = $(this).val();
+  $(".code-ls-tag").text(type);
+  preview("ls");
+});
+
+// create all list item editor cards and code on page load
+function initialListItems(maxListItems) {
+  for (let i = 1; i <= maxListItems; i++) {
+    listItem = createListItem(i);
+    $("#code-ls-items").append(listItem);
+    lsCard = createListItemEditorCard(i);
+    $("#ls-items").append(lsCard);
+  }
+  preview("ls");
+}
+
+// create single list item code, shows first card and collapses all others
+function createListItem(i) {
+  return `${ i == 1 ? "" : "  "}<span class="code-ls-item" id="code-ls-item-${i}"><span class="code-open-tag">\n  &lt;li&gt;</span>
+    <span id="code-ls-item-${i}-text">${ !$("#ls-item-" + i + "-text").val() == "" ? $("#ls-item-" + i + "-text").val() : "List item #" + i + " text"}</span>
+  <span class="code-close-tag">&lt;&#47;li&gt;</span></span>`;
+}
+
+// create single card editor card, shows first card and collapses all others
+function createListItemEditorCard(i) {
+  return `
+<div class="input-group mb-3" id="ls-item-${i}-card">
+  <div class="input-group-prepend">
+    <span class="input-group-text">${i}</span>
+  </div>
+  <input type="text" class="form-control" id="ls-item-${i}-text" aria-label="List item text">
+</div>`;
+}
+
+/*
+${ i == maxListItems ? "" : "\n"}
+<div class="row">
+  <div class="col-md-9">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">${i}</span>
+      </div>
+      <input type="text" class="form-control" id="ls-item-${i}-text" aria-label="List item text">
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input" id="ls-item-${i}-check-sublist">
+      <label class="custom-control-label" for="ls-item-${i}-check-sublist">Sublist</label>
+    </div>
+  </div>
+</div>`;
+*/
+
+// generate card text from input
+updateListItems(8);
+
+updateTextOrHide("ls", "#ls-custom-class", "&#32;class&#61;&#34", "#code-ls-custom-class", "&#34;" );
+
+function updateListItems(listItemLimit) {
+  for (let i = 1; i <= listItemLimit; i++) {
+//    toggleCheckbox("ls", "#ls-item-${i}-check-sublist", "#ls-item-${i}-sublist-form");
+    updateText("ls", "#ls-item-" + i + "-text", "#code-ls-item-" + i + "-text", "List item #" + i + " text");
+  }
+}
+
+/**********************************
+ * transcript                     *
+ **********************************/
+
+updateText("ts", "#ts-title", "#code-ts-title", "Transcript title");
+updateText("ts", "#ts-id", ".code-ts-id", "modname-unitno-transcript");
+updateText("ts", "#ts-link", "#code-ts-link", "#");
+updateText("ts", "#ts-body", "#code-ts-body", "Transcript body...");
+
+// toggle view close transcript button
+$(".view-close-transcript").click(function() {
+  $(this).text($(this).text() == 'View transcript' ? 'Close transcript' : 'View transcript');
+});
 
 /**********************************
  * general functions              *

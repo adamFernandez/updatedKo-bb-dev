@@ -36,7 +36,7 @@
               </div>
             </div>
           </form>
-          <div id="cd-collapse">
+          <div id="cards">
           </div>
         </section>
       </div>
