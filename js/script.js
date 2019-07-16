@@ -688,8 +688,8 @@ function initialTimelineCards(maxTimelineCards) {
 
 // create single timeline card code, shows first card and collapses all others
 function createTimelineCard(i) {
-  return `<span id="code-tl-card-${i}"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;row&#34;&gt;</span>
-    <span class="code-open-tag">&lt;div&#32;class&#61;&#34;col&#45;auto&#32;flex&#45;column&#32;d&#45;none&#32;d&#45;sm&#45;flex&#34;&gt;</span>
+  return `<span id="code-tl-card-${i}"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;row&#34;&gt;</span><span id="code-tl-card-${i}-spacer">${ $("#tl-card-layout").val() == 1 ? "" : "\n    &lt;div&#32;class&#61;&#34;col&#45;sm&#32;order&#45;" +  (i % 2 == 0 ? 3 : 1) + "&#34;&gt&lt;&#47;div&gt; "} </span>
+    <span class="code-open-tag">&lt;div&#32;class&#61;&#34;col&#45;auto&#32;text&#45;center&#32;flex&#45;column&#32;d&#45;none&#32;d&#45;sm&#45;flex<span class="code-tl-card-dot-order">${ $("#tl-card-layout").val() == 1 ? "" : " order-2"}</span>&#34;&gt;</span>
       <span class="code-open-tag">&lt;div&#32;class&#61;&#34;row&#32;h&#45;50&#34;&gt;</span>
         <span class="code-open-tag">&lt;div&#32;class&#61;&#34;col${ i == 1 ? "" : " border&#45;right" }&#34;&gt;</span>&nbsp;<span class="code-close-tag">&lt;&#47;div&gt;</span>
         <span class="code-open-tag">&lt;div&#32;class&#61;&#34;col&#34;&gt;</span>&nbsp;<span class="code-close-tag">&lt;&#47;div&gt;</span>
@@ -702,7 +702,7 @@ function createTimelineCard(i) {
         <span class="code-open-tag">&lt;div&#32;class&#61;&#34;col&#34;&gt;</span>&nbsp;<span class="code-close-tag">&lt;&#47;div&gt;</span>
       <span class="code-close-tag">&lt;&#47;div&gt;</span>
     <span class="code-close-tag">&lt;&#47;div&gt;</span>
-    <span class="code-open-tag">&lt;div&#32;class&#61;&#34;col&#32;py&#45;2&#34;&gt;</span>
+    <span class="code-open-tag">&lt;div&#32;class&#61;&#34;col&#32;py&#45;2<span id="code-tl-card-${i}-content-order">${ $("#tl-card-layout").val() == 1 ? "" : " order&#45;" +  (i % 2 == 0 ? 1 : 3)}</span>&#34;&gt;</span>
      <span class="code-open-tag">&lt;div&#32;class&#61;&#34;card&#34;&gt;</span>
         <span id="code-tl-card-${i}-header-open">&lt;div&#32;class&#61;&#34;card&#45;header&#34;&gt;</span><span id="code-tl-card-${i}-date">
           <span class="code-tl-card-date-open">&lt;span&#32;class&#61;&#34;float&#45;right&#34;&gt;</span>
@@ -753,6 +753,20 @@ function createTimelineEditorCard(i) {
   `;
 }
 
+//toggle timeline card layout
+$("#tl-card-layout").change(function(){
+  layout = $(this).val();
+  timelineToggleLayout(8);
+  preview("tl");
+});
+function timelineToggleLayout(timelineCardLimit) {
+  for (let i = 1; i <= timelineCardLimit; i++) {
+  layout == 1
+    ? ( $("#code-tl-card-" + i + "-content-order").html(""), $(".code-tl-card-dot-order").html(""), $("#code-tl-card-" + i + "-spacer").text(""))
+    : ( $("#code-tl-card-" + i + "-content-order").html(`&#32;order&#45;${ i % 2 == 0 ? 1 : 3 }`), $(".code-tl-card-dot-order").html("&#32;order&#45;2"), $("#code-tl-card-" + i + "-spacer").html(`\n    &lt;div&#32;class&#61;&#34;col&#45;sm&#32;order&#45;${(i % 2 == 0) ? 3 : 1}&#34;&gt&lt;&#47;div&gt;`));
+  }
+};
+
 // toggle timeline title code
 toggleCheckbox("tl", "#tl-check-title", "#tl-title-form");
 $(document).on('click', "#tl-check-title", function (event) {
@@ -770,6 +784,7 @@ $(document).on("click", "#tl-check-date", function(event) {
   $("#tl-check-date").toggleClass("unchecked").toggleClass("checked");
   $(".tl-date").toggle();
   timelineToggleDate(8);
+  preview("tl");
 });
 function timelineToggleDate(timelineCardLimit) {
   for (let i = 1; i <= timelineCardLimit; i++) {
@@ -779,7 +794,6 @@ function timelineToggleDate(timelineCardLimit) {
   $(".code-tl-card-date-open").text('<span class="float-right">');
   $("#tl-" + i + "-date").val() !== "" ? $("#code-tl-card-" + i + "-date-text").text($("#tl-" + i + "-date").val()) : $("#code-tl-card-" + i + "-date-text").text(dateString + " " + (i < 6 ? (i + 7) + ":00AM" : (i - 5) + ":00PM"));
   $(".code-tl-card-date-close").text('</span>');
-  preview("tl");
   }
 };
 
