@@ -372,7 +372,6 @@ function carouselToggleImage(carouselSlideLimit) {
 //toggle carousel caption title code
 $(document).on("click", "#crsl-check-title", function(event) {
   $("#crsl-check-title").toggleClass("unchecked").toggleClass("checked");
-
   carouselToggleTitle(8);
 });
 
@@ -690,7 +689,7 @@ function initialTimelineCards(maxTimelineCards) {
 // create single timeline card code, shows first card and collapses all others
 function createTimelineCard(i) {
   return `<span id="code-tl-card-${i}"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;row&#34;&gt;</span>
-    <span class="code-open-tag">&lt;div&#32;class&#61;&#34;col&#45;auto&#32;flex&#45;column&#32;d&#45;none&#32;d&#45;sm&#45;flex&#34;&gt;</span><span id="code-cd-${i}-header">
+    <span class="code-open-tag">&lt;div&#32;class&#61;&#34;col&#45;auto&#32;flex&#45;column&#32;d&#45;none&#32;d&#45;sm&#45;flex&#34;&gt;</span>
       <span class="code-open-tag">&lt;div&#32;class&#61;&#34;row&#32;h&#45;50&#34;&gt;</span>
         <span class="code-open-tag">&lt;div&#32;class&#61;&#34;col${ i == 1 ? "" : " border&#45;right" }&#34;&gt;</span>&nbsp;<span class="code-close-tag">&lt;&#47;div&gt;</span>
         <span class="code-open-tag">&lt;div&#32;class&#61;&#34;col&#34;&gt;</span>&nbsp;<span class="code-close-tag">&lt;&#47;div&gt;</span>
@@ -705,15 +704,15 @@ function createTimelineCard(i) {
     <span class="code-close-tag">&lt;&#47;div&gt;</span>
     <span class="code-open-tag">&lt;div&#32;class&#61;&#34;col&#32;py&#45;2&#34;&gt;</span>
      <span class="code-open-tag">&lt;div&#32;class&#61;&#34;card&#34;&gt;</span>
-        <span>&lt;div&#32;class&#61;&#34;card&#45;header&#34;&gt;</span>
-          <span class="code-open-tag">&lt;span&#32;class&#61;&#34;float&#45;right&#34;&gt;</span>
-            <span id="code-tl-card-${i}-date">${!$("#tl-" + i + "-date").val() == "" ? $("#tl-" + i + "-date").val() : dateString + " " + (i < 6 ? (i + 7) + ":00AM" : (i - 5) + ":00PM")}</span>
-          <span class="code-close-tag">&lt;&#47;span&gt;</span>
+        <span id="code-tl-card-${i}-header-open">&lt;div&#32;class&#61;&#34;card&#45;header&#34;&gt;</span><span id="code-tl-card-${i}-date">
+          <span class="code-tl-card-date-open">&lt;span&#32;class&#61;&#34;float&#45;right&#34;&gt;</span>
+            <span id="code-tl-card-${i}-date-text">${!$("#tl-" + i + "-date").val() == "" ? $("#tl-" + i + "-date").val() : dateString + " " + (i < 6 ? (i + 7) + ":00AM" : (i - 5) + ":00PM")}</span>
+          <span class="code-tl-card-date-close">&lt;&#47;span&gt;</span></span>
           <span class="code-open-tag">&lt;h4&#32;class&#61;&#34;card&#45;title&#34;&gt;</span>
             <span id="code-tl-card-${i}-title">${!$("#tl-" + i + "-title").val() == "" ? $("#tl-" + i + "-title").val() : "Card #" + i + " title"}</span>
-          <span class="code-close-tag">&lt;&#47;h4&gt;</span>
+          <span class="code-close-tag">&lt;&#47;h4&gt;</span><span id="code-tl-card-${i}-header-close">
         <span class="code-close-tag">&lt;&#47;div&gt;</span>
-        <span class="code-open-tag">&lt;div&#32;class&#61;&#34;card&#45;body&#34;&gt;</span>
+        <span class="code-open-tag">&lt;div&#32;class&#61;&#34;card&#45;body&#34;&gt;</span></span>
           <span class="code-open-tag">&lt;p&#32;class&#61;&#34;card&#45;text&#34;&gt;</span>
             <span id="code-tl-card-${i}-text">${!$("#tl-" + i + "-text").val() == "" ? $("#tl-" + i + "-text").val() : "Lorem ipsum dolor amet flexitarian butcher VHS tilde, squid 3 wolf moon shoreditch vape williamsburg mustache messenger bag prism."}</span>
           <span class="code-close-tag">&lt;&#47;p&gt;</span>
@@ -739,7 +738,7 @@ function createTimelineEditorCard(i) {
               <label for="tl-${i}-header">Card title</label>
               <input type="text" class="form-control" id="tl-${i}-title" placeholder="Card #${i} title">
             </div>
-            <div class="form-group" id="tl-${i}-date-form">
+            <div class="form-group tl-date" id="tl-${i}-date-form">
               <label for="tl-${i}-date">Date</label>
               <input type="text" class="form-control" id="tl-${i}-date" placeholder="${dateString} ${i+7}:00">
             </div>
@@ -754,12 +753,7 @@ function createTimelineEditorCard(i) {
   `;
 }
 
-// generate card text from input
-updateTimelineText(8);
-
-updateText("tl", "#tl-id", ".code-tl-id", "modname-unitno-timeline-no");
-updateText("tl", "#tl-title", "#code-tl-title-text", "Title");
-
+// toggle timeline title code
 toggleCheckbox("tl", "#tl-check-title", "#tl-title-form");
 $(document).on('click', "#tl-check-title", function (event) {
   $("#tl-check-title").hasClass("checked")
@@ -771,10 +765,48 @@ $(document).on('click', "#tl-check-title", function (event) {
   preview("tl");
 });
 
+//toggle timeline date code
+$(document).on("click", "#tl-check-date", function(event) {
+  $("#tl-check-date").toggleClass("unchecked").toggleClass("checked");
+  $(".tl-date").toggle();
+  timelineToggleDate(8);
+});
+function timelineToggleDate(timelineCardLimit) {
+  for (let i = 1; i <= timelineCardLimit; i++) {
+  $("#tl-check-date").hasClass("checked")
+    ? $("#code-tl-card-" + i + "-date").html('\n          <span class="code-tl-card-date-open"></span>\n            <span id="code-tl-card-' + i + '-date-text"></span>\n          <span class="code-tl-card-date-close"></span>')
+    : $("#code-tl-card-" + i + "-date").text("");
+  $(".code-tl-card-date-open").text('<span class="float-right">');
+  $("#tl-" + i + "-date").val() !== "" ? $("#code-tl-card-" + i + "-date-text").text($("#tl-" + i + "-date").val()) : $("#code-tl-card-" + i + "-date-text").text(dateString + " " + (i < 6 ? (i + 7) + ":00AM" : (i - 5) + ":00PM"));
+  $(".code-tl-card-date-close").text('</span>');
+  preview("tl");
+  }
+};
+
+//toggle timeline header code
+$(document).on("click", "#tl-check-header", function(event) {
+  $("#tl-check-header").toggleClass("unchecked").toggleClass("checked");
+  timelineToggleHeader(8);
+});
+function timelineToggleHeader(timelineCardLimit) {
+  for (let i = 1; i <= timelineCardLimit; i++) {
+  console.log(i);
+  $("#tl-check-header").hasClass("checked")
+    ? ( $("#code-tl-card-" + i + "-header-open").html("&lt;div&#32;class&#61;&#34;card&#45;header&#34;&gt;"), $("#code-tl-card-" + i + "-header-close").html("\n        &lt;&#47;div&gt;\n        &lt;div&#32;class&#61;&#34;card&#45;body&#34;&gt;"))
+    : ( $("#code-tl-card-" + i + "-header-open").html("&lt;div&#32;class&#61;&#34;card&#45;body&#34;&gt;"), $("#code-tl-card-" + i + "-header-close").html(""));
+  preview("tl");
+  }
+};
+
+// generate card text from input
+updateTimelineText(8);
+updateTextOrHide("tl", "#tl-id", "&#32;id&#61;&#34;", "#code-tl-id", "&#34;");
+updateText("tl", "#tl-title", "#code-tl-title-text", "Title");
+
 function updateTimelineText(timelineCardLimit) {
   for (let i = 1; i <= timelineCardLimit; i++) {
     updateText("tl", "#tl-" + i + "-title", "#code-tl-card-" + i + "-title", "Card #" + i + " title");
-    updateText("tl", "#tl-" + i + "-date", "#code-tl-card-" + i + "-date", dateString + ( i < 6 ? " 0" + (i+7) + ":00AM" : " " + (i+7) + ":00PM" ));
+    updateText("tl", "#tl-" + i + "-date", "#code-tl-card-" + i + "-date-text", dateString + ( i < 6 ? " 0" + (i+7) + ":00AM" : " " + (i+7) + ":00PM" ));
     updateText("tl", "#tl-" + i + "-text", "#code-tl-card-" + i + "-text", "Card #" + i + " text");
   }
 }
