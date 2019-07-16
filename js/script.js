@@ -740,7 +740,7 @@ function createTimelineEditorCard(i) {
             </div>
             <div class="form-group tl-date" id="tl-${i}-date-form">
               <label for="tl-${i}-date">Date</label>
-              <input type="text" class="form-control" id="tl-${i}-date" placeholder="${dateString} ${i+7}:00">
+              <input type="text" class="form-control" id="tl-${i}-date" placeholder="${dateString} ${ i < 6 ? i + 7 : i - 5 }:00 ${ i < 6 ? "AM" : "PM" }">
             </div>
             <div class="form-group">
               <label for="tl-${i}-text">Text</label>
