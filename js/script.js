@@ -1,3 +1,6 @@
+today = new Date();
+dateString = today.toDateString();
+
 $(document).ready(function() {
   $("#tag-link, #code-btn-value, #code-btn-link, #btn-value, #btn-link-field").hide();
   // set card to show 1 card by default
@@ -631,6 +634,152 @@ function updateListItems(listItemLimit) {
 }
 
 /**********************************
+ * timeline                       *
+ **********************************/
+
+$("#tl-card-no").on('focus', function() {
+  $(this).data("previous",$(this).val());
+  $(this).blur();
+  $("#tl-card-no").change(function(){
+    maxTimelineCards = Number(($(this).val()));
+    j = maxTimelineCards;
+    oldMax = Number(($(this).data("previous")));
+    // compare old and new max list item value
+    if (maxTimelineCards > oldMax) {
+      // regenerates end card for timeline dot formatting
+      $("#code-tl-card-"+(oldMax)).remove();
+      timelineCard = createTimelineCard(oldMax);
+      $("#code-tl-cards").append(timelineCard);
+      for (let i = oldMax; i < j; i++) {
+        // add new items
+        timelineCard = createTimelineCard(i+1);
+        $("#code-tl-cards").append(timelineCard);
+        tlCard = createTimelineEditorCard(i+1);
+        $("#tl-cards").append(tlCard);
+      } 
+    } else {
+      // regenerates end card for timeline dot formatting
+      $("#code-tl-card-"+(maxTimelineCards)).remove();
+      timelineCard = createTimelineCard(maxTimelineCards);
+      $("#code-tl-cards").append(timelineCard);
+      for (let i = oldMax; i > j ; i--) {
+        // remove items
+        $("#code-tl-card-"+(i)).remove();
+        $("#tl-card-"+(i)).remove();
+      }
+    }
+    // reset previous value
+    $(this).removeData("previous");
+    preview("tl");
+  });
+});
+
+initialTimelineCards(4);
+// create all timeline editor cards and code on page load
+function initialTimelineCards(maxTimelineCards) {
+  j = maxTimelineCards
+  for (let i = 1; i <= j; i++) {
+    timelineCard = createTimelineCard(i);
+    $("#code-tl-cards").append(timelineCard);
+    tlCard = createTimelineEditorCard(i);
+    $("#tl-cards").append(tlCard);
+  }
+  preview("tl");
+}
+
+// create single timeline card code, shows first card and collapses all others
+function createTimelineCard(i) {
+  return `<span id="code-tl-card-${i}"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;row&#34;&gt;</span>
+    <span class="code-open-tag">&lt;div&#32;class&#61;&#34;col&#45;auto&#32;flex&#45;column&#32;d&#45;none&#32;d&#45;sm&#45;flex&#34;&gt;</span><span id="code-cd-${i}-header">
+      <span class="code-open-tag">&lt;div&#32;class&#61;&#34;row&#32;h&#45;50&#34;&gt;</span>
+        <span class="code-open-tag">&lt;div&#32;class&#61;&#34;col${ i == 1 ? "" : " border&#45;right" }&#34;&gt;</span>&nbsp;<span class="code-close-tag">&lt;&#47;div&gt;</span>
+        <span class="code-open-tag">&lt;div&#32;class&#61;&#34;col&#34;&gt;</span>&nbsp;<span class="code-close-tag">&lt;&#47;div&gt;</span>
+      <span class="code-close-tag">&lt;&#47;div&gt;</span>
+      <span class="code-open-tag">&lt;div&#32;class&#61;&#34;m&#45;2&#34;&gt;</span>
+        <span class="code-open-tag">&lt;span&#32;class&#61;&#34;badge&#32;badge&#45;pill&#32;bg&#45;light&#32;border&#34;&gt;</span>&nbsp;<span class="code-close-tag">&lt;&#47;span&gt;</span>
+      <span class="code-close-tag">&lt;&#47;div&gt;</span>
+      <span class="code-open-tag">&lt;div&#32;class&#61;&#34;row&#32;h&#45;50&#34;&gt;</span>
+        <span class="code-open-tag">&lt;div&#32;class&#61;&#34;col${ i == j ? "" : " border&#45;right" }&#34;&gt;</span>&nbsp;<span class="code-close-tag">&lt;&#47;div&gt;</span>
+        <span class="code-open-tag">&lt;div&#32;class&#61;&#34;col&#34;&gt;</span>&nbsp;<span class="code-close-tag">&lt;&#47;div&gt;</span>
+      <span class="code-close-tag">&lt;&#47;div&gt;</span>
+    <span class="code-close-tag">&lt;&#47;div&gt;</span>
+    <span class="code-open-tag">&lt;div&#32;class&#61;&#34;col&#32;py&#45;2&#34;&gt;</span>
+     <span class="code-open-tag">&lt;div&#32;class&#61;&#34;card&#34;&gt;</span>
+        <span>&lt;div&#32;class&#61;&#34;card&#45;header&#34;&gt;</span>
+          <span class="code-open-tag">&lt;span&#32;class&#61;&#34;float&#45;right&#34;&gt;</span>
+            <span id="code-tl-card-${i}-date">${!$("#tl-" + i + "-date").val() == "" ? $("#tl-" + i + "-date").val() : dateString + " " + (i < 6 ? (i + 7) + ":00AM" : (i - 5) + ":00PM")}</span>
+          <span class="code-close-tag">&lt;&#47;span&gt;</span>
+          <span class="code-open-tag">&lt;h4&#32;class&#61;&#34;card&#45;title&#34;&gt;</span>
+            <span id="code-tl-card-${i}-title">${!$("#tl-" + i + "-title").val() == "" ? $("#tl-" + i + "-title").val() : "Card #" + i + " title"}</span>
+          <span class="code-close-tag">&lt;&#47;h4&gt;</span>
+        <span class="code-close-tag">&lt;&#47;div&gt;</span>
+        <span class="code-open-tag">&lt;div&#32;class&#61;&#34;card&#45;body&#34;&gt;</span>
+          <span class="code-open-tag">&lt;p&#32;class&#61;&#34;card&#45;text&#34;&gt;</span>
+            <span id="code-tl-card-${i}-text">${!$("#tl-" + i + "-text").val() == "" ? $("#tl-" + i + "-text").val() : "Lorem ipsum dolor amet flexitarian butcher VHS tilde, squid 3 wolf moon shoreditch vape williamsburg mustache messenger bag prism."}</span>
+          <span class="code-close-tag">&lt;&#47;p&gt;</span>
+        <span class="code-close-tag">&lt;&#47;div&gt;</span>
+      <span class="code-close-tag">&lt;&#47;div&gt;</span>
+    <span class="code-close-tag">&lt;&#47;div&gt;</span>
+  <span class="code-close-tag">&lt;&#47;div&gt;</span></span>`;
+}
+
+// create single timeline editor card, shows first card and collapses all others
+function createTimelineEditorCard(i) {
+  return `
+    <div class="card tl-card" id="tl-card-${i}">
+      <div class="card-header p-0" id="tl-card-heading-${i}">
+        <button class="btn btn-link btn-block text-left px-3 ${ i == 1 ? "" : "collapsed" }" data-toggle="collapse" data-target="#tl-collapse-${i}" aria-expanded="true" aria-controls="collapse-${i}">
+          <h5 style="margin-bottom:0 !important">Timeline card #${i}</h5>
+        </button>
+      </div>
+      <div id="tl-collapse-${i}" class="${ i == 1 ? "collapse show" : "collapse" }" aria-labelledby="tl-card-heading-${i}" data-parent="#cards">
+        <div class="card-body">
+          <form>
+            <div class="form-group" id="tl-${i}-title-form">
+              <label for="tl-${i}-header">Card title</label>
+              <input type="text" class="form-control" id="tl-${i}-title" placeholder="Card #${i} title">
+            </div>
+            <div class="form-group" id="tl-${i}-date-form">
+              <label for="tl-${i}-date">Date</label>
+              <input type="text" class="form-control" id="tl-${i}-date" placeholder="${dateString} ${i+7}:00">
+            </div>
+            <div class="form-group">
+              <label for="tl-${i}-text">Text</label>
+              <textarea class="form-control" id="tl-${i}-text" placeholder="Card #${i} text" rows="6"></textarea>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// generate card text from input
+updateTimelineText(8);
+
+updateText("tl", "#tl-id", ".code-tl-id", "modname-unitno-timeline-no");
+updateText("tl", "#tl-title", "#code-tl-title-text", "Title");
+
+toggleCheckbox("tl", "#tl-check-title", "#tl-title-form");
+$(document).on('click', "#tl-check-title", function (event) {
+  $("#tl-check-title").hasClass("checked")
+    ? $("#code-tl-title").html('\n    <span class="code-tl-title-open"></span>\n      <span id="code-tl-title-text"></span>\n    <span class="code-tl-title-close"></span>')
+    : $("#code-tl-title").text("");
+  $(".code-tl-title-open").text('<h2 class="text-center py-3">');
+  $("#tl-title").val() !== "" ? $("#code-tl-title-text").text($("#tl-title").val()) : $("#code-tl-title-text").text("Timeline title");
+  $(".code-tl-title-close").text('</h2>');
+  preview("tl");
+});
+
+function updateTimelineText(timelineCardLimit) {
+  for (let i = 1; i <= timelineCardLimit; i++) {
+    updateText("tl", "#tl-" + i + "-title", "#code-tl-card-" + i + "-title", "Card #" + i + " title");
+    updateText("tl", "#tl-" + i + "-date", "#code-tl-card-" + i + "-date", dateString + ( i < 6 ? " 0" + (i+7) + ":00AM" : " " + (i+7) + ":00PM" ));
+    updateText("tl", "#tl-" + i + "-text", "#code-tl-card-" + i + "-text", "Card #" + i + " text");
+  }
+}
+
+/**********************************
  * transcript                     *
  **********************************/
 
@@ -694,6 +843,7 @@ copyCode("crsl");
 copyCode("col");
 copyCode("em");
 copyCode("ls");
+copyCode("tl");
 copyCode("ts");
 
 // copy code onto clipboard
