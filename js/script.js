@@ -695,7 +695,7 @@ function createTimelineCard(i) {
         <span class="code-open-tag">&lt;div&#32;class&#61;&#34;col&#34;&gt;</span>&nbsp;<span class="code-close-tag">&lt;&#47;div&gt;</span>
       <span class="code-close-tag">&lt;&#47;div&gt;</span>
       <span class="code-open-tag">&lt;div&#32;class&#61;&#34;m&#45;2&#34;&gt;</span>
-        <span class="code-open-tag">&lt;span&#32;class&#61;&#34;badge&#32;badge&#45;pill&#32;bg&#45;light&#32;border&#34;&gt;</span>&nbsp;<span class="code-close-tag">&lt;&#47;span&gt;</span>
+        <span class="code-open-tag">&lt;span&#32;class&#61;&#34;badge&#32;badge&#45;pill&#32;bg&#45;light&#32;border<span id="code-tl-card-${i}-pill-color"></span>&#34;&gt;</span>&nbsp;<span class="code-close-tag">&lt;&#47;span&gt;</span>
       <span class="code-close-tag">&lt;&#47;div&gt;</span>
       <span class="code-open-tag">&lt;div&#32;class&#61;&#34;row&#32;h&#45;50&#34;&gt;</span>
         <span class="code-open-tag">&lt;div&#32;class&#61;&#34;col${ i == j ? "" : " border&#45;right" }&#34;&gt;</span>&nbsp;<span class="code-close-tag">&lt;&#47;div&gt;</span>
@@ -703,8 +703,8 @@ function createTimelineCard(i) {
       <span class="code-close-tag">&lt;&#47;div&gt;</span>
     <span class="code-close-tag">&lt;&#47;div&gt;</span>
     <span class="code-open-tag">&lt;div&#32;class&#61;&#34;col&#32;py&#45;2<span id="code-tl-card-${i}-content-order">${ $("#tl-card-layout").val() == 1 ? "" : " order&#45;" +  (i % 2 == 0 ? 1 : 3)}</span>&#34;&gt;</span>
-     <span class="code-open-tag">&lt;div&#32;class&#61;&#34;card&#34;&gt;</span>
-        <span id="code-tl-card-${i}-header-open">&lt;div&#32;class&#61;&#34;card&#45;header&#34;&gt;</span><span id="code-tl-card-${i}-date">
+     <span class="code-open-tag">&lt;div&#32;class&#61;&#34;card<span id="code-tl-card-${i}-border-color"></span>&#34;&gt;</span>
+        <span id="code-tl-card-${i}-header-open">&lt;div&#32;class&#61;&#34;card&#45;header<span id="code-tl-card-${i}-header-color"></span>&#34;&gt;</span><span id="code-tl-card-${i}-date">
           <span class="code-tl-card-date-open">&lt;span&#32;class&#61;&#34;float&#45;right&#34;&gt;</span>
             <span id="code-tl-card-${i}-date-text">${!$("#tl-" + i + "-date").val() == "" ? $("#tl-" + i + "-date").val() : dateString + " " + (i < 6 ? (i + 7) + ":00AM" : (i - 5) + ":00PM")}</span>
           <span class="code-tl-card-date-close">&lt;&#47;span&gt;</span></span>
@@ -734,6 +734,21 @@ function createTimelineEditorCard(i) {
       <div id="tl-collapse-${i}" class="${ i == 1 ? "collapse show" : "collapse" }" aria-labelledby="tl-card-heading-${i}" data-parent="#cards">
         <div class="card-body">
           <form>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="tl-card-${i}-color">Card color</label>
+              </div>
+              <select class="custom-select" id="tl-card-${i}-color">
+                <option value="default" selected>Light (default)</option>
+                <option value="primary">Primary</option>
+                <option value="secondary">Secondary</option>
+                <option value="success">Success</option>
+                <option value="danger">Danger</option>
+                <option value="warning">Warning</option>
+                <option value="info">Info</option>
+                <option value="dark">Dark</option>
+              </select>
+            </div>
             <div class="form-group" id="tl-${i}-title-form">
               <label for="tl-${i}-header">Card title</label>
               <input type="text" class="form-control" id="tl-${i}-title" placeholder="Card #${i} title">
@@ -753,7 +768,7 @@ function createTimelineEditorCard(i) {
   `;
 }
 
-//toggle timeline card layout
+// toggle timeline card layout
 $("#tl-card-layout").change(function(){
   layout = $(this).val();
   timelineToggleLayout(8);
@@ -779,13 +794,14 @@ $(document).on('click', "#tl-check-title", function (event) {
   preview("tl");
 });
 
-//toggle timeline date code
+// toggle timeline date code
 $(document).on("click", "#tl-check-date", function(event) {
   $("#tl-check-date").toggleClass("unchecked").toggleClass("checked");
   $(".tl-date").toggle();
   timelineToggleDate(8);
   preview("tl");
 });
+
 function timelineToggleDate(timelineCardLimit) {
   for (let i = 1; i <= timelineCardLimit; i++) {
   $("#tl-check-date").hasClass("checked")
@@ -797,18 +813,39 @@ function timelineToggleDate(timelineCardLimit) {
   }
 };
 
-//toggle timeline header code
+// toggle timeline header code
 $(document).on("click", "#tl-check-header", function(event) {
   $("#tl-check-header").toggleClass("unchecked").toggleClass("checked");
   timelineToggleHeader(8);
 });
+
 function timelineToggleHeader(timelineCardLimit) {
   for (let i = 1; i <= timelineCardLimit; i++) {
   console.log(i);
   $("#tl-check-header").hasClass("checked")
-    ? ( $("#code-tl-card-" + i + "-header-open").html("&lt;div&#32;class&#61;&#34;card&#45;header&#34;&gt;"), $("#code-tl-card-" + i + "-header-close").html("\n        &lt;&#47;div&gt;\n        &lt;div&#32;class&#61;&#34;card&#45;body&#34;&gt;"))
-    : ( $("#code-tl-card-" + i + "-header-open").html("&lt;div&#32;class&#61;&#34;card&#45;body&#34;&gt;"), $("#code-tl-card-" + i + "-header-close").html(""));
+    ? ( $("#code-tl-card-" + i + "-header-open").html(`<span>&lt;div&#32;class&#61;&#34;card&#45;header</span><span id="code-tl-card-${i}-header-color"></span><span>&#34;&gt;</span>`), $("#code-tl-card-" + i + "-header-close").html("\n        &lt;&#47;div&gt;\n        &lt;div&#32;class&#61;&#34;card&#45;body&#34;&gt;"))
+    : ( $("#code-tl-card-" + i + "-header-open").html(`<span>&lt;div&#32;class&#61;&#34;card&#45;body</span><span id="code-tl-card-${i}-body-color"></span><span>&#34;&gt;</span>`), $("#code-tl-card-" + i + "-header-close").html(""));
+  color = $("#tl-card-" + i + "-color").val();
+  if (color != "default") ( $("#code-tl-card-" + i + "-header-color").text(` text-white bg-${color}`), $("#code-tl-card-" + i + "-body-color").text(` text-white bg-${color}`) );
   preview("tl");
+  }
+};
+
+// change card color
+timelineChangeCardColor(8);
+
+function timelineChangeCardColor(timelineCardLimit) {
+  for (let i = 1; i <= timelineCardLimit; i++) {
+    $("#tl-card-" + i + "-color").change(function(){
+      color = $(this).val();
+      color == "default"
+      ? ( $("#code-tl-card-" + i + "-border-color").html(""), $("#code-tl-card-" + i + "-header-color").html(""), $("#code-tl-card-" + i + "-body-color").html(""), $("#code-tl-card-" + i + "-pill-color").html("") )
+      : ( $("#code-tl-card-" + i + "-border-color").html(`&#32;border&#45;${color}`), $("#code-tl-card-" + i + "-header-color").html(`&#32;text&#45;white&#32;bg&#45;${color}`), $("#code-tl-card-" + i + "-body-color").html(`&#32;text&#45;white&#32;text&#45;${color}`), $("#code-tl-card-" + i + "-pill-color").html(`&#32;border&#45;${color}`) );
+      $("#tl-check-header").hasClass("unchecked")
+      ? $("#code-tl-card-" + i + "-body-color").html("")
+      : $("#code-tl-card-" + i + "-body-color").html(`&#32;text&#45;${color}`) ;
+      preview("tl");
+    });
   }
 };
 
