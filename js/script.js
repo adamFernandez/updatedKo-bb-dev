@@ -318,15 +318,18 @@ function createCarouselEditorCard(i) {
       </div>
       <div id="collapse-${i}" class="${ i == 1 ? "collapse show" : "collapse" }" aria-labelledby="col-card-heading-${i}" data-parent="#carousel-slides">
         <div class="card-body">
-          <form>
+          <form class="needs-validation crsl-slide-form">
             <div class="form-group crsl-slide-img-form">
               <label for="crsl-slide-${i}-img-src">Image source</label>
               <input type="text" class="form-control" id="crsl-slide-${i}-img-src" placeholder="https://moodle.iddkingsonline.com/file.php/123/images/image.jpg">
               <small id="crsl-img-src-help" class="form-text text-muted">Select an image with 2:1 ratio (i.e 800 x 400px). The image must first be uploaded to Keats, where the generated link can be copied and pasted from.</small>
             </div>
             <div class="form-group crsl-slide-img-form">
-              <label for="crsl-slide-${i}-img-alt">Alternative text</label>
-              <textarea class="form-control" id="crsl-slide-${i}-img-alt" placeholder="Description of image" rows="2"></textarea>
+              <label for="crsl-slide-${i}-img-alt">Alternative text*</label>
+              <textarea class="form-control" id="crsl-slide-${i}-img-alt" placeholder="Description of image" rows="2" required></textarea>
+              <div class="invalid-feedback crsl-img-invalid-feedback">
+                Please provde alternative text for the image.
+              </div>
             </div>
             <div class="form-group crsl-slide-title-form" style="display:none">
               <label for="crsl-slide-${i}-title">Caption title</label>
@@ -532,7 +535,7 @@ function updateEmbedText() {
   embedId = $("#em-id").val();
   $("#em-media-type").val() == "audio"
   ? variables = '&amp;flashvars[infoScreen.plugin]=false&amp;flashvars[titleLabel.plugin]=false&amp;flashvars[related.plugin]=false&amp;flashvars[closedCaptions.displayCaptions]=false&amp;flashvars[IframeCustomPluginCss1]=https:\/\/git.iddkingsonline.com\/kaltura\/audio.css'
-  : variables = '&amp;flashvars[infoScreen.plugin]=false&amp;flashvars[titleLabel.plugin]=false&amp;flashvars[related.plugin]=false&amp;flashvars[closedCaptions.displayCaptions]=false&amp;flashvars[closedCaptions.layout]=below&amp;flashvars[IframeCustomPluginCss1]=https:\/\/git.iddkingsonline..com\/kaltura\/kaltura.css';
+  : variables = '&amp;flashvars[infoScreen.plugin]=false&amp;flashvars[titleLabel.plugin]=false&amp;flashvars[related.plugin]=false&amp;flashvars[closedCaptions.displayCaptions]=false&amp;flashvars[closedCaptions.layout]=below&amp;flashvars[IframeCustomPluginCss1]=https:\/\/git.iddkingsonline.com\/kaltura\/kaltura.css';
   if (!embedId == "") embedText = embedText.replace('iframe id="kaltura_player', 'iframe id="'+ embedId);
   // add variables
   (!embedText == "")
@@ -546,10 +549,9 @@ function updateEmbedText() {
 $("#em-id").keyup(function() {
   embedId = $(this).val();
   embedText = $("#em-embed").val();
-  if (!embedText == "") embedText = embedText.replace('iframe id="kaltura_player', 'iframe id="'+ embedId);
+  if (!embedText == "") embedText = embedText.replace('iframe id="kaltura_player', 'iframe id="'+ embedId);  
   (!embedText == "") ? $("#code-em-embed").text(embedText) : $("#code-em-embed").text("<iframe></iframe>");
 }).keyup();
-
 
 /**********************************
  * list                           *
@@ -960,9 +962,21 @@ copyCode("ls");
 copyCode("tl");
 copyCode("ts");
 
-// copy code onto clipboard
+// on copy code button click
 function copyCode(component) {
   $(document).on("click", "#copy-" + component + "-code", function(event) {
+    // run component validation
+    forms = [$("#" + component + "-form")];
+    validity = true;
+    $.each(forms, function(i, form) {
+      if (form.hasClass("needs-validation")) {
+        form.addClass("was-validated");
+        console.log(form[0].checkValidity());
+        if (!form[0].checkValidity()) validity = false;
+      }
+    });
+    if (validity === false) return;
+    // copy code onto clipboard
     str = $("#" + component + "-preview-pane").html();
     function listener(event) {
       event.clipboardData.setData("text/html", str);
