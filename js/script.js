@@ -511,25 +511,45 @@ $("#em-player-size").change(function() {
   if (!$("#em-embed").val() == "") preview("em");
 });
 
-// add variables and generate embed code
+// change css file on media type select
+$("#em-media-type").change(function() {
+  $("#em-player-size-form").toggle();
+  $("#code-em-player-size").text( $(this).val() == "audio" ? "audio" : $("#em-player-size").val() );
+  embedText = $("#em-embed").val();
+  updateEmbedText();
+  if (!embedText == "") preview("em");
+});
+
+// generate embed code
 $("#em-embed").keyup(function() {
-  embedId = $("#em-id").val();
-  embedText = $(this).val();
-  // update the id if provided
-  if (!embedId == "") embedText = embedText.replace('iframe id="kaltura_player', 'iframe id="'+ embedId);
-  embedText = embedText.replace('" width',
-     '&amp;flashvars[infoScreen.plugin]=false&amp;flashvars[titleLabel.plugin]=false&amp;flashvars[related.plugin]=false&amp;flashvars[closedCaptions.displayCaptions]=false&amp;flashvars[closedCaptions.layout]=below&amp;flashvars[IframeCustomPluginCss1]=https:\/\/git.iddkingsonline.com\/kaltura\/kaltura.css" width');  
-  (!embedText == "") ? $("#code-em-embed").text(embedText) : $("#code-em-embed").text("<iframe></iframe>");
+  embedText = $("#em-embed").val();
+  updateEmbedText();
   preview("em");
 }).keyup();
+
+function updateEmbedText() {
+  // update the id if provided
+  embedId = $("#em-id").val();
+  $("#em-media-type").val() == "audio"
+  ? variables = '&amp;flashvars[infoScreen.plugin]=false&amp;flashvars[titleLabel.plugin]=false&amp;flashvars[related.plugin]=false&amp;flashvars[closedCaptions.displayCaptions]=false&amp;flashvars[IframeCustomPluginCss1]=https:\/\/git.iddkingsonline.com\/kaltura\/audio.css'
+  : variables = '&amp;flashvars[infoScreen.plugin]=false&amp;flashvars[titleLabel.plugin]=false&amp;flashvars[related.plugin]=false&amp;flashvars[closedCaptions.displayCaptions]=false&amp;flashvars[closedCaptions.layout]=below&amp;flashvars[IframeCustomPluginCss1]=https:\/\/git.iddkingsonline..com\/kaltura\/kaltura.css';
+  if (!embedId == "") embedText = embedText.replace('iframe id="kaltura_player', 'iframe id="'+ embedId);
+  // add variables
+  (!embedText == "")
+  ? ( embedText = embedText.replace('\" width', variables + '\" width'),
+    $("#code-em-embed").text(embedText))
+  : $("#code-em-embed").text("<iframe></iframe>");
+}
+
 
 // update the id, do not refresh preview
 $("#em-id").keyup(function() {
   embedId = $(this).val();
   embedText = $("#em-embed").val();
-  if (!embedText == "") embedText = embedText.replace('iframe id="kaltura_player', 'iframe id="'+ embedId);  
+  if (!embedText == "") embedText = embedText.replace('iframe id="kaltura_player', 'iframe id="'+ embedId);
   (!embedText == "") ? $("#code-em-embed").text(embedText) : $("#code-em-embed").text("<iframe></iframe>");
 }).keyup();
+
 
 /**********************************
  * list                           *
