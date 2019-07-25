@@ -3,6 +3,9 @@
     <h2 class="component-title">Embed</h2>
   </div>
   <div class="component-body container">
+    <div class="alert alert-info" role="alert">
+      The builder creates a wrapper for Kaltura video and audio embeds allowing them to be fully responsive.  If the builder preview is working but your embedded media is not displaying correctly in Keats, please check that the correct css files are being included.
+    </div>
     <div class="row">
       <div class="options container col-md-6">
         <section class="options">
@@ -22,7 +25,7 @@
                   </select>
                 </div>
               </div>
-              <div class="form group col-md-5">
+              <div class="form group col-md">
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                      <label class="input-group-text" for="em-media-type">Media type</label>
