@@ -180,14 +180,14 @@ function createCardEditorCard(i) {
           <form>
             <div class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input checked" id="cd-${i}-check-header" checked>
-              <label class="custom-control-label" for="cd-${i}-check-header">Header</label>
+              <label class="custom-control-label" for="cd-${i}-check-header"><span id="cd-${i}-toggle-header">Remove</span> header</label>
             </div>
-            <div class="custom-control custom-checkbox">
+            <div class="custom-control custom-checkbox mb-3">
               <input type="checkbox" class="custom-control-input checked" id="cd-${i}-check-title" checked>
-              <label class="custom-control-label" for="cd-${i}-check-title">Title</label>
+              <label class="custom-control-label" for="cd-${i}-check-title"><span id="cd-${i}-toggle-title">Remove</span> title</label>
             </div>
             <div class="form-group" id="cd-${i}-header-form">
-              <label for="cd-${i}-header">Header</label>
+              <label for="cd-${i}-header">Header text</label>
               <input type="text" class="form-control" id="cd-${i}-header" placeholder="Card #${i} header">
             </div>
             <div class="form-group" id="cd-${i}-title-form">
@@ -195,7 +195,7 @@ function createCardEditorCard(i) {
               <input type="text" class="form-control" id="cd-${i}-title" placeholder="Card #${i} title">
             </div>
             <div class="form-group">
-              <label for="cd-${i}-text">Text</label>
+              <label for="cd-${i}-text">Body text</label>
               <textarea class="form-control" id="cd-${i}-text" placeholder="Card #${i} text" rows="6"></textarea>
             </div>
           </form>
@@ -213,6 +213,8 @@ function updateCards(cardCardLimit) {
     // toggle optional input fields
     toggleCheckbox("cd", "#cd-" + i + "-check-header", "#cd-" + i + "-header-form");
     toggleCheckbox("cd", "#cd-" + i + "-check-title", "#cd-" + i + "-title-form, #code-cd-" + i + "-title");
+    toggleCheckboxText("#cd-" + i + "-check-header", "#cd-" + i + "-toggle-header");
+    toggleCheckboxText("#cd-" + i + "-check-title", "#cd-" + i + "-toggle-title");
     // toggle header code
     $(document).on('click', "#cd-" + i + "-check-header", function (event) {
       $("#cd-" + i + "-check-header").hasClass("checked")
@@ -942,6 +944,12 @@ function toggleCheckbox(component, input, target) {
     $(target).toggle(this.checked);
     $(input).toggleClass("unchecked").toggleClass("checked");
     preview(component);
+  });
+}
+
+function toggleCheckboxText(input, textspan) {
+  $(document).on('click', input, function (event) {
+    $(textspan).text($(input).hasClass("checked") ? "Remove" : "Add");
   });
 }
 

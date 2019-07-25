@@ -10,7 +10,7 @@
         <p>Complete the following fields:</p>
         <form>
             <div class="form-row">
-              <div class="form-group col-md-6">
+              <div class="form-group col-md-4">
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <label class="input-group-text" for="cd-card-no">No. of cards</label>
@@ -23,14 +23,14 @@
                   </select>
                 </div>
               </div>
-              <div class="form-group col-md-6">
+              <div class="form-group col-md-8">
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <label class="input-group-text" for="cd-layout">Layout</label>
                   </div>
                   <select class="custom-select" id="cd-layout">
-                    <option value="block" selected>Block</option>
-                    <option value="deck">Card deck</option>
+                    <option value="block" selected>Block (vertical)</option>
+                    <option value="deck">Card deck (horizontal)</option>
                   </select>
                 </div>
               </div>
