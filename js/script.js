@@ -819,7 +819,9 @@ function timelineToggleLayout(timelineCardLimit) {
   }
 };
 
+
 // toggle timeline title code
+toggleCheckboxText("#tl-check-title", "#tl-toggle-title");
 toggleCheckbox("tl", "#tl-check-title", "#tl-title-form");
 $(document).on('click', "#tl-check-title", function (event) {
   $("#tl-check-title").hasClass("checked")
@@ -831,7 +833,27 @@ $(document).on('click', "#tl-check-title", function (event) {
   preview("tl");
 });
 
+// toggle timeline header code
+toggleCheckboxText("#tl-check-header", "#tl-toggle-header");
+$(document).on("click", "#tl-check-header", function(event) {
+  $("#tl-check-header").toggleClass("unchecked").toggleClass("checked");
+  timelineToggleHeader(8);
+});
+
+function timelineToggleHeader(timelineCardLimit) {
+  for (let i = 1; i <= timelineCardLimit; i++) {
+  color = $("#tl-card-" + i + "-color").val();
+  $("#tl-check-header").hasClass("checked")
+    ? ( $("#code-tl-card-" + i + "-header-open").html(`<span>&lt;div&#32;class&#61;&#34;card&#45;header</span><span id="code-tl-card-${i}-header-color"></span><span>&#34;&gt;</span>`), $("#code-tl-card-" + i + "-header-close").html("\n        &lt;&#47;div&gt;\n        &lt;div&#32;class&#61;&#34;card&#45;body&#34;&gt;"))
+    : ( $("#code-tl-card-" + i + "-header-open").html(`<span>&lt;div&#32;class&#61;&#34;card&#45;body</span><span id="code-tl-card-${i}-body-color"></span><span>&#34;&gt;</span>`), $("#code-tl-card-" + i + "-header-close").html(""));
+  color = $("#tl-card-" + i + "-color").val();
+  if (color != "default") ( $("#code-tl-card-" + i + "-header-color").text(` text-white bg-${color}`), $("#code-tl-card-" + i + "-body-color").text(` text-white bg-${color}`) );
+  preview("tl");
+  }
+};
+
 // toggle timeline date code
+toggleCheckboxText("#tl-check-date", "#tl-toggle-date");
 $(document).on("click", "#tl-check-date", function(event) {
   $("#tl-check-date").toggleClass("unchecked").toggleClass("checked");
   $(".tl-date").toggle();
@@ -847,24 +869,6 @@ function timelineToggleDate(timelineCardLimit) {
   $(".code-tl-card-date-open").text('<span class="float-right">');
   $("#tl-" + i + "-date").val() !== "" ? $("#code-tl-card-" + i + "-date-text").text($("#tl-" + i + "-date").val()) : $("#code-tl-card-" + i + "-date-text").text(dateString + " " + (i < 6 ? (i + 7) + ":00AM" : (i - 5) + ":00PM"));
   $(".code-tl-card-date-close").text('</span>');
-  }
-};
-
-// toggle timeline header code
-$(document).on("click", "#tl-check-header", function(event) {
-  $("#tl-check-header").toggleClass("unchecked").toggleClass("checked");
-  timelineToggleHeader(8);
-});
-
-function timelineToggleHeader(timelineCardLimit) {
-  for (let i = 1; i <= timelineCardLimit; i++) {
-  color = $("#tl-card-" + i + "-color").val();
-  $("#tl-check-header").hasClass("checked")
-    ? ( $("#code-tl-card-" + i + "-header-open").html(`<span>&lt;div&#32;class&#61;&#34;card&#45;header</span><span id="code-tl-card-${i}-header-color"></span><span>&#34;&gt;</span>`), $("#code-tl-card-" + i + "-header-close").html("\n        &lt;&#47;div&gt;\n        &lt;div&#32;class&#61;&#34;card&#45;body&#34;&gt;"))
-    : ( $("#code-tl-card-" + i + "-header-open").html(`<span>&lt;div&#32;class&#61;&#34;card&#45;body</span><span id="code-tl-card-${i}-body-color"></span><span>&#34;&gt;</span>`), $("#code-tl-card-" + i + "-header-close").html(""));
-  color = $("#tl-card-" + i + "-color").val();
-  if (color != "default") ( $("#code-tl-card-" + i + "-header-color").text(` text-white bg-${color}`), $("#code-tl-card-" + i + "-body-color").text(` text-white bg-${color}`) );
-  preview("tl");
   }
 };
 
