@@ -11,7 +11,7 @@
         <form>
             <div class="form-row">
               <div class="form-group col-md-4">
-                <div class="input-group mb-3">
+                <div class="input-group">
                   <div class="input-group-prepend">
                     <label class="input-group-text" for="cd-card-no">No. of cards</label>
                   </div>
@@ -24,7 +24,7 @@
                 </div>
               </div>
               <div class="form-group col-md-8">
-                <div class="input-group mb-3">
+                <div class="input-group">
                   <div class="input-group-prepend">
                     <label class="input-group-text" for="cd-layout">Layout</label>
                   </div>
