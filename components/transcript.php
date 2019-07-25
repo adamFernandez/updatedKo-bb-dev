@@ -32,7 +32,7 @@
             <div class="form-group">
               <div class="input-group">
                 <div class="input-group-prepend">
-                  <label class="input-group-text" for="ts-link">Link</label>
+                  <label class="input-group-text" for="ts-link">Link*</label>
                 </div>
                 <input type="text" class="form-control" id="ts-link" aria-label="ts-link" placeholder="https://keats.kcl.ac.uk/pluginfile.php/12345/course/section/12345/transcript.pdf" required>
                 <div class="invalid-feedback" id="ts-link-invalid-feedback">
