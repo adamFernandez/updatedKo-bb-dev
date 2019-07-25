@@ -211,10 +211,10 @@ updateCards(4);
 function updateCards(cardCardLimit) {
   for (let i = 1; i <= cardCardLimit; i++) {
     // toggle optional input fields
-    toggleCheckbox("cd", "#cd-" + i + "-check-header", "#cd-" + i + "-header-form");
-    toggleCheckbox("cd", "#cd-" + i + "-check-title", "#cd-" + i + "-title-form, #code-cd-" + i + "-title");
     toggleCheckboxText("#cd-" + i + "-check-header", "#cd-" + i + "-toggle-header");
     toggleCheckboxText("#cd-" + i + "-check-title", "#cd-" + i + "-toggle-title");
+    toggleCheckbox("cd", "#cd-" + i + "-check-header", "#cd-" + i + "-header-form");
+    toggleCheckbox("cd", "#cd-" + i + "-check-title", "#cd-" + i + "-title-form, #code-cd-" + i + "-title");
     // toggle header code
     $(document).on('click', "#cd-" + i + "-check-header", function (event) {
       $("#cd-" + i + "-check-header").hasClass("checked")
@@ -397,6 +397,8 @@ function updateCarouselSlides(carouselSlideLimit) {
     // toggle optional image input field 
     toggleCheckbox("crsl", "#crsl-check-img", ".crsl-slide-img-form");
     toggleCheckbox("crsl", "#crsl-check-title", ".crsl-slide-title-form");
+    toggleCheckboxText("#crsl-check-img", "#crsl-toggle-img");
+    toggleCheckboxText("#crsl-check-title", "#crsl-toggle-title");
     // update carousel text
     updateText("crsl", "#crsl-slide-" + i + "-img-src", "#code-crsl-slide-" + i + "-img-src", "https://placekitten.com/800/300");
     updateText("crsl", "#crsl-slide-" + i + "-img-alt", "#code-crsl-slide-" + i + "-img-alt", "An adorable kitten");
@@ -947,9 +949,10 @@ function toggleCheckbox(component, input, target) {
   });
 }
 
+// toggles checkbox text
 function toggleCheckboxText(input, textspan) {
   $(document).on('click', input, function (event) {
-    $(textspan).text($(input).hasClass("checked") ? "Remove" : "Add");
+    $(textspan).text($(input).hasClass("checked") ? "Add" : "Remove");
   });
 }
 

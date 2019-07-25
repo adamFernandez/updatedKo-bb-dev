@@ -15,42 +15,36 @@
           <h3>Options</h3>
           <p>Complete the following fields:</p>
           <form class="needs-validation" id="crsl-form" novalidate>
-            <div class="form-row">
-              <div class="form-group col-md">
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <label class="input-group-text" for="crsl-slide-no">No. of slides</label>
-                  </div>
-                  <select class="custom-select" id="crsl-slide-no">
-                    <option value="2">2</option>
-                    <option value="3" selected>3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                  </select>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="crsl-slide-no">No. of slides</label>
+                </div>
+                <select class="custom-select" id="crsl-slide-no">
+                  <option value="2">2</option>
+                  <option value="3" selected>3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                </select>
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="crsl-id">Unique ID*</label>
+                </div>
+                <input type="text" class="form-control" id="crsl-id" aria-label="crsl-id" placeholder="modname-unitno-carousel-no" aria-describedby="carousel-unique-id" required>
+                <div class="invalid-feedback" id="crsl-id-invalid-feedback">
+                  Please enter a unique ID.
                 </div>
               </div>
-              <div class="form-group col-md">
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <label class="input-group-text" for="crsl-id">Unique ID*</label>
-                  </div>
-                  <input type="text" class="form-control" id="crsl-id" aria-label="crsl-id" placeholder="modname-unitno-carousel-no" aria-describedby="carousel-unique-id" required>
-                  <div class="invalid-feedback" id="crsl-id-invalid-feedback">
-                    Please enter a unique ID.
-                  </div>
-                </div>
-              </div>
-            </div>
             <div class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input checked" id="crsl-check-img" checked>
-              <label class="custom-control-label" for="crsl-check-img">With image</label>
+              <label class="custom-control-label" for="crsl-check-img"><span id="crsl-toggle-img">Remove</span> image</label>
             </div>
             <div class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input unchecked" id="crsl-check-title">
-              <label class="custom-control-label" for="crsl-check-title">With caption title</label>
+              <label class="custom-control-label" for="crsl-check-title"><span id="crsl-toggle-title">Add</span> caption title</label>
             </div>
           </form>
           <div id="carousel-slides">
