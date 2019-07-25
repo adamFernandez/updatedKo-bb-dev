@@ -40,7 +40,7 @@
               </div>
             </div>
             <div class="form-row">
-              <div class="form-group col-md-4">
+              <div class="form-group col-md">
                 <div class="input-group">
                   <div class="input-group-prepend">
                     <label class="input-group-text" for="btn-tag">Tags</label>
@@ -50,8 +50,8 @@
                     <option value="a">a</option>
 <!--                    <option value="input">input</option> -->
                   </select>
-                  <small id="btn-tag-help" class="form-text text-muted">Select 'a' to add a hyperlink.</small>
                 </div>
+                <small id="btn-tag-help" class="form-text text-muted">Select 'a' to add a hyperlink.</small>
               </div>
               <div class="form-group col-md-8" id="btn-link-field">
                 <div class="input-group mb-3">
