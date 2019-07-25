@@ -962,20 +962,25 @@ copyCode("ls");
 copyCode("tl");
 copyCode("ts");
 
+
 // on copy code button click
 function copyCode(component) {
   $(document).on("click", "#copy-" + component + "-code", function(event) {
     // run component validation
-    forms = [$("#" + component + "-form")];
-    validity = true;
-    $.each(forms, function(i, form) {
-      if (form.hasClass("needs-validation")) {
-        form.addClass("was-validated");
-        console.log(form[0].checkValidity());
-        if (!form[0].checkValidity()) validity = false;
-      }
-    });
-    if (validity === false) return;
+    componentForms = [$("#" + component + "-form")];
+    validity = "valid";
+    altTextValidity = "valid";
+    // for carousel, check alt text
+    if (component == "crsl" && $("#crsl-check-img").hasClass("checked")) {
+      altTextForms = [];
+      $(".crsl-slide-form").each(function() {
+        altTextForms.push($(this));
+      });
+      validateForms(altTextForms);
+      altTextValidity == "invalid" ? $("#crsl-alt-text-alert").removeClass("d-none") : $("#crsl-alt-text-alert").addClass("d-none");            
+    }
+    validateForms(componentForms);
+    if (validity === "invalid") return;
     // copy code onto clipboard
     str = $("#" + component + "-preview-pane").html();
     function listener(event) {
@@ -988,4 +993,16 @@ function copyCode(component) {
     document.removeEventListener("copy", listener);
     alert("Your code has been copied to the clipboard \uD83D\uDE00");
   })
+}
+
+function validateForms(forms) {
+  $.each(forms, function(i, form) {
+    if (form.hasClass("needs-validation")) {
+      form.addClass("was-validated");
+      if (!form[0].checkValidity()) {
+        validity = "invalid";
+        if (forms == altTextForms) altTextValidity = "invalid";
+      }
+    }
+  });
 }

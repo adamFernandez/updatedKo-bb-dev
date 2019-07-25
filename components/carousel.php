@@ -6,15 +6,18 @@
     <div class="alert alert-info" role="alert">
       Don't forget to link to the css file! - https://git.iddkingsonline.com/designsystem/base.css
     </div>
+    <div class="alert alert-danger d-none" role="alert" id="crsl-alt-text-alert">
+      Please add alternative text for all images.
+    </div>
     <div class="row">
       <div class="options container col-md-5">
         <section class="options">
           <h3>Options</h3>
           <p>Complete the following fields:</p>
-          <form>
+          <form class="needs-validation" id="crsl-form" novalidate>
             <div class="form-row">
-              <div class="form-group col-md-5">
-                <div class="input-group mb-3">
+              <div class="form-group col-md">
+                <div class="input-group">
                   <div class="input-group-prepend">
                     <label class="input-group-text" for="crsl-slide-no">No. of slides</label>
                   </div>
@@ -29,12 +32,15 @@
                   </select>
                 </div>
               </div>
-              <div class="form-group col-md-7">
-                <div class="input-group mb-3">
+              <div class="form-group col-md">
+                <div class="input-group">
                   <div class="input-group-prepend">
-                    <label class="input-group-text" for="crsl-id">Unique ID</label>
+                    <label class="input-group-text" for="crsl-id">Unique ID*</label>
                   </div>
-                  <input type="text" class="form-control" id="crsl-id" aria-label="crsl-id" placeholder="modname-unitno-carousel-no" aria-describedby="carousel-unique-id">
+                  <input type="text" class="form-control" id="crsl-id" aria-label="crsl-id" placeholder="modname-unitno-carousel-no" aria-describedby="carousel-unique-id" required>
+                  <div class="invalid-feedback" id="crsl-id-invalid-feedback">
+                    Please enter a unique ID.
+                  </div>
                 </div>
               </div>
             </div>

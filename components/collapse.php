@@ -8,9 +8,9 @@
         <section class="options">
           <h3>Options</h3>
           <p>Complete the following fields:</p>
-          <form>
+          <form class="needs-validation" id="col-form" novalidate>
             <div class="form-row">
-              <div class="form-group col-md-4">
+              <div class="form-group col-md-5">
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <label class="input-group-text" for="col-card-no">No. of cards</label>
@@ -27,12 +27,15 @@
                   </select>
                 </div>
               </div>
-              <div class="form-group col-md-8">
+              <div class="form-group col-md-7">
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
-                    <label class="input-group-text" for="col-id">Unique ID</label>
+                    <label class="input-group-text" for="col-id">Unique ID*</label>
                   </div>
-                  <input type="text" class="form-control" id="col-id" aria-label="col-id" placeholder="modname-unitno-collapse-no" aria-describedby="collapse-unique-id">
+                  <input type="text" class="form-control" id="col-id" aria-label="col-id" placeholder="modname-unitno-collapse-no" aria-describedby="collapse-unique-id" required>
+                  <div class="invalid-feedback" id="col-id-invalid-feedback">
+                    Please enter a unique ID.
+                  </div>
                 </div>
               </div>
             </div>
@@ -49,7 +52,7 @@
         <section class="component-code">
           <div class="code-header">
             <h3 class="code-title">Code</h3>
-            <button class="btn btn-outline-primary" id="copy-col-code">Copy Code</button>
+            <button class="btn btn-outline-primary" id="copy-col-code" type="submit">Copy Code</button>
           </div>
           <div class="code-box">
 <pre class="code-text"><span id="col-print-code"><span class="code-open-tag">&lt;div&#32;id&#61;&#34;<span class="code-col-id">modname&#45;unitno&#45;collapse&#45;no</span>&#34;&gt;</span>

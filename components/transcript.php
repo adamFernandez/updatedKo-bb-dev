@@ -1,50 +1,65 @@
 <div class="component-content" id="transcript">
   <div class="component-header">
     <h2 class="component-title">Transcript</h2>
-    <p>Complete the following fields:</p>
   </div>
   <div class="component-body container">
     <div class="row">
       <div class="options container col-md-6">
-        <form>
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label for="ts-title">Title</label>
-              <input type="text" class="form-control" id="ts-title" placeholder="Transcript title">
-            </div>
-            <div class="form-group col-md-6">
-              <label for="ts-id">Unique ID *</label>
-              <input type="text" class="form-control" id="ts-id" placeholder="modname-unitno-transcript" required>
-            </div>
-          </div>
-<!--
-              <div class="form-group">
-                <label for="ts-file">Upload transcript</label>
-                <input type="file" class="form-control-file" id="ts-file">
+        <section class="options">
+          <h3>Options</h3>
+          <p>Complete the following fields:</p>
+          <form class="needs-validation" id="ts-form" novalidate>
+            <div class="form-row">
+              <div class="form-group col-md">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <label class="input-group-text" for="ts-title">Title</label>
+                  </div>
+                  <input type="text" class="form-control" id="ts-title" aria-label="ts-title" placeholder="Transcript title">                </div>
               </div>
--->
-          <div class="form-group">
-            <label for="ts-link">Link *</label>
-            <input type="text" class="form-control" id="ts-link" placeholder="https://keats.kcl.ac.uk/pluginfile.php/12345/course/section/12345/transcript.pdf" required>
-            <small id="ts-link-help" class="form-text text-muted">The transcript must first be uploaded to Keats, where the generated link can be copied and pasted from.</small>
-          </div>
-          <div class="form-group">
-            <label for="ts-body">Body</label>
-            <textarea class="form-control" id="ts-body" placeholder="This is the first paragraph.
-</p><p>
+              <div class="form-group col-md">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <label class="input-group-text" for="ts-id">Unique ID*</label>
+                  </div>
+                  <input type="text" class="form-control" id="ts-id" aria-label="ts-id" placeholder="modname-unitno-transcript" required>
+                  <div class="invalid-feedback" id="ts-id-invalid-feedback">
+                    Please enter a unique ID.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="ts-link">Link</label>
+                </div>
+                <input type="text" class="form-control" id="ts-link" aria-label="ts-link" placeholder="https://keats.kcl.ac.uk/pluginfile.php/12345/course/section/12345/transcript.pdf" required>
+                <div class="invalid-feedback" id="ts-link-invalid-feedback">
+                  Please enter the transcript link.
+                </div>
+                <small id="ts-link-help" class="form-text text-muted">The transcript must first be uploaded to Keats, where the generated link can be copied and pasted from.</small>
+            </div>
+            <div class="form-group">
+              <label for="ts-body">Body</label>
+              <textarea class="form-control" id="ts-body" placeholder="This is the first paragraph.
+  </p><p>
 This is the second paragraph." rows="6"></textarea>
-            <small id="ts-body-help" class="form-text text-muted">Copy and paste the body of the transcript text into the textarea.</small>
-          </div>
-        </form> 
+              <small id="ts-body-help" class="form-text text-muted">Copy and paste the body of the transcript text into the textarea.</small>
+            </div>
+          </form>
+        </section>
       </div>
       <div class="col-md-6 container">
-        <div class="preview">
-          <h2 class="preview-title">Preview</h2>
-          <div id="ts-preview-pane">
+        <section class="preview">
+          <h3 class="preview-title">Preview</h3>
+          <div id="ts-preview-pane"></div>
+        </section>
+        <section class="component-code">
+          <div class="code-header">
+            <h3 class="code-title">Code</h3>
+            <button class="btn btn-outline-primary" id="copy-ts-code">Copy Code</button>
           </div>
-        </div>
-        <div class="component-code">
-          <h2 class="code-title">And here's the code...</h2>
           <div class="code-box">
             <pre class="code-text">
 <span id="ts-print-code"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;transcript&#45;container&#34;&gt;</span>
@@ -58,10 +73,9 @@ This is the second paragraph." rows="6"></textarea>
       <span class="code-open-tag">&lt;p&gt;</span><span id="code-ts-body">Transcript body...</span><span class="code-close-tag">&lt;&#47;p&gt;</span>
     <span class="code-close-tag">&lt;&#47;div&gt;</span>
   <span class="code-close-tag">&lt;&#47;div&gt;</span>
-<span class="code-close-tag">&lt;&#47;div&gt;</span>
-            </pre>
+<span class="code-close-tag">&lt;&#47;div&gt;</span></pre>
           </div>
-        </div>
+        </section>
       </div>
     </div>
   </div>
