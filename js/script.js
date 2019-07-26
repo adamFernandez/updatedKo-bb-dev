@@ -913,7 +913,7 @@ updateText("ts", "#ts-link", "#code-ts-link", "#");
 updateText("ts", "#ts-body", "#code-ts-body", "Transcript body...");
 
 // toggle view close transcript button
-$(".view-close-transcript").click(function() {
+$(document).on("click", ".view-close-transcript", function(event) {
   $(this).text($(this).text() == 'View transcript' ? 'Close transcript' : 'View transcript');
 });
 
@@ -1016,7 +1016,7 @@ function validateForms(forms) {
       form.addClass("was-validated");
       if (!form[0].checkValidity()) {
         validity = "invalid";
-        if (forms == altTextForms) altTextValidity = "invalid";
+        if (altTextForms && forms == altTextForms) altTextValidity = "invalid";
       }
     }
   });
