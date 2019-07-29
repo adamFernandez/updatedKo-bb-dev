@@ -1,4 +1,4 @@
-<div class="component-content" id="timeline">
+<div class="component-content" id="component-timeline">
   <div class="component-header">
     <h2 class="component-title">Timeline</h2>
   </div>

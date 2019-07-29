@@ -1,4 +1,4 @@
-<div class="component-content" id="collapse">
+<div class="component-content" id="component-collapse">
   <div class="component-header">
     <h2 class="component-title">Collapse</h2>
   </div>

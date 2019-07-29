@@ -3,39 +3,45 @@
     <title>KO Bootstrap Builder</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
-    <link href="https://git.iddkingsonline.com/kaltura/kaltura.css" rel="stylesheet">
+    <link href="https://git.iddkingsonline.com/instances/lambda/embed-responsive.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+    <link href="https://git.iddkingsonline.com/designsystem/base.css" rel="stylesheet">
   </head>
   <body>
     <main>
-    <h1>KO Bootstrap Builder</h1>
+    <h1 class="mt-5">KO Bootstrap Builder</h1>
     <div>
       <section>
         <p>Select the component you wish to build:</p>
-        <select id="component-select">
-          <option value="" disabled selected>Select a component</option>
+        <ul class="nav nav-tabs">
           <?php 
-            $components = array('Button', 'Carousel', 'Collapse', 'Timeline', 'Grid', 'Table', 'Transcript', 'Embed', 'Card', 'List');
+            $components = array('Button', 'Carousel', 'Collapse', 'Timeline', 'Grid', 'Table', 'Transcript', 'Embed', 'Card', 'List', 'Quotation', 'Alert');
             sort($components);
             foreach ($components as $component) {
-              $value = strtolower(str_replace(' ','',$component));
-              echo "<option value=\"$value\">$component</option>";
+              $id = strtolower(str_replace(' ','',$component));
+              echo "<li class=\"nav-item\"><a class=\"nav-link\" href=\"#\" id=\"link-$id\">$component</a></li>";
             }
           ?>
-        </select>
+          <li class="nav-item">
+            <a class="nav-link text-secondary" href="#" id="link-faqs">FAQs</a>
+          </li>
+        </ul>
       </section>
       <section>
         <div class="card" id="component-builder">
+          <?php include('components/alert.php'); ?>
           <?php include('components/button.php'); ?>
           <?php include('components/card.php'); ?>
           <?php include('components/carousel.php'); ?>
           <?php include('components/collapse.php'); ?>
+          <?php include('components/embed.php'); ?>
           <?php include('components/grid.php'); ?>
           <?php include('components/list.php'); ?>
-          <?php include('components/embed.php'); ?>
+          <?php include('components/quotation.php'); ?>
           <?php include('components/table.php'); ?>
           <?php include('components/timeline.php'); ?>
           <?php include('components/transcript.php'); ?>
+          <?php include('components/faqs.php'); ?>
         </div>   
       </section>
     </main>

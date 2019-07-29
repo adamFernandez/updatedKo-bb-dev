@@ -21,13 +21,14 @@ $(document).ready(function() {
   preview("ts");
 });
 
-// display component card upon select
-$("#component-select").change(function() {
+//display component on nav select
+$(".nav-link").click(function() {
   $("#component-builder").show();
   $(".component-content").each(function() {
     $(this).hide();
   });
-  $("#" + $(this).val()).show();
+  linkId = this.id.slice(5);
+  $("#component-" + linkId).show();
 });
 
 /**********************************

@@ -1,4 +1,4 @@
-<div class="component-content" id="button">
+<div class="component-content" id="component-button">
   <div class="component-header">
     <h2 class="component-title">Button</h2>
   </div>

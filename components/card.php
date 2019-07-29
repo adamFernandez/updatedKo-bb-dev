@@ -1,4 +1,4 @@
-<div class="component-content" id="card">
+<div class="component-content" id="component-card">
   <div class="component-header">
     <h2 class="component-title">Card</h2>
   </div>

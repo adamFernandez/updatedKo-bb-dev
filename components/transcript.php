@@ -1,4 +1,4 @@
-<div class="component-content" id="transcript">
+<div class="component-content" id="component-transcript">
   <div class="component-header">
     <h2 class="component-title">Transcript</h2>
   </div>

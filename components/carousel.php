@@ -1,13 +1,13 @@
-<div class="component-content" id="carousel">
+<div class="component-content" id="component-carousel">
   <div class="component-header">
     <h2 class="component-title">Carousel</h2>
   </div>
   <div class="component-body container">
-    <div class="alert alert-info" role="alert">
-      Don't forget to link to the css file! - https://git.iddkingsonline.com/designsystem/base.css
+    <div class="alert alert-info mt-3" role="alert">
+      <i class="fas fa-pencil-alt"></i> Don't forget to link to the css file! - https://git.iddkingsonline.com/designsystem/base.css
     </div>
     <div class="alert alert-danger d-none" role="alert" id="crsl-alt-text-alert">
-      Please add alternative text for all images.
+      <i class="fas fa-exclamation-triangle"></i> Please add alternative text for all images.
     </div>
     <div class="row">
       <div class="options container col-md-5">

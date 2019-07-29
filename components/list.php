@@ -1,4 +1,4 @@
-<div class="component-content" id="list">
+<div class="component-content" id="component-list">
   <div class="component-header">
     <h2 class="component-title">List</h2>
   </div>
