@@ -2,6 +2,7 @@ today = new Date();
 dateString = today.toDateString();
 
 $(document).ready(function() {
+  updateAlertTitle();
   $("#tag-link, #code-btn-value, #code-btn-link, #btn-value, #btn-link-field").hide();
   // set card to show 1 card by default
   maxCards = 1;
@@ -31,6 +32,35 @@ $(".nav-link").click(function() {
   $("#component-" + linkId).show();
 });
 
+/**********************************
+ * alert                          *
+ **********************************/
+
+// change alert type
+$("#al-type").change(function() {
+  $("#code-al-type").text($(this).val());
+  preview("al");
+});
+
+// toggle alert title
+toggleCheckbox("al", "#al-check-title", ".al-title-form");
+toggleCheckboxText("#al-check-title", "#al-toggle-title");
+$("#al-check-title").click(function() {
+  $("#code-al-title").text( $(this).hasClass("unchecked") ? "<h5>" + (!$("#al-title").val() == "" ?  $("#al-title").val() : "Alert title" ) + "</h5>\n    "  : "" );
+});
+
+// update alert text
+updateText("al", "#al-text", "#code-al-text", "This is an alert!");
+updateText("al", "#al-title", "#code-al-title-text", "Alert title");
+$(document).on('keyup', "#al-title", function (event) {
+  updateAlertTitle();
+}).keyup();
+
+function updateAlertTitle() {
+  title = $("#al-title").val();
+ $("#code-al-title").html("&lt;h5&gt;" + (!title == "" ? title : "Alert title") + "&lt;&#47;h5&gt;\n    ");
+  preview("al");
+}
 /**********************************
  * button                         *
  **********************************/
@@ -969,6 +999,7 @@ function preview(component) {
   if (component == "btn") disablePreview();
 }
 
+copyCode("al");
 copyCode("btn");
 copyCode("cd");
 copyCode("crsl");
