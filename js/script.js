@@ -3,7 +3,6 @@ dateString = today.toDateString();
 
 $(document).ready(function() {
   updateAlertTitle();
-  $("#tag-link, #code-btn-value, #code-btn-link, #btn-value, #btn-link-field").hide();
   // set card to show 1 card by default
   maxCards = 1;
   initialCards(maxCards);
@@ -87,55 +86,25 @@ $("#btn-style").change(function() {
   preview("btn");
 });
 
-// sets button width
-$("#btn-width").change(function() {
-  $("#code-btn-class-width").text($(this).val());
+// sets button size
+$("#btn-size").change(function() {
+  $("#code-btn-class-size").text($(this).val());
   preview("btn");
 });
 
 // sets tags
 $("#btn-tag").change(function() {
   $(".code-btn-tag").text($(this).val());
-  $(this).val() == "a" ?  ($(
-    "#btn-link-field, #code-btn-link").show(),
-    $("#code-btn-type, #code-btn-value").hide(),
-    updateBtnText()
-  ) : (
-    $("#btn-link-field, #code-btn-link").hide(),
-    $("#code-btn-type").show(),
-    (
-      $(this).val() == "input" ? (
-        $("#code-close-tag").hide(),
-        $("#code-btn-value").show(),
-        updateBtnValue()
-      ) : (
-        $("#code-close-tag").show(),
-        $("#code-btn-value").hide(),
-        updateBtnText()
-      )
-    )
-  )
+  // displays link input field and code
+  $("#btn-link-field").toggle();
+  $("#code-btn-link").html($(this).val() == "a" ? 'href="<span id="code-btn-link-text"></span>"' : "");
+  $("#code-btn-link-text").text( !$("#btn-link").val() == "" ? $("#btn-link").val() : "#" );
+  $("#code-btn-type").text( $(this).val() == "a" ? ' role="button" ' : 'type="button" ');
   preview("btn");
 });
 
 // generates button text from input
-function updateBtnText() {
-  updateText("btn", "#btn-text", "#code-btn-text", "Button Text");
-}
-
-function updateBtnValue() {
-  updateText("btn", "#btn-text", "#code-btn-value-text", "Button Text");
-  $("#code-btn-text").text("");
-}
-
-$("#btn-text").keyup(function() {
-  if ( $(".code-btn-tag").html() === "input" ) {
-   $("#code-btn-text").text("");
-  } else {
-    (!$(this).val() == "") ? $("#code-btn-text").text($(this).val()) : $("#code-btn-text").text("Button Text");
-  }
-  preview("btn");
-}).keyup();
+updateText("btn", "#btn-text", "#code-btn-text", "Button Text");
 
 // generates link text from input
 updateText("btn", "#btn-link", "#code-btn-link-text", "#");

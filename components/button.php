@@ -30,11 +30,11 @@
               <div class="form-group col-md-6">
                 <div class="input-group">
                   <div class="input-group-prepend">
-                    <label class="input-group-text" for="btn-width">Button width</label>
+                    <label class="input-group-text" for="btn-size">Button size</label>
                   </div>
-                  <select class="custom-select" id="btn-width">
+                  <select class="custom-select" id="btn-size">
                     <option value="" selected>Standard</option>
-                    <option value=" btn-block">Full-width</option>
+                    <option value=" btn-lg">Large</option>
                   </select>
                 </div>
               </div>
@@ -53,7 +53,7 @@
                 </div>
                 <small id="btn-tag-help" class="form-text text-muted">Select 'a' to add a hyperlink.</small>
               </div>
-              <div class="form-group col-md-8" id="btn-link-field">
+              <div class="form-group col-md-8" id="btn-link-field" style="display:none">
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <label class="input-group-text" for="btn-link">Link</label>
@@ -98,9 +98,9 @@
           </div>
           <div class="code-box">
             <pre class="code-text">
-<span id="btn-print-code"><span id="code-open-tag">&lt;<span class="code-btn-tag">button</span>&#32;<span id="code-btn-type">type&#61;&#34;<span id="code-btn-type-value">button</span>&#34;&#32;</span><span id="code-btn-link">href&#61;&#34;<span id="code-btn-link-text">#</span>&#34;&#32;</span>class&#61;&#34;<span id="code-btn-class-style">btn&#32;btn&#45;primary</span><span id="code-btn-class-width"></span>&#34;<span id="code-btn-value">&#32;value&#61;&#34;<span class="code-btn-text" id="code-btn-value-text"></span>&#34;</span>&gt;</span>
-  <span class="code-btn-text" id="code-btn-text">Button Text</span>
-<span id="code-close-tag">&lt;&#47;<span class="code-btn-tag">button</span>&gt;</span></span>
+<span id="btn-print-code"><span class="code-open-tag">&lt;<span class="code-btn-tag">button</span>&#32;<span id="code-btn-link"></span><span id="code-btn-type">type&#61;&#34;button&#34&#32;</span>class&#61;&#34;<span id="code-btn-class-style">btn&#32;btn&#45;primary</span><span id="code-btn-class-size"></span>&#34;&gt;</span>
+  <span id="code-btn-text">Button Text</span>
+<span class="code-close-tag">&lt;&#47;<span class="code-btn-tag">button</span>&gt;</span></span>
             </pre>
           </div>
         </section>
