@@ -39,8 +39,23 @@ $(".nav-link").click(function() {
 // change alert type
 $("#al-type").change(function() {
   $("#code-al-type").text($(this).val());
+  $(this).val() == "feedback"
+  ? ($("#al-feedback-select").show(), $("#al-title-check-form").hide(), $("#code-al-feedback-type").text(" " + $("#al-feedback-type").val() + "-feedback"), updateAlertFeedbackTitle())
+  : ($("#al-feedback-select").hide(), $("#al-title-check-form").show(), $("#code-al-feedback-type").text(""), updateAlertTitle());
   preview("al");
 });
+
+// change feedback type
+$("#al-feedback-type").change(function() {
+  updateAlertFeedbackTitle();
+  preview("al");
+});
+
+function updateAlertFeedbackTitle() {
+  type = $("#al-feedback-type").val();
+  $("#code-al-feedback-type").text(" " + type + "-answer");
+  $("#code-al-title").text("<h5>" + ( type == "model" ? type.charAt(0).toUpperCase() + type.slice(1) + " answer" : "Your answer was " + type ) + "</h5>\n    ");
+}
 
 // toggle alert title
 toggleCheckbox("al", "#al-check-title", ".al-title-form");
@@ -51,16 +66,17 @@ $("#al-check-title").click(function() {
 
 // update alert text
 updateText("al", "#al-text", "#code-al-text", "This is an alert!");
-updateText("al", "#al-title", "#code-al-title-text", "Alert title");
+//updateText("al", "#al-title", "#code-al-title-text", "Alert title");
 $(document).on('keyup', "#al-title", function (event) {
   updateAlertTitle();
 }).keyup();
 
 function updateAlertTitle() {
   title = $("#al-title").val();
- $("#code-al-title").html("&lt;h5&gt;" + (!title == "" ? title : "Alert title") + "&lt;&#47;h5&gt;\n    ");
+  $("#code-al-title").html("&lt;h5&gt;" + (!title == "" ? title : "Alert title") + "&lt;&#47;h5&gt;\n    ");
   preview("al");
 }
+
 /**********************************
  * button                         *
  **********************************/
