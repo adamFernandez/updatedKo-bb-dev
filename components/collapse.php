@@ -9,7 +9,7 @@
           <h3>Options</h3>
           <p>Complete the following fields:</p>
           <form class="needs-validation" id="col-form" novalidate>
-            <div class="form-row">
+             <div class="form-row">
               <div class="form-group col-md-5">
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">

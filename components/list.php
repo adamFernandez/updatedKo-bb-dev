@@ -11,7 +11,7 @@
           <form>
             <div class="form-row">
               <div class="form-group col-md-6">
-                <div class="input-group mb-3">
+                <div class="input-group">
                   <div class="input-group-prepend">
                     <label class="input-group-text" for="ls-type">Type of List</label>
                   </div>
@@ -22,7 +22,7 @@
                 </div>
               </div>
               <div class="form-group col-md-6">
-                <div class="input-group mb-3">
+                <div class="input-group">
                   <div class="input-group-prepend">
                     <label class="input-group-text" for="ls-item-no">No. of list items</label>
                   </div>

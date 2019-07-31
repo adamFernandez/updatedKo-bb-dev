@@ -3,6 +3,10 @@
     <h2 class="component-title">Alert</h2>
   </div>
   <div class="component-body container">
+    <div class="alert alert-instructional mt-3" role="alert">
+    <p>Don't forget to link to the css file! - https://git.iddkingsonline.com/designsystem/base.css.
+     Alerts also rely on Font Awesome icons so this needs to be included too! - https://kit-free.fontawesome.com/releases/latest/css/free.min.css.</p>
+    </div>
     <div class="row">
       <div class="options container col-md-6">
         <section class="options">

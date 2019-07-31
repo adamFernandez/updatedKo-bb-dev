@@ -3,8 +3,8 @@
     <h2 class="component-title">Embed</h2>
   </div>
   <div class="component-body container">
-    <div class="alert alert-info mt-3" role="alert">
-      The builder creates a wrapper for Kaltura video and audio embeds allowing them to be fully responsive.  If the builder preview is working but your embedded media is not displaying correctly in Keats, please check that the correct css files are being included.
+    <div class="alert alert-instructional mt-3" role="alert">
+      <p>The builder creates a wrapper for Kaltura video and audio embeds allowing them to be fully responsive.  If the builder preview is working but your embedded media is not displaying correctly in Keats, please check that the correct css files are being included.</p>
     </div>
     <div class="row">
       <div class="options container col-md-6">
