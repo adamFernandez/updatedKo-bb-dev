@@ -679,38 +679,6 @@ function updateListItems(listItemLimit) {
  * table                          *
  **********************************/
 
-// toggle table title
-toggleCheckboxText("#tab-check-title", "#tab-toggle-title");
-$("#tab-check-title").click(function() {
-  $("#code-tab-title").text( $(this).hasClass("unchecked") ? "<h5>" + (!$("#tab-title").val() == "" ?  $("#tab-title").val() : "Table title" ) + "</h5>\n"  : "" );
-});
-toggleCheckbox("tab", "#tab-check-title", "#tab-title-form");
-
-$(document).on('keyup', "#tab-title", function (event) {
-  updateTableTitle();
-}).keyup();
-
-function updateTableTitle() {
-  title = $("#tab-title").val();
-  $("#code-tab-title").html("&lt;h5&gt;" + (!title == "" ? title : "Table title") + "&lt;&#47;h5&gt;\n    ");
-  preview("tab");
-}
-
-toggleCheckboxText("#tab-check-row-title", "#tab-toggle-row-title");
-$(document).on("click", "#tab-check-row-title", function(event) {
-  $(this).toggleClass("unchecked").toggleClass("checked");
-  maxTabRows = $("#tab-row-no").val();
-  if ($(this).hasClass("checked")) {
-    for (let r = 0; r <= maxTabRows; r++) {
-      tabRowHeader = createTableRowHeader(r);
-      $("#code-tab-row-" + r + "-header").append(tabRowHeader);
-    }
-  } else {
-    $(".code-tab-row-header").remove();
-  }
-  preview("tab");
-});
-
 // on column selet change, update table code and preview
 $("#tab-col-no").on('focus', function() {
   $(this).data("previous",$(this).val());
@@ -776,6 +744,7 @@ $("#tab-row-no").on('focus', function() {
   });
 });
 
+// initial table size
 function initialTable(maxTabCols, maxTabRows) {
   for (let c = 1; c <= maxTabCols; c++) {
     tabColHeader = createTableColHeader(c);
@@ -810,8 +779,25 @@ function createTableRowCol(i,j) {
   return `<span id="code-tab-row-${j}-col-${i}">\n      <span class="code-open-tag">&lt;td&gt;<span id="code-tab-row-${j}-col-${i}-text">Cell</span><span class="code-close-tag">&lt;&#47;td&gt;</span></span>`;
 }
 
+// change table width
 $("#tab-width").change(function() {
   $("#code-tab-width").text( $(this).val() == "default" ? " default-width" : "" );
+  preview("tab");
+});
+
+// toggle table row headers
+toggleCheckboxText("#tab-check-row-title", "#tab-toggle-row-title");
+$(document).on("click", "#tab-check-row-title", function(event) {
+  $(this).toggleClass("unchecked").toggleClass("checked");
+  maxTabRows = $("#tab-row-no").val();
+  if ($(this).hasClass("checked")) {
+    for (let r = 0; r <= maxTabRows; r++) {
+      tabRowHeader = createTableRowHeader(r);
+      $("#code-tab-row-" + r + "-header").append(tabRowHeader);
+    }
+  } else {
+    $(".code-tab-row-header").remove();
+  }
   preview("tab");
 });
 

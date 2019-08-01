@@ -57,21 +57,9 @@
                 </div>
               </div>
             </div>
-            <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input unchecked" id="tab-check-title">
-              <label class="custom-control-label" for="tab-check-title"><span id="tab-toggle-title">Add</span> table title</label>
-            </div>
             <div class="custom-control custom-checkbox mb-3">
               <input type="checkbox" class="custom-control-input unchecked" id="tab-check-row-title">
               <label class="custom-control-label" for="tab-check-row-title"><span id="tab-toggle-row-title">Add</span> row titles</label>
-            </div>
-            <div class="form-group" id="tab-title-form" style="display:none">
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <label class="input-group-text" for="tab-title">Title</label>
-                </div>
-                <input type="text" class="form-control" id="tab-title" aria-label="tab-title" placeholder="Table title">
-              </div>
             </div>
             <div id="tab-cards">
             </div>
