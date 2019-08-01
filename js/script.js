@@ -18,6 +18,8 @@ $(document).ready(function() {
   // default embed preview on load
   $("#em-preview-pane").html('<div class="embed-responsive embed-responsive-400by285"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2368101/sp/236810100/embedIframeJs/uiconf_id/42876062/partner_id/2368101?iframeembed=true&playerId=kaltura_player&entry_id=0_m83muzm5&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_fejlyov0&amp;flashvars[infoScreen.plugin]=false&amp;flashvars[titleLabel.plugin]=false&amp;flashvars[related.plugin]=false&amp;flashvars[closedCaptions.displayCaptions]=false&amp;flashvars[closedCaptions.layout]=below&amp;flashvars[IframeCustomPluginCss1]=https://git.iddkingsonline.com/kaltura/kaltura.css" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" frameborder="0" title="Kaltura Player"></iframe></div>');
   // transcript preview
+//preview("tab");
+  initialTable(3,3);
   preview("ts");
 });
 
@@ -57,15 +59,14 @@ function updateAlertFeedbackTitle() {
 }
 
 // toggle alert title
-toggleCheckbox("al", "#al-check-title", ".al-title-form");
 toggleCheckboxText("#al-check-title", "#al-toggle-title");
 $("#al-check-title").click(function() {
   $("#code-al-title").text( $(this).hasClass("unchecked") ? "<h5>" + (!$("#al-title").val() == "" ?  $("#al-title").val() : "Alert title" ) + "</h5>\n    "  : "" );
 });
+toggleCheckbox("al", "#al-check-title", ".al-title-form");
 
 // update alert text
 updateText("al", "#al-text", "#code-al-text", "This is an alert!");
-//updateText("al", "#al-title", "#code-al-title-text", "Alert title");
 $(document).on('keyup', "#al-title", function (event) {
   updateAlertTitle();
 }).keyup();
@@ -165,7 +166,7 @@ function initialCards(maxCards) {
   preview("cd");
 }
 
-// create single card card code, shows first card and collapses all others
+// create single card card code
 function createCard(i) {
   return `<span id="code-cd-card-${i}"><pre>  <span class="code-open-tag">&lt;div&#32;class&#61;&#34;card&#32;mb&#45;3&#34;&gt;</span><span id="code-cd-${i}-header">
     <span>&lt;div&#32;class&#61;&#34;card&#45;header&#34;&gt;</span>
@@ -675,6 +676,146 @@ function updateListItems(listItemLimit) {
 }
 
 /**********************************
+ * table                          *
+ **********************************/
+
+// toggle table title
+toggleCheckboxText("#tab-check-title", "#tab-toggle-title");
+$("#tab-check-title").click(function() {
+  $("#code-tab-title").text( $(this).hasClass("unchecked") ? "<h5>" + (!$("#tab-title").val() == "" ?  $("#tab-title").val() : "Table title" ) + "</h5>\n"  : "" );
+});
+toggleCheckbox("tab", "#tab-check-title", "#tab-title-form");
+
+$(document).on('keyup', "#tab-title", function (event) {
+  updateTableTitle();
+}).keyup();
+
+function updateTableTitle() {
+  title = $("#tab-title").val();
+  $("#code-tab-title").html("&lt;h5&gt;" + (!title == "" ? title : "Table title") + "&lt;&#47;h5&gt;\n    ");
+  preview("tab");
+}
+
+toggleCheckboxText("#tab-check-row-title", "#tab-toggle-row-title");
+$(document).on("click", "#tab-check-row-title", function(event) {
+  $(this).toggleClass("unchecked").toggleClass("checked");
+  maxTabRows = $("#tab-row-no").val();
+  if ($(this).hasClass("checked")) {
+    for (let r = 0; r <= maxTabRows; r++) {
+      tabRowHeader = createTableRowHeader(r);
+      $("#code-tab-row-" + r + "-header").append(tabRowHeader);
+    }
+  } else {
+    $(".code-tab-row-header").remove();
+  }
+  preview("tab");
+});
+
+// on column selet change, update table code and preview
+$("#tab-col-no").on('focus', function() {
+  $(this).data("previous",$(this).val());
+  $(this).blur();
+  $("#tab-col-no").change(function(){
+    newMax = Number(($(this).val()));
+    oldMax = Number(($(this).data("previous")));
+    maxTabRows = $("#tab-row-no").val();
+    // compare old and new max list item value
+    if (newMax > oldMax) {
+      for (let c = oldMax; c < newMax; c++) {
+        // add new headers
+        tabColHeader = createTableColHeader(c+1);
+        $("#code-tab-headers").append(tabColHeader);
+        for (let r = 1; r <= maxTabRows; r++) {
+          tabRowCol = createTableRowCol(c+1,r);
+          $("#code-tab-row-"+ r + "-cols").append(tabRowCol);
+        }
+      }
+     } else {
+       for (let c = newMax; c < oldMax; c++) {
+        // remove items
+        $("#code-tab-col-"+(c+1)+"-header").remove();
+        for (let r = 1; r <= maxTabRows; r++) {
+          $("#code-tab-row-"+r+"-col-"+(c+1)).remove();
+        }
+      }
+    }
+    // reset previous value
+    $(this).removeData("previous");
+    preview("tab");
+  });
+});
+
+// on row selet change, update table code and preview
+$("#tab-row-no").on('focus', function() {
+  $(this).data("previous",$(this).val());
+  $(this).blur();
+  $("#tab-row-no").change(function(){
+    newMax = Number(($(this).val()));
+    oldMax = Number(($(this).data("previous")));
+    // compare old and new max list item value
+    if (newMax > oldMax) {
+      for (let r = oldMax; r < newMax; r++) {
+        // add new items
+        tabRow = createTableRow(r+1);
+        $("#code-tab-rows").append(tabRow);
+        maxTabCols = $("#tab-col-no").val();
+        for (let c = 1; c <= maxTabCols; c++) {
+          tabRowCol = createTableRowCol(c,r+1);
+          $("#code-tab-row-"+ (r+1) + "-cols").append(tabRowCol);
+        }
+      }
+    } else {
+      for (let r = newMax; r < oldMax; r++) {
+        // remove items
+        $("#code-tab-row-"+(r+1)).remove();
+      }
+    }
+    // reset previous value
+    $(this).removeData("previous");
+    preview("tab");
+  });
+});
+
+function initialTable(maxTabCols, maxTabRows) {
+  for (let c = 1; c <= maxTabCols; c++) {
+    tabColHeader = createTableColHeader(c);
+    $("#code-tab-headers").append(tabColHeader);
+  }
+  for (let r = 1; r <= maxTabRows; r++) {
+    tabRow = createTableRow(r);
+    $("#code-tab-rows").append(tabRow);
+    for (let c = 1; c <= maxTabCols; c++) {
+      tabRowCol = createTableRowCol(c,r);
+      $("#code-tab-row-"+ r + "-cols").append(tabRowCol);
+    }
+  }
+  preview("tab");
+}
+
+// create single table column header code
+function createTableColHeader(i) {
+  return `<span id="code-tab-col-${i}-header">\n      <span class="code-open-tag">&lt;th&#32;scope&#61;&#34;col&#34;&gt;<span id="code-tab-col-${i}-header-text">Column header</span><span class="code-close-tag">&lt;&#47;th&gt;</span></span>`;
+}
+// create single table row header code
+function createTableRowHeader(i) {
+  return `<span class="code-tab-row-header">\n      <span class="code-open-tag">&lt;th&#32;scope&#61;&#34;row&#34;&gt;<span id="code-tab-row-${i}-header-text">${i == 0 ? "#" :"Row Header"}</span><span class="code-close-tag">&lt;&#47;th&gt;</span></span>`;
+}
+// create single table row code
+function createTableRow(i) {
+  return `<span id="code-tab-row-${i}">\n    <span class="code-open-tag">&lt;tr&gt;<span id="code-tab-row-${i}-cols"><span id="code-tab-row-${i}-header"></span></span>
+    <span class="code-close-tag">&lt;&#47;tr&gt;</span></span>`;
+}
+// create single table row column code
+function createTableRowCol(i,j) {
+  return `<span id="code-tab-row-${j}-col-${i}">\n      <span class="code-open-tag">&lt;td&gt;<span id="code-tab-row-${j}-col-${i}-text">Cell</span><span class="code-close-tag">&lt;&#47;td&gt;</span></span>`;
+}
+
+$("#tab-width").change(function() {
+  $("#code-tab-width").text( $(this).val() == "default" ? " default-width" : "" );
+  preview("tab");
+});
+
+/**********************************
  * timeline                       *
  **********************************/
 
@@ -991,6 +1132,7 @@ copyCode("crsl");
 copyCode("col");
 copyCode("em");
 copyCode("ls");
+copyCode("tab");
 copyCode("tl");
 copyCode("ts");
 
