@@ -861,45 +861,45 @@ function createTimelineCard(i) {
   title = $("#tl-" + i + "-title").val();
   text = $("#tl-" + i + "-text").val();
   color = $("#tl-card-" + i + "-color").val();
-  return `<span id="code-tl-card-${i}"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;row&#34;&gt;</span><span id="code-tl-card-${i}-spacer">${ $("#tl-card-layout").val() == 1 ? "" : "\n    &lt;div&#32;class&#61;&#34;col&#45;sm&#32;order&#45;" +  (i % 2 == 0 ? 3 : 1) + "&#34;&gt&lt;&#47;div&gt; "} </span>
-    <span class="code-open-tag">&lt;div&#32;class&#61;&#34;col&#45;auto&#32;text&#45;center&#32;flex&#45;column&#32;d&#45;none&#32;d&#45;sm&#45;flex<span class="code-tl-card-dot-order">${ $("#tl-card-layout").val() == 1 ? "" : " order-2"}</span>&#34;&gt;</span>
+  return `<span id="code-tl-card-${i}"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;row&#32;timeline&#45;row<span id="code-tl-card-${i}-highlighted"></span>&#34;&gt;</span>
+    <span class="code-open-tag">&lt;div&#32;class&#61;&#34;col&#45;auto&#32;text&#45;center&#32;flex&#45;column&#32;d&#45;none&#32;d&#45;sm&#45;flex&#34;&gt;</span>
       <span class="code-open-tag">&lt;div&#32;class&#61;&#34;row&#32;h&#45;50&#34;&gt;</span>
-        <span class="code-open-tag">&lt;div&#32;class&#61;&#34;col${ i == 1 ? "" : " border&#45;right" }&#34;&gt;</span>&nbsp;<span class="code-close-tag">&lt;&#47;div&gt;</span>
-        <span class="code-open-tag">&lt;div&#32;class&#61;&#34;col&#34;&gt;</span>&nbsp;<span class="code-close-tag">&lt;&#47;div&gt;</span>
+        <span class="code-open-tag">&lt;div&#32;class&#61;&#34;col${ i == 1 ? "" : " border&#45;right" }&#34;&gt;</span>&#38;nbsp&#59;<span class="code-close-tag">&lt;&#47;div&gt;</span>
+        <span class="code-open-tag">&lt;div&#32;class&#61;&#34;col${ i == 1 ? "" : " border&#45;left" }&#34;&gt;</span>&#38;nbsp&#59;<span class="code-close-tag">&lt;&#47;div&gt;</span>
       <span class="code-close-tag">&lt;&#47;div&gt;</span>
-      <span class="code-open-tag">&lt;div&#32;class&#61;&#34;m&#45;2&#34;&gt;</span>
-        <span class="code-open-tag">&lt;span&#32;class&#61;&#34;badge&#32;badge&#45;pill&#32;bg&#45;light&#32;border<span id="code-tl-card-${i}-pill-color">${ color && color !== "default" ? ` border-${color}` : "" }</span>&#34;&gt;</span>&nbsp;<span class="code-close-tag">&lt;&#47;span&gt;</span>
+      <span class="code-open-tag">&lt;div&gt;</span>
+        <span class="code-open-tag">&lt;span&#32;class&#61;&#34;badge&#32;timeline&#45;badge&#45;pill&#32;border${ i == 1 || i == j ? " fill" : "" }&#34;&gt;</span>&#38;nbsp&#59;<span class="code-close-tag">&lt;&#47;span&gt;</span>
       <span class="code-close-tag">&lt;&#47;div&gt;</span>
       <span class="code-open-tag">&lt;div&#32;class&#61;&#34;row&#32;h&#45;50&#34;&gt;</span>
-        <span class="code-open-tag">&lt;div&#32;class&#61;&#34;col${ i == j ? "" : " border&#45;right" }&#34;&gt;</span>&nbsp;<span class="code-close-tag">&lt;&#47;div&gt;</span>
-        <span class="code-open-tag">&lt;div&#32;class&#61;&#34;col&#34;&gt;</span>&nbsp;<span class="code-close-tag">&lt;&#47;div&gt;</span>
+        <span class="code-open-tag">&lt;div&#32;class&#61;&#34;col${ i == j ? "" : " border&#45;right" }&#34;&gt;</span>&#38;nbsp&#59;<span class="code-close-tag">&lt;&#47;div&gt;</span>
+        <span class="code-open-tag">&lt;div&#32;class&#61;&#34;col${ i == j ? "" : " border&#45;left" }&#34;&gt;</span>&#38;nbsp&#59;<span class="code-close-tag">&lt;&#47;div&gt;</span>
       <span class="code-close-tag">&lt;&#47;div&gt;</span>
     <span class="code-close-tag">&lt;&#47;div&gt;</span>
-    <span class="code-open-tag">&lt;div&#32;class&#61;&#34;col&#32;py&#45;2<span id="code-tl-card-${i}-content-order">${ $("#tl-card-layout").val() == 1 ? "" : " order&#45;" +  (i % 2 == 0 ? 1 : 3)}</span>&#34;&gt;</span>
-     <span class="code-open-tag">&lt;div&#32;class&#61;&#34;card<span id="code-tl-card-${i}-border-color">${ color && color !== "default" ? ` border-${color}` : "" }</span>&#34;&gt;</span>
-        <span id="code-tl-card-${i}-header-open"> ${ $("#tl-check-header").hasClass("checked")
-          ? `<span>&lt;div&#32;class&#61;&#34;card&#45;header</span><span id="code-tl-card-${i}-header-color"> ${ color && color !== "default" ? ` text-white bg-${color}` : "" }</span><span>&#34;&gt;</span>`
-          : `<span>&lt;div&#32;class&#61;&#34;card&#45;body</span><span id="code-tl-card-${i}-body-color">${ color && color !== "default" ? ` text-white bg-${color}` : "" }</span><span>&#34;&gt;</span>`}
-        </span><span id="code-tl-card-${i}-date">
-          <span class="code-tl-card-date-open">&lt;span&#32;class&#61;&#34;float&#45;right&#34;&gt;</span>
-            <span id="code-tl-card-${i}-date-text">${ !date == "" ? date : dateString + " " + (i < 6 ? (i + 7) + ":00AM" : (i - 5) + ":00PM")}</span>
-          <span class="code-tl-card-date-close">&lt;&#47;span&gt;</span></span>
-          <span class="code-open-tag">&lt;h4&#32;class&#61;&#34;card&#45;title&#34;&gt;</span>
-            <span id="code-tl-card-${i}-title">${ !title == "" ? title : "Card #" + i + " title"}</span>
-          <span class="code-close-tag">&lt;&#47;h4&gt;</span><span id="code-tl-card-${i}-header-close">${ $("#tl-check-header").hasClass("checked")
-            ? `\n        &lt;&#47;div&gt;\n        &lt;div&#32;class&#61;&#34;card&#45;body&#34;&gt;`
-            : ``} </span>
-          <span class="code-open-tag">&lt;p&#32;class&#61;&#34;card&#45;text&#34;&gt;</span>
-            <span id="code-tl-card-${i}-text">${ !text == "" ? text : "Lorem ipsum dolor amet flexitarian butcher VHS tilde, squid 3 wolf moon shoreditch vape williamsburg mustache messenger bag prism."}</span>
+    <span class="code-open-tag">&lt;div&#32;class&#61;&#34;col&#32;py&#45;4&#34;&gt;</span>
+      <span class="code-open-tag">&lt;div&#32;class&#61;&#34;card&#32timeline-card&#34;&gt;</span><span id="code-tl-card-${i}-date">
+        <span class="code-tl-card-date-open">&lt;span&#32;class&#61;&#34;date&#45;tab&#34;&gt;</span>
+          <span id="code-tl-card-${i}-date-text">${ !date == "" ? date : dateString + " " + (i < 6 ? (i + 7) + ":00AM" : (i - 5) + ":00PM")}</span>
+        <span class="code-tl-card-date-close">&lt;&#47;span&gt;</span></span>
+        <span>&lt;div&#32;class&#61;&#34;card&#45;body</span>&#34;&gt;</span>
+          <span class="code-open-tag">&lt;div&#32;class&#61;&#34;row&#34;&gt;</span>
+            <span id="code-tl-card-${i}-img"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;col&#45;md&#45;3&#32;card&#45;image&#34;&gt;</span>
+              <span class="code-open-tag">&lt;img&#32;src&#61;&#34;<span id="code-tl-card-${i}-img-src">https:\/\/placekitten.com\/200\/300</span>&#34;&gt;</span>
+            <span class="code-close-tag">&lt;&#47;div&gt;</span></span>
+            <span class="code-open-tag">&lt;div&#32;class&#61;&#34;col&#45;md&#34;&gt;</span>
+              <span class="code-open-tag">&lt;h5&#32;class&#61;&#34;card&#45;title&#34;&gt;</span>
+                <span id="code-tl-card-${i}-title">${ !title == "" ? title : "Card #" + i + " title"}</span>
+              <span class="code-close-tag">&lt;&#47;h5&gt;</span>
+              <span class="code-open-tag">&lt;p&#32;class&#61;&#34;card&#45;text&#34;&gt;</span>
+                <span id="code-tl-card-${i}-text">${ !text == "" ? text : "Lorem ipsum dolor amet flexitarian butcher VHS tilde, squid 3 wolf moon shoreditch vape williamsburg mustache messenger bag prism."}</span>
+              <span class="code-close-tag">&lt;&#47;p&gt;</span>
+            <span class="code-close-tag">&lt;&#47;div&gt;</span>
+          <span class="code-close-tag">&lt;&#47;div&gt;</span>
+          <span class="code-open-tag">&lt;p&#32;class&#61;&#34;text&#45;right&#32;mb&#45;0&#32;img&#45;reference&#34;&gt;</span><span id="code-tl-card-${i}-img-reference">Image: placekitten.com. An extremely adorable kitten</span>
           <span class="code-close-tag">&lt;&#47;p&gt;</span>
         <span class="code-close-tag">&lt;&#47;div&gt;</span>
       <span class="code-close-tag">&lt;&#47;div&gt;</span>
     <span class="code-close-tag">&lt;&#47;div&gt;</span>
   <span class="code-close-tag">&lt;&#47;div&gt;</span></span>`;
-  $("#tl-check-header").hasClass("checked")
-    ? ( $("#code-tl-card-" + i + "-header-open").html(`<span>&lt;div&#32;class&#61;&#34;card&#45;header</span><span id="code-tl-card-${i}-header-color"></span><span>&#34;&gt;</span>`), $("#code-tl-card-" + i + "-header-close").html("\n        &lt;&#47;div&gt;\n        &lt;div&#32;class&#61;&#34;card&#45;body&#34;&gt;"))
-    : ( $("#code-tl-card-" + i + "-header-open").html(`<span>&lt;div&#32;class&#61;&#34;card&#45;body</span><span id="code-tl-card-${i}-body-color"></span><span>&#34;&gt;</span>`), $("#code-tl-card-" + i + "-header-close").html(""));
-  if (color != "default") ( $("#code-tl-card-" + i + "-header-color").text(` text-white bg-${color}`), $("#code-tl-card-" + i + "-body-color").text(` text-white bg-${color}`) );
 }
 
 // create single timeline editor card, shows first card and collapses all others
@@ -913,24 +913,44 @@ function createTimelineEditorCard(i) {
       </div>
       <div id="tl-collapse-${i}" class="${ i == 1 ? "collapse show" : "collapse" }" aria-labelledby="tl-card-heading-${i}" data-parent="#cards">
         <div class="card-body">
-          <form>
+          <form class="needs-validation tl-card-form">
             <div class="input-group mb-3">
               <div class="input-group-prepend">
                 <label class="input-group-text" for="tl-card-${i}-color">Card color</label>
               </div>
               <select class="custom-select" id="tl-card-${i}-color">
-                <option value="default" selected>Light (default)</option>
-                <option value="primary">Primary</option>
-                <option value="secondary">Secondary</option>
-                <option value="success">Success</option>
-                <option value="danger">Danger</option>
-                <option value="warning">Warning</option>
-                <option value="info">Info</option>
-                <option value="dark">Dark</option>
+                <option value="default" selected>Default</option>
+                <option value="highlighted">Highlighted</option>
               </select>
             </div>
-            <div class="form-group" id="tl-${i}-title-form">
-              <label for="tl-${i}-header">Card title</label>
+            <div class="custom-control custom-checkbox mb-3">
+              <input type="checkbox" class="custom-control-input checked" id="tl-${i}-check-img" checked>
+              <label class="custom-control-label" for="tl-${i}-check-img"><span id="tl-${i}-toggle-img">Remove</span> image</label>
+            </div>
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="tl-card-${i}-img-src">Image source*</label>
+                </div>
+                <input type="text" class="form-control" id="tl-card-${i}-img-src" placeholder="https://moodle.iddkingsonline.com/file.php/123/images/image.jpg">
+              </div>
+              <small id="tl-img-src-help" class="form-text text-muted">The image must first be uploaded to Keats, where the generated link can be copied and pasted from.</small>
+              <div class="invalid-feedback tl-img-invalid-feedback">
+                Please provde a source for the image.
+              </div>
+              <label for="tl-card-${i}-img-alt">Alternative text*</label>
+              <textarea class="form-control" id="tl-card-${i}-img-alt" placeholder="Description of image" rows="2" required></textarea>
+              <div class="invalid-feedback tl-img-invalid-feedback">
+                Please provde alternative text for the image.
+              </div>
+              <label for="tl-card-${i}-img-red">Image reference*</label>
+              <textarea class="form-control" id="tl-card-${i}-img-ref" placeholder="www.placekitten.com" rows="2" required></textarea>
+              <div class="invalid-feedback tl-img-invalid-feedback">
+                Please provde a reference for the image.
+              </div>
+            </div>
+            <div class="form-group tl-title" id="tl-${i}-date-form">
+              <label for="tl-${i}-title">Card title</label>
               <input type="text" class="form-control" id="tl-${i}-title" placeholder="Card #${i} title">
             </div>
             <div class="form-group tl-date" id="tl-${i}-date-form">
@@ -948,6 +968,7 @@ function createTimelineEditorCard(i) {
   `;
 }
 
+/*
 // toggle timeline card layout
 $("#tl-card-layout").change(function(){
   layout = $(this).val();
@@ -961,7 +982,7 @@ function timelineToggleLayout(timelineCardLimit) {
     : ( $("#code-tl-card-" + i + "-content-order").html(`&#32;order&#45;${ i % 2 == 0 ? 1 : 3 }`), $(".code-tl-card-dot-order").html("&#32;order&#45;2"), $("#code-tl-card-" + i + "-spacer").html(`\n    &lt;div&#32;class&#61;&#34;col&#45;sm&#32;order&#45;${(i % 2 == 0) ? 3 : 1}&#34;&gt&lt;&#47;div&gt;`));
   }
 };
-
+*/
 
 // toggle timeline title code
 toggleCheckboxText("#tl-check-title", "#tl-toggle-title");
@@ -976,6 +997,7 @@ $(document).on('click', "#tl-check-title", function (event) {
   preview("tl");
 });
 
+/*
 // toggle timeline header code
 toggleCheckboxText("#tl-check-header", "#tl-toggle-header");
 $(document).on("click", "#tl-check-header", function(event) {
@@ -994,6 +1016,7 @@ function timelineToggleHeader(timelineCardLimit) {
   preview("tl");
   }
 };
+*/
 
 // toggle timeline date code
 toggleCheckboxText("#tl-check-date", "#tl-toggle-date");
@@ -1007,9 +1030,9 @@ $(document).on("click", "#tl-check-date", function(event) {
 function timelineToggleDate(timelineCardLimit) {
   for (let i = 1; i <= timelineCardLimit; i++) {
   $("#tl-check-date").hasClass("checked")
-    ? $("#code-tl-card-" + i + "-date").html('\n          <span class="code-tl-card-date-open"></span>\n            <span id="code-tl-card-' + i + '-date-text"></span>\n          <span class="code-tl-card-date-close"></span>')
+    ? $("#code-tl-card-" + i + "-date").html('\n        <span class="code-tl-card-date-open"></span>\n          <span id="code-tl-card-' + i + '-date-text"></span>\n        <span class="code-tl-card-date-close"></span>')
     : $("#code-tl-card-" + i + "-date").text("");
-  $(".code-tl-card-date-open").text('<span class="float-right">');
+  $(".code-tl-card-date-open").text('<span class="date-tab">');
   $("#tl-" + i + "-date").val() !== "" ? $("#code-tl-card-" + i + "-date-text").text($("#tl-" + i + "-date").val()) : $("#code-tl-card-" + i + "-date-text").text(dateString + " " + (i < 6 ? (i + 7) + ":00AM" : (i - 5) + ":00PM"));
   $(".code-tl-card-date-close").text('</span>');
   }
@@ -1022,15 +1045,10 @@ function timelineChangeCardColor(timelineCardLimit) {
   for (let i = 1; i <= timelineCardLimit; i++) {
     $("#tl-card-" + i + "-color").change(function(){
       color = $(this).val();
-      color == "default"
-      ? ( $("#code-tl-card-" + i + "-border-color").html(""), $("#code-tl-card-" + i + "-header-color").html(""), $("#code-tl-card-" + i + "-body-color").html(""), $("#code-tl-card-" + i + "-pill-color").html("") )
-      : ( $("#code-tl-card-" + i + "-border-color").html(`&#32;border&#45;${color}`), $("#code-tl-card-" + i + "-header-color").html(`&#32;text&#45;white&#32;bg&#45;${color}`), $("#code-tl-card-" + i + "-body-color").html(`&#32;text&#45;white&#32;text&#45;${color}`), $("#code-tl-card-" + i + "-pill-color").html(`&#32;border&#45;${color}`) );
-      $("#tl-check-header").hasClass("checked")
-      ? $("#code-tl-card-" + i + "-body-color").html("")
-      : $("#code-tl-card-" + i + "-body-color").html(`&#32;text&#45;white&#32;bg&#45;${color}`) ;
+      $("#code-tl-card-" + i + "-highlighted").text( color == "highlighted" ? " highlighted" : "" );
       preview("tl");
     });
-  }
+  }  
 };
 
 // generate card text from input

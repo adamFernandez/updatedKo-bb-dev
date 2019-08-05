@@ -29,22 +29,16 @@
               <div class="form-group col-md-8">
                 <div class="input-group">
                   <div class="input-group-prepend">
-                    <label class="input-group-text" for="tl-card-layout">Card layout</label>
+                    <label class="input-group-text" for="tl-id">Unique ID</label>
                   </div>
-                  <select class="custom-select" id="tl-card-layout">
-                    <option value="1" selected>Single column</option>
-                    <option value="2">Alternating left/right</option>
-                  </select>
+                  <input type="text" class="form-control" id="tl-id" aria-label="tl-id" placeholder="modname-unitno-timeline-no" aria-describedby="timeline-unique-id">
                 </div>
+                <small id="tl-id-help" class="form-text text-muted">Optional ID to assist with identification and custom styling.</small>
               </div>
             </div>
             <div class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input checked" id="tl-check-title" checked>
               <label class="custom-control-label" for="tl-check-title"><span id="tl-toggle-title">Remove</span> timeline title</label>
-            </div>
-            <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input checked" id="tl-check-header" checked>
-              <label class="custom-control-label" for="tl-check-header"><span id="tl-toggle-header">Remove</span> header styles</label>
             </div>
             <div class="custom-control custom-checkbox mb-3">
               <input type="checkbox" class="custom-control-input checked" id="tl-check-date" checked>
@@ -56,13 +50,6 @@
               </div>
               <input type="text" class="form-control" id="tl-title" aria-label="tl-title" placeholder="Timeline title" aria-describedby="timeline-title">
             </div>
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <label class="input-group-text" for="tl-id">Unique ID</label>
-              </div>
-              <input type="text" class="form-control" id="tl-id" aria-label="tl-id" placeholder="modname-unitno-timeline-no" aria-describedby="timeline-unique-id">
-            </div>
-            <small id="tl-id-help" class="form-text text-muted">Optional ID to assist with identification and custom styling.</small>
           </form>
           <div id="tl-cards">
           </div>
