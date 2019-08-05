@@ -43,6 +43,9 @@ $("#al-type").change(function() {
   $(this).val() == "feedback"
   ? ($("#al-feedback-select").show(), $("#al-title-check-form").hide(), $("#code-al-feedback-type").text(" " + $("#al-feedback-type").val() + "-feedback"), updateAlertFeedbackTitle())
   : ($("#al-feedback-select").hide(), $("#al-title-check-form").show(), $("#code-al-feedback-type").text(""), updateAlertTitle());
+  $(this).val() == "lo"
+  ? ($("#al-title-check-form").hide(), $("#code-al-title").text("<h5>Learning Outcomes</h5>"))
+  : $("#al-title-check-form").show();
   preview("al");
 });
 

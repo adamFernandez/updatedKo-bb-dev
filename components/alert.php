@@ -23,6 +23,7 @@
                     <option value="success" selected>Success</option>
                     <option value="instructional">Instructional</option>
                     <option value="danger">Danger</option>
+                    <option value="lo">Learning outcome</option>
                     <option value="feedback">Feedback</option>
                   </select>
                 </div>
