@@ -863,8 +863,7 @@ function createTimelineCard(i) {
   date = $("#tl-" + i + "-date").val();
   title = $("#tl-" + i + "-title").val();
   text = $("#tl-" + i + "-text").val();
-  color = $("#tl-card-" + i + "-color").val();
-  return `<span id="code-tl-card-${i}"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;row&#32;timeline&#45;row<span id="code-tl-card-${i}-highlighted"></span>&#34;&gt;</span>
+  return `${ i == 1 ? "" : "  "}<span id="code-tl-card-${i}"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;row&#32;timeline&#45;row<span id="code-tl-card-${i}-highlighted"></span>&#34;&gt;</span>
     <span class="code-open-tag">&lt;div&#32;class&#61;&#34;col&#45;auto&#32;text&#45;center&#32;flex&#45;column&#32;d&#45;none&#32;d&#45;sm&#45;flex&#34;&gt;</span>
       <span class="code-open-tag">&lt;div&#32;class&#61;&#34;row&#32;h&#45;50&#34;&gt;</span>
         <span class="code-open-tag">&lt;div&#32;class&#61;&#34;col${ i == 1 ? "" : " border&#45;right" }&#34;&gt;</span>&#38;nbsp&#59;<span class="code-close-tag">&lt;&#47;div&gt;</span>
@@ -883,7 +882,7 @@ function createTimelineCard(i) {
         <span class="code-tl-card-date-open">&lt;span&#32;class&#61;&#34;date&#45;tab&#34;&gt;</span>
           <span id="code-tl-card-${i}-date-text">${ !date == "" ? date : dateString + " " + (i < 6 ? (i + 7) + ":00AM" : (i - 5) + ":00PM")}</span>
         <span class="code-tl-card-date-close">&lt;&#47;span&gt;</span></span>
-        <span>&lt;div&#32;class&#61;&#34;card&#45;body</span>&#34;&gt;</span>
+        <span>&lt;div&#32;class&#61;&#34;card&#45;body&#34;&gt;</span>
           <span class="code-open-tag">&lt;div&#32;class&#61;&#34;row&#34;&gt;</span>
             <span id="code-tl-card-${i}-img"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;col&#45;md&#45;3&#32;card&#45;image&#34;&gt;</span>
               <span class="code-open-tag">&lt;img&#32;src&#61;&#34;<span id="code-tl-card-${i}-img-src">https:\/\/placekitten.com\/200\/300</span>&#34;&gt;</span>
@@ -902,7 +901,7 @@ function createTimelineCard(i) {
         <span class="code-close-tag">&lt;&#47;div&gt;</span>
       <span class="code-close-tag">&lt;&#47;div&gt;</span>
     <span class="code-close-tag">&lt;&#47;div&gt;</span>
-  <span class="code-close-tag">&lt;&#47;div&gt;</span></span>`;
+  <span class="code-close-tag">&lt;&#47;div&gt;</span>${ i == j ? "" : "\n" }</span>`;
 }
 
 // create single timeline editor card, shows first card and collapses all others

@@ -66,7 +66,7 @@
             <button class="btn btn-outline-primary" id="copy-tl-code" type="submit">Copy Code</button>
           </div>
           <div class="code-box">
-<pre class="code-text"><span id="tl-print-code"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;container&#32;py&#45;2&#34;<span id="code-tl-id"></span>&gt;</span><span id="code-tl-title">
+<pre class="code-text"><span id="tl-print-code"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;timeline&#45;container&#34;<span id="code-tl-id"></span>&gt;</span><span id="code-tl-title">
   &lt;h2&#32;class&#61;&#34;text&#45;center&#32;py&#45;3&#34;&gt;<span id="code-tl-title-text">Timeline title</span>&lt;&#47;h2&gt;</span>
   <span id="code-tl-cards"></span>
 <span class="code-close-tag">&lt;&#47;div&gt;</span></span></pre>
