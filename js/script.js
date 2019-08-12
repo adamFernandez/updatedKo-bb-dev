@@ -877,7 +877,7 @@ function createTimelineCard(i) {
         <span class="code-open-tag">&lt;div&#32;class&#61;&#34;col${ i == j ? "" : " border&#45;left" }&#34;&gt;</span>&#38;nbsp&#59;<span class="code-close-tag">&lt;&#47;div&gt;</span>
       <span class="code-close-tag">&lt;&#47;div&gt;</span>
     <span class="code-close-tag">&lt;&#47;div&gt;</span>
-    <span class="code-open-tag">&lt;div&#32;class&#61;&#34;col&#32;py&#45;4&#34;&gt;</span>
+    <span class="code-open-tag">&lt;div&#32;class&#61;&#34;col&#32;timeline&#45;content&#34;&gt;</span>
       <span class="code-open-tag">&lt;div&#32;class&#61;&#34;card&#32timeline-card&#34;&gt;</span><span id="code-tl-card-${i}-date">
         <span class="code-tl-card-date-open">&lt;span&#32;class&#61;&#34;date&#45;tab&#34;&gt;</span>
           <span id="code-tl-card-${i}-date-text">${ !date == "" ? date : dateString + " " + (i < 6 ? (i + 7) + ":00AM" : (i - 5) + ":00PM")}</span>
@@ -896,8 +896,8 @@ function createTimelineCard(i) {
               <span class="code-close-tag">&lt;&#47;p&gt;</span>
             <span class="code-close-tag">&lt;&#47;div&gt;</span>
           <span class="code-close-tag">&lt;&#47;div&gt;</span>
-          <span class="code-open-tag">&lt;p&#32;class&#61;&#34;text&#45;right&#32;mb&#45;0&#32;img&#45;reference&#34;&gt;</span><span id="code-tl-card-${i}-img-reference">Image: placekitten.com. An extremely adorable kitten</span>
-          <span class="code-close-tag">&lt;&#47;p&gt;</span>
+          <span id="code-tl-card-${i}-img-ref"><span class="code-open-tag">&lt;p&#32;class&#61;&#34;text&#45;right&#32;mb&#45;0&#32;img&#45;reference&#34;&gt;</span><span id="code-tl-card-${i}-img-reference">Image: placekitten.com. An extremely adorable kitten</span>
+          <span class="code-close-tag">&lt;&#47;p&gt;</span></span>
         <span class="code-close-tag">&lt;&#47;div&gt;</span>
       <span class="code-close-tag">&lt;&#47;div&gt;</span>
     <span class="code-close-tag">&lt;&#47;div&gt;</span>
@@ -1037,6 +1037,32 @@ function timelineToggleDate(timelineCardLimit) {
   $(".code-tl-card-date-open").text('<span class="date-tab">');
   $("#tl-" + i + "-date").val() !== "" ? $("#code-tl-card-" + i + "-date-text").text($("#tl-" + i + "-date").val()) : $("#code-tl-card-" + i + "-date-text").text(dateString + " " + (i < 6 ? (i + 7) + ":00AM" : (i - 5) + ":00PM"));
   $(".code-tl-card-date-close").text('</span>');
+  }
+};
+
+// toggle timeline image code
+timelineToggleImage(8);
+
+function timelineToggleImage(timelineCardLimit) {
+  for (let i = 1; i <= timelineCardLimit; i++) {
+    toggleCheckboxText("#tl-" + i + "-check-img", "#tl-" + 1 + "-toggle-img");
+    $(document).on("click", "#tl-" + i + "-check-img", function(event) {
+      $("#tl-" + i + "-check-img").toggleClass("unchecked").toggleClass("checked");
+      $("#tl-" + i + "-check-img").hasClass("checked")
+        ? ( $("#code-tl-card-" + i + "-img").html('<span class="code-tl-card-img-open"></span><span id="code-tl-card-' + i + '-img-src"></span><span class="code-tl-card-img-center"></span><span id="code-tl-card-' + i + '-img-alt"></span><span class="code-tl-card-img-close"></span>'),
+            $("#code-tl-card-" + i + "-img-ref").html('<span class="code-tl-card-img-ref-open"></span><span id="code-tl-card-' + i + '-img-ref-text"></span><span class="code-tl-card-img-ref-close"></span>') )
+        : ( $("#code-tl-card-" + i + "-img").text(""),
+            $("#code-tl-card-" + i + "-img-ref").text("") );
+      $(".code-tl-card-img-open").text('<div class="col-md-3 card-image"><img src="');
+      $("#code-tl-card-" + i + "-img-src").text( $("#tl-card-" + i + "-img-src").val() !== "" ? $("#tl-card-" + i + "-img-src").val() : "https://placekitten.com/200/300");
+      $(".code-tl-card-img-center").text('" alt="');
+      $("#code-tl-card-" + i + "-img-alt").text( $("#tl-card-" + i + "-img-alt").val() !== "" ? $("#tl-card-" + i + "-img-alt").val() : "An extremely adorable kitten");
+      $(".code-tl-card-img-close").text('"></div>');
+      $(".code-tl-card-img-ref-open").text('<p class="text-right img-reference">');
+      $("#code-tl-card-" + i + "-img-ref-text").text( $("#tl-card-" + i + "-img-ref").val() !== "" ? $("#tl-card-" + i + "-img-ref").val() : "Image: placekotten.com. An extremely adorable kitten");
+      $(".code-tl-card-img-ref-close").text('</p>');
+     preview("tl");
+    });
   }
 };
 
