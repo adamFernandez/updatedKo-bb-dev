@@ -8,8 +8,22 @@ main {
   max-width: 1200px;
   margin: 0 auto;
 }
+input[type="text"] {
+  height: auto;
+  width: 100%;
+}
 section {
-  margin: 1rem 0;
+  margin: 1rem 0 2rem 0;
+}
+.subsection {
+  margin-bottom: 3rem;
+}
+form {
+  margin-bottom: 1rem;
+}
+.form-group {
+  padding-right: unset;
+  padding-left: unset;
 }
 h2 {
   margin-top: 1rem;
@@ -78,6 +92,8 @@ textarea {
 }
 pre {
   margin: 0 !important;
+  background-color: unset;
+  border: unset;
 }
 /* code box styles */
 .code-header {
@@ -91,6 +107,7 @@ pre {
 .code-box {
   border: 1px solid rgba(0,0,0,.125);  
   font-size: 12px;
+  overflow: auto;
 }
 .code-text {
   max-height:25rem;
@@ -121,4 +138,15 @@ pre {
 }
 .alert-nope > :first-child {
   margin: 8px 4px 8px 50px;
+}
+#gridiconcontainer .gridicon_link .icon_content {
+  bottom: -310px !important;
+}
+.navtext.navtop, .navtext.navbottom {
+  text-align: right;
+}
+
+/* collapse */
+.collapse-container .collapse-card .collapse-body {
+  padding-right: unset;
 }
