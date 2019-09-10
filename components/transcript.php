@@ -39,6 +39,7 @@
                   Please enter the transcript link.
                 </div>
                 <small id="ts-link-help" class="form-text text-muted">The transcript must first be uploaded to Keats, where the generated link can be copied and pasted from.</small>
+              </div>
             </div>
             <div class="form-group">
               <label for="ts-body">Body</label>

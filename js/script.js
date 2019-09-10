@@ -1059,7 +1059,7 @@ function timelineToggleImage(timelineCardLimit) {
       $("#code-tl-card-" + i + "-img-alt").text( $("#tl-card-" + i + "-img-alt").val() !== "" ? $("#tl-card-" + i + "-img-alt").val() : "An extremely adorable kitten");
       $(".code-tl-card-img-close").text('"></div>');
       $(".code-tl-card-img-ref-open").text('<p class="text-right img-reference">');
-      $("#code-tl-card-" + i + "-img-ref-text").text( $("#tl-card-" + i + "-img-ref").val() !== "" ? $("#tl-card-" + i + "-img-ref").val() : "Image: placekotten.com. An extremely adorable kitten");
+      $("#code-tl-card-" + i + "-img-ref-text").text( $("#tl-card-" + i + "-img-ref").val() !== "" ? $("#tl-card-" + i + "-img-ref").val() : "Image: placekitten.com. An extremely adorable kitten");
       $(".code-tl-card-img-ref-close").text('</p>');
      preview("tl");
     });

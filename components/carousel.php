@@ -47,7 +47,7 @@
               <label class="custom-control-label" for="crsl-check-title"><span id="crsl-toggle-title">Add</span> caption title</label>
             </div>
           </form>
-          <div id="carousel-slides">
+          <div class="collapse-container" id="carousel-slides">
           </div>
         </section>
       </div>
@@ -62,7 +62,7 @@
             <button class="btn btn-outline-primary" id="copy-crsl-code">Copy Code</button>
           </div>
           <div class="code-box">
-<pre class="code-text"><span id="crsl-print-code"><span class="code-open-tag">&lt;div&#32;id&#61;&#34;<span class="code-crsl-id">modname&#45;unitno&#45;carousel&#45;no</span>&#34;&#32;class&#61;&#34;carousel&#32;slide<span id="code-crsl-text-only"></span>&#34;&#32;data&#45;interval&#61;&#34;false&#34;&#32;data&#45;wrap&#61;&#34;false&#34;&gt;</span>
+<pre class="code-text"><span id="crsl-print-code"><span class="code-open-tag">&lt;div&#32;id&#61;&#34;<span class="code-crsl-id">modname&#45;unitno&#45;carousel&#45;no</span>&#34;&#32;class&#61;&#34;carousel&#32;slide&#32;start<span id="code-crsl-text-only"></span>&#34;&#32;data&#45;interval&#61;&#34;false&#34;&#32;data&#45;wrap&#61;&#34;false&#34;&gt;</span>
   <span class="code-open-tag">&lt;ol&#32;class&#61;&#34;carousel&#45;indicators&#34;></span><span id="code-crsl-indicators"></span>
   <span class="code-close-tag">&lt;&#47;ol&gt;</span>
   <span class="code-open-tag">&lt;div&#32;class&#61;&#34;carousel&#45;inner&#34;></span>

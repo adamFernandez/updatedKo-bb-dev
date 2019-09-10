@@ -3,6 +3,9 @@
     <h2 class="component-title">Table</h2>
   </div>
   <div class="component-body container">
+    <div class="alert alert-instructional mt-3" role="alert">
+      <p>Please note that it is not yet possible to edit content within the Builder for this component. Copy and paste the code into Keats in order to add content.</p>
+    </div>
     <div class="row">
       <div class="options container col-md-4">
         <section class="options">
@@ -51,8 +54,8 @@
                     <label class="input-group-text" for="tab-width">Width</label>
                   </div>
                   <select class="custom-select" id="tab-width">
-                    <option value="default">default</option>
                     <option value="full-width" selected>full-width</option>
+                    <option value="default">default</option>
                   </select>
                 </div>
               </div>
