@@ -59,7 +59,7 @@ This is the second paragraph." rows="6"></textarea>
         <section class="component-code">
           <div class="code-header">
             <h3 class="code-title">Code</h3>
-            <button class="btn btn-outline-primary" id="copy-ts-code">Copy Code</button>
+            <button class="btn btn-secondary" id="copy-ts-code">Copy Code</button>
           </div>
           <div class="code-box">
             <pre class="code-text">

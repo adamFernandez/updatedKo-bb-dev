@@ -59,7 +59,7 @@
         <section class="component-code">
           <div class="code-header">
             <h3 class="code-title">Code</h3>
-            <button class="btn btn-outline-primary" id="copy-crsl-code">Copy Code</button>
+            <button class="btn btn-secondary" id="copy-crsl-code">Copy Code</button>
           </div>
           <div class="code-box">
 <pre class="code-text"><span id="crsl-print-code"><span class="code-open-tag">&lt;div&#32;id&#61;&#34;<span class="code-crsl-id">modname&#45;unitno&#45;carousel&#45;no</span>&#34;&#32;class&#61;&#34;carousel&#32;slide&#32;start<span id="code-crsl-text-only"></span>&#34;&#32;data&#45;interval&#61;&#34;false&#34;&#32;data&#45;wrap&#61;&#34;false&#34;&gt;</span>

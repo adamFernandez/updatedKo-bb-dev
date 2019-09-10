@@ -62,7 +62,7 @@
         <section class="component-code">
           <div class="code-header">
             <h3 class="code-title">Code</h3>
-            <button class="btn btn-outline-primary" id="copy-em-code">Copy Code</button>
+            <button class="btn btn-secondary" id="copy-em-code">Copy Code</button>
           </div>
           <div class="code-box">
             <pre class="code-text"><span id="em-print-code"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;embed&#45;responsive&#32;embed&#45;responsive&#45;<span id="code-em-player-size">400by285</span>&#34;&gt;</span>

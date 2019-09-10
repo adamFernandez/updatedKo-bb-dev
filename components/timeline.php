@@ -63,7 +63,7 @@
         <section class="component-code">
           <div class="code-header">
             <h3 class="code-title">Code</h3>
-            <button class="btn btn-outline-primary" id="copy-tl-code" type="submit">Copy Code</button>
+            <button class="btn btn-secondary" id="copy-tl-code" type="submit">Copy Code</button>
           </div>
           <div class="code-box">
 <pre class="code-text"><span id="tl-print-code"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;timeline&#45;container&#34;<span id="code-tl-id"></span>&gt;</span><span id="code-tl-title">

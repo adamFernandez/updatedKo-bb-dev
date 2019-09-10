@@ -58,7 +58,7 @@
         <section class="component-code">
           <div class="code-header">
             <h3 class="code-title">Code</h3>
-            <button class="btn btn-outline-primary" id="copy-ls-code">Copy Code</button>
+            <button class="btn btn-secondary" id="copy-ls-code">Copy Code</button>
           </div>
           <div class="code-box">
 <pre class="code-text"><span id="ls-print-code"><span class="code-open-tag">&lt;<span class="code-ls-tag">ul</span><span id="code-ls-custom-class"></span>&gt;</span><span id="code-ls-items"></span>

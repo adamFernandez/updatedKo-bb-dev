@@ -52,7 +52,7 @@
         <section class="component-code">
           <div class="code-header">
             <h3 class="code-title">Code</h3>
-            <button class="btn btn-outline-primary" id="copy-col-code" type="submit">Copy Code</button>
+            <button class="btn btn-secondary" id="copy-col-code" type="submit">Copy Code</button>
           </div>
           <div class="code-box">
 <pre class="code-text"><span id="col-print-code"><span class="code-open-tag">&lt;div&#32;id&#61;&#34;<span class="code-col-id">modname&#45;unitno&#45;collapse&#45;no</span>&#34;&gt;</span>
