@@ -1081,7 +1081,6 @@ function updateTimelineText(timelineCardLimit) {
  * transcript                     *
  **********************************/
 
-updateText("ts", "#ts-title", "#code-ts-title", "Transcript title");
 updateText("ts", "#ts-id", ".code-ts-id", "modname-unitno-transcript");
 updateText("ts", "#ts-link", "#code-ts-link", "#");
 updateText("ts", "#ts-body", "#code-ts-body", "Transcript body...");
