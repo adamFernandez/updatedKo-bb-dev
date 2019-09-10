@@ -189,37 +189,33 @@ function createCard(i) {
 // create single card editor card, shows first card and collapses all others
 function createCardEditorCard(i) {
   return `
-    <div class="card cd-card" id="cd-card-${i}">
-      <div class="card-header p-0" id="cd-card-heading-${i}">
-        <button class="btn btn-link btn-block text-left px-3 ${ i == 1 ? "" : "collapsed" }" data-toggle="collapse" data-target="#cd-collapse-${i}" aria-expanded="true" aria-controls="collapse-${i}">
-          <h5 style="margin-bottom:0 !important">Card #${i}</h5>
-        </button>
+    <div class="collapse-card cd-card ${ i == 1 ? "" : "collapsed" }" id="cd-card-${i}">
+      <div class="collapse-header" id="cd-card-heading-${i}">
+        <button class="btn btn-link"><h5 class="h4">Card #${i}</h5></button>
       </div>
-      <div id="cd-collapse-${i}" class="${ i == 1 ? "collapse show" : "collapse" }" aria-labelledby="cd-card-heading-${i}" data-parent="#cards">
-        <div class="card-body">
-          <form>
-            <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input checked" id="cd-${i}-check-header" checked>
-              <label class="custom-control-label" for="cd-${i}-check-header"><span id="cd-${i}-toggle-header">Remove</span> header</label>
-            </div>
-            <div class="custom-control custom-checkbox mb-3">
-              <input type="checkbox" class="custom-control-input checked" id="cd-${i}-check-title" checked>
-              <label class="custom-control-label" for="cd-${i}-check-title"><span id="cd-${i}-toggle-title">Remove</span> title</label>
-            </div>
-            <div class="form-group" id="cd-${i}-header-form">
-              <label for="cd-${i}-header">Header text</label>
-              <input type="text" class="form-control" id="cd-${i}-header" placeholder="Card #${i} header">
-            </div>
-            <div class="form-group" id="cd-${i}-title-form">
-              <label for="cd-${i}-title">Title</label>
-              <input type="text" class="form-control" id="cd-${i}-title" placeholder="Card #${i} title">
-            </div>
-            <div class="form-group">
-              <label for="cd-${i}-text">Body text</label>
-              <textarea class="form-control" id="cd-${i}-text" placeholder="Card #${i} text" rows="6"></textarea>
-            </div>
-          </form>
-        </div>
+      <div class="collapse-body" id="cd-collapse-${i}">
+        <form>
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input checked" id="cd-${i}-check-header" checked>
+            <label class="custom-control-label" for="cd-${i}-check-header"><span id="cd-${i}-toggle-header">Remove</span> header</label>
+          </div>
+          <div class="custom-control custom-checkbox mb-3">
+            <input type="checkbox" class="custom-control-input checked" id="cd-${i}-check-title" checked>
+            <label class="custom-control-label" for="cd-${i}-check-title"><span id="cd-${i}-toggle-title">Remove</span> title</label>
+          </div>
+          <div class="form-group" id="cd-${i}-header-form">
+            <label for="cd-${i}-header">Header text</label>
+            <input type="text" class="form-control" id="cd-${i}-header" placeholder="Card #${i} header">
+          </div>
+          <div class="form-group" id="cd-${i}-title-form">
+            <label for="cd-${i}-title">Title</label>
+            <input type="text" class="form-control" id="cd-${i}-title" placeholder="Card #${i} title">
+          </div>
+          <div class="form-group">
+            <label for="cd-${i}-text">Body text</label>
+            <textarea class="form-control" id="cd-${i}-text" placeholder="Card #${i} text" rows="6"></textarea>
+          </div>
+        </form>
       </div>
     </div>
   `;
@@ -332,37 +328,33 @@ function createCarouselSlide(i) {
 // create single collapse editor card, shows first card and collapses all others
 function createCarouselEditorCard(i) {
   return `
-    <div class="card crsl-card" id="crsl-card-${i}">
-      <div class="card-header p-0" id="crsl-card-heading-${i}">
-        <button class="btn btn-link btn-block text-left px-3 ${ i == 1 ? "" : "collapsed" }" data-toggle="collapse" data-target="#collapse-${i}" aria-expanded="true" aria-controls="collapse-${i}">
-          <h5 style="margin-bottom:0 !important">Slide #${i}</h5>
-        </button>
+    <div class="collapse-card crsl-card ${ i == 1 ? "" : "collapsed" }" id="crsl-card-${i}">
+      <div class="collapse-header" id="crsl-card-heading-${i}">
+        <button class="btn btn-link"><h5 class="h4">Slide #${i}</h5></button>
       </div>
-      <div id="collapse-${i}" class="${ i == 1 ? "collapse show" : "collapse" }" aria-labelledby="col-card-heading-${i}" data-parent="#carousel-slides">
-        <div class="card-body">
-          <form class="needs-validation crsl-slide-form">
-            <div class="form-group crsl-slide-img-form">
-              <label for="crsl-slide-${i}-img-src">Image source</label>
-              <input type="text" class="form-control" id="crsl-slide-${i}-img-src" placeholder="https://moodle.iddkingsonline.com/file.php/123/images/image.jpg">
-              <small id="crsl-img-src-help" class="form-text text-muted">Select an image with 2:1 ratio (i.e 800 x 400px). The image must first be uploaded to Keats, where the generated link can be copied and pasted from.</small>
+      <div class="collapse-body" id="collapse-${i}">
+        <form class="needs-validation crsl-slide-form">
+          <div class="form-group crsl-slide-img-form">
+            <label for="crsl-slide-${i}-img-src">Image source</label>
+            <input type="text" class="form-control" id="crsl-slide-${i}-img-src" placeholder="https://moodle.iddkingsonline.com/file.php/123/images/image.jpg">
+            <small id="crsl-img-src-help" class="form-text text-muted">Select an image with 2:1 ratio (i.e 800 x 400px). The image must first be uploaded to Keats, where the generated link can be copied and pasted from.</small>
+          </div>
+          <div class="form-group crsl-slide-img-form">
+            <label for="crsl-slide-${i}-img-alt">Alternative text*</label>
+            <textarea class="form-control" id="crsl-slide-${i}-img-alt" placeholder="Description of image" rows="2" required></textarea>
+            <div class="invalid-feedback crsl-img-invalid-feedback">
+              Please provde alternative text for the image.
             </div>
-            <div class="form-group crsl-slide-img-form">
-              <label for="crsl-slide-${i}-img-alt">Alternative text*</label>
-              <textarea class="form-control" id="crsl-slide-${i}-img-alt" placeholder="Description of image" rows="2" required></textarea>
-              <div class="invalid-feedback crsl-img-invalid-feedback">
-                Please provde alternative text for the image.
-              </div>
-            </div>
-            <div class="form-group crsl-slide-title-form" style="display:none">
-              <label for="crsl-slide-${i}-title">Caption title</label>
-              <input type="text" class="form-control" id="crsl-slide-${i}-title-text" placeholder="Carousel slide #${i} title" maxlength="65">
-            </div>
-            <div class="form-group">
-              <label for="crsl-slide-${i}-text">Caption text</label>
-              <textarea class="form-control" id="crsl-slide-${i}-text" placeholder="Carousel slide #${i} text" rows="4" maxlength="215"></textarea>
-            </div>
-          </form>
-        </div>
+          </div>
+          <div class="form-group crsl-slide-title-form" style="display:none">
+            <label for="crsl-slide-${i}-title">Caption title</label>
+            <input type="text" class="form-control" id="crsl-slide-${i}-title-text" placeholder="Carousel slide #${i} title" maxlength="65">
+          </div>
+          <div class="form-group">
+            <label for="crsl-slide-${i}-text">Caption text</label>
+            <textarea class="form-control" id="crsl-slide-${i}-text" placeholder="Carousel slide #${i} text" rows="4" maxlength="215"></textarea>
+          </div>
+        </form>
       </div>
     </div>
   `;
@@ -405,9 +397,9 @@ function carouselToggleTitle(carouselSlideLimit) {
   $("#crsl-check-title").hasClass("checked")
     ? $("#code-crsl-slide-" + i + "-title").html('\n      <span class="code-crsl-slide-title-open"></span>\n        <span id="code-crsl-slide-' + i + '-title-text"></span>\n      <span class="code-crsl-slide-title-close"></span>')
     : $("#code-crsl-slide-" + i + "-title").text("");
-  $(".code-crsl-slide-title-open").text('<h5>');
+  $(".code-crsl-slide-title-open").text('<h2>');
   $("#crsl-slide-" + i + "-title-text").val() !== "" ? $("#code-crsl-slide-" + i + "-title-text").text($("#crsl-slide-" + i + "-title-text").val()) : $("#code-crsl-slide-" + i + "-title-text").text("Carousel slide #" + i + " title");
-  $(".code-crsl-slide-title-close").text('</h5>');
+  $(".code-crsl-slide-title-close").text('</h2>');
   preview("crsl");
   }
 };
@@ -473,18 +465,14 @@ function initialCollapseCards(maxCollapseCards) {
 
 // create single collapse card code, shows first card and collapses all others
 function createCollapseCard(i) {
-  return `<span id="code-col-card-${i}"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;card&#34;&gt;</span>
-    <span class="code-open-tag">&lt;div&#32;class&#61;&#34;card&#45;header&#32;p&#45;0&#34;&#32;id&#61;&#34;<span class="code-col-id">modname&#45;unitno&#45;collapse&#45;no</span>&#45;heading&#45;<span class="code-col-card-no">${i}</span>&#34;&gt;</span>
-      <span class="code-open-tag">&lt;button&#32;class&#61;&#34;btn&#32;btn&#45;link&#32;collapsed&#32;btn&#45;block&#32;text&#45;left&#32;px&#45;3${ i == 1 ? "" : "collapsed" }&#34;&#32;data&#45;toggle&#61;&#34;collapse&#34;&#32;data&#45;target&#61;&#34;#<span class="code-col-id">modname&#45;unitno&#45;collapse&#45;no</span>&#45;collapse&#45;${i}&#34;&#32;aria&#45;expanded&#61;&#34;false&#34;&#32;aria&#45;controls&#61;&#34;<span class="code-col-id">modname&#45;unitno&#45;collapse&#45;no</span>&#45;collapse&#45;${i}&#34;&gt;</span>
-        <span class="code-open-tag">&lt;h5&gt;</span>
-          <span id="code-col-collapse-${i}-heading">Collapse card #${i} heading</span>
-        <span class="code-close-tag">&lt;&#47;h5&gt;</span>
+  return `<span id="code-col-card-${i}"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;collapse&#45;card&#34;&gt;</span>
+    <span class="code-open-tag">&lt;div&#32;class&#61;&#34;collapse&#45;header&#34;&gt;</span>
+      <span class="code-open-tag">&lt;button&#32;class&#61;&#34;btn&#32;btn&#45;link&#34;&gt;</span>
+        <span class="code-open-tag">&lt;h5&#32;class&#61;&#34;h4&#34;&gt;</span><span id="code-col-collapse-${i}-heading">Collapse card #${i} heading</span><span class="code-close-tag">&lt;&#47;h5&gt;</span>
       <span class="code-close-tag">&lt;&#47;button&gt;</span>
     <span class="code-close-tag">&lt;&#47;div&gt;</span>
-    <span class="code-open-tag">&lt;div&#32;class&#61;&#34;${ i == 1 ? "collapse show" : "collapse" }&#34;&#32;id&#61;&#34;<span class="code-col-id">modname&#45;unitno&#45;collapse&#45;no</span>&#45;collapse&#45;${i}&#34;&#32;aria&#45;labelledby&#61;&#34;<span class="code-col-id">modname&#45;unitno&#45;collapse&#45;no</span>&#45;heading&#45;${i}&#34;&#32;data&#45;parent&#61;&#34;#<span class="code-col-id">modname&#45;unitno&#45;collapse&#45;no</span>&#34;&gt;</span>
-      <span class="code-open-tag">&lt;div&#32;class&#61;&#34;card&#45;body&#34;&gt;</span>
-        <span id="code-col-collapse-${i}-body">Collapse card #${i} body</span>
-      <span class="code-close-tag">&lt;&#47;div&gt;</span>
+    <span class="code-open-tag">&lt;div&#32;class&#61;&#34;collapse&#45;body&#34;&gt;</span>
+      <span id="code-col-collapse-${i}-body">Collapse card #${i} body</span>
     <span class="code-close-tag">&lt;&#47;div&gt;</span>
   <span class="code-close-tag">&lt;&#47;div&gt;</span></span>`;
 }
@@ -492,25 +480,21 @@ function createCollapseCard(i) {
 // create single collapse editor card, shows first card and collapses all others
 function createCollapseEditorCard(i) {
   return `
-    <div class="card col-card" id="col-card-${i}">
-      <div class="card-header p-0" id="col-card-heading-${i}">
-        <button class="btn btn-link btn-block text-left px-3 ${ i == 1 ? "" : "collapsed" }" data-toggle="collapse" data-target="#collapse-${i}" aria-expanded="true" aria-controls="collapse-${i}">
-          <h5 style="margin-bottom:0 !important">Card #${i}</h5>
-        </button>
+    <div class="collapse-card ${ i == 1 ? "" : "collapsed" }" id="col-card-${i}">
+      <div class="collapse-header" id="col-card-heading-${i}">
+        <button class="btn btn-link"><h5 class="h4">Card #${i}</h5></button>
       </div>
-      <div id="collapse-${i}" class="${ i == 1 ? "collapse show" : "collapse" }" aria-labelledby="col-card-heading-${i}" data-parent="#collapse-cards">
-        <div class="card-body">
-          <form>
-            <div class="form-group">
-              <label for="collapse-${i}-heading">Heading</label>
-              <input type="text" class="form-control" id="collapse-${i}-heading" placeholder="Collapse card #${i} heading">
-            </div>
-            <div class="form-group">
-              <label for="collapse-${i}-body">Body</label>
-              <textarea class="form-control" id="collapse-${i}-body" placeholder="Collapse card #${i} body" rows="6"></textarea>
-            </div>
-          </form>
-        </div>
+      <div class="collapse-body" id="collapse-${i}">
+        <form>
+          <div class="form-group">
+            <label for="collapse-${i}-heading">Heading</label>
+            <input type="text" class="form-control" id="collapse-${i}-heading" placeholder="Collapse card #${i} heading">
+          </div>
+          <div class="form-group">
+            <label for="collapse-${i}-body">Body</label>
+            <textarea class="form-control" id="collapse-${i}-body" placeholder="Collapse card #${i} body" rows="6"></textarea>
+          </div>
+        </form>
       </div>
     </div>
   `;
@@ -518,8 +502,6 @@ function createCollapseEditorCard(i) {
 
 // generate card text from input
 updateCollapseText(8);
-
-updateText("col", "#col-id", ".code-col-id", "modname-unitno-collapse-no");
 
 function updateCollapseText(collapseCardLimit) {
   for (let i = 1; i <= collapseCardLimit; i++) {
@@ -1089,6 +1071,9 @@ function updateTimelineText(timelineCardLimit) {
     updateText("tl", "#tl-" + i + "-title", "#code-tl-card-" + i + "-title", "Card #" + i + " title");
     updateText("tl", "#tl-" + i + "-date", "#code-tl-card-" + i + "-date-text", dateString + ( i < 6 ? " 0" + (i+7) + ":00AM" : " " + (i+7) + ":00PM" ));
     updateText("tl", "#tl-" + i + "-text", "#code-tl-card-" + i + "-text", "Card #" + i + " text");
+    updateText("tl", "#tl-card-" + i + "-img-src", "#code-tl-card-" + i + "-img-src", "https://placekitten.com/200/300");
+    updateText("tl", "#tl-card-" + i + "-img-alt", "#code-tl-card-" + i + "-img-alt", "An extremely adorable kitten" );
+    updateText("tl", "#tl-card-" + i + "-img-ref", "#code-tl-card-" + i + "-img-ref-text", "Foo");
   }
 }
 
