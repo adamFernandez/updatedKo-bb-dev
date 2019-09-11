@@ -1,16 +1,27 @@
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'KingsBureauGrot'
+  font-family: 'KingsBureauGrot';
 }
 body, select, option {
-  font-family: 'KingsBureauGrotFiveOne'
+  font-family: 'KingsBureauGrotFiveOne';
 }
 main {
   max-width: 1200px;
   margin: 0 auto;
+  position: relative;
+  margin-top: 2rem;
+}
+.nav-tabs {
+  border-bottom: 1px solid #0B5584;
+}
+.nav-tabs > li > a {
+  color: #0B5584;
 }
 input[type="text"] {
   height: auto;
   width: 100%;
+}
+textarea {
+  font-family: Open Sans, sans-serif;
 }
 section {
   margin: 1rem 0 2rem 0;
