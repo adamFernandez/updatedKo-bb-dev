@@ -36,22 +36,12 @@
                 <small id="tl-id-help" class="form-text text-muted">Optional ID to assist with identification and custom styling.</small>
               </div>
             </div>
-            <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input checked" id="tl-check-title" checked>
-              <label class="custom-control-label" for="tl-check-title"><span id="tl-toggle-title">Remove</span> timeline title</label>
-            </div>
             <div class="custom-control custom-checkbox mb-3">
               <input type="checkbox" class="custom-control-input checked" id="tl-check-date" checked>
               <label class="custom-control-label" for="tl-check-date"><span id="tl-toggle-date">Remove</span> dates</label>
             </div>
-            <div class="input-group mb-3" id="tl-title-form">
-              <div class="input-group-prepend">
-                <label class="input-group-text" for="tl-title">Title</label>
-              </div>
-              <input type="text" class="form-control" id="tl-title" aria-label="tl-title" placeholder="Timeline title" aria-describedby="timeline-title">
-            </div>
           </form>
-          <div id="tl-cards">
+          <div class="collapse-container" id="tl-cards">
           </div>
         </section>
       </div>
@@ -66,8 +56,7 @@
             <button class="btn btn-secondary" id="copy-tl-code" type="submit">Copy Code</button>
           </div>
           <div class="code-box">
-<pre class="code-text"><span id="tl-print-code"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;timeline&#45;container&#34;<span id="code-tl-id"></span>&gt;</span><span id="code-tl-title">
-  &lt;h2&#32;class&#61;&#34;text&#45;center&#32;py&#45;3&#34;&gt;<span id="code-tl-title-text">Timeline title</span>&lt;&#47;h2&gt;</span>
+<pre class="code-text"><span id="tl-print-code"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;timeline&#45;container&#34;<span id="code-tl-id"></span>&gt;</span>
   <span id="code-tl-cards"></span>
 <span class="code-close-tag">&lt;&#47;div&gt;</span></span></pre>
           </div>

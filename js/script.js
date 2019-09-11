@@ -889,64 +889,60 @@ function createTimelineCard(i) {
 // create single timeline editor card, shows first card and collapses all others
 function createTimelineEditorCard(i) {
   return `
-    <div class="card tl-card" id="tl-card-${i}">
-      <div class="card-header p-0" id="tl-card-heading-${i}">
-        <button class="btn btn-link btn-block text-left px-3 ${ i == 1 ? "" : "collapsed" }" data-toggle="collapse" data-target="#tl-collapse-${i}" aria-expanded="true" aria-controls="collapse-${i}">
-          <h5 style="margin-bottom:0 !important">Timeline card #${i}</h5>
-        </button>
+    <div class="collapse-card tl-card ${ i == 1 ? "" : "collapsed" }" id="tl-card-${i}">
+      <div class="collapse-header" id="tl-card-heading-${i}">
+        <button class="btn btn-link"><h5 class="h4">Timeline card #${i}</h5></button>
       </div>
-      <div id="tl-collapse-${i}" class="${ i == 1 ? "collapse show" : "collapse" }" aria-labelledby="tl-card-heading-${i}" data-parent="#cards">
-        <div class="card-body">
-          <form class="needs-validation tl-card-form">
-            <div class="input-group mb-3">
+      <div class="collapse-body" id="tl-collapse-${i}">
+        <form class="needs-validation tl-card-form">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="tl-card-${i}-color">Card color</label>
+            </div>
+            <select class="custom-select" id="tl-card-${i}-color">
+              <option value="default" selected>Default</option>
+              <option value="highlighted">Highlighted</option>
+            </select>
+          </div>
+          <div class="custom-control custom-checkbox mb-3">
+            <input type="checkbox" class="custom-control-input checked" id="tl-${i}-check-img" checked>
+            <label class="custom-control-label" for="tl-${i}-check-img"><span id="tl-${i}-toggle-img">Remove</span> image</label>
+          </div>
+          <div class="form-group">
+            <div class="input-group">
               <div class="input-group-prepend">
-                <label class="input-group-text" for="tl-card-${i}-color">Card color</label>
+                <label class="input-group-text" for="tl-card-${i}-img-src">Image source*</label>
               </div>
-              <select class="custom-select" id="tl-card-${i}-color">
-                <option value="default" selected>Default</option>
-                <option value="highlighted">Highlighted</option>
-              </select>
+              <input type="text" class="form-control" id="tl-card-${i}-img-src" placeholder="https://moodle.iddkingsonline.com/file.php/123/images/image.jpg">
             </div>
-            <div class="custom-control custom-checkbox mb-3">
-              <input type="checkbox" class="custom-control-input checked" id="tl-${i}-check-img" checked>
-              <label class="custom-control-label" for="tl-${i}-check-img"><span id="tl-${i}-toggle-img">Remove</span> image</label>
+            <small id="tl-img-src-help" class="form-text text-muted">The image must first be uploaded to Keats, where the generated link can be copied and pasted from.</small>
+            <div class="invalid-feedback tl-img-invalid-feedback">
+              Please provde a source for the image.
             </div>
-            <div class="form-group">
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <label class="input-group-text" for="tl-card-${i}-img-src">Image source*</label>
-                </div>
-                <input type="text" class="form-control" id="tl-card-${i}-img-src" placeholder="https://moodle.iddkingsonline.com/file.php/123/images/image.jpg">
-              </div>
-              <small id="tl-img-src-help" class="form-text text-muted">The image must first be uploaded to Keats, where the generated link can be copied and pasted from.</small>
-              <div class="invalid-feedback tl-img-invalid-feedback">
-                Please provde a source for the image.
-              </div>
-              <label for="tl-card-${i}-img-alt">Alternative text*</label>
-              <textarea class="form-control" id="tl-card-${i}-img-alt" placeholder="Description of image" rows="2" required></textarea>
-              <div class="invalid-feedback tl-img-invalid-feedback">
-                Please provde alternative text for the image.
-              </div>
-              <label for="tl-card-${i}-img-red">Image reference*</label>
-              <textarea class="form-control" id="tl-card-${i}-img-ref" placeholder="www.placekitten.com" rows="2" required></textarea>
-              <div class="invalid-feedback tl-img-invalid-feedback">
-                Please provde a reference for the image.
-              </div>
+            <label for="tl-card-${i}-img-alt">Alternative text*</label>
+            <textarea class="form-control" id="tl-card-${i}-img-alt" placeholder="Description of image" rows="2" required></textarea>
+            <div class="invalid-feedback tl-img-invalid-feedback">
+              Please provde alternative text for the image.
             </div>
-            <div class="form-group tl-title" id="tl-${i}-date-form">
-              <label for="tl-${i}-title">Card title</label>
-              <input type="text" class="form-control" id="tl-${i}-title" placeholder="Card #${i} title">
+            <label for="tl-card-${i}-img-red">Image reference*</label>
+            <textarea class="form-control" id="tl-card-${i}-img-ref" placeholder="www.placekitten.com" rows="2" required></textarea>
+            <div class="invalid-feedback tl-img-invalid-feedback">
+              Please provde a reference for the image.
             </div>
-            <div class="form-group tl-date" id="tl-${i}-date-form">
-              <label for="tl-${i}-date">Date</label>
-              <input type="text" class="form-control" id="tl-${i}-date" placeholder="${dateString} ${ i < 6 ? i + 7 : i - 5 }:00 ${ i < 6 ? "AM" : "PM" }">
-            </div>
-            <div class="form-group">
-              <label for="tl-${i}-text">Text</label>
-              <textarea class="form-control" id="tl-${i}-text" placeholder="Card #${i} text" rows="6"></textarea>
-            </div>
-          </form>
-        </div>
+          </div>
+          <div class="form-group tl-title" id="tl-${i}-date-form">
+            <label for="tl-${i}-title">Card title</label>
+            <input type="text" class="form-control" id="tl-${i}-title" placeholder="Card #${i} title">
+          </div>
+          <div class="form-group tl-date" id="tl-${i}-date-form">
+            <label for="tl-${i}-date">Date</label>
+            <input type="text" class="form-control" id="tl-${i}-date" placeholder="${dateString} ${ i < 6 ? i + 7 : i - 5 }:00 ${ i < 6 ? "AM" : "PM" }">
+          </div>
+          <div class="form-group">
+            <label for="tl-${i}-text">Text</label>
+            <textarea class="form-control" id="tl-${i}-text" placeholder="Card #${i} text" rows="6"></textarea>
+          </div>
+        </form>
       </div>
     </div>
   `;
@@ -969,7 +965,7 @@ function timelineToggleLayout(timelineCardLimit) {
 */
 
 // toggle timeline title code
-toggleCheckboxText("#tl-check-title", "#tl-toggle-title");
+/*toggleCheckboxText("#tl-check-title", "#tl-toggle-title");
 toggleCheckbox("tl", "#tl-check-title", "#tl-title-form");
 $(document).on('click', "#tl-check-title", function (event) {
   $("#tl-check-title").hasClass("checked")
@@ -981,7 +977,7 @@ $(document).on('click', "#tl-check-title", function (event) {
   preview("tl");
 });
 
-/*
+
 // toggle timeline header code
 toggleCheckboxText("#tl-check-header", "#tl-toggle-header");
 $(document).on("click", "#tl-check-header", function(event) {
@@ -1064,7 +1060,7 @@ function timelineChangeCardColor(timelineCardLimit) {
 // generate card text from input
 updateTimelineText(8);
 updateTextOrHide("tl", "#tl-id", "&#32;id&#61;&#34;", "#code-tl-id", "&#34;");
-updateText("tl", "#tl-title", "#code-tl-title-text", "Title");
+//updateText("tl", "#tl-title", "#code-tl-title-text", "Title");
 
 function updateTimelineText(timelineCardLimit) {
   for (let i = 1; i <= timelineCardLimit; i++) {
