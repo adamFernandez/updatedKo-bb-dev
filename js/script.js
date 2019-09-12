@@ -153,14 +153,12 @@ function initialCards(maxCards) {
 
 // create single card card code
 function createCard(i) {
-  return `<span id="code-cd-card-${i}"><pre>  <span class="code-open-tag">&lt;div&#32;class&#61;&#34;card&#32;mb&#45;3&#34;&gt;</span><span id="code-cd-${i}-header">
-    <span>&lt;div&#32;class&#61;&#34;card&#45;header&#34;&gt;</span>
-      <span id="code-cd-${i}-header-text">Card #${i} header</span>
-    <span>&lt;&#47;div&gt;</span></span>
+  return `<span id="code-cd-card-${i}"><pre>  <span class="code-open-tag">&lt;div&#32;class&#61;&#34;card&#34;&gt;</span><span id="code-cd-${i}-img">
+    <span id="code-cd-${i}-img-open">&lt;img&#32;class&#61;&#34;card&#45;img&#45;left&#34;&#32;src&#61;&#34;</span><span id="code-cd-${i}-img-src">http:\/\/placekitten.com\/300\/300</span><span id="code-cd-${i}-img-middle">&#34;&#32;alt&#61;&#34;</span><span id="code-cd-${i}-img-alt">A&#32;cute&#32;kitten</span>&#34;&gt;</span></span>
     <span class="code-open-tag">&lt;div&#32;class&#61;&#34;card&#45;body&#34;&gt;</span><span id="code-cd-${i}-title">
-      <span>&lt;h5&#32;class&#61;&#34;card&#45;title&#34;&gt;</span>
+      <span>&lt;h4&#32;class&#61;&#34;card&#45;title&#34;&gt;</span>
         <span id="code-cd-${i}-title-text">Card #${i} title</span>
-      <span>&lt;&#47;h5&gt;</span></span>
+      <span>&lt;&#47;h4&gt;</span></span>
       <span class="code-open-tag">&lt;p&#32;class&#61;&#34;card&#45;text&#34;&gt;</span>
         <span id="code-cd-${i}-text">Card #${i} text</span>
       <span class="code-close-tag">&lt;&#47;p&gt;</span>
@@ -178,16 +176,20 @@ function createCardEditorCard(i) {
       <div class="collapse-body" id="cd-collapse-${i}">
         <form>
           <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input checked" id="cd-${i}-check-header" checked>
-            <label class="custom-control-label" for="cd-${i}-check-header"><span id="cd-${i}-toggle-header">Remove</span> header</label>
+            <input type="checkbox" class="custom-control-input checked" id="cd-${i}-check-img" checked>
+            <label class="custom-control-label" for="cd-${i}-check-img"><span id="cd-${i}-toggle-img">Remove</span> image</label>
           </div>
           <div class="custom-control custom-checkbox mb-3">
             <input type="checkbox" class="custom-control-input checked" id="cd-${i}-check-title" checked>
             <label class="custom-control-label" for="cd-${i}-check-title"><span id="cd-${i}-toggle-title">Remove</span> title</label>
           </div>
-          <div class="form-group" id="cd-${i}-header-form">
-            <label for="cd-${i}-header">Header text</label>
-            <input type="text" class="form-control" id="cd-${i}-header" placeholder="Card #${i} header">
+          <div class="form-group cd-${i}-img-form" id="cd-${i}-img-src-form">
+            <label for="cd-${i}-header">Img src</label>
+            <input type="text" class="form-control" id="cd-${i}-img-src" placeholder="http://placekitten.com/300/300">
+          </div>
+          <div class="form-group cd-${i}-img-form" id="cd-${i}-img-alt-form">
+            <label for="cd-${i}-header">Img alt text</label>
+            <input type="text" class="form-control" id="cd-${i}-img-alt" placeholder="A cute kitten">
           </div>
           <div class="form-group" id="cd-${i}-title-form">
             <label for="cd-${i}-title">Title</label>
@@ -209,32 +211,35 @@ updateCards(4);
 function updateCards(cardCardLimit) {
   for (let i = 1; i <= cardCardLimit; i++) {
     // toggle optional input fields
-    toggleCheckboxText("#cd-" + i + "-check-header", "#cd-" + i + "-toggle-header");
+    toggleCheckboxText("#cd-" + i + "-check-img", "#cd-" + i + "-toggle-img");
     toggleCheckboxText("#cd-" + i + "-check-title", "#cd-" + i + "-toggle-title");
-    toggleCheckbox("cd", "#cd-" + i + "-check-header", "#cd-" + i + "-header-form");
+    toggleCheckbox("cd", "#cd-" + i + "-check-img", ".cd-" + i + "-img-form");
     toggleCheckbox("cd", "#cd-" + i + "-check-title", "#cd-" + i + "-title-form, #code-cd-" + i + "-title");
-    // toggle header code
-    $(document).on('click', "#cd-" + i + "-check-header", function (event) {
-      $("#cd-" + i + "-check-header").hasClass("checked")
-        ? $("#code-cd-" + i + "-header").html('\n    <span class="code-cd-header-open"></span>\n      <span id="code-cd-' + i + '-header-text"></span>\n    <span class="code-cd-header-close"></span>')
-        : $("#code-cd-" + i + "-header").text("");
-      $(".code-cd-header-open").text('<div class="card-header">');
-      $("#cd-" + i + "-header").val() !== "" ? $("#code-cd-" + i + "-header-text").text($("#cd-" + i + "-header").val()) : $("#code-cd-" + i + "-header-text").text("Card #" + i + " header");
-      $(".code-cd-header-close").text('</div>');
+    // toggle img code
+    $(document).on('click', "#cd-" + i + "-check-img", function (event) {
+      $("#cd-" + i + "-check-img").hasClass("checked")
+        ? $("#code-cd-" + i + "-img").html('\n    <span class="code-cd-img-open"></span><span id="code-cd-' + i + '-img-src"></span><span class="code-cd-img-alt"></span><span id="code-cd-' + i + '-img-alt"></span><span class="code-cd-img-close"></span>')
+        : $("#code-cd-" + i + "-img").text("");
+      $(".code-cd-img-open").text('<img class="card-img-left" src="');
+      $("#code-cd-" + i + "-img-src").text($("#cd-" + i + "-img-src").val() !== "" ? $("#cd-" + i + "-img-src").val() : "https:\/\/placekitten.com\/300\/300");
+      $(".code-cd-img-alt").text('" alt="');
+      $("#code-cd-" + i + "-img-alt").text($("#cd-" + i + "-img-alt").val() !== "" ? $("#cd-" + i + "-img-alt").val() : "A cute kitten");
+      $(".code-cd-img-close").text('">');
       preview("cd");
     });
     // toggle title code
     $(document).on('click', "#cd-" + i + "-check-title", function (event) {
       $("#cd-" + i + "-check-title").hasClass("checked")
-        ? $("#code-cd-" + i + "-title").html('\n    <span class="code-cd-title-open"></span>\n      <span id="code-cd-' + i + '-title-text"></span>\n    <span class="code-cd-title-close"></span>')
+        ? $("#code-cd-" + i + "-title").html('\n      <span class="code-cd-title-open"></span>\n        <span id="code-cd-' + i + '-title-text"></span>\n      <span class="code-cd-title-close"></span>')
         : $("#code-cd-" + i + "-title").text("");
-      $(".code-cd-title-open").text('<h5 class="card-title">');
+      $(".code-cd-title-open").text('<h4 class="card-title">');
       $("#cd-" + i + "-title").val() !== "" ? $("#code-cd-" + i + "-title-text").text($("#cd-" + i + "-title").val()) : $("#code-cd-" + i + "-title-text").text("Card #" + i + " title");
-      $(".code-cd-title-close").text('</h5>');
+      $(".code-cd-title-close").text('</h4>');
       preview("cd");
     });
     // update text
-    updateText("cd", "#cd-" + i + "-header", "#code-cd-" + i + "-header-text", "Card #" + i + " header");
+    updateText("cd", "#cd-" + i + "-img-src", "#code-cd-" + i + "-img-src", "https://placekitten.com/300/300");
+    updateText("cd", "#cd-" + i + "-img-alt", "#code-cd-" + i + "-img-alt", "A cute kitten");
     updateText("cd", "#cd-" + i + "-title", "#code-cd-" + i + "-title-text", "Card #" + i + " title");
     updateText("cd", "#cd-" + i + "-text", "#code-cd-" + i + "-text", "Card #" + i + " text");
   }
