@@ -2,7 +2,6 @@ today = new Date();
 dateString = today.toDateString();
 
 $(document).ready(function() {
-  updateAlertTitle();
   // set card to show 1 card by default
   maxCards = 1;
   initialCards(maxCards);
@@ -17,9 +16,11 @@ $(document).ready(function() {
   initialListItems(maxListItems);
   // default embed preview on load
   $("#em-preview-pane").html('<div class="embed-responsive embed-responsive-400by285"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2368101/sp/236810100/embedIframeJs/uiconf_id/42876062/partner_id/2368101?iframeembed=true&playerId=kaltura_player&entry_id=0_m83muzm5&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_fejlyov0&amp;flashvars[infoScreen.plugin]=false&amp;flashvars[titleLabel.plugin]=false&amp;flashvars[related.plugin]=false&amp;flashvars[closedCaptions.displayCaptions]=false&amp;flashvars[closedCaptions.layout]=below&amp;flashvars[IframeCustomPluginCss1]=https://git.iddkingsonline.com/kaltura/kaltura.css" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" frameborder="0" title="Kaltura Player"></iframe></div>');
-  // transcript preview
-//preview("tab");
+  // preview infobox
+  preview("ib");
+  //preview("tab");
   initialTable(3,3);
+  // transcript preview
   preview("ts");
 });
 
@@ -38,47 +39,28 @@ $(".nav-link").click(function() {
  **********************************/
 
 // change alert type
-$("#al-type").change(function() {
-  $("#code-al-type").text($(this).val());
-  $(this).val() == "feedback"
-  ? ($("#al-feedback-select").show(), $("#al-title-check-form").hide(), $("#code-al-feedback-type").text(" " + $("#al-feedback-type").val() + "-feedback"), updateAlertFeedbackTitle())
-  : ($("#al-feedback-select").hide(), $("#al-title-check-form").show(), $("#code-al-feedback-type").text(""), updateAlertTitle());
-  $(this).val() == "lo"
-  ? ($("#al-title-check-form").hide(), $("#code-al-title").text("<h5>Learning Outcomes</h5>"))
-  : $("#al-title-check-form").show();
-  preview("al");
+$("#ib-type").change(function() {
+  $("#code-ib-type").text($(this).val());
+  $(this).val() == "alert-instructional"
+  ? ($("#code-ib-alert-class").text("alert "), $("#code-ib-alert-role").text('" role="alert'), $("#code-ib-title-open, #code-ib-title-text, #code-ib-title-close").empty())
+  : ($("#code-ib-alert-class").empty(), $("#code-ib-alert-role").empty());
+  $(this).val() == "definition-box"
+  ? (
+    $("#ib-title-form").show(),
+    $("#code-ib-title-open").html("\n    &lt;h5&gt;"),
+    $("#code-ib-title-text").text((!$("#ib-df-title").val() == "") ? $("#ib-df-title").val() : "Definition title" ),
+    $("#code-ib-title-close").text("</h5>"))
+  : $("#ib-title-form").hide();
+  if ($(this).val() == "learning-outcome-box") (
+    $("#code-ib-title-open").html("\n    &lt;h5&gt;"),
+    $("#code-ib-title-text").text("Learning outcomes"),
+    $("#code-ib-title-close").text("</h5>"));
+  preview("ib");
 });
-
-// change feedback type
-$("#al-feedback-type").change(function() {
-  updateAlertFeedbackTitle();
-  preview("al");
-});
-
-function updateAlertFeedbackTitle() {
-  type = $("#al-feedback-type").val();
-  $("#code-al-feedback-type").text(" " + type + "-answer");
-  $("#code-al-title").text("<h5>" + ( type == "model" ? type.charAt(0).toUpperCase() + type.slice(1) + " answer" : "Your answer was " + type ) + "</h5>\n    ");
-}
-
-// toggle alert title
-toggleCheckboxText("#al-check-title", "#al-toggle-title");
-$("#al-check-title").click(function() {
-  $("#code-al-title").text( $(this).hasClass("unchecked") ? "<h5>" + (!$("#al-title").val() == "" ?  $("#al-title").val() : "Alert title" ) + "</h5>\n    "  : "" );
-});
-toggleCheckbox("al", "#al-check-title", ".al-title-form");
 
 // update alert text
-updateText("al", "#al-text", "#code-al-text", "This is an alert!");
-$(document).on('keyup', "#al-title", function (event) {
-  updateAlertTitle();
-}).keyup();
-
-function updateAlertTitle() {
-  title = $("#al-title").val();
-  $("#code-al-title").html("&lt;h5&gt;" + (!title == "" ? title : "Alert title") + "&lt;&#47;h5&gt;\n    ");
-  preview("al");
-}
+updateText("ib", "#ib-text", "#code-ib-text", "Info box body text");
+updateText("ib", "#ib-df-title", "#code-ib-title-text", "Foo");
 
 /**********************************
  * button                         *
@@ -1137,12 +1119,12 @@ function preview(component) {
   if (component == "btn") disablePreview();
 }
 
-copyCode("al");
 copyCode("btn");
 copyCode("cd");
 copyCode("crsl");
 copyCode("col");
 copyCode("em");
+copyCode("ib");
 copyCode("ls");
 copyCode("tab");
 copyCode("tl");
