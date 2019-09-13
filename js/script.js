@@ -18,6 +18,7 @@ $(document).ready(function() {
   $("#em-preview-pane").html('<div class="embed-responsive embed-responsive-400by285"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2368101/sp/236810100/embedIframeJs/uiconf_id/42876062/partner_id/2368101?iframeembed=true&playerId=kaltura_player&entry_id=0_m83muzm5&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_fejlyov0&amp;flashvars[infoScreen.plugin]=false&amp;flashvars[titleLabel.plugin]=false&amp;flashvars[related.plugin]=false&amp;flashvars[closedCaptions.displayCaptions]=false&amp;flashvars[closedCaptions.layout]=below&amp;flashvars[IframeCustomPluginCss1]=https://git.iddkingsonline.com/kaltura/kaltura.css" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" frameborder="0" title="Kaltura Player"></iframe></div>');
   // preview infobox
   preview("ib");
+  preview("quo");
   //preview("tab");
   initialTable(3,3);
   // transcript preview
@@ -653,6 +654,13 @@ function updateListItems(listItemLimit) {
 }
 
 /**********************************
+ * quotation                      *
+ **********************************/
+
+updateText("quo", "#quo-body", "#code-quo-body", "Quotation");
+updateText("quo", "#quo-att", "#code-quo-att", "Attribution, 2019");
+
+/**********************************
  * table                          *
  **********************************/
 
@@ -866,7 +874,7 @@ function createTimelineCard(i) {
                 <span id="code-tl-card-${i}-title">${ !title == "" ? title : "Card #" + i + " title"}</span>
               <span class="code-close-tag">&lt;&#47;h5&gt;</span>
               <span class="code-open-tag">&lt;p&#32;class&#61;&#34;card&#45;text&#34;&gt;</span>
-                <span id="code-tl-card-${i}-text">${ !text == "" ? text : "Lorem ipsum dolor amet flexitarian butcher VHS tilde, squid 3 wolf moon shoreditch vape williamsburg mustache messenger bag prism."}</span>
+                <span id="code-tl-card-${i}-text">${ !text == "" ? text : "Chocolate sesame snaps bonbon sesame snaps macaroon powder lemon drops dessert. Jelly beans halvah jelly-o icing marshmallow tart soufflé."}</span>
               <span class="code-close-tag">&lt;&#47;p&gt;</span>
             <span class="code-close-tag">&lt;&#47;div&gt;</span>
           <span class="code-close-tag">&lt;&#47;div&gt;</span>
@@ -1143,6 +1151,7 @@ copyCode("col");
 copyCode("em");
 copyCode("ib");
 copyCode("ls");
+copyCode("quo");
 copyCode("tab");
 copyCode("tl");
 copyCode("ts");
