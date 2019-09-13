@@ -22,6 +22,7 @@ $(document).ready(function() {
   initialTable(3,3);
   // transcript preview
   preview("ts");
+  preview("va");
 });
 
 //display component on nav select
@@ -1078,6 +1079,13 @@ $(document).on("click", ".view-close-transcript", function(event) {
 });
 
 /**********************************
+ * view answer                    *
+ **********************************/
+
+updateText("va", "#va-q", "#code-va-q", "Question?");
+updateText("va", "#va-a", "#code-va-a", "Answer");
+
+/**********************************
  * general functions              *
  **********************************/
 
@@ -1138,6 +1146,7 @@ copyCode("ls");
 copyCode("tab");
 copyCode("tl");
 copyCode("ts");
+copyCode("va");
 
 
 // on copy code button click
