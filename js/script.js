@@ -101,6 +101,19 @@ updateText("btn", "#btn-link", "#code-btn-link-text", "#");
  * card                           *
  **********************************/
 
+// change card type between default card and float box
+$("#cd-type").change(function(data){
+  $(this).val() == "float-box"
+    ? (cdLayout(),
+      showCardImgs(4),
+      $(".cd-img-form").show(),
+      $("#cd-layout-form, .cd-img-check").hide(),
+      $(".code-cd-type, .code-cd-body-class").text("float-box"))
+    : ($("#cd-layout-form, .cd-img-check").show(),
+    $(".code-cd-type, .code-cd-body-class").text("card"));
+  preview("cd");  
+});
+
 // on selet change, show only the required no of cards to edit, update code and preview
 $("#cd-card-no").on('focus', function() {
   $(this).data("previous",$(this).val());
@@ -130,19 +143,26 @@ $("#cd-card-no").on('focus', function() {
     }
     // reset previous value
     $(this).removeData("previous");
+    if ($("#cd-type").val() == "float-box") $(".cd-img-check").hide();
     preview("cd");
   });
 });
 
-$("#cd-layout").change(function(data){
-  $(this).val() == "deck" 
+// change card layout between vertical block and horizontal deck
+$("#cd-layout").change(function(){
+  cdLayout();
+});
+
+function cdLayout() {
+  $("#cd-layout").val() == "deck" && $("#cd-type").val() == "default"
     ? ($("#code-cd-deck-open").text('<div class="card-deck">'),
       $("#code-cd-deck-close").text("</div>"),
       $(".code-cd-img-position").text("top"))
     : ($("#code-cd-deck-open, #code-cd-deck-close").empty(),
-      $(".code-cd-img-position").text("left"));
+      $(".code-cd-img-position").text("left"),
+      $("#cd-layout").val("block"));
   preview("cd");  
-});
+};
 
 // create all card editor cards and code on page load
 function initialCards(maxCards) {
@@ -157,15 +177,11 @@ function initialCards(maxCards) {
 
 // create single card card code
 function createCard(i) {
-  return `<span id="code-cd-card-${i}"><pre>  <span class="code-open-tag">&lt;div&#32;class&#61;&#34;card&#34;&gt;</span><span id="code-cd-${i}-img">
-    <span id="code-cd-${i}-img-open">&lt;img&#32;class&#61;&#34;card&#45;img&#45;<span class="code-cd-img-position">${ $("#cd-layout").val() == "block" ? "left" : "top" }</span>&#34;&#32;src&#61;&#34;</span><span id="code-cd-${i}-img-src">http:\/\/placekitten.com\/300\/300</span><span id="code-cd-${i}-img-middle">&#34;&#32;alt&#61;&#34;</span><span id="code-cd-${i}-img-alt">A&#32;cute&#32;kitten</span>&#34;&gt;</span></span>
-    <span class="code-open-tag">&lt;div&#32;class&#61;&#34;card&#45;body&#34;&gt;</span><span id="code-cd-${i}-title">
-      <span>&lt;h4&#32;class&#61;&#34;card&#45;title&#34;&gt;</span>
-        <span id="code-cd-${i}-title-text">Card #${i} title</span>
-      <span>&lt;&#47;h4&gt;</span></span>
-      <span class="code-open-tag">&lt;p&#32;class&#61;&#34;card&#45;text&#34;&gt;</span>
-        <span id="code-cd-${i}-text">Card #${i} text</span>
-      <span class="code-close-tag">&lt;&#47;p&gt;</span>
+  return `<span id="code-cd-card-${i}"><pre>  <span class="code-open-tag">&lt;div&#32;class&#61;&#34;<span class="code-cd-type">${ $("#cd-type").val() == "float-box" ? "float-box" : "card" }</span>&#34;&gt;</span><span id="code-cd-${i}-img">
+    <span id="code-cd-${i}-img-open">&lt;img&#32;class&#61;&#34;img&#45;<span class="code-cd-img-position">${ $("#cd-layout").val() == "block" ? "left" : "top" }</span>&#34;&#32;src&#61;&#34;</span><span id="code-cd-${i}-img-src">http:\/\/placekitten.com\/300\/300</span><span id="code-cd-${i}-img-middle">&#34;&#32;alt&#61;&#34;</span><span id="code-cd-${i}-img-alt">A&#32;cute&#32;kitten</span>&#34;&gt;</span></span>
+    <span class="code-open-tag">&lt;div&#32;class&#61;&#34;<span class="code-cd-body-class">card</span>&#45;body&#34;&gt;</span><span id="code-cd-${i}-title">
+      <span>&lt;h4&gt;</span><span id="code-cd-${i}-title-text">Card #${i} title</span><span>&lt;&#47;h4&gt;</span></span>
+      <span class="code-open-tag">&lt;p&gt;</span><span id="code-cd-${i}-text">Card #${i} text</span><span class="code-close-tag">&lt;&#47;p&gt;</span>
     <span class="code-close-tag">&lt;&#47;div&gt;</span>
   <span class="code-close-tag">&lt;&#47;div&gt;</span></pre></span>`;
 }
@@ -179,19 +195,19 @@ function createCardEditorCard(i) {
       </div>
       <div class="collapse-body" id="cd-collapse-${i}">
         <form>
-          <div class="custom-control custom-checkbox">
+          <div class="custom-control custom-checkbox cd-img-check">
             <input type="checkbox" class="custom-control-input checked" id="cd-${i}-check-img" checked>
             <label class="custom-control-label" for="cd-${i}-check-img"><span id="cd-${i}-toggle-img">Remove</span> image</label>
           </div>
-          <div class="custom-control custom-checkbox mb-3">
+          <div class="custom-control custom-checkbox">
             <input type="checkbox" class="custom-control-input checked" id="cd-${i}-check-title" checked>
             <label class="custom-control-label" for="cd-${i}-check-title"><span id="cd-${i}-toggle-title">Remove</span> title</label>
           </div>
-          <div class="form-group cd-${i}-img-form" id="cd-${i}-img-src-form">
+          <div class="form-group cd-img-form cd-${i}-img-form" id="cd-${i}-img-src-form">
             <label for="cd-${i}-header">Img src</label>
             <input type="text" class="form-control" id="cd-${i}-img-src" placeholder="http://placekitten.com/300/300">
           </div>
-          <div class="form-group cd-${i}-img-form" id="cd-${i}-img-alt-form">
+          <div class="form-group cd-img-form cd-${i}-img-form" id="cd-${i}-img-alt-form">
             <label for="cd-${i}-header">Img alt text</label>
             <input type="text" class="form-control" id="cd-${i}-img-alt" placeholder="A cute kitten">
           </div>
@@ -248,6 +264,19 @@ function updateCards(cardCardLimit) {
     updateText("cd", "#cd-" + i + "-img-alt", "#code-cd-" + i + "-img-alt", "A cute kitten");
     updateText("cd", "#cd-" + i + "-title", "#code-cd-" + i + "-title-text", "Card #" + i + " title");
     updateText("cd", "#cd-" + i + "-text", "#code-cd-" + i + "-text", "Card #" + i + " text");
+  }
+}
+
+function showCardImgs(cardCardLimit) {
+  for (let i = 1; i <= cardCardLimit; i++) {
+    $("#code-cd-" + i + "-img").html('\n    <span class="code-cd-img-open"></span><span class="code-cd-img-position"></span><span class="code-cd-img-src"></span><span id="code-cd-' + i + '-img-src"></span><span class="code-cd-img-alt"></span><span id="code-cd-' + i + '-img-alt"></span><span class="code-cd-img-close"></span>');
+    $(".code-cd-img-open").text('<img class="card-img-');
+    $(".code-cd-img-position").text(  $("#cd-layout").val() == "block" ? "left" : "top" );
+    $(".code-cd-img-src").text('" src="');
+    $("#code-cd-" + i + "-img-src").text($("#cd-" + i + "-img-src").val() !== "" ? $("#cd-" + i + "-img-src").val() : "https:\/\/placekitten.com\/300\/300");
+    $(".code-cd-img-alt").text('" alt="');
+    $("#code-cd-" + i + "-img-alt").text($("#cd-" + i + "-img-alt").val() !== "" ? $("#cd-" + i + "-img-alt").val() : "A cute kitten");
+    $(".code-cd-img-close").text('">');
   }
 }
 

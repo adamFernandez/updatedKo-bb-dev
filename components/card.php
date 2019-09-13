@@ -1,6 +1,6 @@
 <div class="component-content" id="component-card">
   <div class="component-header">
-    <h2 class="component-title">Card</h2>
+    <h2 class="component-title">Card and Float box</h2>
   </div>
   <div class="component-body container">
     <div class="row">
@@ -10,6 +10,17 @@
         <p>Complete the following fields:</p>
         <form>
             <div class="form-row">
+              <div class="form-group">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <label class="input-group-text" for="cd-type">Card type</label>
+                  </div>
+                  <select class="custom-select" id="cd-type">
+                    <option value="default" selected>Default card</option>
+                    <option value="float-box">Float box</option>
+                  </select>
+                </div>
+              </div>
               <div class="form-group col-md-4">
                 <div class="input-group">
                   <div class="input-group-prepend">
@@ -23,7 +34,7 @@
                   </select>
                 </div>
               </div>
-              <div class="form-group col-md-8">
+              <div class="form-group col-md-8" id="cd-layout-form">
                 <div class="input-group">
                   <div class="input-group-prepend">
                     <label class="input-group-text" for="cd-layout">Layout</label>
@@ -36,7 +47,7 @@
               </div>
             </div>
           </form>
-          <div id="cards">
+          <div class="collapse-container" id="cards">
           </div>
         </section>
       </div>
