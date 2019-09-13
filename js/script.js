@@ -135,8 +135,10 @@ $("#cd-card-no").on('focus', function() {
 $("#cd-layout").change(function(data){
   $(this).val() == "deck" 
     ? ($("#code-cd-deck-open").text('<div class="card-deck">'),
-      $("#code-cd-deck-close").text('</div>'))
-    : ($("#code-cd-deck-open").empty(), $("#code-cd-deck-close").empty());
+      $("#code-cd-deck-close").text("</div>"),
+      $(".code-cd-img-position").text("top"))
+    : ($("#code-cd-deck-open, #code-cd-deck-close").empty(),
+      $(".code-cd-img-position").text("left"));
   preview("cd");  
 });
 
@@ -154,7 +156,7 @@ function initialCards(maxCards) {
 // create single card card code
 function createCard(i) {
   return `<span id="code-cd-card-${i}"><pre>  <span class="code-open-tag">&lt;div&#32;class&#61;&#34;card&#34;&gt;</span><span id="code-cd-${i}-img">
-    <span id="code-cd-${i}-img-open">&lt;img&#32;class&#61;&#34;card&#45;img&#45;left&#34;&#32;src&#61;&#34;</span><span id="code-cd-${i}-img-src">http:\/\/placekitten.com\/300\/300</span><span id="code-cd-${i}-img-middle">&#34;&#32;alt&#61;&#34;</span><span id="code-cd-${i}-img-alt">A&#32;cute&#32;kitten</span>&#34;&gt;</span></span>
+    <span id="code-cd-${i}-img-open">&lt;img&#32;class&#61;&#34;card&#45;img&#45;<span class="code-cd-img-position">${ $("#cd-layout").val() == "block" ? "left" : "top" }</span>&#34;&#32;src&#61;&#34;</span><span id="code-cd-${i}-img-src">http:\/\/placekitten.com\/300\/300</span><span id="code-cd-${i}-img-middle">&#34;&#32;alt&#61;&#34;</span><span id="code-cd-${i}-img-alt">A&#32;cute&#32;kitten</span>&#34;&gt;</span></span>
     <span class="code-open-tag">&lt;div&#32;class&#61;&#34;card&#45;body&#34;&gt;</span><span id="code-cd-${i}-title">
       <span>&lt;h4&#32;class&#61;&#34;card&#45;title&#34;&gt;</span>
         <span id="code-cd-${i}-title-text">Card #${i} title</span>
@@ -218,9 +220,11 @@ function updateCards(cardCardLimit) {
     // toggle img code
     $(document).on('click', "#cd-" + i + "-check-img", function (event) {
       $("#cd-" + i + "-check-img").hasClass("checked")
-        ? $("#code-cd-" + i + "-img").html('\n    <span class="code-cd-img-open"></span><span id="code-cd-' + i + '-img-src"></span><span class="code-cd-img-alt"></span><span id="code-cd-' + i + '-img-alt"></span><span class="code-cd-img-close"></span>')
+        ? $("#code-cd-" + i + "-img").html('\n    <span class="code-cd-img-open"></span><span class="code-cd-img-position"></span><span class="code-cd-img-src"></span><span id="code-cd-' + i + '-img-src"></span><span class="code-cd-img-alt"></span><span id="code-cd-' + i + '-img-alt"></span><span class="code-cd-img-close"></span>')
         : $("#code-cd-" + i + "-img").text("");
-      $(".code-cd-img-open").text('<img class="card-img-left" src="');
+      $(".code-cd-img-open").text('<img class="card-img-');
+      $(".code-cd-img-position").text(  $("#cd-layout").val() == "block" ? "left" : "top" );
+      $(".code-cd-img-src").text('" src="');
       $("#code-cd-" + i + "-img-src").text($("#cd-" + i + "-img-src").val() !== "" ? $("#cd-" + i + "-img-src").val() : "https:\/\/placekitten.com\/300\/300");
       $(".code-cd-img-alt").text('" alt="');
       $("#code-cd-" + i + "-img-alt").text($("#cd-" + i + "-img-alt").val() !== "" ? $("#cd-" + i + "-img-alt").val() : "A cute kitten");
