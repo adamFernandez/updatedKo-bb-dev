@@ -37,34 +37,6 @@ $(".nav-link").click(function() {
 });
 
 /**********************************
- * alert                          *
- **********************************/
-
-// change alert type
-$("#ib-type").change(function() {
-  $("#code-ib-type").text($(this).val());
-  $(this).val() == "alert-instructional"
-  ? ($("#code-ib-alert-class").text("alert "), $("#code-ib-alert-role").text('" role="alert'), $("#code-ib-title-open, #code-ib-title-text, #code-ib-title-close").empty())
-  : ($("#code-ib-alert-class").empty(), $("#code-ib-alert-role").empty());
-  $(this).val() == "definition-box"
-  ? (
-    $("#ib-title-form").show(),
-    $("#code-ib-title-open").html("\n    &lt;h5&gt;"),
-    $("#code-ib-title-text").text((!$("#ib-df-title").val() == "") ? $("#ib-df-title").val() : "Definition title" ),
-    $("#code-ib-title-close").text("</h5>"))
-  : $("#ib-title-form").hide();
-  if ($(this).val() == "learning-outcome-box") (
-    $("#code-ib-title-open").html("\n    &lt;h5&gt;"),
-    $("#code-ib-title-text").text("Learning outcomes"),
-    $("#code-ib-title-close").text("</h5>"));
-  preview("ib");
-});
-
-// update alert text
-updateText("ib", "#ib-text", "#code-ib-text", "Info box body text");
-updateText("ib", "#ib-df-title", "#code-ib-title-text", "Foo");
-
-/**********************************
  * button                         *
  **********************************/
 
@@ -580,6 +552,37 @@ $("#em-id").keyup(function() {
   if (!embedText == "") embedText = embedText.replace('iframe id="kaltura_player', 'iframe id="'+ embedId);  
   (!embedText == "") ? $("#code-em-embed").text(embedText) : $("#code-em-embed").text("<iframe></iframe>");
 }).keyup();
+
+/**********************************
+ * infobox                        *
+ **********************************/
+
+// change infobox type
+$("#ib-type").change(function() {
+  $("#code-ib-type").text($(this).val());
+  $(this).val() == "alert-instructional"
+  ? ($("#code-ib-alert-class").text("alert "), $("#code-ib-alert-role").text('" role="alert'), $("#code-ib-title-open, #code-ib-title-text, #code-ib-title-close").empty())
+  : ($("#code-ib-alert-class").empty(), $("#code-ib-alert-role").empty());
+  $(this).val() == "definition-box"
+  ? (
+    $("#ib-title-form").show(),
+    $("#code-ib-title-open").html("\n    &lt;h5&gt;"),
+    $("#code-ib-title-text").text((!$("#ib-df-title").val() == "") ? $("#ib-df-title").val() : "Definition title" ),
+    $("#code-ib-title-close").text("</h5>"))
+  : $("#ib-title-form").hide();
+  $(this).val() == "key-concept-box"
+  ? ($("#ib-title-form").hide(), $("#code-ib-title-open, #code-ib-title-text, #code-ib-title-close").empty())
+  : $("#ib-title-form").show();
+  if ($(this).val() == "learning-outcome-box") (
+    $("#code-ib-title-open").html("\n    &lt;h5&gt;"),
+    $("#code-ib-title-text").text("Learning outcomes"),
+    $("#code-ib-title-close").text("</h5>"));
+  preview("ib");
+});
+
+// update infobox text
+updateText("ib", "#ib-text", "#code-ib-text", "Info box body text");
+updateText("ib", "#ib-df-title", "#code-ib-title-text", "Foo");
 
 /**********************************
  * list                           *
