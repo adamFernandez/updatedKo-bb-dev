@@ -893,24 +893,18 @@ function createTimelineCard(i) {
     <span class="code-close-tag">&lt;&#47;div&gt;</span>
     <span class="code-open-tag">&lt;div&#32;class&#61;&#34;col&#32;timeline&#45;content&#34;&gt;</span>
       <span class="code-open-tag">&lt;div&#32;class&#61;&#34;card&#32timeline-card&#34;&gt;</span><span id="code-tl-card-${i}-date">
-        <span class="code-tl-card-date-open">&lt;span&#32;class&#61;&#34;date&#45;tab&#34;&gt;</span>
-          <span id="code-tl-card-${i}-date-text">${ !date == "" ? date : dateString + " " + (i < 6 ? (i + 7) + ":00AM" : (i - 5) + ":00PM")}</span>
-        <span class="code-tl-card-date-close">&lt;&#47;span&gt;</span></span>
+        <span class="code-tl-card-date-open">&lt;span&#32;class&#61;&#34;date&#45;tab&#34;&gt;</span><span id="code-tl-card-${i}-date-text">${ !date == "" ? date : dateString + " " + (i < 6 ? (i + 7) + ":00AM" : (i - 5) + ":00PM")}</span><span class="code-tl-card-date-close">&lt;&#47;span&gt;</span></span>
         <span>&lt;div&#32;class&#61;&#34;card&#45;body&#34;&gt;</span>
           <span class="code-open-tag">&lt;div&#32;class&#61;&#34;row&#34;&gt;</span>
             <span id="code-tl-card-${i}-img"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;col&#45;md&#45;3&#32;card&#45;image&#34;&gt;</span>
               <span class="code-open-tag">&lt;img&#32;src&#61;&#34;<span id="code-tl-card-${i}-img-src">https:\/\/placekitten.com\/200\/300</span>&#34;&gt;</span>
             <span class="code-close-tag">&lt;&#47;div&gt;</span></span>
             <span class="code-open-tag">&lt;div&#32;class&#61;&#34;col&#45;md&#34;&gt;</span>
-              <span class="code-open-tag">&lt;h5&#32;class&#61;&#34;card&#45;title&#34;&gt;</span>
-                <span id="code-tl-card-${i}-title">${ !title == "" ? title : "Card #" + i + " title"}</span>
-              <span class="code-close-tag">&lt;&#47;h5&gt;</span>
-              <span class="code-open-tag">&lt;p&#32;class&#61;&#34;card&#45;text&#34;&gt;</span>
-                <span id="code-tl-card-${i}-text">${ !text == "" ? text : "Chocolate sesame snaps bonbon sesame snaps macaroon powder lemon drops dessert. Jelly beans halvah jelly-o icing marshmallow tart soufflé."}</span>
-              <span class="code-close-tag">&lt;&#47;p&gt;</span>
+              <span class="code-open-tag">&lt;h5&#32;class&#61;&#34;card&#45;title&#34;&gt;</span><span id="code-tl-card-${i}-title">${ !title == "" ? title : "Card #" + i + " title"}</span><span class="code-close-tag">&lt;&#47;h5&gt;</span>
+              <span class="code-open-tag">&lt;p&#32;class&#61;&#34;card&#45;text&#34;&gt;</span><span id="code-tl-card-${i}-text">${ !text == "" ? text : "Chocolate sesame snaps bonbon sesame snaps macaroon powder lemon drops dessert. Jelly beans halvah jelly-o icing marshmallow tart soufflé."}</span><span class="code-close-tag">&lt;&#47;p&gt;</span>
             <span class="code-close-tag">&lt;&#47;div&gt;</span>
           <span class="code-close-tag">&lt;&#47;div&gt;</span>
-          <span id="code-tl-card-${i}-img-ref"><span class="code-open-tag">&lt;p&#32;class&#61;&#34;text&#45;right&#32;mb&#45;0&#32;img&#45;reference&#34;&gt;</span><span id="code-tl-card-${i}-img-reference">Image: placekitten.com. An extremely adorable kitten</span>
+          <span id="code-tl-card-${i}-img-ref"><span class="code-open-tag">&lt;p&#32;class&#61;&#34;img&#45;reference&#34;&gt;</span><span id="code-tl-card-${i}-img-reference">Image: placekitten.com. An extremely adorable kitten</span>
           <span class="code-close-tag">&lt;&#47;p&gt;</span></span>
         <span class="code-close-tag">&lt;&#47;div&gt;</span>
       <span class="code-close-tag">&lt;&#47;div&gt;</span>
