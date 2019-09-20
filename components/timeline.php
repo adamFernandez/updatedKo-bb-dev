@@ -4,7 +4,7 @@
   </div>
   <div class="component-body container">
     <div class="row">
-      <div class="options container col-md-6">
+      <div class="options container col-md-5">
         <section class="options">
           <h3>Options</h3>
           <p>Complete the following fields:</p>
@@ -26,6 +26,7 @@
                   </select>
                 </div>
               </div>
+              <!--
               <div class="form-group col-md-8">
                 <div class="input-group">
                   <div class="input-group-prepend">
@@ -35,6 +36,7 @@
                 </div>
                 <small id="tl-id-help" class="form-text text-muted">Optional ID to assist with identification and custom styling.</small>
               </div>
+               -->
             </div>
             <div class="custom-control custom-checkbox mb-3">
               <input type="checkbox" class="custom-control-input checked" id="tl-check-date" checked>
@@ -45,7 +47,7 @@
           </div>
         </section>
       </div>
-      <div class="col-md-6 container">
+      <div class="container col-md-7">
         <section class="preview">
           <h3 class="preview-title">Preview</h3>
           <div class="card" id="tl-preview-pane"></div>

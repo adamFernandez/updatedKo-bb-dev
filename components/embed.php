@@ -13,7 +13,7 @@
           <p>Complete the following fields:</p>
           <form>
             <div class="form-row">
-              <div class="form group col-md-7" id="em-player-size-form">
+              <div class="form-group col-md-7" id="em-player-size-form">
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                      <label class="input-group-text" for="em-player-size">Player Size</label>
@@ -25,7 +25,7 @@
                   </select>
                 </div>
               </div>
-              <div class="form group col-md">
+              <div class="form-group col-md">
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                      <label class="input-group-text" for="em-media-type">Media type</label>
@@ -36,6 +36,7 @@
                   </select>
                 </div>
               </div>
+              <!--
               <div class="form-group col-md-12">
                 <div class="input-group">
                   <div class="input-group-prepend">
@@ -45,6 +46,7 @@
                 </div>
                 <small id="tl-id-help" class="form-text text-muted">Optional ID to assist with identification and custom styling.</small>
               </div>
+              -->
             </div>
             <div class="form-group">
               <label for="em-embed">Embed code</label>
