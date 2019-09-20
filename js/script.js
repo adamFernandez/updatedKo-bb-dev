@@ -42,13 +42,17 @@ $(".nav-link").click(function() {
 
 // sets button style
 $("#btn-style").change(function() {
+  // if secondary style is selected, force button standard button size
+  if ($(this).val() == "secondary") ($("#btn-size").val("standard"), $("#code-btn-class-size").text(""));
   $("#code-btn-class-style").text("btn btn-" + $(this).val());
   preview("btn");
 });
 
 // sets button size
 $("#btn-size").change(function() {
-  $("#code-btn-class-size").text($(this).val());
+  // if large size is selected, force button primary button style
+  if ($(this).val() == "large") ($("#btn-style").val("primary"), $("#code-btn-class-style").text("btn btn-primary"));
+  $("#code-btn-class-size").text($(this).val == "standard" ? "" : " btn-lg");
   preview("btn");
 });
 
@@ -904,8 +908,7 @@ function createTimelineCard(i) {
               <span class="code-open-tag">&lt;p&#32;class&#61;&#34;card&#45;text&#34;&gt;</span><span id="code-tl-card-${i}-text">${ !text == "" ? text : "Chocolate sesame snaps bonbon sesame snaps macaroon powder lemon drops dessert. Jelly beans halvah jelly-o icing marshmallow tart soufflé."}</span><span class="code-close-tag">&lt;&#47;p&gt;</span>
             <span class="code-close-tag">&lt;&#47;div&gt;</span>
           <span class="code-close-tag">&lt;&#47;div&gt;</span>
-          <span id="code-tl-card-${i}-img-ref"><span class="code-open-tag">&lt;p&#32;class&#61;&#34;img&#45;reference&#34;&gt;</span><span id="code-tl-card-${i}-img-reference">Image: placekitten.com. An extremely adorable kitten</span>
-          <span class="code-close-tag">&lt;&#47;p&gt;</span></span>
+          <span id="code-tl-card-${i}-img-ref"><span class="code-open-tag">&lt;p&#32;class&#61;&#34;img&#45;reference&#34;&gt;</span><span id="code-tl-card-${i}-img-reference">Image: placekitten.com. An extremely adorable kitten</span><span class="code-close-tag">&lt;&#47;p&gt;</span></span>
         <span class="code-close-tag">&lt;&#47;div&gt;</span>
       <span class="code-close-tag">&lt;&#47;div&gt;</span>
     <span class="code-close-tag">&lt;&#47;div&gt;</span>

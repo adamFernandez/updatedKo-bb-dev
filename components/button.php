@@ -33,8 +33,8 @@
                     <label class="input-group-text" for="btn-size">Button size</label>
                   </div>
                   <select class="custom-select" id="btn-size">
-                    <option value="" selected>Standard</option>
-                    <option value=" btn-lg">Large</option>
+                    <option value="standard" selected>Standard</option>
+                    <option value="large">Large</option>
                   </select>
                 </div>
               </div>
@@ -48,7 +48,6 @@
                   <select class="custom-select" id="btn-tag">
                     <option value="button" selected>button</option>
                     <option value="a">a</option>
-<!--                    <option value="input">input</option> -->
                   </select>
                 </div>
                 <small id="btn-tag-help" class="form-text text-muted">Select 'a' to add a hyperlink.</small>
@@ -62,25 +61,6 @@
                 </div>
               </div>
             </div>
-
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <label class="input-group-text" for="btn-icon">Icons</label>
-              </div>
-              <select class="custom-select" id="btn-icon" aria-label="Icon selector">
-                <option selected>Choose...</option>
-                <option value="1">set</option>
-                <option value="2">list</option>
-                <option value="3">of</option>
-                <option value="4">icons</option>
-                <option value="5">from</option>
-                <option value="6">UX</option>
-              </select>
-              <div class="input-group-append">
-                <button class="btn btn-outline-secondary no-margin btn-icon disabled" type="button">Prepend</button>
-                <button class="btn btn-outline-secondary no-margin btn-icon disabled" type="button">Append</button>
-              </div>
-            </div>
           </form>
         </section>
       </div>
@@ -88,7 +68,7 @@
         <section class="preview">
           <h3 class="preview-title">Preview</h3>
           <div id="btn-preview-pane">
-            <button type="button" class="btn btn-primary" disabled>Button Text</button>
+            <button type="button" class="btn btn-primary">Button Text</button>
           </div>
         </section>
         <section class="component-code">
