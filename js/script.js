@@ -52,7 +52,7 @@ $("#btn-style").change(function() {
 $("#btn-size").change(function() {
   // if large size is selected, force button primary button style
   if ($(this).val() == "large") ($("#btn-style").val("primary"), $("#code-btn-class-style").text("btn btn-primary"));
-  $("#code-btn-class-size").text($(this).val == "standard" ? "" : " btn-lg");
+  $("#code-btn-class-size").text($(this).val() == "standard" ? "" : " btn-lg");
   preview("btn");
 });
 
