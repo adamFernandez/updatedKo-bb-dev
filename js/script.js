@@ -806,6 +806,12 @@ $("#tab-width").change(function() {
   preview("tab");
 });
 
+// change vertical text alignment
+$("#vertical-align").change(function() {
+  $("#code-tab-vertical-align").text( $(this).val() == "middle" ? " vertical-align-middle" : "" );
+  preview("tab");
+});
+
 // toggle table row headers
 toggleCheckboxText("#tab-check-row-title", "#tab-toggle-row-title");
 $(document).on("click", "#tab-check-row-title", function(event) {
