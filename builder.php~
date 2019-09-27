@@ -5,8 +5,8 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
     <link href="https://kit-free.fontawesome.com/releases/latest/css/free.min.css" rel="stylesheet">
     <link href="https://git.iddkingsonline.com/designsystem/bootstrap.css" rel="stylesheet">
-    <link href="https://git.iddkingsonline.com/designsystem/base.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <link href="https://git.iddkingsonline.com/designsystem-dev/main.css" rel="stylesheet">
+    <link href="css/style-demo.css" rel="stylesheet">
   </head>
   <body>
     <main>
@@ -52,7 +52,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/ea529b88ed.js"></script>
     <script src="https://git.iddkingsonline.com/designsystem-dev/js/main.js"></script>
-    <script src="js/script.js"></script>
+    <script src="js/script-demo.js"></script>
   </body>
 </html>
 

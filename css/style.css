@@ -51,9 +51,6 @@ section h3 {
 #component-builder, #component-code {
   display: none;
 }
-.component-header {
-  margin-left: 45px;
-}
 .component-content {
   display: none;
   margin: 1.5rem 0;
