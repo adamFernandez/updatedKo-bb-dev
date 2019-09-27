@@ -10,7 +10,7 @@
       <p>Please add alternative text for all images.</p>
     </div>
     <div class="row">
-      <div class="options container col-md-5">
+      <div class="options col-md-5">
         <section class="options">
           <h3>Options</h3>
           <p>Complete the following fields:</p>
@@ -51,7 +51,7 @@
           </div>
         </section>
       </div>
-      <div class="col-md-7 container">
+      <div class="col-md-7">
         <section class="preview">
           <h3 class="preview-title">Preview</h3>
           <div id="crsl-preview-pane"></div>

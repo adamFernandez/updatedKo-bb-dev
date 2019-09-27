@@ -7,7 +7,7 @@
       <p>Please note that it is not yet possible to edit content within the Builder for this component. Copy and paste the code into Keats in order to add content.</p>
     </div>
     <div class="row">
-      <div class="options container col-md-4">
+      <div class="options col-md-4">
         <section class="options">
           <h3>Options</h3>
           <p>Select your options:</p>
@@ -59,6 +59,18 @@
                   </select>
                 </div>
               </div>
+              <div class="form-group col-md-12">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <label class="input-group-text" for="vertical-align">Vertical align</label>
+                  </div>
+                  <select class="custom-select" id="vertical-align">
+                    <option value="top" selected>Top (defautl)</option>
+                    <option value="middle">Middle</option>
+                  </select>
+                </div>
+                <small id="tab-vertical-align-help" class="form-text text-muted">Select 'middle' for tables with merged cells only.</small>
+              </div>
             </div>
             <div class="custom-control custom-checkbox mb-3">
               <input type="checkbox" class="custom-control-input unchecked" id="tab-check-row-title">
@@ -69,7 +81,7 @@
           </form>
         </section>
       </div>
-      <div class="container col-md-8">
+      <div class="col-md-8">
         <section class="preview">
           <h3 class="preview-title">Preview</h3>
           <div id="tab-preview-pane"></div>
@@ -81,14 +93,16 @@
           </div>
           <div class="code-box">
             <pre class="code-text">
-<span id="tab-print-code"><span id="code-tab-title"></span><span class="code-open-tag">&lt;table&#32;class&#61&#34;table&#32;table&#45;bordered<span id="code-tab-width"></span>&#34;&gt;</span>
-  <span class="code-open-tag">&lt;thead&gt;</span>
-    <span class="code-open-tag">&lt;tr&gt;</span><span id="code-tab-headers"><span id="code-tab-row-0-header"></span></span>
-    <span class="code-close-tag">&lt;&#47;tr&gt;</span>
-  <span class="code-close-tag">&lt;&#47;thead&gt;</span>
-  <span class="code-open-tag">&lt;tbody&gt;</span><span id="code-tab-rows"></span>
-  <span class="code-close-tag">&lt;&#47;tbody&gt;</span>
-<span class="code-close-tag">&lt;&#47;table&gt;</span></span>
+<span id="tab-print-code"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;table&#45;scroll&#34;&gt;</span>
+  <span class="code-open-tag">&lt;table&#32;class&#61&#34;table&#32;table&#45;bordered<span id="code-tab-width"></span><span id="code-tab-vertical-align"></span>&#34;&gt;</span>
+    <span class="code-open-tag">&lt;thead&gt;</span>
+      <span class="code-open-tag">&lt;tr&gt;</span><span id="code-tab-headers"><span id="code-tab-row-0-header"></span></span>
+      <span class="code-close-tag">&lt;&#47;tr&gt;</span>
+    <span class="code-close-tag">&lt;&#47;thead&gt;</span>
+    <span class="code-open-tag">&lt;tbody&gt;</span><span id="code-tab-rows"></span>
+    <span class="code-close-tag">&lt;&#47;tbody&gt;</span>
+  <span class="code-close-tag">&lt;&#47;table&gt;</span>
+<span class="code-close-tag">&lt;&#47;div&gt;</span></span>
             </pre>
           </div>
         </section>

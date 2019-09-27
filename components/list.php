@@ -4,7 +4,7 @@
   </div>
   <div class="component-body container">
     <div class="row">
-      <div class="options container col-md-6">
+      <div class="options col-md-6">
         <section class="options">
           <h3>Options</h3>
           <p>Complete the following fields:</p>
@@ -50,7 +50,7 @@
           </div>
         </section>
       </div>
-      <div class="col-md-6 container">
+      <div class="col-md-6">
         <section class="preview">
           <h3 class="preview-title">Preview</h3>
           <div class="card" id="ls-preview-pane"></div>

@@ -7,7 +7,7 @@
       <p>The builder creates a wrapper for Kaltura video and audio embeds allowing them to be fully responsive.  If the builder preview is working but your embedded media is not displaying correctly in Keats, please check that the correct css files are being included.</p>
     </div>
     <div class="row">
-      <div class="options container col-md-6">
+      <div class="options col-md-6">
         <section class="options">
           <h3>Options</h3>
           <p>Complete the following fields:</p>
@@ -56,7 +56,7 @@
           </form>
         </section>
       </div>
-      <div class="col-md-6 container">
+      <div class="col-md-6">
         <section class="preview">
           <h3 class="preview-title">Preview</h3>
           <div id="em-preview-pane"></div>

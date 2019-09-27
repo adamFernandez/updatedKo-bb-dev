@@ -7,7 +7,7 @@
       <p>Don't forget to link to the css file! - https://git.iddkingsonline.com/designsystem/base.css. Info Boxes also rely on Font Awesome icons so this needs to be included too! - https://kit-free.fontawesome.com/releases/latest/css/free.min.css.</p>
     </div>
     <div class="row">
-      <div class="options container col-md-6">
+      <div class="options col-md-6">
         <section class="options">
           <h3>Options</h3>
           <p>Select your options:</p>
@@ -36,7 +36,7 @@
           </form>
         </section>
       </div>
-      <div class="container col-md-6">
+      <div class="col-md-6">
         <section class="preview">
           <h3 class="preview-title">Preview</h3>
           <div id="ib-preview-pane"></div>
