@@ -216,7 +216,7 @@ function updateCards(cardCardLimit) {
       $("#cd-" + i + "-check-img").hasClass("checked")
         ? $("#code-cd-" + i + "-img").html('\n    <span class="code-cd-img-open"></span><span class="code-cd-img-position"></span><span class="code-cd-img-src"></span><span id="code-cd-' + i + '-img-src"></span><span class="code-cd-img-alt"></span><span id="code-cd-' + i + '-img-alt"></span><span class="code-cd-img-close"></span>')
         : $("#code-cd-" + i + "-img").text("");
-      $(".code-cd-img-open").text('<img class="card-img-');
+      $(".code-cd-img-open").text('<img class="img-');
       $(".code-cd-img-position").text(  $("#cd-layout").val() == "block" ? "left" : "top" );
       $(".code-cd-img-src").text('" src="');
       $("#code-cd-" + i + "-img-src").text($("#cd-" + i + "-img-src").val() !== "" ? $("#cd-" + i + "-img-src").val() : "https:\/\/placekitten.com\/300\/300");
@@ -246,7 +246,7 @@ function updateCards(cardCardLimit) {
 function showCardImgs(cardCardLimit) {
   for (let i = 1; i <= cardCardLimit; i++) {
     $("#code-cd-" + i + "-img").html('\n    <span class="code-cd-img-open"></span><span class="code-cd-img-position"></span><span class="code-cd-img-src"></span><span id="code-cd-' + i + '-img-src"></span><span class="code-cd-img-alt"></span><span id="code-cd-' + i + '-img-alt"></span><span class="code-cd-img-close"></span>');
-    $(".code-cd-img-open").text('<img class="card-img-');
+    $(".code-cd-img-open").text('<img class="img-');
     $(".code-cd-img-position").text(  $("#cd-layout").val() == "block" ? "left" : "top" );
     $(".code-cd-img-src").text('" src="');
     $("#code-cd-" + i + "-img-src").text($("#cd-" + i + "-img-src").val() !== "" ? $("#cd-" + i + "-img-src").val() : "https:\/\/placekitten.com\/300\/300");
