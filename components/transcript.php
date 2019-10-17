@@ -46,7 +46,7 @@
 <span id="ts-print-code"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;transcript&#45;container&#32;collapsed&#34;&gt;</span>
   <span class="code-open-tag">&lt;div&#32;class&#61;&#34;transcript&#45;button&#45;group&#34;&gt;</span>
     <span class="code-open-tag">&lt;a&#32;class&#61;&#34;btn&#32;btn&#45;primary&#32;view&#45;close&#45;transcript&#32;role&#61;&#34;button&#34;&gt;</span>View transcript<span class="code-close-tag">&lt;&#47;a&gt;</span>
-    <span class="code-open-tag">&lt;a&#32;class&#61;&#34;btn&#32;btn&#45;primary&#34;&#32;href&#61;&#34;<span id="code-ts-link">www.example.com/transcript.pdf</span>&#34;&#32;role&#61;&#34;button&#34;&#32;target&#61;&#34;&#95;blank&#34;&gt;</span>Download transcript<span class="code-close-tag">&lt;&#47;a&gt;</span>
+    <span class="code-open-tag">&lt;a&#32;class&#61;&#34;btn&#32;btn&#45;secondary&#32;download&#45;transcript&#34;&#32;href&#61;&#34;<span id="code-ts-link">www.example.com/transcript.pdf</span>&#34;&#32;role&#61;&#34;button&#34;&#32;target&#61;&#34;&#95;blank&#34;&gt;</span>Download transcript<span class="code-close-tag">&lt;&#47;a&gt;</span>
   <span class="code-close-tag">&lt;&#47;div&gt;</span>
   <span class="code-open-tag">&lt;div&#32;class&#61;&#34;transcript&#45;card&#34;&gt;</span>
     <span class="code-open-tag">&lt;div&#32;class&#61;&#34;card&#45;body&#34;&gt;</span>
