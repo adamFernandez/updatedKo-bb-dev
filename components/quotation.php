@@ -15,7 +15,7 @@
             </div>
             <div class="form-group">
               <label for="quo-att">Attribution</label>
-              <input type="text" class="form-control" id="quo-att" aria-label="quo-att" placeholder="Marsh Mallow, 2019">
+              <input type="text" class="form-control" id="quo-att" aria-label="quo-att" placeholder="Marsh Mallow (2019)">
             </div>
           </form>
         </section>
@@ -28,14 +28,14 @@
         <section class="component-code">
           <div class="code-header">
             <h3 class="code-title">Code</h3>
-            <button class="btn btn-secondary" id="copy-va-code">Copy Code</button>
+            <button class="btn btn-secondary" id="copy-quo-code">Copy Code</button>
           </div>
           <div class="code-box">
             <pre class="code-text">
 <span id="quo-print-code"><span class="code-open-tag">&lt;div&#32;class&#61&#34;quote&#45;box&#34;&gt;</span>
   <span class="code-open-tag">&lt;div&gt;</span>
     <span class="code-open-tag">&lt;p&#32;class&#61;&#34;quote&#45;body&#34;&gt;</span><span id="code-quo-body">Cookie dessert brownie gingerbread jelly-o cake pie. Danish dragée gingerbread cake sesame snaps cotton candy. Chocolate lollipop soufflé carrot cake. Lollipop sugar plum candy dragée bonbon chocolate bear claw cookie. Ice cream gingerbread gummies pudding.</span><span class="code-close-tag">&lt;&#47;p&gt;</span>
-    <span class="code-open-tag">&lt;h5&#32;class&#61;&#34;quote&#45;attribution&#34;&gt;</span><span id="code-quo-att">Marsh Mallow, 2019</span><span class="code-close-tag">&lt;&#47;h5&gt;</span>
+    <span class="code-open-tag">&lt;h5&#32;class&#61;&#34;quote&#45;attribution&#34;&gt;</span><span id="code-quo-att">Marsh Mallow (2019)</span><span class="code-close-tag">&lt;&#47;h5&gt;</span>
   <span class="code-close-tag">&lt;&#47;div&gt;</span>
 <span class="code-close-tag">&lt;&#47;div&gt;</span></span>
           </div>

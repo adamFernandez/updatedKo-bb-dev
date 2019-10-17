@@ -694,7 +694,7 @@ function updateListItems(listItemLimit) {
  **********************************/
 
 updateText("quo", "#quo-body", "#code-quo-body", "Quotation");
-updateText("quo", "#quo-att", "#code-quo-att", "Attribution, 2019");
+updateText("quo", "#quo-att", "#code-quo-att", "Attribution (2019)");
 
 /**********************************
  * table                          *
