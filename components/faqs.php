@@ -6,6 +6,14 @@
     <h3>How can I report an issue?</h3>
     <p>If something isn't working as expected, <a href="https://docs.google.com/forms/d/e/1FAIpQLScV9PqAFCSyXcnbJoGPpG_BEB3y5fMZv0TggBvHzWl41u5v1w/viewform">submit a bug report via the Google form</a>.</p>
     <h3>Where can I find examples of all the different components?</h3>
-    <p>The Design System test course has a <a href="https://keats.kcl.ac.uk/course/view.php?id=73004&section=1">Kitchen Sink</a> that demonstrates all of the different components that can be built.</p>
+    <p>The <a href="https://keats.kcl.ac.uk/course/view.php?id=73004&section=1">Design System test course on KEATS has a 
+Kitchen Sink</a> that demonstrates all of the different components that can be built. This also contains examples of 
+commonly used default pages and some of the different types of activities available.</p>
+    <h3>Show me that other one! The one with the beautiful wireframes, illustrations and infographics!</h3>
+    <p>Visit the <a href="https://sites.google.com/kingsonline.eu/designsystem">Design System Google site</a> crafted 
+by our very talented UX team.</p>
+    <h3>Looks good. What's coming next?</h3>
+    <p>View the <a href="https://keats.kcl.ac.uk/course/view.php?id=73004&section=2">Roadmap and changelog</a> for a 
+breakdown of what's currently live and what's in store for future releases.</p>
   </div>
 </div>
