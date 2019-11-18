@@ -418,6 +418,38 @@ function updateCarouselSlides(carouselSlideLimit) {
 }
 
 /**********************************
+ * code                           *
+ **********************************/
+
+// sets code language
+$("#co-lang").change(function() {
+  $("#code-co-lang").text($(this).val());
+});
+
+// generate code body
+$("#co-body").keyup(function() {
+  codeBody = $("#co-body").val();
+  updateCodeBody();
+  preview("co");
+}).keyup();
+
+function updateCodeBody() {
+  (!codeBody == "")
+  // replace < and > with character entities
+  ? ( codeBody = codeBody.replace(/</gi, "&lt;"),
+    codeBody = codeBody.replace(/>/gi, "&gt;"),
+    $("#code-co-body").text(codeBody))
+  : $("#code-co-body").text("<h1>Hello world</h1\n");
+}
+
+// toggle code line nos
+$(document).on("click", "#co-check-line-nos", function(event) {
+  $(this).toggleClass("unchecked").toggleClass("checked");
+  $("#code-co-line-nos").text( $(this).hasClass("checked") ? ' linenumbers="yes"' : "");
+  $("#co-toggle-line-nos").text( $(this).hasClass("checked") ? "Remove" : "Add");
+});
+
+/**********************************
  * collapse                       *
  **********************************/
 
@@ -1125,6 +1157,15 @@ $(document).on("click", ".view-close-transcript", function(event) {
  * view answer                    *
  **********************************/
 
+// sets type
+$("#va-type").change(function() {
+  $(".code-va-type").text($(this).val());
+  // removes hyphen from model answer button text
+  if ($(this).val() == "model-answer") $("#code-va-type-button-text").text("model answer");
+  preview("va");
+});
+
+// updates question and answer text on input update
 updateText("va", "#va-q", "#code-va-q", "Question?");
 updateText("va", "#va-a", "#code-va-a", "Answer");
 
@@ -1182,6 +1223,7 @@ function preview(component) {
 copyCode("btn");
 copyCode("cd");
 copyCode("crsl");
+copyCode("co");
 copyCode("col");
 copyCode("em");
 copyCode("ib");
