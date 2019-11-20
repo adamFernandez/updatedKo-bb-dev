@@ -5,8 +5,8 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
     <link href="https://kit-free.fontawesome.com/releases/latest/css/free.min.css" rel="stylesheet">
     <link href="https://git.iddkingsonline.com/designsystem/bootstrap.css" rel="stylesheet">
-    <link href="https://git.iddkingsonline.com/designsystem/base.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <link href="https://git.iddkingsonline.com/designsystem-dev/main.css" rel="stylesheet">
+    <link href="css/style-demo.css" rel="stylesheet">
   </head>
   <body>
     <main>
@@ -16,7 +16,7 @@
         <p>Select the component you wish to build:</p>
         <ul class="nav nav-tabs">
           <?php
-            $components = array('Button', 'Carousel', 'Collapse', 'Timeline', 'Grid', 'Table', 'Transcript', 'Embed', 'Card', 'List', 'Quotation', 'Infobox', 'View answer');
+            $components = array('Button', 'Carousel', 'Collapse', 'Timeline', 'Grid', 'Table', 'Transcript', 'Embed', 'Card', 'List', 'Quotation', 'Infobox', 'View answer', 'Geshi');
             sort($components);
             foreach ($components as $component) {
               $id = strtolower(str_replace(' ','',$component));
@@ -28,22 +28,23 @@
           </li>
         </ul>
       </div>
-      <section>
+      <section id="region-main">
        <div id="component-builder">
-          <?php include('components-demo/button.php'); ?>
-          <?php include('components-demo/card.php'); ?>
-          <?php include('components-demo/carousel.php'); ?>
-          <?php include('components-demo/collapse.php'); ?>
-          <?php include('components-demo/embed.php'); ?>
-          <?php include('components-demo/grid.php'); ?>
-          <?php include('components-demo/infobox.php'); ?>
-          <?php include('components-demo/list.php'); ?>
-          <?php include('components-demo/quotation.php'); ?>
-          <?php include('components-demo/table.php'); ?>
-          <?php include('components-demo/timeline.php'); ?>
-          <?php include('components-demo/transcript.php'); ?>
-          <?php include('components-demo/viewanswer.php'); ?>
-          <?php include('components-demo/faqs.php'); ?>
+          <?php include('components/button.php'); ?>
+          <?php include('components/card.php'); ?>
+          <?php include('components/carousel.php'); ?>
+          <?php include('components/collapse.php'); ?>
+          <?php include('components/embed.php'); ?>
+          <?php include('components/geshi.php'); ?>
+          <?php include('components/grid.php'); ?>
+          <?php include('components/infobox.php'); ?>
+          <?php include('components/list.php'); ?>
+          <?php include('components/quotation.php'); ?>
+          <?php include('components/table.php'); ?>
+          <?php include('components/timeline.php'); ?>
+          <?php include('components/transcript.php'); ?>
+          <?php include('components/viewanswer.php'); ?>
+          <?php include('components/faqs.php'); ?>
         </div>
       </section>
     </main>
@@ -52,7 +53,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/ea529b88ed.js"></script>
     <script src="https://git.iddkingsonline.com/designsystem-dev/js/main.js"></script>
-    <script src="js/script.js"></script>
+    <script src="js/script-demo.js"></script>
   </body>
 </html>
 

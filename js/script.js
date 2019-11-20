@@ -154,7 +154,7 @@ function initialCards(maxCards) {
 // create single card card code
 function createCard(i) {
   return `<span id="code-cd-card-${i}"><pre>  <span class="code-open-tag">&lt;div&#32;class&#61;&#34;<span class="code-cd-type">${ $("#cd-type").val() == "float-box" ? "float-box" : "card" }</span>&#34;&gt;</span><span id="code-cd-${i}-img">
-    <span id="code-cd-${i}-img-open">&lt;img&#32;class&#61;&#34;img&#45;<span class="code-cd-img-position">${ $("#cd-layout").val() == "block" ? "left" : "top" }</span>&#34;&#32;src&#61;&#34;</span><span id="code-cd-${i}-img-src">http:\/\/placekitten.com\/300\/300</span><span id="code-cd-${i}-img-middle">&#34;&#32;alt&#61;&#34;</span><span id="code-cd-${i}-img-alt">A&#32;cute&#32;kitten</span>&#34;&gt;</span></span>
+    <span id="code-cd-${i}-img-open">&lt;img&#32;class&#61;&#34;img&#45;<span class="code-cd-img-position">${ $("#cd-layout").val() == "block" ? "left" : "top" }</span>&#34;&#32;src&#61;&#34;</span><span id="code-cd-${i}-img-src">https:\/\/via.placeholder.com\/300</span><span id="code-cd-${i}-img-middle">&#34;&#32;alt&#61;&#34;</span><span id="code-cd-${i}-img-alt">A&#32;boring&#32;placeholder&#32;image</span>&#34;&gt;</span></span>
     <span class="code-open-tag">&lt;div&#32;class&#61;&#34;<span class="code-cd-body-class">card</span>&#45;body&#34;&gt;</span><span id="code-cd-${i}-title">
       <span>&lt;h4&gt;</span><span id="code-cd-${i}-title-text">Card #${i} title</span><span>&lt;&#47;h4&gt;</span></span>
       <span class="code-open-tag">&lt;p&gt;</span><span id="code-cd-${i}-text">Card #${i} text</span><span class="code-close-tag">&lt;&#47;p&gt;</span>
@@ -181,11 +181,11 @@ function createCardEditorCard(i) {
           </div>
           <div class="form-group cd-img-form cd-${i}-img-form" id="cd-${i}-img-src-form">
             <label for="cd-${i}-header">Img src</label>
-            <input type="text" class="form-control" id="cd-${i}-img-src" placeholder="http://placekitten.com/300/300">
+            <input type="text" class="form-control" id="cd-${i}-img-src" placeholder="https://via.placeholder.com/300">
           </div>
           <div class="form-group cd-img-form cd-${i}-img-form" id="cd-${i}-img-alt-form">
             <label for="cd-${i}-header">Img alt text</label>
-            <input type="text" class="form-control" id="cd-${i}-img-alt" placeholder="A cute kitten">
+            <input type="text" class="form-control" id="cd-${i}-img-alt" placeholder="A boring placeholder image">
           </div>
           <div class="form-group" id="cd-${i}-title-form">
             <label for="cd-${i}-title">Title</label>
@@ -219,9 +219,9 @@ function updateCards(cardCardLimit) {
       $(".code-cd-img-open").text('<img class="img-');
       $(".code-cd-img-position").text(  $("#cd-layout").val() == "block" ? "left" : "top" );
       $(".code-cd-img-src").text('" src="');
-      $("#code-cd-" + i + "-img-src").text($("#cd-" + i + "-img-src").val() !== "" ? $("#cd-" + i + "-img-src").val() : "https:\/\/placekitten.com\/300\/300");
+      $("#code-cd-" + i + "-img-src").text($("#cd-" + i + "-img-src").val() !== "" ? $("#cd-" + i + "-img-src").val() : "https:\/\/via.placeholder.com\/300");
       $(".code-cd-img-alt").text('" alt="');
-      $("#code-cd-" + i + "-img-alt").text($("#cd-" + i + "-img-alt").val() !== "" ? $("#cd-" + i + "-img-alt").val() : "A cute kitten");
+      $("#code-cd-" + i + "-img-alt").text($("#cd-" + i + "-img-alt").val() !== "" ? $("#cd-" + i + "-img-alt").val() : "A boring placeholder image");
       $(".code-cd-img-close").text('">');
       preview("cd");
     });
@@ -236,8 +236,8 @@ function updateCards(cardCardLimit) {
       preview("cd");
     });
     // update text
-    updateText("cd", "#cd-" + i + "-img-src", "#code-cd-" + i + "-img-src", "https://placekitten.com/300/300");
-    updateText("cd", "#cd-" + i + "-img-alt", "#code-cd-" + i + "-img-alt", "A cute kitten");
+    updateText("cd", "#cd-" + i + "-img-src", "#code-cd-" + i + "-img-src", "https://via.placeholder.com/300");
+    updateText("cd", "#cd-" + i + "-img-alt", "#code-cd-" + i + "-img-alt", "A boring placeholder image");
     updateText("cd", "#cd-" + i + "-title", "#code-cd-" + i + "-title-text", "Card #" + i + " title");
     updateText("cd", "#cd-" + i + "-text", "#code-cd-" + i + "-text", "Card #" + i + " text");
   }
@@ -249,9 +249,9 @@ function showCardImgs(cardCardLimit) {
     $(".code-cd-img-open").text('<img class="img-');
     $(".code-cd-img-position").text(  $("#cd-layout").val() == "block" ? "left" : "top" );
     $(".code-cd-img-src").text('" src="');
-    $("#code-cd-" + i + "-img-src").text($("#cd-" + i + "-img-src").val() !== "" ? $("#cd-" + i + "-img-src").val() : "https:\/\/placekitten.com\/300\/300");
+    $("#code-cd-" + i + "-img-src").text($("#cd-" + i + "-img-src").val() !== "" ? $("#cd-" + i + "-img-src").val() : "https:\/\/via.placeholder.com\/300");
     $(".code-cd-img-alt").text('" alt="');
-    $("#code-cd-" + i + "-img-alt").text($("#cd-" + i + "-img-alt").val() !== "" ? $("#cd-" + i + "-img-alt").val() : "A cute kitten");
+    $("#code-cd-" + i + "-img-alt").text($("#cd-" + i + "-img-alt").val() !== "" ? $("#cd-" + i + "-img-alt").val() : "A boring placeholder image");
     $(".code-cd-img-close").text('">');
   }
 }
@@ -314,7 +314,7 @@ function createCarouselIndicator(i) {
 // create single carousel slide code
 function createCarouselSlide(i) {
   return `<span id="code-crsl-slide-${i}"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;carousel&#45;item${ i == 1 ? " active" : "" }&#34;&gt;</span><span id="code-crsl-slide-${i}-img">
-    <span class="code-open-tag">&lt;img&#32;src&#61;&#34;<span id="code-crsl-slide-${i}-img-src">https:&#47;&#47;placekitten.com&#47;800&#47;400</span>&#34;&#32;class&#61;&#34;w&#45;100&#34;&#32;alt&#61;&#34;<span id="code-crsl-slide-${i}-img-alt">An adorable kitten</span>&#34;&gt;</span></span>
+    <span class="code-open-tag">&lt;img&#32;src&#61;&#34;<span id="code-crsl-slide-${i}-img-src">https:&#47;&#47;via.placeholder.com&#47;800x400</span>&#34;&#32;alt&#61;&#34;<span id="code-crsl-slide-${i}-img-alt">A boring placeholder image</span>&#34;&gt;</span></span>
     <span class="code-open-tag">&lt;div&#32;class&#61;&#34;carousel&#45;caption&#34;&gt;</span><span id="code-crsl-slide-${i}-title"></span>
       <span class="code-open-tag">&lt;p&gt;</span>
         <span id="code-crsl-slide-${i}-text">Carousel slide #${i} text</span>
@@ -376,9 +376,9 @@ function carouselToggleImage(carouselSlideLimit) {
     ? $("#code-crsl-slide-" + i + "-img").html('\n    <span class="code-crsl-slide-img-open"></span><span id="code-crsl-slide-' + i + '-img-src"></span><span class="code-crsl-slide-img-middle"></span><span id="code-crsl-slide-' + i + '-img-alt"></span><span class="code-crsl-slide-img-close"></span>')
     : $("#code-crsl-slide-" + i + "-img").text("");
   $(".code-crsl-slide-img-open").text('<img src="');
-  $("#crsl-slide-" + i + "-img-src").val() !== "" ? $("#code-crsl-slide-" + i + "-img-src").text($("#crsl-slide-" + i + "-img-src").val()) : $("#code-crsl-slide-" + i + "-img-src").text("https://placekitten.com/800/400");
-  $(".code-crsl-slide-img-middle").text('" class="w-100" alt="');
-  $("#crsl-slide-" + i + "-img-alt").val() !== "" ? $("#code-crsl-slide-" + i + "-img-alt").text($("#crsl-slide-" + i + "-img-alt").val()) : $("#code-crsl-slide-" + i + "-img-alt").text("An adorable kitten");
+  $("#crsl-slide-" + i + "-img-src").val() !== "" ? $("#code-crsl-slide-" + i + "-img-src").text($("#crsl-slide-" + i + "-img-src").val()) : $("#code-crsl-slide-" + i + "-img-src").text("https://via.placeholder.com/800x400");
+  $(".code-crsl-slide-img-middle").text('" alt="');
+  $("#crsl-slide-" + i + "-img-alt").val() !== "" ? $("#code-crsl-slide-" + i + "-img-alt").text($("#crsl-slide-" + i + "-img-alt").val()) : $("#code-crsl-slide-" + i + "-img-alt").text("A boring placeholder image");
   $(".code-crsl-slide-img-close").text('">');
   preview("crsl");
   }
@@ -395,9 +395,9 @@ function carouselToggleTitle(carouselSlideLimit) {
   $("#crsl-check-title").hasClass("checked")
     ? $("#code-crsl-slide-" + i + "-title").html('\n      <span class="code-crsl-slide-title-open"></span>\n        <span id="code-crsl-slide-' + i + '-title-text"></span>\n      <span class="code-crsl-slide-title-close"></span>')
     : $("#code-crsl-slide-" + i + "-title").text("");
-  $(".code-crsl-slide-title-open").text('<h2>');
+  $(".code-crsl-slide-title-open").text('<h3>');
   $("#crsl-slide-" + i + "-title-text").val() !== "" ? $("#code-crsl-slide-" + i + "-title-text").text($("#crsl-slide-" + i + "-title-text").val()) : $("#code-crsl-slide-" + i + "-title-text").text("Carousel slide #" + i + " title");
-  $(".code-crsl-slide-title-close").text('</h2>');
+  $(".code-crsl-slide-title-close").text('</h3>');
   preview("crsl");
   }
 };
@@ -410,44 +410,12 @@ function updateCarouselSlides(carouselSlideLimit) {
     toggleCheckboxText("#crsl-check-img", "#crsl-toggle-img");
     toggleCheckboxText("#crsl-check-title", "#crsl-toggle-title");
     // update carousel text
-    updateText("crsl", "#crsl-slide-" + i + "-img-src", "#code-crsl-slide-" + i + "-img-src", "https://placekitten.com/800/300");
-    updateText("crsl", "#crsl-slide-" + i + "-img-alt", "#code-crsl-slide-" + i + "-img-alt", "An adorable kitten");
+    updateText("crsl", "#crsl-slide-" + i + "-img-src", "#code-crsl-slide-" + i + "-img-src", "https://via.placeholder.com/800x400");
+    updateText("crsl", "#crsl-slide-" + i + "-img-alt", "#code-crsl-slide-" + i + "-img-alt", "A boring placeholder image");
     updateText("crsl", "#crsl-slide-" + i + "-title-text", "#code-crsl-slide-" + i + "-title-text", "Carousel slide #" + i + "title");
     updateText("crsl", "#crsl-slide-" + i + "-text", "#code-crsl-slide-" + i + "-text", "Carousel slide #" + i + " text");
   }
 }
-
-/**********************************
- * code                           *
- **********************************/
-
-// sets code language
-$("#co-lang").change(function() {
-  $("#code-co-lang").text($(this).val());
-});
-
-// generate code body
-$("#co-body").keyup(function() {
-  codeBody = $("#co-body").val();
-  updateCodeBody();
-  preview("co");
-}).keyup();
-
-function updateCodeBody() {
-  (!codeBody == "")
-  // replace < and > with character entities
-  ? ( codeBody = codeBody.replace(/</gi, "&lt;"),
-    codeBody = codeBody.replace(/>/gi, "&gt;"),
-    $("#code-co-body").text(codeBody))
-  : $("#code-co-body").text("<h1>Hello world</h1\n");
-}
-
-// toggle code line nos
-$(document).on("click", "#co-check-line-nos", function(event) {
-  $(this).toggleClass("unchecked").toggleClass("checked");
-  $("#code-co-line-nos").text( $(this).hasClass("checked") ? ' linenumbers="yes"' : "");
-  $("#co-toggle-line-nos").text( $(this).hasClass("checked") ? "Remove" : "Add");
-});
 
 /**********************************
  * collapse                       *
@@ -588,6 +556,38 @@ $("#em-id").keyup(function() {
   if (!embedText == "") embedText = embedText.replace('iframe id="kaltura_player', 'iframe id="'+ embedId);  
   (!embedText == "") ? $("#code-em-embed").text(embedText) : $("#code-em-embed").text("<iframe></iframe>");
 }).keyup();
+
+/**********************************
+ * geshi                          *
+ **********************************/
+
+// sets geshi code language
+$("#geshi-lang").change(function() {
+  $("#code-geshi-lang").text($(this).val());
+});
+
+// generate geshi code body
+$("#geshi-body").keyup(function() {
+  codeBody = $("#geshi-body").val();
+  updateCodeBody();
+  preview("geshi");
+}).keyup();
+
+function updateCodeBody() {
+  (!codeBody == "")
+  // replace < and > with character entities
+  ? ( codeBody = codeBody.replace(/</gi, "&lt;"),
+    codeBody = codeBody.replace(/>/gi, "&gt;"),
+    $("#code-geshi-body").text(codeBody))
+  : $("#code-geshi-body").text("&lt;h1&gt;Hello world&lt;/h1&gt;\n");
+}
+
+// toggle geshi code line nos
+$(document).on("click", "#geshi-check-line-nos", function(event) {
+  $(this).toggleClass("unchecked").toggleClass("checked");
+  $("#code-geshi-line-nos").text( $(this).hasClass("checked") ? ' linenumbers="yes"' : "");
+  $("#geshi-toggle-line-nos").text( $(this).hasClass("checked") ? "Remove" : "Add");
+});
 
 /**********************************
  * infobox                        *
@@ -939,14 +939,14 @@ function createTimelineCard(i) {
         <span>&lt;div&#32;class&#61;&#34;card&#45;body&#34;&gt;</span>
           <span class="code-open-tag">&lt;div&#32;class&#61;&#34;row&#34;&gt;</span>
             <span id="code-tl-card-${i}-img"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;col&#45;md&#45;3&#32;card&#45;image&#34;&gt;</span>
-              <span class="code-open-tag">&lt;img&#32;src&#61;&#34;<span id="code-tl-card-${i}-img-src">https:\/\/placekitten.com\/200\/300</span>&#34;&gt;</span>
+              <span class="code-open-tag">&lt;img&#32;src&#61;&#34;<span id="code-tl-card-${i}-img-src">https:\/\/via.placeholder.com\/200x300</span>&#34;&gt;</span>
             <span class="code-close-tag">&lt;&#47;div&gt;</span></span>
             <span class="code-open-tag">&lt;div&#32;class&#61;&#34;col&#45;md&#34;&gt;</span>
               <span class="code-open-tag">&lt;h5&#32;class&#61;&#34;card&#45;title&#34;&gt;</span><span id="code-tl-card-${i}-title">${ !title == "" ? title : "Card #" + i + " title"}</span><span class="code-close-tag">&lt;&#47;h5&gt;</span>
               <span class="code-open-tag">&lt;p&#32;class&#61;&#34;card&#45;text&#34;&gt;</span><span id="code-tl-card-${i}-text">${ !text == "" ? text : "Chocolate sesame snaps bonbon sesame snaps macaroon powder lemon drops dessert. Jelly beans halvah jelly-o icing marshmallow tart soufflé."}</span><span class="code-close-tag">&lt;&#47;p&gt;</span>
             <span class="code-close-tag">&lt;&#47;div&gt;</span>
           <span class="code-close-tag">&lt;&#47;div&gt;</span>
-          <span id="code-tl-card-${i}-img-ref"><span class="code-open-tag">&lt;p&#32;class&#61;&#34;img&#45;reference&#34;&gt;</span><span id="code-tl-card-${i}-img-reference">Image: placekitten.com. An extremely adorable kitten</span><span class="code-close-tag">&lt;&#47;p&gt;</span></span>
+          <span id="code-tl-card-${i}-img-ref"><span class="code-open-tag">&lt;p&#32;class&#61;&#34;img&#45;reference&#34;&gt;</span><span id="code-tl-card-${i}-img-reference">Image: via.placeholder.com. A boring placeholder image</span><span class="code-close-tag">&lt;&#47;p&gt;</span></span>
         <span class="code-close-tag">&lt;&#47;div&gt;</span>
       <span class="code-close-tag">&lt;&#47;div&gt;</span>
     <span class="code-close-tag">&lt;&#47;div&gt;</span>
@@ -992,7 +992,7 @@ function createTimelineEditorCard(i) {
               Please provde alternative text for the image.
             </div>
             <label for="tl-card-${i}-img-red">Image reference*</label>
-            <textarea class="form-control" id="tl-card-${i}-img-ref" placeholder="www.placekitten.com" rows="2" required></textarea>
+            <textarea class="form-control" id="tl-card-${i}-img-ref" placeholder="via.placeholder.com" rows="2" required></textarea>
             <div class="invalid-feedback tl-img-invalid-feedback">
               Please provde a reference for the image.
             </div>
@@ -1099,12 +1099,12 @@ function timelineToggleImage(timelineCardLimit) {
         : ( $("#code-tl-card-" + i + "-img").text(""),
             $("#code-tl-card-" + i + "-img-ref").text("") );
       $(".code-tl-card-img-open").text('<div class="col-md-3 card-image"><img src="');
-      $("#code-tl-card-" + i + "-img-src").text( $("#tl-card-" + i + "-img-src").val() !== "" ? $("#tl-card-" + i + "-img-src").val() : "https://placekitten.com/200/300");
+      $("#code-tl-card-" + i + "-img-src").text( $("#tl-card-" + i + "-img-src").val() !== "" ? $("#tl-card-" + i + "-img-src").val() : "https://via.placeholder.com/200x300");
       $(".code-tl-card-img-center").text('" alt="');
-      $("#code-tl-card-" + i + "-img-alt").text( $("#tl-card-" + i + "-img-alt").val() !== "" ? $("#tl-card-" + i + "-img-alt").val() : "An extremely adorable kitten");
+      $("#code-tl-card-" + i + "-img-alt").text( $("#tl-card-" + i + "-img-alt").val() !== "" ? $("#tl-card-" + i + "-img-alt").val() : "A boring placeholder image");
       $(".code-tl-card-img-close").text('"></div>');
       $(".code-tl-card-img-ref-open").text('<p class="text-right img-reference">');
-      $("#code-tl-card-" + i + "-img-ref-text").text( $("#tl-card-" + i + "-img-ref").val() !== "" ? $("#tl-card-" + i + "-img-ref").val() : "Image: placekitten.com. An extremely adorable kitten");
+      $("#code-tl-card-" + i + "-img-ref-text").text( $("#tl-card-" + i + "-img-ref").val() !== "" ? $("#tl-card-" + i + "-img-ref").val() : "Image: via.placeholder.com. A boring placeholder image");
       $(".code-tl-card-img-ref-close").text('</p>');
      preview("tl");
     });
@@ -1134,8 +1134,8 @@ function updateTimelineText(timelineCardLimit) {
     updateText("tl", "#tl-" + i + "-title", "#code-tl-card-" + i + "-title", "Card #" + i + " title");
     updateText("tl", "#tl-" + i + "-date", "#code-tl-card-" + i + "-date-text", dateString + ( i < 6 ? " 0" + (i+7) + ":00AM" : " " + (i+7) + ":00PM" ));
     updateText("tl", "#tl-" + i + "-text", "#code-tl-card-" + i + "-text", "Card #" + i + " text");
-    updateText("tl", "#tl-card-" + i + "-img-src", "#code-tl-card-" + i + "-img-src", "https://placekitten.com/200/300");
-    updateText("tl", "#tl-card-" + i + "-img-alt", "#code-tl-card-" + i + "-img-alt", "An extremely adorable kitten" );
+    updateText("tl", "#tl-card-" + i + "-img-src", "#code-tl-card-" + i + "-img-src", "https://via.placeholder.com/200x300");
+    updateText("tl", "#tl-card-" + i + "-img-alt", "#code-tl-card-" + i + "-img-alt", "A boring placeholder image" );
     updateText("tl", "#tl-card-" + i + "-img-ref", "#code-tl-card-" + i + "-img-ref-text", "Foo");
   }
 }
@@ -1223,9 +1223,9 @@ function preview(component) {
 copyCode("btn");
 copyCode("cd");
 copyCode("crsl");
-copyCode("co");
 copyCode("col");
 copyCode("em");
+copyCode("geshi");
 copyCode("ib");
 copyCode("ls");
 copyCode("quo");
