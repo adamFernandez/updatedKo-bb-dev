@@ -1144,7 +1144,34 @@ function updateTimelineText(timelineCardLimit) {
  * transcript                     *
  **********************************/
 
-updateText("ts", "#ts-id", ".code-ts-id", "modname-unitno-transcript");
+$("#ts-type").change(function() {
+  // if secondary style is selected, force button standard button size
+  $(this).val() == "nsp"
+    ? (
+        $("#ts-id-container").html('<div class="input-group-prepend">\n<label class="input-group-text" for="ts-id">Unique ID*</label>\n</div><input type="text" class="form-control" id="ts-id" aria-label="ts-id" placeholder="modname-unitno-transcript-no" required>\n<div class="invalid-feedback" id="ts-id-invalid-feedback">Please enter the id link.</div>'),
+        $(".code-ts-btn-tag").text("button"),
+        $("#code-ts-view-btn-class").text(" btn-secondary collapsed"),
+        $("#code-ts-view-btn-role, #code-ts-download-btn-class").empty(),
+        $("#code-ts-id-1").text(' data-toggle="collapse" data-target="#'),
+        $(".code-ts-id").text($("#ts-id").val() === "" ? "modname-unitno-transcript-no" : $("#ts-id").val()),
+        $("#code-ts-id-2").text('" aria-expanded="false" aria-controls="'),
+        $("#code-ts-card-collapse").text(" collapse"),
+        $("#code-ts-id-3").text('"'),
+        $("#code-ts-id-4").text(' id="'),
+        $("#code-ts-id-5").text('"')
+      )
+    : (
+        $("#ts-id-container").empty(),
+        $(".code-ts-btn-tag").text("a"),
+        $("#code-ts-view-btn-class").text(" btn-primary view-close-transcript"),
+        $("#code-ts-view-btn-role").text(' role="button"'),
+        $("#code-ts-download-btn-class").text(" download-transcript"),
+        $(".code-ts-id, #code-ts-id-1, #code-ts-id-2, #code-ts-id-3, #code-ts-id-4, #code-ts-id-5, #code-ts-card-collapse").empty()
+     );
+  preview("ts");
+});
+
+updateText("ts", "#ts-id", ".code-ts-id", "modname-unitno-transcript-no");
 updateText("ts", "#ts-link", "#code-ts-link", "#");
 updateText("ts", "#ts-body", "#code-ts-body", "Transcript body...");
 
