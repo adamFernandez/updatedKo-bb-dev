@@ -1,6 +1,7 @@
 <div class="component-content" id="component-carousel">
   <div class="component-header">
     <h2 class="component-title">Carousel</h2>
+    <a href="https://keats.kcl.ac.uk/mod/page/view.php?id=3118002" target="_blank">Design System guidance and examples</a>
   </div>
   <div class="component-body container">
     <div class="alert alert-instructional mt-3" role="alert">

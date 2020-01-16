@@ -9,8 +9,7 @@
     <p>The <a href="https://keats.kcl.ac.uk/course/view.php?id=73004">King's Online Design System demo course on KEATS</a> demonstrates all of the different components that can be built. This also contains examples of 
 commonly used default pages and some of the different types of activities available.</p>
     <h3>Show me that other one! The one with the beautiful wireframes, illustrations and infographics!</h3>
-    <p>Visit the <a href="https://sites.google.com/kingsonline.eu/designsystem">Design System Google site</a> crafted 
-by our very talented UX team.  We're looking to migrate all the info over to the KEATS course so that we have all our guidance in one place.</p>
+    <p>We've retired the Design System Google site in order to have all our guidance in one place. All of the info previously found on the Gogle site is now available on KEATS via the link above.</p>
     <h3>Looks good. What's coming next?</h3>
     <p>View the <a href="https://keats.kcl.ac.uk/course/view.php?id=73004&section=1">Release plan and changelog</a> for a 
 breakdown of what's currently live and what's in store for future releases.</p>

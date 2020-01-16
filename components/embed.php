@@ -1,6 +1,7 @@
 <div class="component-content" id="component-embed">
   <div class="component-header">
     <h2 class="component-title">Embed</h2>
+    <a href="https://keats.kcl.ac.uk/mod/book/view.php?id=3072545" target="_blank">Design System guidance and examples</a>
   </div>
   <div class="component-body container">
     <div class="alert alert-instructional mt-3" role="alert">
