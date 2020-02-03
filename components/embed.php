@@ -14,6 +14,18 @@
           <p>Complete the following fields:</p>
           <form>
             <div class="form-row">
+              <div class="form-group col-md">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                     <label class="input-group-text" for="em-media-type">Media type</label>
+                  </div>
+                  <select class="custom-select" id="em-media-type">
+                    <option value="kaltura" selected>Video</option>
+                    <option value="audio">Audio</option>
+                    <option value="youtube">YouTube</option>
+                  </select>
+                </div>
+              </div>
               <div class="form-group col-md-7" id="em-player-size-form">
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
@@ -23,17 +35,6 @@
                     <option value="608by402">608x402</option>
                     <option value="400by285" selected>400x285 (Default)</option>
                     <option value="304by231">304x231</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group col-md">
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                     <label class="input-group-text" for="em-media-type">Media type</label>
-                  </div>
-                  <select class="custom-select" id="em-media-type">
-                    <option value="kaltura" selected>Video</option>
-                    <option value="audio">Audio</option>
                   </select>
                 </div>
               </div>

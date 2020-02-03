@@ -520,8 +520,9 @@ $("#em-player-size").change(function() {
 
 // change css file on media type select
 $("#em-media-type").change(function() {
-  $("#em-player-size-form").toggle();
-  $("#code-em-player-size").text( $(this).val() == "audio" ? "audio" : $("#em-player-size").val() );
+  $(this).val() == "kaltura" ? $("#em-player-size-form").show() : $("#em-player-size-form").hide();
+//  $("#em-player-size-form").toggle();
+  $("#code-em-player-size").text( $(this).val() == "kaltura" ? $("#em-player-size").val() : $("#em-media-type").val() );
   embedText = $("#em-embed").val();
   updateEmbedText();
   if (!embedText == "") preview("em");
