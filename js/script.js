@@ -845,9 +845,17 @@ $("#vertical-align").change(function() {
   preview("tab");
 });
 
+// toggle table column headers
+toggleCheckboxText("#tab-check-column-header", "#tab-toggle-column-header");
+$(document).on("click", "#tab-check-column-header", function(event) {
+  $(this).toggleClass("unchecked").toggleClass("checked");
+  $(this).hasClass("checked") ? $("#code-tab-thead").show() : $("#code-tab-thead").empty();
+  preview("tab");
+});
+
 // toggle table row headers
-toggleCheckboxText("#tab-check-row-title", "#tab-toggle-row-title");
-$(document).on("click", "#tab-check-row-title", function(event) {
+toggleCheckboxText("#tab-check-row-header", "#tab-toggle-row-header");
+$(document).on("click", "#tab-check-row-header", function(event) {
   $(this).toggleClass("unchecked").toggleClass("checked");
   maxTabRows = $("#tab-row-no").val();
   if ($(this).hasClass("checked")) {
@@ -1091,7 +1099,7 @@ timelineToggleImage(8);
 
 function timelineToggleImage(timelineCardLimit) {
   for (let i = 1; i <= timelineCardLimit; i++) {
-    toggleCheckboxText("#tl-" + i + "-check-img", "#tl-" + 1 + "-toggle-img");
+    toggleCheckboxText("#tl-" + i + "-check-img", "#tl-" + i + "-toggle-img");
     $(document).on("click", "#tl-" + i + "-check-img", function(event) {
       $("#tl-" + i + "-check-img").toggleClass("unchecked").toggleClass("checked");
       $("#tl-" + i + "-check-img").hasClass("checked")
@@ -1190,10 +1198,30 @@ $("#va-type").change(function() {
   $(".code-va-type").text($(this).val());
   // removes hyphen from model answer button text
   if ($(this).val() == "model-answer") $("#code-va-type-button-text").text("model answer");
+  if ($(this).val() == "generic") $("#code-va-type-button-text").text("");
   preview("va");
 });
 
-// updates question and answer text on input update
+// toggle view answer author code
+toggleCheckboxText("#va-check-author", "#va-toggle-author");
+$(document).on("click", "#va-check-author", function(event) {
+  $("#va-check-author").toggleClass("unchecked").toggleClass("checked");
+  $(".va-author").toggle();
+  $("#code-va-author").html( $(this).hasClass("checked") ? '<span class="code-va-author-open"></span><span id="code-va-author-img-src"></span><span class="code-va-author-2"></span><span id="code-va-author-img-alt"></span><span class="code-va-author-3"></span><span id="code-va-author-name"></span><span class="code-va-author-close"></span>' : "");
+  $(".code-va-author-open").text('<div class="card-author">\n        <img src="');
+  $("#code-va-author-img-src").text( $("#va-author-img-src").val() !== "" ? $("#va-author-img-src").val() : "https://via.placeholder.com/150");
+  $(".code-va-author-2").text('" alt="');
+  $("#code-va-author-img-alt").text( $("#va-author-img-alt").val() !== "" ? $("#va-author-img-alt").val() : "Description of image");
+  $(".code-va-author-3").text('">\n        <h5 class="card-title">');
+  $("#code-va-author-name").text( $("#va-author-name").val() !== "" ? $("#va-author-name").val() : "Author name");
+  $(".code-va-author-close").text('\n      </div>\n      ');
+  preview("va");
+});
+
+// updates text on input change
+updateText("va", "#va-author-img-src", "#code-va-author-img-src", "https://keats.kcl.ac.uk/pluginfile.php/1234567/mod_folder_content/1/23/name.jpg");
+updateText("va", "#va-author-img-alt", "#code-va-author-img-alt", "Description of image");
+updateText("va", "#va-author-name", "#code-va-author-name", "Author name");
 updateText("va", "#va-q", "#code-va-q", "Question?");
 updateText("va", "#va-a", "#code-va-a", "Answer");
 
