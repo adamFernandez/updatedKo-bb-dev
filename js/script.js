@@ -745,8 +745,10 @@ $("#tab-col-no").on('focus', function() {
     if (newMax > oldMax) {
       for (let c = oldMax; c < newMax; c++) {
         // add new headers
-        tabColHeader = createTableColHeader(c+1);
-        $("#code-tab-headers").append(tabColHeader);
+        if ($("#tab-check-column-header").hasClass("checked")) {
+          tabColHeader = createTableColHeader(c+1);
+          $("#code-tab-headers").append(tabColHeader);
+        }
         for (let r = 1; r <= maxTabRows; r++) {
           tabRowCol = createTableRowCol(c+1,r);
           $("#code-tab-row-"+ r + "-cols").append(tabRowCol);
@@ -785,6 +787,10 @@ $("#tab-row-no").on('focus', function() {
           tabRowCol = createTableRowCol(c,r+1);
           $("#code-tab-row-"+ (r+1) + "-cols").append(tabRowCol);
         }
+        if ($("#tab-check-row-header").hasClass("checked")) {
+          tabRowHeader = createTableRowHeader(r + 1);
+          $("#code-tab-row-" + (r + 1) + "-header").append(tabRowHeader);
+        }
       }
     } else {
       for (let r = newMax; r < oldMax; r++) {
@@ -817,20 +823,20 @@ function initialTable(maxTabCols, maxTabRows) {
 
 // create single table column header code
 function createTableColHeader(i) {
-  return `<span id="code-tab-col-${i}-header">\n      <span class="code-open-tag">&lt;th&#32;scope&#61;&#34;col&#34;&gt;<span id="code-tab-col-${i}-header-text">Column header</span><span class="code-close-tag">&lt;&#47;th&gt;</span></span>`;
+  return `<span id="code-tab-col-${i}-header">\n        <span class="code-open-tag">&lt;th&#32;scope&#61;&#34;col&#34;&gt;<span id="code-tab-col-${i}-header-text">Column header</span><span class="code-close-tag">&lt;&#47;th&gt;</span></span>`;
 }
 // create single table row header code
 function createTableRowHeader(i) {
-  return `<span class="code-tab-row-header">\n      <span class="code-open-tag">&lt;th&#32;scope&#61;&#34;row&#34;&gt;<span id="code-tab-row-${i}-header-text">${i == 0 ? "#" :"Row Header"}</span><span class="code-close-tag">&lt;&#47;th&gt;</span></span>`;
+  return `<span class="code-tab-row-header">\n        <span class="code-open-tag">&lt;th&#32;scope&#61;&#34;row&#34;&gt;<span id="code-tab-row-${i}-header-text">${i == 0 ? "#" :"Row Header"}</span><span class="code-close-tag">&lt;&#47;th&gt;</span></span>`;
 }
 // create single table row code
 function createTableRow(i) {
-  return `<span id="code-tab-row-${i}">\n    <span class="code-open-tag">&lt;tr&gt;<span id="code-tab-row-${i}-cols"><span id="code-tab-row-${i}-header"></span></span>
-    <span class="code-close-tag">&lt;&#47;tr&gt;</span></span>`;
+  return `<span id="code-tab-row-${i}">\n      <span class="code-open-tag">&lt;tr&gt;<span id="code-tab-row-${i}-cols"><span id="code-tab-row-${i}-header"></span></span>
+      <span class="code-close-tag">&lt;&#47;tr&gt;</span></span>`;
 }
 // create single table row column code
 function createTableRowCol(i,j) {
-  return `<span id="code-tab-row-${j}-col-${i}">\n      <span class="code-open-tag">&lt;td&gt;<span id="code-tab-row-${j}-col-${i}-text">Cell</span><span class="code-close-tag">&lt;&#47;td&gt;</span></span>`;
+  return `<span id="code-tab-row-${j}-col-${i}">\n        <span class="code-open-tag">&lt;td&gt;<span id="code-tab-row-${j}-col-${i}-text">Cell</span><span class="code-close-tag">&lt;&#47;td&gt;</span></span>`;
 }
 
 // change table width
@@ -849,7 +855,21 @@ $("#vertical-align").change(function() {
 toggleCheckboxText("#tab-check-column-header", "#tab-toggle-column-header");
 $(document).on("click", "#tab-check-column-header", function(event) {
   $(this).toggleClass("unchecked").toggleClass("checked");
-  $(this).hasClass("checked") ? $("#code-tab-thead").show() : $("#code-tab-thead").empty();
+  maxTabCols = $("#tab-col-no").val();
+  $(this).hasClass("checked")
+    ? ($("#code-tab-thead-open-tag").text('\n    <thead>\n      <tr>'),
+       $("#code-tab-thead-close-tag").text('\n      </tr>\n    </thead>'))
+    : $("#code-tab-thead-open-tag, #code-tab-thead-close-tag, #code-tab-row-0-header, #code-tab-headers").empty();
+  if ($(this).hasClass("checked")) {
+    for (let c = 1; c <= maxTabCols; c++) {
+      tabColHeader = createTableColHeader(c);
+      $("#code-tab-headers").append(tabColHeader);
+    }
+    if ($("#tab-check-row-header").hasClass("checked")) {
+      tabRowHeader = createTableRowHeader(0);
+      $("#code-tab-row-0-header").append(tabRowHeader);
+    }
+  }
   preview("tab");
 });
 
@@ -858,8 +878,13 @@ toggleCheckboxText("#tab-check-row-header", "#tab-toggle-row-header");
 $(document).on("click", "#tab-check-row-header", function(event) {
   $(this).toggleClass("unchecked").toggleClass("checked");
   maxTabRows = $("#tab-row-no").val();
-  if ($(this).hasClass("checked")) {
+  if ($(this).hasClass("checked") && $("#tab-check-column-header").hasClass("checked")) {
     for (let r = 0; r <= maxTabRows; r++) {
+      tabRowHeader = createTableRowHeader(r);
+      $("#code-tab-row-" + r + "-header").append(tabRowHeader);
+    }
+  } else if ($(this).hasClass("checked") && $("#tab-check-column-header").hasClass("unchecked")) {
+    for (let r = 1; r <= maxTabRows; r++) {
       tabRowHeader = createTableRowHeader(r);
       $("#code-tab-row-" + r + "-header").append(tabRowHeader);
     }

@@ -74,8 +74,12 @@
               </div>
             </div>
             <div class="custom-control custom-checkbox mb-3">
-              <input type="checkbox" class="custom-control-input unchecked" id="tab-check-row-title">
-              <label class="custom-control-label" for="tab-check-row-title"><span id="tab-toggle-row-title">Add</span> row titles</label>
+              <input type="checkbox" class="custom-control-input checked" id="tab-check-column-header" checked>
+              <label class="custom-control-label" for="tab-check-column-header"><span id="tab-toggle-column-header">Remove</span> column headers</label>
+            </div>
+            <div class="custom-control custom-checkbox mb-3">
+              <input type="checkbox" class="custom-control-input unchecked" id="tab-check-row-header">
+              <label class="custom-control-label" for="tab-check-row-header"><span id="tab-toggle-row-header">Add</span> row headers</label>
             </div>
             <div id="tab-cards">
             </div>
@@ -95,11 +99,11 @@
           <div class="code-box">
             <pre class="code-text">
 <span id="tab-print-code"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;table&#45;scroll&#34;&gt;</span>
-  <span class="code-open-tag">&lt;table&#32;class&#61&#34;table&#32;table&#45;bordered<span id="code-tab-width"></span><span id="code-tab-vertical-align"></span>&#34;&gt;</span>
-    <span class="code-open-tag">&lt;thead&gt;</span>
-      <span class="code-open-tag">&lt;tr&gt;</span><span id="code-tab-headers"><span id="code-tab-row-0-header"></span></span>
-      <span class="code-close-tag">&lt;&#47;tr&gt;</span>
-    <span class="code-close-tag">&lt;&#47;thead&gt;</span>
+  <span class="code-open-tag">&lt;table&#32;class&#61&#34;table&#32;table&#45;bordered<span id="code-tab-width"></span><span id="code-tab-vertical-align"></span>&#34;&gt;</span><span id="code-tab-thead-open-tag">
+    &lt;thead&gt;
+      &lt;tr&gt;</span><span id="code-tab-row-0-header"></span><span id="code-tab-headers"></span><span id="code-tab-thead-close-tag">
+      &lt;&#47;tr&gt;
+    &lt;&#47;thead&gt;</span>
     <span class="code-open-tag">&lt;tbody&gt;</span><span id="code-tab-rows"></span>
     <span class="code-close-tag">&lt;&#47;tbody&gt;</span>
   <span class="code-close-tag">&lt;&#47;table&gt;</span>
