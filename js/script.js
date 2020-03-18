@@ -2,6 +2,7 @@ today = new Date();
 dateString = today.toDateString();
 
 $(document).ready(function() {
+  preview("an");
   // set card to show 1 card by default
   maxCards = 1;
   initialCards(maxCards);
@@ -35,6 +36,32 @@ $(".nav-link").click(function() {
   linkId = this.id.slice(5);
   $("#component-" + linkId).show();
 });
+
+/**********************************
+ * academic note                  *
+ **********************************/
+
+// toggle academic note author code
+toggleCheckboxText("#an-check-author", "#an-toggle-author");
+$(document).on("click", "#an-check-author", function(event) {
+  $("#an-check-author").toggleClass("unchecked").toggleClass("checked");
+  $(".an-author").toggle();
+  $("#code-an-author").html( $(this).hasClass("checked") ? '<span class="code-an-author-open"></span><span id="code-an-author-img-src"></span><span class="code-an-author-2"></span><span id="code-an-author-img-alt"></span><span class="code-an-author-3"></span><span id="code-an-author-name"></span><span class="code-an-author-close"></span>' : "");
+  $(".code-an-author-open").text('<div class="card-author">\n        <img src="');
+  $("#code-an-author-img-src").text( $("#an-author-img-src").val() !== "" ? $("#an-author-img-src").val() : "https://via.placeholder.com/150");
+  $(".code-an-author-2").text('" alt="');
+  $("#code-an-author-img-alt").text( $("#an-author-img-alt").val() !== "" ? $("#an-author-img-alt").val() : "Description of image");
+  $(".code-an-author-3").text('">\n        <h5 class="card-title">');
+  $("#code-an-author-name").text( $("#an-author-name").val() !== "" ? $("#an-author-name").val() : "Author name");
+  $(".code-an-author-close").text('</h5>\n      </div>\n      ');
+  preview("an");
+});
+
+// updates text on input change
+updateText("an", "#an-author-img-src", "#code-an-author-img-src", "https://keats.kcl.ac.uk/pluginfile.php/1234567/mod_folder_content/1/23/name.jpg");
+updateText("an", "#an-author-img-alt", "#code-an-author-img-alt", "Description of image");
+updateText("an", "#an-author-name", "#code-an-author-name", "Author name");
+updateText("an", "#an-body", "#code-an-body", "Pudding pie bonbon muffin carrot cake fruitcake macaroon...");
 
 /**********************************
  * button                         *
@@ -1239,7 +1266,7 @@ $(document).on("click", "#va-check-author", function(event) {
   $("#code-va-author-img-alt").text( $("#va-author-img-alt").val() !== "" ? $("#va-author-img-alt").val() : "Description of image");
   $(".code-va-author-3").text('">\n        <h5 class="card-title">');
   $("#code-va-author-name").text( $("#va-author-name").val() !== "" ? $("#va-author-name").val() : "Author name");
-  $(".code-va-author-close").text('\n      </div>\n      ');
+  $(".code-va-author-close").text('</h5>\n      </div>\n      ');
   preview("va");
 });
 
@@ -1247,8 +1274,9 @@ $(document).on("click", "#va-check-author", function(event) {
 updateText("va", "#va-author-img-src", "#code-va-author-img-src", "https://keats.kcl.ac.uk/pluginfile.php/1234567/mod_folder_content/1/23/name.jpg");
 updateText("va", "#va-author-img-alt", "#code-va-author-img-alt", "Description of image");
 updateText("va", "#va-author-name", "#code-va-author-name", "Author name");
-updateText("va", "#va-q", "#code-va-q", "Question?");
-updateText("va", "#va-a", "#code-va-a", "Answer");
+updateText("va", "#va-q", "#code-va-q", "Lemon drops gingerbread topping?");
+updateText("va", "#va-a", "#code-va-a", "Pudding pie bonbon muffin carrot cake fruitcake
+macaroon...");
 
 /**********************************
  * general functions              *
@@ -1301,6 +1329,7 @@ function preview(component) {
   if (component == "btn") disablePreview();
 }
 
+copyCode("an");
 copyCode("btn");
 copyCode("cd");
 copyCode("crsl");
