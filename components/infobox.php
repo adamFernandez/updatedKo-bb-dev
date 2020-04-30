@@ -1,12 +1,9 @@
 <div class="component-content" id="component-infobox">
   <div class="component-header">
     <h2 class="component-title">Info Box</h2>
-    <a href="https://keats.kcl.ac.uk/mod/book/view.php?id=3118030" target="_blank">Design System guidance and examples</a>
+    <p><a href="https://keats.kcl.ac.uk/mod/book/view.php?id=3118030" target="_blank">Design System guidance and examples</a></p>
   </div>
   <div class="component-body container">
-    <div class="alert alert-instructional" role="alert">
-      <p>Don't forget to link to the css file! - https://git.iddkingsonline.com/designsystem/base.css. Info Boxes also rely on Font Awesome icons so this needs to be included too! - https://kit-free.fontawesome.com/releases/latest/css/free.min.css.</p>
-    </div>
     <div class="row">
       <div class="options col-md-6">
         <section class="options">
@@ -23,12 +20,13 @@
                   <option value="alert-instructional">Instructional alert</option>
                   <option value="key-concept-box">Key concept</option>
                   <option value="learning-outcome-box">Learning outcome</option>
+                  <option value="reading-box">Reading</option>
                 </select>
               </div>
             </div>
             <div class="form-group" id="ib-title-form">
-              <label for="ib-title">Definition title</label>
-              <input type="text" class="form-control" id="ib-df-title" placeholder="Definition title">
+              <label for="ib-title">Info box title</label>
+              <input type="text" class="form-control" id="ib-df-title" placeholder="Info box title">
             </div>
             <div class="form-group">
               <label for="ib-text">Info box body text</label>

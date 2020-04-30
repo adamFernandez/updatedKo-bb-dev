@@ -1,8 +1,10 @@
+
 today = new Date();
 dateString = today.toDateString();
 
 $(document).ready(function() {
   preview("an");
+  // default audio preview on load
   // set card to show 1 card by default
   maxCards = 1;
   initialCards(maxCards);
@@ -15,8 +17,6 @@ $(document).ready(function() {
   // set list to show 3 items by default
   maxListItems = 3;
   initialListItems(maxListItems);
-  // default embed preview on load
-  $("#em-preview-pane").html('<div class="embed-responsive embed-responsive-400by285"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2368101/sp/236810100/embedIframeJs/uiconf_id/42876062/partner_id/2368101?iframeembed=true&playerId=kaltura_player&entry_id=0_m83muzm5&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_fejlyov0&amp;flashvars[infoScreen.plugin]=false&amp;flashvars[titleLabel.plugin]=false&amp;flashvars[related.plugin]=false&amp;flashvars[closedCaptions.displayCaptions]=false&amp;flashvars[closedCaptions.layout]=below&amp;flashvars[IframeCustomPluginCss1]=https://git.iddkingsonline.com/kaltura/kaltura.css" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" frameborder="0" title="Kaltura Player"></iframe></div>');
   // preview infobox
   preview("ib");
   preview("quo");
@@ -25,6 +25,8 @@ $(document).ready(function() {
   // transcript preview
   preview("ts");
   preview("va");
+  // default video preview on load
+  $("#vd-preview-pane").html('<div class="embed-responsive embed-responsive-400by285"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2368101/sp/236810100/embedIframeJs/uiconf_id/42876062/partner_id/2368101?iframeembed=true&playerId=kaltura_player&entry_id=0_m83muzm5&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_fejlyov0&amp;flashvars[infoScreen.plugin]=false&amp;flashvars[titleLabel.plugin]=false&amp;flashvars[related.plugin]=false&amp;flashvars[closedCaptions.displayCaptions]=false&amp;flashvars[closedCaptions.layout]=below&amp;flashvars[IframeCustomPluginCss1]=https://git.iddkingsonline.com/kaltura/kaltura.css" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" frameborder="0" title="Kaltura Player"></iframe></div>');
 });
 
 //display component on nav select
@@ -62,6 +64,29 @@ updateText("an", "#an-author-img-src", "#code-an-author-img-src", "https://keats
 updateText("an", "#an-author-img-alt", "#code-an-author-img-alt", "Description of image");
 updateText("an", "#an-author-name", "#code-an-author-name", "Author name");
 updateText("an", "#an-body", "#code-an-body", "Pudding pie bonbon muffin carrot cake fruitcake macaroon...");
+
+/**********************************
+ * audio                          *
+ **********************************/
+
+// generate embed code
+$("#au-embed").keyup(function() {
+  embedText = $("#au-embed").val();
+  variables =
+  '&amp;flashvars[infoScreen.plugin]=false&amp;flashvars[titleLabel.plugin]=false&amp;flashvars[related.plugin]=false&amp;flashvars[closedCaptions.displayCaptions]=false&amp;flashvars[IframeCustomPluginCss1]=https:\/\/kit-free.fontawesome.com\/releases\/latest\/css\/free.min.css&amp;flashvars[IframeCustomPluginCss2]=https:\/\/git.iddkingsonline.com\/designsystem\/css\/audio.css&amp;flashvars[loadingSpinner.imageUrl]=https://git.iddkingsonline.com/assets/blank.png';
+  // add variables
+  (!embedText == "")
+  ? ( embedText = embedText.replace('\" width', variables + '\" width'),
+    $("#code-au-embed").text(embedText))
+  : $("#code-au-embed").text('<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2368101/sp/236810100/embedIframeJs/uiconf_id/42876062/partner_id/2368101?iframeembed=true&playerId=kaltura_player&entry_id=1_ps7tz9uc&flashvars[streamerType]=auto&flashvars[localizationCode]=en&flashvars[leadWithHTML5]=true&flashvars[sideBarContainer.plugin]=true&flashvars[sideBarContainer.position]=left&flashvars[sideBarContainer.clickToClose]=true&flashvars[chapters.plugin]=true&flashvars[chapters.layout]=vertical&flashvars[chapters.thumbnailRotator]=false&flashvars[streamSelector.plugin]=true&flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&flashvars[dualScreen.plugin]=true&flashvars[hotspots.plugin]=1&flashvars[Kaltura.addCrossoriginToIframe]=true&&wid=1_8oznd0m2&flashvars[infoScreen.plugin]=false&flashvars[titleLabel.plugin]=false&flashvars[related.plugin]=false&flashvars[closedCaptions.displayCaptions]=false&flashvars[IframeCustomPluginCss1]=https://kit-free.fontawesome.com/releases/latest/css/free.min.css&flashvars[IframeCustomPluginCss2]=https://git.iddkingsonline.com/designsystem/css/audio.css&flashvars[loadingSpinner.imageUrl]=https://git.iddkingsonline.com/assets/blank.png" width="400" height="285" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen="" allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-forms allow-same-origin allow-scripts allow-top-navigation" frameborder="0" title="Kaltura Player"></iframe>');
+  preview("au");
+}).keyup();
+
+// updates text on input change
+updateText("au", "#au-img-src", "#code-au-img-src", "https://via.placeholder.com/300");
+updateText("au", "#au-img-alt", "#code-au-img-alt", "Image description");
+updateText("au", "#au-speaker", "#code-au-speaker", "Professor Place Holder");
+updateText("au", "#au-title", "#code-au-title", "Audio title");
 
 /**********************************
  * button                         *
@@ -534,56 +559,6 @@ function updateCollapseText(collapseCardLimit) {
     updateText("col", "#collapse-" + i + "-body", "#code-col-collapse-" + i + "-body", "Collapse card #" + i + "body");
   }
 }
-
-/**********************************
- * embed                          *
- **********************************/
-
-// change responsive ratio on size select
-$("#em-player-size").change(function() {
-  $("#code-em-player-size").text($(this).val());
-  if (!$("#em-embed").val() == "") preview("em");
-});
-
-// change css file on media type select
-$("#em-media-type").change(function() {
-  $(this).val() == "kaltura" ? $("#em-player-size-form").show() : $("#em-player-size-form").hide();
-//  $("#em-player-size-form").toggle();
-  $("#code-em-player-size").text( $(this).val() == "kaltura" ? $("#em-player-size").val() : $("#em-media-type").val() );
-  embedText = $("#em-embed").val();
-  updateEmbedText();
-  if (!embedText == "") preview("em");
-});
-
-// generate embed code
-$("#em-embed").keyup(function() {
-  embedText = $("#em-embed").val();
-  updateEmbedText();
-  preview("em");
-}).keyup();
-
-function updateEmbedText() {
-  // update the id if provided
-  embedId = $("#em-id").val();
-  $("#em-media-type").val() == "audio"
-  ? variables = '&amp;flashvars[infoScreen.plugin]=false&amp;flashvars[titleLabel.plugin]=false&amp;flashvars[related.plugin]=false&amp;flashvars[closedCaptions.displayCaptions]=false&amp;flashvars[IframeCustomPluginCss1]=https:\/\/git.iddkingsonline.com\/kaltura\/audio.css'
-  : variables = '&amp;flashvars[infoScreen.plugin]=false&amp;flashvars[titleLabel.plugin]=false&amp;flashvars[related.plugin]=false&amp;flashvars[closedCaptions.displayCaptions]=false&amp;flashvars[closedCaptions.layout]=below&amp;flashvars[IframeCustomPluginCss1]=https:\/\/git.iddkingsonline.com\/kaltura\/kaltura.css';
-  if (!embedId == "") embedText = embedText.replace('iframe id="kaltura_player', 'iframe id="'+ embedId);
-  // add variables
-  (!embedText == "")
-  ? ( embedText = embedText.replace('\" width', variables + '\" width'),
-    $("#code-em-embed").text(embedText))
-  : $("#code-em-embed").text("<iframe></iframe>");
-}
-
-
-// update the id, do not refresh preview
-$("#em-id").keyup(function() {
-  embedId = $(this).val();
-  embedText = $("#em-embed").val();
-  if (!embedText == "") embedText = embedText.replace('iframe id="kaltura_player', 'iframe id="'+ embedId);  
-  (!embedText == "") ? $("#code-em-embed").text(embedText) : $("#code-em-embed").text("<iframe></iframe>");
-}).keyup();
 
 /**********************************
  * geshi                          *
@@ -1242,6 +1217,44 @@ $(document).on("click", ".view-close-transcript", function(event) {
 });
 
 /**********************************
+ * video                          *
+ **********************************/
+
+// change responsive ratio on size select
+$("#vd-player-size").change(function() {
+  $("#code-vd-player-size").text($(this).val());
+  if (!$("#vd-embed").val() == "") preview("vd");
+});
+
+// change class on media type select
+$("#vd-media-type").change(function() {
+  $(this).val() == "kaltura" ? $("#vd-player-size-form").show() : $("#vd-player-size-form").hide();
+  $("#code-vd-player-size").text( $(this).val() == "kaltura" ? $("#vd-player-size").val() : $("#vd-media-type").val() );
+  embedText = $("#vd-embed").val();
+  embedTextAddVariables();
+  if (!embedText == "") preview("vd");
+});
+
+// generate embed code
+$("#vd-embed").keyup(function() {
+  embedText = $("#vd-embed").val();
+  $("#vd-media-type").val() == "kaltura"
+  ? embedTextAddVariables()
+  : $("#code-vd-embed").text(embedText);
+  preview("vd");
+}).keyup();
+
+function embedTextAddVariables() {
+  variables =
+  '&amp;flashvars[infoScreen.plugin]=false&amp;flashvars[titleLabel.plugin]=false&amp;flashvars[related.plugin]=false&amp;flashvars[closedCaptions.displayCaptions]=false&amp;flashvars[closedCaptions.layout]=below&amp;flashvars[IframeCustomPluginCss1]=https:\/\/git.iddkingsonline.com\/designsystem\/css\/kaltura.css';
+  // add variables
+  (!embedText == "")
+  ? ( embedText = embedText.replace('\" width', variables + '\" width'),
+    $("#code-vd-embed").text(embedText))
+  : $("#code-vd-embed").text("<iframe></iframe>");
+}
+
+/**********************************
  * view answer                    *
  **********************************/
 
@@ -1249,8 +1262,7 @@ $(document).on("click", ".view-close-transcript", function(event) {
 $("#va-type").change(function() {
   $(".code-va-type").text($(this).val());
   // removes hyphen from model answer button text
-  if ($(this).val() == "model-answer") $("#code-va-type-button-text").text("model answer");
-  if ($(this).val() == "generic") $("#code-va-type-button-text").text("");
+  $("#code-va-type-button-text").text( $(this).val() == "generic" ? "" : ' ' + $(this).val().replace('-',' ') );
   preview("va");
 });
 
@@ -1275,8 +1287,7 @@ updateText("va", "#va-author-img-src", "#code-va-author-img-src", "https://keats
 updateText("va", "#va-author-img-alt", "#code-va-author-img-alt", "Description of image");
 updateText("va", "#va-author-name", "#code-va-author-name", "Author name");
 updateText("va", "#va-q", "#code-va-q", "Lemon drops gingerbread topping?");
-updateText("va", "#va-a", "#code-va-a", "Pudding pie bonbon muffin carrot cake fruitcake
-macaroon...");
+updateText("va", "#va-a", "#code-va-a", "Pudding pie bonbon muffin carrot cake fruitcake macaroon...");
 
 /**********************************
  * general functions              *
@@ -1330,11 +1341,11 @@ function preview(component) {
 }
 
 copyCode("an");
+copyCode("au");
 copyCode("btn");
 copyCode("cd");
 copyCode("crsl");
 copyCode("col");
-copyCode("em");
 copyCode("geshi");
 copyCode("ib");
 copyCode("ls");
@@ -1343,6 +1354,7 @@ copyCode("tab");
 copyCode("tl");
 copyCode("ts");
 copyCode("va");
+copyCode("vd");
 
 
 // on copy code button click
