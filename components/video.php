@@ -1,7 +1,7 @@
 <div class="component-content" id="component-video">
   <div class="component-header">
     <h2 class="component-title">Video</h2>
-    <p><a href="https://keats.kcl.ac.uk/mod/book/view.php?id=3072545&chapterid=240944" target="_blank">Design System guidance and examples</a></p>
+    <a href="https://keats.kcl.ac.uk/mod/book/view.php?id=3072545&chapterid=240944" target="_blank">Design System guidance and examples</a>
   </div>
   <div class="component-body container">
     <div class="row">
@@ -17,7 +17,8 @@
                      <label class="input-group-text" for="vd-media-type">Media type</label>
                   </div>
                   <select class="custom-select" id="vd-media-type">
-                    <option value="kaltura" selected>Video</option>
+                    <option value="kaltura" selected>Kaltura video</option>
+                    <!-- <option value="kaltura-playlist">Kaltura video playlist</option> -->
                     <option value="youtube">YouTube</option>
                   </select>
                 </div>

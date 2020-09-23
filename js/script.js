@@ -14,6 +14,7 @@ $(document).ready(function() {
   // set collapse to show 3 cards by default
   maxCollapseCards = 3;
   initialCollapseCards(maxCollapseCards);
+  preview("dl");
   // set list to show 3 items by default
   maxListItems = 3;
   initialListItems(maxListItems);
@@ -26,7 +27,7 @@ $(document).ready(function() {
   preview("ts");
   preview("va");
   // default video preview on load
-  $("#vd-preview-pane").html('<div class="embed-responsive embed-responsive-400by285"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2368101/sp/236810100/embedIframeJs/uiconf_id/42876062/partner_id/2368101?iframeembed=true&playerId=kaltura_player&entry_id=0_m83muzm5&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_fejlyov0&amp;flashvars[infoScreen.plugin]=false&amp;flashvars[titleLabel.plugin]=false&amp;flashvars[related.plugin]=false&amp;flashvars[closedCaptions.displayCaptions]=false&amp;flashvars[closedCaptions.layout]=below&amp;flashvars[IframeCustomPluginCss1]=https://git.iddkingsonline.com/kaltura/kaltura.css" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" frameborder="0" title="Kaltura Player"></iframe></div>');
+  $("#vd-preview-pane").html('<div class="embed-responsive embed-responsive-400by285"><iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2368101/sp/236810100/embedIframeJs/uiconf_id/42876062/partner_id/2368101?iframeembed=true&playerId=kaltura_player&entry_id=0_m83muzm5&flashvars[streamerType]=auto&amp;flashvars[localizationCode]=en&amp;flashvars[leadWithHTML5]=true&amp;flashvars[sideBarContainer.plugin]=true&amp;flashvars[sideBarContainer.position]=left&amp;flashvars[sideBarContainer.clickToClose]=true&amp;flashvars[chapters.plugin]=true&amp;flashvars[chapters.layout]=vertical&amp;flashvars[chapters.thumbnailRotator]=false&amp;flashvars[streamSelector.plugin]=true&amp;flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&amp;flashvars[dualScreen.plugin]=true&amp;flashvars[Kaltura.addCrossoriginToIframe]=true&amp;&wid=1_fejlyov0&amp;flashvars[infoScreen.plugin]=false&amp;flashvars[titleLabel.plugin]=false&amp;flashvars[related.plugin]=false&amp;flashvars[closedCaptions.displayCaptions]=false&amp;flashvars[closedCaptions.layout]=below&amp;flashvars[transcript.plugin]=false&amp;flashvars[IframeCustomPluginCss1]=https://git.iddkingsonline.com/kaltura/kaltura.css" width="400" height="285" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" frameborder="0" title="Kaltura Player"></iframe></div>');
 });
 
 //display component on nav select
@@ -69,16 +70,30 @@ updateText("an", "#an-body", "#code-an-body", "Pudding pie bonbon muffin carrot 
  * audio                          *
  **********************************/
 
+// toggle view answer author code
+toggleCheckboxText("#au-check-img", "#au-toggle-img");
+$(document).on("click", "#au-check-img", function(event) {
+  $("#au-check-img").toggleClass("unchecked").toggleClass("checked");
+  $(".au-img").toggle();
+  $("#code-au-img-container").html( $(this).hasClass("checked") ? '<span class="code-au-img-open"></span><span id="code-au-img-img-src"></span><span class="code-au-img-2"></span><span id="code-au-img-img-alt"></span><span class="code-au-img-close"></span>' : "");
+  $(".code-au-img-open").text('<div class="card-author">\n        <img class="audio-image"  src="');
+  $("#code-au-img-img-src").text( $("#au-img-src").val() !== "" ? $("#au-img-img-src").val() : "https://via.placeholder.com/150");
+  $(".code-au-img-2").text('" alt="');
+  $("#code-au-img-img-alt").text( $("#va-author-img-alt").val() !== "" ? $("#va-author-img-alt").val() : "Image description");
+  $(".code-au-img-close").text('">\n    </div>\n    ');
+  preview("au");
+});
+
 // generate embed code
 $("#au-embed").keyup(function() {
   embedText = $("#au-embed").val();
   variables =
-  '&amp;flashvars[infoScreen.plugin]=false&amp;flashvars[titleLabel.plugin]=false&amp;flashvars[related.plugin]=false&amp;flashvars[closedCaptions.displayCaptions]=false&amp;flashvars[IframeCustomPluginCss1]=https:\/\/kit-free.fontawesome.com\/releases\/latest\/css\/free.min.css&amp;flashvars[IframeCustomPluginCss2]=https:\/\/git.iddkingsonline.com\/designsystem\/css\/audio.css&amp;flashvars[loadingSpinner.imageUrl]=https://git.iddkingsonline.com/assets/blank.png';
+  '&amp;flashvars[infoScreen.plugin]=false&amp;flashvars[titleLabel.plugin]=false&amp;flashvars[related.plugin]=false&amp;flashvars[closedCaptions.displayCaptions]=false&amp;flashvars[transcript.plugin]=false&amp;flashvars[IframeCustomPluginCss1]=https:\/\/kit-free.fontawesome.com\/releases\/latest\/css\/free.min.css&amp;flashvars[IframeCustomPluginCss2]=https:\/\/git.iddkingsonline.com\/designsystem\/css\/audio.css&amp;flashvars[loadingSpinner.imageUrl]=https://git.iddkingsonline.com/assets/blank.png';
   // add variables
   (!embedText == "")
   ? ( embedText = embedText.replace('\" width', variables + '\" width'),
     $("#code-au-embed").text(embedText))
-  : $("#code-au-embed").text('<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2368101/sp/236810100/embedIframeJs/uiconf_id/42876062/partner_id/2368101?iframeembed=true&playerId=kaltura_player&entry_id=1_ps7tz9uc&flashvars[streamerType]=auto&flashvars[localizationCode]=en&flashvars[leadWithHTML5]=true&flashvars[sideBarContainer.plugin]=true&flashvars[sideBarContainer.position]=left&flashvars[sideBarContainer.clickToClose]=true&flashvars[chapters.plugin]=true&flashvars[chapters.layout]=vertical&flashvars[chapters.thumbnailRotator]=false&flashvars[streamSelector.plugin]=true&flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&flashvars[dualScreen.plugin]=true&flashvars[hotspots.plugin]=1&flashvars[Kaltura.addCrossoriginToIframe]=true&&wid=1_8oznd0m2&flashvars[infoScreen.plugin]=false&flashvars[titleLabel.plugin]=false&flashvars[related.plugin]=false&flashvars[closedCaptions.displayCaptions]=false&flashvars[IframeCustomPluginCss1]=https://kit-free.fontawesome.com/releases/latest/css/free.min.css&flashvars[IframeCustomPluginCss2]=https://git.iddkingsonline.com/designsystem/css/audio.css&flashvars[loadingSpinner.imageUrl]=https://git.iddkingsonline.com/assets/blank.png" width="400" height="285" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen="" allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-forms allow-same-origin allow-scripts allow-top-navigation" frameborder="0" title="Kaltura Player"></iframe>');
+  : $("#code-au-embed").text('<iframe id="kaltura_player" src="https://cdnapisec.kaltura.com/p/2368101/sp/236810100/embedIframeJs/uiconf_id/42876062/partner_id/2368101?iframeembed=true&playerId=kaltura_player&entry_id=1_ps7tz9uc&flashvars[streamerType]=auto&flashvars[localizationCode]=en&flashvars[leadWithHTML5]=true&flashvars[sideBarContainer.plugin]=true&flashvars[sideBarContainer.position]=left&flashvars[sideBarContainer.clickToClose]=true&flashvars[chapters.plugin]=true&flashvars[chapters.layout]=vertical&flashvars[chapters.thumbnailRotator]=false&flashvars[streamSelector.plugin]=true&flashvars[EmbedPlayer.SpinnerTarget]=videoHolder&flashvars[dualScreen.plugin]=true&flashvars[hotspots.plugin]=1&flashvars[Kaltura.addCrossoriginToIframe]=true&&wid=1_8oznd0m2&flashvars[infoScreen.plugin]=false&flashvars[titleLabel.plugin]=false&flashvars[related.plugin]=false&flashvars[closedCaptions.displayCaptions]=false&flashvars[transcript.plugin]=false&flashvars[IframeCustomPluginCss1]=https://kit-free.fontawesome.com/releases/latest/css/free.min.css&flashvars[IframeCustomPluginCss2]=https://git.iddkingsonline.com/designsystem/css/audio.css&flashvars[loadingSpinner.imageUrl]=https://git.iddkingsonline.com/assets/blank.png" width="400" height="285" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen="" allow="autoplay *; fullscreen *; encrypted-media *" sandbox="allow-forms allow-same-origin allow-scripts allow-top-navigation" frameborder="0" title="Kaltura Player"></iframe>');
   preview("au");
 }).keyup();
 
@@ -132,13 +147,16 @@ updateText("btn", "#btn-link", "#code-btn-link-text", "#");
 // change card type between default card and float box
 $("#cd-type").change(function(data){
   $(this).val() == "float-box"
-    ? (cdLayout(),
+    ? ( cdLayout(),
       showCardImgs(4),
       $(".cd-img-form").show(),
       $("#cd-layout-form, .cd-img-check").hide(),
-      $(".code-cd-type, .code-cd-body-class").text("float-box"))
-    : ($("#cd-layout-form, .cd-img-check").show(),
-    $(".code-cd-type, .code-cd-body-class").text("card"));
+      $(".code-cd-type, .code-cd-body-class").text("float-box"),
+      $("#code-cd-img-container-open").html("div"),
+      $("#code-cd-img-container-middle").html("&gt;\n&lt;img&gt;"),
+      $("#code-cd-img-container-close").html("&lt;&#47;div&gt;\n&lt;&#47;div&gt;") )
+    : ( $("#cd-layout-form, .cd-img-check").show(),
+      $(".code-cd-type, .code-cd-body-class").text("card") );
   preview("cd");  
 });
 
@@ -187,7 +205,6 @@ function cdLayout() {
       $("#code-cd-deck-close").text("</div>"),
       $(".code-cd-img-position").text("top"))
     : ($("#code-cd-deck-open, #code-cd-deck-close").empty(),
-      $(".code-cd-img-position").text("left"),
       $("#cd-layout").val("block"));
   preview("cd");  
 };
@@ -206,7 +223,9 @@ function initialCards(maxCards) {
 // create single card card code
 function createCard(i) {
   return `<span id="code-cd-card-${i}"><pre>  <span class="code-open-tag">&lt;div&#32;class&#61;&#34;<span class="code-cd-type">${ $("#cd-type").val() == "float-box" ? "float-box" : "card" }</span>&#34;&gt;</span><span id="code-cd-${i}-img">
-    <span id="code-cd-${i}-img-open">&lt;img&#32;class&#61;&#34;img&#45;<span class="code-cd-img-position">${ $("#cd-layout").val() == "block" ? "left" : "top" }</span>&#34;&#32;src&#61;&#34;</span><span id="code-cd-${i}-img-src">https:\/\/via.placeholder.com\/300</span><span id="code-cd-${i}-img-middle">&#34;&#32;alt&#61;&#34;</span><span id="code-cd-${i}-img-alt">A&#32;boring&#32;placeholder&#32;image</span>&#34;&gt;</span></span>
+    <span id="code-cd-${i}-img-open">&lt;<span
+    id="code-cd-img-container-open">img</span>&#32;src&#61;&#34;</span><span id="code-cd-${i}-img-src">https:\/\/via.placeholder.com\/300</span><span id="code-cd-${i}-img-middle">&#34;&#32;alt&#61;&#34;</span><span id="code-cd-${i}-img-alt">A&#32;boring&#32;placeholder&#32;image</span>&#34;&gt;<span
+    id="code-cd-img-container-close"></span></span></span>
     <span class="code-open-tag">&lt;div&#32;class&#61;&#34;<span class="code-cd-body-class">card</span>&#45;body&#34;&gt;</span><span id="code-cd-${i}-title">
       <span>&lt;h4&gt;</span><span id="code-cd-${i}-title-text">Card #${i} title</span><span>&lt;&#47;h4&gt;</span></span>
       <span class="code-open-tag">&lt;p&gt;</span><span id="code-cd-${i}-text">Card #${i} text</span><span class="code-close-tag">&lt;&#47;p&gt;</span>
@@ -266,11 +285,10 @@ function updateCards(cardCardLimit) {
     // toggle img code
     $(document).on('click', "#cd-" + i + "-check-img", function (event) {
       $("#cd-" + i + "-check-img").hasClass("checked")
-        ? $("#code-cd-" + i + "-img").html('\n    <span class="code-cd-img-open"></span><span class="code-cd-img-position"></span><span class="code-cd-img-src"></span><span id="code-cd-' + i + '-img-src"></span><span class="code-cd-img-alt"></span><span id="code-cd-' + i + '-img-alt"></span><span class="code-cd-img-close"></span>')
+        ? $("#code-cd-" + i + "-img").html('\n    <span class="code-cd-img-open"></span></span><span class="code-cd-img-src"></span><span id="code-cd-' + i + '-img-src"></span><span class="code-cd-img-alt"></span><span id="code-cd-' + i + '-img-alt"></span><span class="code-cd-img-close"></span>')
         : $("#code-cd-" + i + "-img").text("");
-      $(".code-cd-img-open").text('<img class="img-');
-      $(".code-cd-img-position").text(  $("#cd-layout").val() == "block" ? "left" : "top" );
-      $(".code-cd-img-src").text('" src="');
+      $(".code-cd-img-open").text('<img');
+      $(".code-cd-img-src").text(' src="');
       $("#code-cd-" + i + "-img-src").text($("#cd-" + i + "-img-src").val() !== "" ? $("#cd-" + i + "-img-src").val() : "https:\/\/via.placeholder.com\/300");
       $(".code-cd-img-alt").text('" alt="');
       $("#code-cd-" + i + "-img-alt").text($("#cd-" + i + "-img-alt").val() !== "" ? $("#cd-" + i + "-img-alt").val() : "A boring placeholder image");
@@ -297,16 +315,35 @@ function updateCards(cardCardLimit) {
 
 function showCardImgs(cardCardLimit) {
   for (let i = 1; i <= cardCardLimit; i++) {
-    $("#code-cd-" + i + "-img").html('\n    <span class="code-cd-img-open"></span><span class="code-cd-img-position"></span><span class="code-cd-img-src"></span><span id="code-cd-' + i + '-img-src"></span><span class="code-cd-img-alt"></span><span id="code-cd-' + i + '-img-alt"></span><span class="code-cd-img-close"></span>');
-    $(".code-cd-img-open").text('<img class="img-');
-    $(".code-cd-img-position").text(  $("#cd-layout").val() == "block" ? "left" : "top" );
-    $(".code-cd-img-src").text('" src="');
-    $("#code-cd-" + i + "-img-src").text($("#cd-" + i + "-img-src").val() !== "" ? $("#cd-" + i + "-img-src").val() : "https:\/\/via.placeholder.com\/300");
+    $("#code-cd-" + i + "-img").html('\n    <span class="code-cd-img-open"></span><span class="code-cd-img-src"></span><span id="code-cd-' + i + '-img-src"></span><span class="code-cd-img-alt"></span><span id="code-cd-' + i + '-img-alt"></span><span class="code-cd-img-close"></span>');
+    $(".code-cd-img-open").text('<img');
+    $(".code-cd-img-src").text(' src="');
+    $("#code-cd-" + i + "-img-src").text($("#cd-" + i + "-img-src").val() !== ""
+    ? $("#cd-" + i + "-img-src").val() : "https:\/\/via.placeholder.com\/300");
     $(".code-cd-img-alt").text('" alt="');
-    $("#code-cd-" + i + "-img-alt").text($("#cd-" + i + "-img-alt").val() !== "" ? $("#cd-" + i + "-img-alt").val() : "A boring placeholder image");
+    $("#code-cd-" + i + "-img-alt").text($("#cd-" + i + "-img-alt").val() !== ""
+    ? $("#cd-" + i + "-img-alt").val() : "A boring placeholder image");
     $(".code-cd-img-close").text('">');
   }
 }
+
+/*
+function showCardImgs(cardCardLimit) {
+  for (let i = 1; i <= cardCardLimit; i++) {
+    $("#code-cd-" + i + "-img").html('\n    <span class="code-cd-img-open"></span><span class="code-cd-img-src"></span><span id="code-cd-' + i + '-img-src"></span><span class="code-cd-img-alt"></span><span id="code-cd-' + i + '-img-alt"></span><span class="code-cd-img-close"></span>');
+    $(".code-cd-img-open").html( ${ $("#cd-type").val() == "default"
+      ? "&lt;img"
+      : "&lt;&#47;div&gt;\n      &lt;img";
+    $(".code-cd-img-src").text(' src="');
+    $("#code-cd-" + i + "-img-src").text($("#cd-" + i + "-img-src").val() !== "" ? $("#cd-" + i + "-img-src").val() : "https:\/\/via.placeholder.com\/300");
+    $(".code-cd-img-alt").text('" alt="');
+    $("#code-cd-" + i + "-img-alt").text($("#cd-" + i + "-img-alt").val() !== "" ? $("#cd-" + i + "-img-alt").val() : "A boring placeholder image");
+    $(".code-cd-img-close").html( ${ $("#cd-type").val() == "default" 
+      ? "&#32;&gt;"
+      : "&#32;&gt;\n    &lt;&#47;div&gt;" } );
+  }
+}
+*/
 
 /**********************************
  * carousel                       *
@@ -561,6 +598,16 @@ function updateCollapseText(collapseCardLimit) {
 }
 
 /**********************************
+ * download                       *
+ **********************************/
+
+updateText("dl", "#dl-link", "#code-dl-link",
+"http://keats.kcl.ac.uk/pluginfile.php/12345/course/section/file.pdf");
+updateText("dl", "#dl-type", "#code-dl-type", "PDF");
+updateText("dl", "#dl-size", "#code-dl-size", "86KB");
+
+
+/**********************************
  * geshi                          *
  **********************************/
 
@@ -609,6 +656,15 @@ $("#ib-type").change(function() {
     $("#code-ib-title-text").text((!$("#ib-df-title").val() == "") ? $("#ib-df-title").val() : "Definition title" ),
     $("#code-ib-title-close").text("</h5>"))
   : $("#ib-title-form").hide();
+  $(this).val() == "editing-help-box"
+  ? (
+    $("#ib-title-form").show(),
+    $("#code-ib-title-open").html("\n    &lt;h5&gt;"),
+    $("#code-ib-title-text").text((!$("#ib-df-title").val() == "") ? $("#ib-df-title").val() :
+    "Editing help title" ),
+    $("#code-ib-title-close").text("</h5>"),
+    $("#code-ib-caption").text('\n    <p class="caption">Note: This help message is not displayed to students.</p>'))
+  : ($("#ib-title-form").hide(), $("#code-ib-caption").empty());
   $(this).val() == "key-concept-box"
   ? ($("#ib-title-form").hide(), $("#code-ib-title-open, #code-ib-title-text, #code-ib-title-close").empty())
   : $("#ib-title-form").show();
@@ -1238,15 +1294,16 @@ $("#vd-media-type").change(function() {
 // generate embed code
 $("#vd-embed").keyup(function() {
   embedText = $("#vd-embed").val();
-  $("#vd-media-type").val() == "kaltura"
+  $("#vd-media-type").val() !== "youtube"
   ? embedTextAddVariables()
   : $("#code-vd-embed").text(embedText);
   preview("vd");
 }).keyup();
 
 function embedTextAddVariables() {
-  variables =
-  '&amp;flashvars[infoScreen.plugin]=false&amp;flashvars[titleLabel.plugin]=false&amp;flashvars[related.plugin]=false&amp;flashvars[closedCaptions.displayCaptions]=false&amp;flashvars[closedCaptions.layout]=below&amp;flashvars[IframeCustomPluginCss1]=https:\/\/git.iddkingsonline.com\/designsystem\/css\/kaltura.css';
+  $("#vd-media-type").val() == "kaltura-playlist"
+  ? variables = '&amp;flashvars[playlistAPI.containerPosition]=bottom&amp;flashvars[infoScreen.plugin]=false&amp;flashvars[titleLabel.plugin]=false&amp;flashvars[related.plugin]=false&amp;flashvars[closedCaptions.displayCaptions]=false&amp;flashvars[closedCaptions.layout]=below&amp;flashvars[transcript.plugin]=false&amp;flashvars[IframeCustomPluginCss1]=https:\/\/git.iddkingsonline.com\/designsystem\/css\/kaltura.css'
+  : variables = '&amp;flashvars[infoScreen.plugin]=false&amp;flashvars[titleLabel.plugin]=false&amp;flashvars[related.plugin]=false&amp;flashvars[closedCaptions.displayCaptions]=false&amp;flashvars[closedCaptions.layout]=below&amp;flashvars[transcript.plugin]=false&amp;flashvars[IframeCustomPluginCss1]=https:\/\/git.iddkingsonline.com\/designsystem\/css\/kaltura.css';
   // add variables
   (!embedText == "")
   ? ( embedText = embedText.replace('\" width', variables + '\" width'),
@@ -1288,6 +1345,47 @@ updateText("va", "#va-author-img-alt", "#code-va-author-img-alt", "Description o
 updateText("va", "#va-author-name", "#code-va-author-name", "Author name");
 updateText("va", "#va-q", "#code-va-q", "Lemon drops gingerbread topping?");
 updateText("va", "#va-a", "#code-va-a", "Pudding pie bonbon muffin carrot cake fruitcake macaroon...");
+
+/**********************************
+ * test                           *
+ **********************************/
+
+$("#test-type").change(function() {
+  // if secondary style is selected, force button standard button size
+  $(this).val() == "nsp"
+    ? (
+        $("#test-id-container").html('<div class="input-group-prepend">\n<label class="input-group-text" for="test-id">Unique ID*</label>\n</div><input type="text" class="form-control" id="test-id" aria-label="test-id" placeholder="modname-unitno-transcript-no" required>\n<div class="invalid-feedback" id="test-id-invalid-feedback">Please enter the id link.</div>'),
+        $(".code-test-btn-tag").text("button"),
+        $("#code-test-view-btn-class").text(" btn-secondary collapsed"),
+        $("#code-test-view-btn-role, #code-test-download-btn-class").empty(),
+        $("#code-test-id-1").text(' data-toggle="collapse" data-target="#'),
+        $(".code-test-id").text($("#test-id").val() === "" ? "modname-unitno-transcript-no" : $("#test-id").val()),
+        $("#code-test-id-2").text('" aria-expanded="false" aria-controls="'),
+        $("#code-test-card-collapse").text(" collapse"),
+        $("#code-test-id-3").text('"'),
+        $("#code-test-id-4").text(' id="'),
+        $("#code-test-id-5").text('"')
+      )
+    : (
+        $("#test-id-container").empty(),
+        $(".code-test-btn-tag").text("a"),
+        $("#code-test-view-btn-class").text(" btn-primary view-close-transcript"),
+        $("#code-test-view-btn-role").text(' role="button"'),
+        $("#code-test-download-btn-class").text(" download-transcript"),
+        $(".code-test-id, #code-test-id-1, #code-test-id-2, #code-test-id-3, #code-test-id-4, #code-test-id-5, #code-test-card-collapse").empty()
+     );
+  preview("test");
+  console.log($("#test-body").val());
+});
+
+updateText("test", "#test-id", ".code-test-id", "modname-unitno-transcript-no");
+updateText("test", "#test-link", "#code-test-link", "#");
+updateText("test", "#test-body", "#code-test-body", "Transcript body...");
+
+// toggle view close transcript button
+$(document).on("click", ".view-close-transcript", function(event) {
+  $(this).text($(this).text() == 'View transcript' ? 'Close transcript' : 'View transcript');
+});
 
 /**********************************
  * general functions              *
@@ -1346,6 +1444,7 @@ copyCode("btn");
 copyCode("cd");
 copyCode("crsl");
 copyCode("col");
+copyCode("dl");
 copyCode("geshi");
 copyCode("ib");
 copyCode("ls");
@@ -1355,7 +1454,7 @@ copyCode("tl");
 copyCode("ts");
 copyCode("va");
 copyCode("vd");
-
+copyCode("test");
 
 // on copy code button click
 function copyCode(component) {

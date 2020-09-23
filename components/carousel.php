@@ -1,12 +1,8 @@
 <div class="component-content" id="component-carousel">
   <div class="component-header">
     <h2 class="component-title">Carousel</h2>
-    <a href="https://keats.kcl.ac.uk/mod/page/view.php?id=3118002" target="_blank">Design System guidance and examples</a>
   </div>
   <div class="component-body container">
-    <div class="alert alert-instructional mt-3" role="alert">
-      <p>Don't forget to link to the css file! - https://git.iddkingsonline.com/designsystem/base.css</p>
-    </div>
     <div class="alert alert-danger d-none" role="alert" id="crsl-alt-text-alert">
       <p>Please add alternative text for all images.</p>
     </div>

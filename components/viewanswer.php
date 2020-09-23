@@ -1,7 +1,7 @@
 <div class="component-content" id="component-viewanswer">
   <div class="component-header">
     <h2 class="component-title">View answer</h2>
-    <p><a href="https://keats.kcl.ac.uk/mod/book/view.php?id=3118036" target="_blank">Design System guidance and examples</a></p>
+    <a href="https://keats.kcl.ac.uk/mod/book/view.php?id=3118036" target="_blank">Design System guidance and examples</a>
   </div>
   <div class="component-body container">
     <div class="row">
@@ -34,6 +34,7 @@
               </div>
               <select id="va-type">
                 <option value="answer">View answer</option>
+                <option value="description">View description</option>
                 <option value="feedback">View feedback</option>
                 <option value="model-answer">View model answer</option>
                 <option value="generic">View (generic)</option>

@@ -1,7 +1,7 @@
 <div class="component-content" id="component-infobox">
   <div class="component-header">
     <h2 class="component-title">Info Box</h2>
-    <p><a href="https://keats.kcl.ac.uk/mod/book/view.php?id=3118030" target="_blank">Design System guidance and examples</a></p>
+    <a href="https://keats.kcl.ac.uk/mod/book/view.php?id=3118030" target="_blank">Design System guidance and examples</a>
   </div>
   <div class="component-body container">
     <div class="row">
@@ -17,6 +17,7 @@
                 </div>
                 <select class="custom-select" id="ib-type">
                   <option value="definition-box">Definition</option>
+                  <option value="editing-help-box">Editing help</option>
                   <option value="alert-instructional">Instructional alert</option>
                   <option value="key-concept-box">Key concept</option>
                   <option value="learning-outcome-box">Learning outcome</option>
@@ -50,7 +51,7 @@
 <span id="ib-print-code"><span class="code-open-tag">&lt;div&#32;class&#61&#34;<span id="code-ib-alert-class"></span><span id="code-ib-type">definition-box</span><span id="code-ib-alert-role"></span>&#34;&gt;</span>
   <span class="code-open-tag">&lt;div&gt;</span><span id="code-ib-title-open">
     &lt;h5&gt;</span><span id="code-ib-title-text">Definition title</span><span id="code-ib-title-close">&lt;&#47;h5&gt;</span>
-    <span id="code-ib-body">&lt;<span id="code-ib-body-open">p</span>&gt;<span id="code-ib-text">Info box body text</span>&lt;&#47;<span id="code-ib-body-close">p</span>&gt;</span>
+    <span id="code-ib-body">&lt;<span id="code-ib-body-open">p</span>&gt;<span id="code-ib-text">Info box body text</span>&lt;&#47;<span id="code-ib-body-close">p</span>&gt;</span><span id="code-ib-caption"></span>
   <span class="code-close-tag">&lt;&#47;div&gt;</span>
 <span class="code-close-tag">&lt;&#47;div&gt;</span></span>
             </pre>

@@ -1,12 +1,8 @@
 <div class="component-content" id="component-embed">
   <div class="component-header">
     <h2 class="component-title">Embed</h2>
-    <a href="https://keats.kcl.ac.uk/mod/book/view.php?id=3072545" target="_blank">Design System guidance and examples</a>
   </div>
   <div class="component-body container">
-    <div class="alert alert-instructional mt-3" role="alert">
-      <p>The builder creates a wrapper for Kaltura video and audio embeds allowing them to be fully responsive.  If the builder preview is working but your embedded media is not displaying correctly in Keats, please check that the correct css files are being included.</p>
-    </div>
     <div class="row">
       <div class="options col-md-6">
         <section class="options">
@@ -20,7 +16,8 @@
                      <label class="input-group-text" for="em-media-type">Media type</label>
                   </div>
                   <select class="custom-select" id="em-media-type">
-                    <option value="kaltura" selected>Video</option>
+                    <option value="kaltura" selected>Kaltura video</option>
+                    <option value="kaltura-playlist" selected>Kaltura video playlist</option>
                     <option value="audio">Audio</option>
                     <option value="youtube">YouTube</option>
                   </select>
