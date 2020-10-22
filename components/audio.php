@@ -59,7 +59,7 @@
             <pre class="code-text"><span id="au-print-code"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;audio&#45;container&#34;&gt;</span>
   <span class="code-open-tag">&lt;div&#32;class&#61;&#34;audio&#45;top&#34;&gt;</span>
     <span id="code-au-img-container"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;audio&#45;image&#45;container&#34;&gt;</span>
-      <span class="code-open-tag">&lt;img&#32;class&#61;&#34;audio&#45;image&#34&#32;src&#61;&#34;<span id="code-au-img-src">https://via.placeholder.com/150</span>&#34;&#32;alt&#61;<span id="code-au-img-alt">Image description</span>&#34;&gt;</span>
+      <span class="code-open-tag">&lt;img&#32;class&#61;&#34;audio&#45;image&#34&#32;src&#61;&#34;<span id="code-au-img-src">https://via.placeholder.com/150</span>&#34;<span id="code-au-img-img-alt"></span>&gt;</span>
     <span class="code-close-tag">&lt;&#47;div&gt;</span>  
     </span><span class="code-open-tag">&lt;div&#32;class&#61;&#34;audio&#45;info&#34;&gt;</span>
       <span class="code-open-tag">&lt;p&#32;class&#61;&#34;audio&#45;speaker&#34;&gt;</span><span id="code-au-speaker">Professor Place Holder</span><span class="code-close-tag">&lt;&#47;p&gt;</span>  

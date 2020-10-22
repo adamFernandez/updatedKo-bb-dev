@@ -1,11 +1,11 @@
 <div class="component-content" id="component-table">
   <div class="component-header">
     <h2 class="component-title">Table</h2>
-    <a href="https://keats.kcl.ac.uk/mod/book/view.php?id=3119719" target="_blank">Design System guidance and examples</a>
+    <p><a href="https://keats.kcl.ac.uk/mod/book/view.php?id=3119719" target="_blank">Design System guidance and examples</a></p>
   </div>
   <div class="component-body container">
-    <div class="alert alert-instructional mt-3" role="alert">
-      <p>Please note that it is not yet possible to edit content within the Builder for this component. Copy and paste the code into Keats in order to add content.</p>
+    <div class="alert alert-btw" role="alert">
+      <p>It is not yet possible to edit content within the Builder for this component. Copy and paste the code into Keats in order to add content.</p>
     </div>
     <div class="row">
       <div class="options col-md-4">

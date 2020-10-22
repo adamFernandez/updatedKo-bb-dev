@@ -1,6 +1,7 @@
 <div class="component-content" id="component-collapse">
   <div class="component-header">
     <h2 class="component-title">Collapse</h2>
+    <p><a href="https://keats.kcl.ac.uk/mod/page/view.php?id=3118003" target="_blank">Design System guidance and examples</a></p>
   </div>
   <div class="component-body container">
     <div class="row">

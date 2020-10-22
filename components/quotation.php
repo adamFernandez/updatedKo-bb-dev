@@ -1,6 +1,7 @@
 <div class="component-content" id="component-quotation">
   <div class="component-header">
     <h2 class="component-title">Quotation</h2>
+    <p><a href="https://keats.kcl.ac.uk/mod/book/view.php?id=3072535&chapterid=240598" target="_blank">Design System guidance and examples</a></p>
   </div>
   <div class="component-body container">
     <div class="row">

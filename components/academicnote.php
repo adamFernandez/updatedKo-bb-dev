@@ -1,7 +1,7 @@
 <div class="component-content" id="component-academicnote">
   <div class="component-header">
     <h2 class="component-title">Academic note</h2>
-    <a href="https://keats.kcl.ac.uk/mod/page/view.php?id=3219389&forceview=1" target="_blank">Design System guidance and examples</a>
+    <p><a href="https://keats.kcl.ac.uk/mod/page/view.php?id=3219389&forceview=1" target="_blank">Design System guidance and examples</a></p>
   </div>
   <div class="component-body container">
     <div class="row">

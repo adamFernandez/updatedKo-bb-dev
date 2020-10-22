@@ -1,4 +1,3 @@
-
 today = new Date();
 dateString = today.toDateString();
 
@@ -52,9 +51,9 @@ $(document).on("click", "#an-check-author", function(event) {
   $("#code-an-author").html( $(this).hasClass("checked") ? '<span class="code-an-author-open"></span><span id="code-an-author-img-src"></span><span class="code-an-author-2"></span><span id="code-an-author-img-alt"></span><span class="code-an-author-3"></span><span id="code-an-author-name"></span><span class="code-an-author-close"></span>' : "");
   $(".code-an-author-open").text('<div class="card-author">\n        <img src="');
   $("#code-an-author-img-src").text( $("#an-author-img-src").val() !== "" ? $("#an-author-img-src").val() : "https://via.placeholder.com/150");
-  $(".code-an-author-2").text('" alt="');
-  $("#code-an-author-img-alt").text( $("#an-author-img-alt").val() !== "" ? $("#an-author-img-alt").val() : "Description of image");
-  $(".code-an-author-3").text('">\n        <h5 class="card-title">');
+  $(".code-an-author-2").text('"');
+  $("#code-an-author-img-alt").text( $("#an-author-img-alt").val() !== "" ? ' alt ="' + $("#an-author-img-alt").val() + '"' : "");
+  $(".code-an-author-3").text('>\n        <h5 class="card-title">');
   $("#code-an-author-name").text( $("#an-author-name").val() !== "" ? $("#an-author-name").val() : "Author name");
   $(".code-an-author-close").text('</h5>\n      </div>\n      ');
   preview("an");
@@ -62,7 +61,7 @@ $(document).on("click", "#an-check-author", function(event) {
 
 // updates text on input change
 updateText("an", "#an-author-img-src", "#code-an-author-img-src", "https://keats.kcl.ac.uk/pluginfile.php/1234567/mod_folder_content/1/23/name.jpg");
-updateText("an", "#an-author-img-alt", "#code-an-author-img-alt", "Description of image");
+updateAltText("an", "#an-author-img-alt", "#code-an-author-img-alt");
 updateText("an", "#an-author-name", "#code-an-author-name", "Author name");
 updateText("an", "#an-body", "#code-an-body", "Pudding pie bonbon muffin carrot cake fruitcake macaroon...");
 
@@ -77,9 +76,9 @@ $(document).on("click", "#au-check-img", function(event) {
   $(".au-img").toggle();
   $("#code-au-img-container").html( $(this).hasClass("checked") ? '<span class="code-au-img-open"></span><span id="code-au-img-img-src"></span><span class="code-au-img-2"></span><span id="code-au-img-img-alt"></span><span class="code-au-img-close"></span>' : "");
   $(".code-au-img-open").text('<div class="card-author">\n        <img class="audio-image"  src="');
-  $("#code-au-img-img-src").text( $("#au-img-src").val() !== "" ? $("#au-img-img-src").val() : "https://via.placeholder.com/150");
-  $(".code-au-img-2").text('" alt="');
-  $("#code-au-img-img-alt").text( $("#va-author-img-alt").val() !== "" ? $("#va-author-img-alt").val() : "Image description");
+  $("#code-au-img-img-src").text( $("#au-img-src").val() !== "" ? $("#au-img-src").val() : "https://via.placeholder.com/150");
+  $(".code-au-img-2").text('"');
+  $("#code-au-img-img-alt").text( $("#au-img-alt").val() !== "" ? ' alt="' + $("#au-img-alt").val() + '"' : '');
   $(".code-au-img-close").text('">\n    </div>\n    ');
   preview("au");
 });
@@ -99,7 +98,7 @@ $("#au-embed").keyup(function() {
 
 // updates text on input change
 updateText("au", "#au-img-src", "#code-au-img-src", "https://via.placeholder.com/300");
-updateText("au", "#au-img-alt", "#code-au-img-alt", "Image description");
+updateAltText("au", "#au-img-alt", "#code-au-img-img-alt");
 updateText("au", "#au-speaker", "#code-au-speaker", "Professor Place Holder");
 updateText("au", "#au-title", "#code-au-title", "Audio title");
 
@@ -223,9 +222,7 @@ function initialCards(maxCards) {
 // create single card card code
 function createCard(i) {
   return `<span id="code-cd-card-${i}"><pre>  <span class="code-open-tag">&lt;div&#32;class&#61;&#34;<span class="code-cd-type">${ $("#cd-type").val() == "float-box" ? "float-box" : "card" }</span>&#34;&gt;</span><span id="code-cd-${i}-img">
-    <span id="code-cd-${i}-img-open">&lt;<span
-    id="code-cd-img-container-open">img</span>&#32;src&#61;&#34;</span><span id="code-cd-${i}-img-src">https:\/\/via.placeholder.com\/300</span><span id="code-cd-${i}-img-middle">&#34;&#32;alt&#61;&#34;</span><span id="code-cd-${i}-img-alt">A&#32;boring&#32;placeholder&#32;image</span>&#34;&gt;<span
-    id="code-cd-img-container-close"></span></span></span>
+    <span id="code-cd-${i}-img-open">&lt;<span id="code-cd-img-container-open">img</span>&#32;src&#61;&#34;</span><span id="code-cd-${i}-img-src">https:\/\/via.placeholder.com\/300</span><span id="code-cd-${i}-img-middle">&#34;</span><span id="code-cd-${i}-img-alt"></span>&gt;<span id="code-cd-img-container-close"></span></span></span>
     <span class="code-open-tag">&lt;div&#32;class&#61;&#34;<span class="code-cd-body-class">card</span>&#45;body&#34;&gt;</span><span id="code-cd-${i}-title">
       <span>&lt;h4&gt;</span><span id="code-cd-${i}-title-text">Card #${i} title</span><span>&lt;&#47;h4&gt;</span></span>
       <span class="code-open-tag">&lt;p&gt;</span><span id="code-cd-${i}-text">Card #${i} text</span><span class="code-close-tag">&lt;&#47;p&gt;</span>
@@ -256,7 +253,7 @@ function createCardEditorCard(i) {
           </div>
           <div class="form-group cd-img-form cd-${i}-img-form" id="cd-${i}-img-alt-form">
             <label for="cd-${i}-header">Img alt text</label>
-            <input type="text" class="form-control" id="cd-${i}-img-alt" placeholder="A boring placeholder image">
+            <input type="text" class="form-control" id="cd-${i}-img-alt" placeholder="Description of image">
           </div>
           <div class="form-group" id="cd-${i}-title-form">
             <label for="cd-${i}-title">Title</label>
@@ -290,9 +287,9 @@ function updateCards(cardCardLimit) {
       $(".code-cd-img-open").text('<img');
       $(".code-cd-img-src").text(' src="');
       $("#code-cd-" + i + "-img-src").text($("#cd-" + i + "-img-src").val() !== "" ? $("#cd-" + i + "-img-src").val() : "https:\/\/via.placeholder.com\/300");
-      $(".code-cd-img-alt").text('" alt="');
-      $("#code-cd-" + i + "-img-alt").text($("#cd-" + i + "-img-alt").val() !== "" ? $("#cd-" + i + "-img-alt").val() : "A boring placeholder image");
-      $(".code-cd-img-close").text('">');
+      $(".code-cd-img-alt").text('"');
+      $("#code-cd-" + i + "-img-alt").text($("#cd-" + i + "-img-alt").val() !== "" ? ' alt="' + $("#cd-" + i + "-img-alt").val() + '"' : "");
+      $(".code-cd-img-close").text('>');
       preview("cd");
     });
     // toggle title code
@@ -307,7 +304,7 @@ function updateCards(cardCardLimit) {
     });
     // update text
     updateText("cd", "#cd-" + i + "-img-src", "#code-cd-" + i + "-img-src", "https://via.placeholder.com/300");
-    updateText("cd", "#cd-" + i + "-img-alt", "#code-cd-" + i + "-img-alt", "A boring placeholder image");
+    updateAltText("cd", "#cd-" + i + "-img-alt", "#code-cd-" + i + "-img-alt");
     updateText("cd", "#cd-" + i + "-title", "#code-cd-" + i + "-title-text", "Card #" + i + " title");
     updateText("cd", "#cd-" + i + "-text", "#code-cd-" + i + "-text", "Card #" + i + " text");
   }
@@ -320,30 +317,13 @@ function showCardImgs(cardCardLimit) {
     $(".code-cd-img-src").text(' src="');
     $("#code-cd-" + i + "-img-src").text($("#cd-" + i + "-img-src").val() !== ""
     ? $("#cd-" + i + "-img-src").val() : "https:\/\/via.placeholder.com\/300");
-    $(".code-cd-img-alt").text('" alt="');
+    $(".code-cd-img-alt").text('"');
     $("#code-cd-" + i + "-img-alt").text($("#cd-" + i + "-img-alt").val() !== ""
-    ? $("#cd-" + i + "-img-alt").val() : "A boring placeholder image");
-    $(".code-cd-img-close").text('">');
+      ? ' alt="' + $("#cd-" + i + "-img-alt").val() + '"'
+      : "");
+    $(".code-cd-img-close").text('>');
   }
 }
-
-/*
-function showCardImgs(cardCardLimit) {
-  for (let i = 1; i <= cardCardLimit; i++) {
-    $("#code-cd-" + i + "-img").html('\n    <span class="code-cd-img-open"></span><span class="code-cd-img-src"></span><span id="code-cd-' + i + '-img-src"></span><span class="code-cd-img-alt"></span><span id="code-cd-' + i + '-img-alt"></span><span class="code-cd-img-close"></span>');
-    $(".code-cd-img-open").html( ${ $("#cd-type").val() == "default"
-      ? "&lt;img"
-      : "&lt;&#47;div&gt;\n      &lt;img";
-    $(".code-cd-img-src").text(' src="');
-    $("#code-cd-" + i + "-img-src").text($("#cd-" + i + "-img-src").val() !== "" ? $("#cd-" + i + "-img-src").val() : "https:\/\/via.placeholder.com\/300");
-    $(".code-cd-img-alt").text('" alt="');
-    $("#code-cd-" + i + "-img-alt").text($("#cd-" + i + "-img-alt").val() !== "" ? $("#cd-" + i + "-img-alt").val() : "A boring placeholder image");
-    $(".code-cd-img-close").html( ${ $("#cd-type").val() == "default" 
-      ? "&#32;&gt;"
-      : "&#32;&gt;\n    &lt;&#47;div&gt;" } );
-  }
-}
-*/
 
 /**********************************
  * carousel                       *
@@ -403,7 +383,7 @@ function createCarouselIndicator(i) {
 // create single carousel slide code
 function createCarouselSlide(i) {
   return `<span id="code-crsl-slide-${i}"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;carousel&#45;item${ i == 1 ? " active" : "" }&#34;&gt;</span><span id="code-crsl-slide-${i}-img">
-    <span class="code-open-tag">&lt;img&#32;src&#61;&#34;<span id="code-crsl-slide-${i}-img-src">https:&#47;&#47;via.placeholder.com&#47;800x400</span>&#34;&#32;alt&#61;&#34;<span id="code-crsl-slide-${i}-img-alt">A boring placeholder image</span>&#34;&gt;</span></span>
+    <span class="code-open-tag">&lt;img&#32;src&#61;&#34;<span id="code-crsl-slide-${i}-img-src">https:&#47;&#47;via.placeholder.com&#47;800x400</span>&#34;<span id="code-crsl-slide-${i}-img-alt"></span>&gt;</span></span>
     <span class="code-open-tag">&lt;div&#32;class&#61;&#34;carousel&#45;caption&#34;&gt;</span><span id="code-crsl-slide-${i}-title"></span>
       <span class="code-open-tag">&lt;p&gt;</span>
         <span id="code-crsl-slide-${i}-text">Carousel slide #${i} text</span>
@@ -466,9 +446,12 @@ function carouselToggleImage(carouselSlideLimit) {
     : $("#code-crsl-slide-" + i + "-img").text("");
   $(".code-crsl-slide-img-open").text('<img src="');
   $("#crsl-slide-" + i + "-img-src").val() !== "" ? $("#code-crsl-slide-" + i + "-img-src").text($("#crsl-slide-" + i + "-img-src").val()) : $("#code-crsl-slide-" + i + "-img-src").text("https://via.placeholder.com/800x400");
-  $(".code-crsl-slide-img-middle").text('" alt="');
-  $("#crsl-slide-" + i + "-img-alt").val() !== "" ? $("#code-crsl-slide-" + i + "-img-alt").text($("#crsl-slide-" + i + "-img-alt").val()) : $("#code-crsl-slide-" + i + "-img-alt").text("A boring placeholder image");
-  $(".code-crsl-slide-img-close").text('">');
+  $(".code-crsl-slide-img-middle").text('"');
+  $("#code-crsl-slide-" + i + "-img-alt").text( $("#crsl-slide-" + i + "-img-alt").val() !== ""
+    ? ' alt="' + $("#crsl-slide-" + i + "-img-alt").val() + '"'
+    : "" );
+    //$("#crsl-slide-" + i + "-img-alt").val() !== "" ? $("#code-crsl-slide-" + i + "-img-alt").text($("#crsl-slide-" + i + "-img-alt").val()) : $("#code-crsl-slide-" + i + "-img-alt").text("");
+  $(".code-crsl-slide-img-close").text('>');
   preview("crsl");
   }
 };
@@ -500,7 +483,7 @@ function updateCarouselSlides(carouselSlideLimit) {
     toggleCheckboxText("#crsl-check-title", "#crsl-toggle-title");
     // update carousel text
     updateText("crsl", "#crsl-slide-" + i + "-img-src", "#code-crsl-slide-" + i + "-img-src", "https://via.placeholder.com/800x400");
-    updateText("crsl", "#crsl-slide-" + i + "-img-alt", "#code-crsl-slide-" + i + "-img-alt", "A boring placeholder image");
+    updateAltText("crsl", "#crsl-slide-" + i + "-img-alt", "#code-crsl-slide-" + i + "-img-alt");
     updateText("crsl", "#crsl-slide-" + i + "-title-text", "#code-crsl-slide-" + i + "-title-text", "Carousel slide #" + i + "title");
     updateText("crsl", "#crsl-slide-" + i + "-text", "#code-crsl-slide-" + i + "-text", "Carousel slide #" + i + " text");
   }
@@ -649,6 +632,14 @@ $("#ib-type").change(function() {
   $(this).val() == "alert-instructional"
   ? ($("#code-ib-alert-class").text("alert "), $("#code-ib-alert-role").text('" role="alert'), $("#code-ib-title-open, #code-ib-title-text, #code-ib-title-close").empty())
   : ($("#code-ib-alert-class").empty(), $("#code-ib-alert-role").empty());
+  $(this).val() == "alert-caution"
+  ? (
+    $("#code-ib-alert-class").text("alert "),
+    $("#ib-title-form").show(),
+    $("#code-ib-title-open").html("\n    &lt;h5&gt;"),
+    $("#code-ib-title-text").text((!$("#ib-df-title").val() == "") ? $("#ib-df-title").val() : "Caution alert title" ),
+    $("#code-ib-title-close").text("</h5>"))
+  : $("#ib-title-form").hide();
   $(this).val() == "definition-box"
   ? (
     $("#ib-title-form").show(),
@@ -660,8 +651,7 @@ $("#ib-type").change(function() {
   ? (
     $("#ib-title-form").show(),
     $("#code-ib-title-open").html("\n    &lt;h5&gt;"),
-    $("#code-ib-title-text").text((!$("#ib-df-title").val() == "") ? $("#ib-df-title").val() :
-    "Editing help title" ),
+    $("#code-ib-title-text").text((!$("#ib-df-title").val() == "") ? $("#ib-df-title").val() : "Editing help title" ),
     $("#code-ib-title-close").text("</h5>"),
     $("#code-ib-caption").text('\n    <p class="caption">Note: This help message is not displayed to students.</p>'))
   : ($("#ib-title-form").hide(), $("#code-ib-caption").empty());
@@ -1031,14 +1021,14 @@ function createTimelineCard(i) {
         <span>&lt;div&#32;class&#61;&#34;card&#45;body&#34;&gt;</span>
           <span class="code-open-tag">&lt;div&#32;class&#61;&#34;row&#34;&gt;</span>
             <span id="code-tl-card-${i}-img"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;col&#45;md&#45;3&#32;card&#45;image&#34;&gt;</span>
-              <span class="code-open-tag">&lt;img&#32;src&#61;&#34;<span id="code-tl-card-${i}-img-src">https:\/\/via.placeholder.com\/200x300</span>&#34;&gt;</span>
+              <span class="code-open-tag">&lt;img&#32;src&#61;&#34;<span id="code-tl-card-${i}-img-src">https:\/\/via.placeholder.com\/200x300</span>&#34;<span id="code-tl-card-${i}-img-alt"></span>&gt;</span>
             <span class="code-close-tag">&lt;&#47;div&gt;</span></span>
             <span class="code-open-tag">&lt;div&#32;class&#61;&#34;col&#45;md&#34;&gt;</span>
               <span class="code-open-tag">&lt;h5&#32;class&#61;&#34;card&#45;title&#34;&gt;</span><span id="code-tl-card-${i}-title">${ !title == "" ? title : "Card #" + i + " title"}</span><span class="code-close-tag">&lt;&#47;h5&gt;</span>
               <span class="code-open-tag">&lt;p&#32;class&#61;&#34;card&#45;text&#34;&gt;</span><span id="code-tl-card-${i}-text">${ !text == "" ? text : "Chocolate sesame snaps bonbon sesame snaps macaroon powder lemon drops dessert. Jelly beans halvah jelly-o icing marshmallow tart soufflé."}</span><span class="code-close-tag">&lt;&#47;p&gt;</span>
             <span class="code-close-tag">&lt;&#47;div&gt;</span>
           <span class="code-close-tag">&lt;&#47;div&gt;</span>
-          <span id="code-tl-card-${i}-img-ref"><span class="code-open-tag">&lt;p&#32;class&#61;&#34;img&#45;reference&#34;&gt;</span><span id="code-tl-card-${i}-img-reference">Image: via.placeholder.com. A boring placeholder image</span><span class="code-close-tag">&lt;&#47;p&gt;</span></span>
+          <span id="code-tl-card-${i}-img-ref"><span class="code-open-tag">&lt;p&#32;class&#61;&#34;img&#45;reference&#34;&gt;</span><span id="code-tl-card-${i}-img-reference">Image: via.placeholder.com</span><span class="code-close-tag">&lt;&#47;p&gt;</span></span>
         <span class="code-close-tag">&lt;&#47;div&gt;</span>
       <span class="code-close-tag">&lt;&#47;div&gt;</span>
     <span class="code-close-tag">&lt;&#47;div&gt;</span>
@@ -1106,22 +1096,6 @@ function createTimelineEditorCard(i) {
     </div>
   `;
 }
-
-/*
-// toggle timeline card layout
-$("#tl-card-layout").change(function(){
-  layout = $(this).val();
-  timelineToggleLayout(8);
-  preview("tl");
-});
-function timelineToggleLayout(timelineCardLimit) {
-  for (let i = 1; i <= timelineCardLimit; i++) {
-  layout == 1
-    ? ( $("#code-tl-card-" + i + "-content-order").html(""), $(".code-tl-card-dot-order").html(""), $("#code-tl-card-" + i + "-spacer").text(""))
-    : ( $("#code-tl-card-" + i + "-content-order").html(`&#32;order&#45;${ i % 2 == 0 ? 1 : 3 }`), $(".code-tl-card-dot-order").html("&#32;order&#45;2"), $("#code-tl-card-" + i + "-spacer").html(`\n    &lt;div&#32;class&#61;&#34;col&#45;sm&#32;order&#45;${(i % 2 == 0) ? 3 : 1}&#34;&gt&lt;&#47;div&gt;`));
-  }
-};
-*/
 
 // toggle timeline title code
 /*toggleCheckboxText("#tl-check-title", "#tl-toggle-title");
@@ -1192,11 +1166,13 @@ function timelineToggleImage(timelineCardLimit) {
             $("#code-tl-card-" + i + "-img-ref").text("") );
       $(".code-tl-card-img-open").text('<div class="col-md-3 card-image"><img src="');
       $("#code-tl-card-" + i + "-img-src").text( $("#tl-card-" + i + "-img-src").val() !== "" ? $("#tl-card-" + i + "-img-src").val() : "https://via.placeholder.com/200x300");
-      $(".code-tl-card-img-center").text('" alt="');
-      $("#code-tl-card-" + i + "-img-alt").text( $("#tl-card-" + i + "-img-alt").val() !== "" ? $("#tl-card-" + i + "-img-alt").val() : "A boring placeholder image");
+      $(".code-tl-card-img-center").text('"');
+      $("#code-tl-card-" + i + "-img-alt").text( $("#tl-card-" + i + "-img-alt").val() !== ""
+        ? ' alt="' + $("#tl-card-" + i + "-img-alt").val() + '"'
+        : "");
       $(".code-tl-card-img-close").text('"></div>');
       $(".code-tl-card-img-ref-open").text('<p class="text-right img-reference">');
-      $("#code-tl-card-" + i + "-img-ref-text").text( $("#tl-card-" + i + "-img-ref").val() !== "" ? $("#tl-card-" + i + "-img-ref").val() : "Image: via.placeholder.com. A boring placeholder image");
+      $("#code-tl-card-" + i + "-img-ref-text").text( $("#tl-card-" + i + "-img-ref").val() !== "" ? $("#tl-card-" + i + "-img-ref").val() : "Image: via.placeholder.com");
       $(".code-tl-card-img-ref-close").text('</p>');
      preview("tl");
     });
@@ -1219,7 +1195,6 @@ function timelineChangeCardColor(timelineCardLimit) {
 // generate card text from input
 updateTimelineText(8);
 updateTextOrHide("tl", "#tl-id", "&#32;id&#61;&#34;", "#code-tl-id", "&#34;");
-//updateText("tl", "#tl-title", "#code-tl-title-text", "Title");
 
 function updateTimelineText(timelineCardLimit) {
   for (let i = 1; i <= timelineCardLimit; i++) {
@@ -1227,7 +1202,7 @@ function updateTimelineText(timelineCardLimit) {
     updateText("tl", "#tl-" + i + "-date", "#code-tl-card-" + i + "-date-text", dateString + ( i < 6 ? " 0" + (i+7) + ":00AM" : " " + (i+7) + ":00PM" ));
     updateText("tl", "#tl-" + i + "-text", "#code-tl-card-" + i + "-text", "Card #" + i + " text");
     updateText("tl", "#tl-card-" + i + "-img-src", "#code-tl-card-" + i + "-img-src", "https://via.placeholder.com/200x300");
-    updateText("tl", "#tl-card-" + i + "-img-alt", "#code-tl-card-" + i + "-img-alt", "A boring placeholder image" );
+    updateAltText("tl", "#tl-card-" + i + "-img-alt", "#code-tl-card-" + i + "-img-alt");
     updateText("tl", "#tl-card-" + i + "-img-ref", "#code-tl-card-" + i + "-img-ref-text", "Foo");
   }
 }
@@ -1264,14 +1239,16 @@ $("#ts-type").change(function() {
 });
 
 updateText("ts", "#ts-id", ".code-ts-id", "modname-unitno-transcript-no");
-updateText("ts", "#ts-link", "#code-ts-link", "#");
-updateText("ts", "#ts-body", "#code-ts-body", "Transcript body...");
+//updateText("ts", "#ts-body", "#code-ts-body", "foo");
+//updateText("ts", "#ts-link", "#code-ts-link", "#");
+updateText("ts", "#ts-body", "#code-ts-body-text", "Transcript body...");
 
+/*
 // toggle view close transcript button
 $(document).on("click", ".view-close-transcript", function(event) {
   $(this).text($(this).text() == 'View transcript' ? 'Close transcript' : 'View transcript');
 });
-
+*/
 /**********************************
  * video                          *
  **********************************/
@@ -1331,9 +1308,11 @@ $(document).on("click", "#va-check-author", function(event) {
   $("#code-va-author").html( $(this).hasClass("checked") ? '<span class="code-va-author-open"></span><span id="code-va-author-img-src"></span><span class="code-va-author-2"></span><span id="code-va-author-img-alt"></span><span class="code-va-author-3"></span><span id="code-va-author-name"></span><span class="code-va-author-close"></span>' : "");
   $(".code-va-author-open").text('<div class="card-author">\n        <img src="');
   $("#code-va-author-img-src").text( $("#va-author-img-src").val() !== "" ? $("#va-author-img-src").val() : "https://via.placeholder.com/150");
-  $(".code-va-author-2").text('" alt="');
-  $("#code-va-author-img-alt").text( $("#va-author-img-alt").val() !== "" ? $("#va-author-img-alt").val() : "Description of image");
-  $(".code-va-author-3").text('">\n        <h5 class="card-title">');
+  $(".code-va-author-2").text('"');
+  $("#code-va-author-img-alt").text( $("#va-author-img-alt").val() !== ""
+    ? ' alt="' + $("#va-author-img-alt").val() + '"'
+    : "");
+  $(".code-va-author-3").text('>\n        <h5 class="card-title">');
   $("#code-va-author-name").text( $("#va-author-name").val() !== "" ? $("#va-author-name").val() : "Author name");
   $(".code-va-author-close").text('</h5>\n      </div>\n      ');
   preview("va");
@@ -1341,7 +1320,7 @@ $(document).on("click", "#va-check-author", function(event) {
 
 // updates text on input change
 updateText("va", "#va-author-img-src", "#code-va-author-img-src", "https://keats.kcl.ac.uk/pluginfile.php/1234567/mod_folder_content/1/23/name.jpg");
-updateText("va", "#va-author-img-alt", "#code-va-author-img-alt", "Description of image");
+updateAltText("va", "#va-author-img-alt", "#code-va-author-img-alt");
 updateText("va", "#va-author-name", "#code-va-author-name", "Author name");
 updateText("va", "#va-q", "#code-va-q", "Lemon drops gingerbread topping?");
 updateText("va", "#va-a", "#code-va-a", "Pudding pie bonbon muffin carrot cake fruitcake macaroon...");
@@ -1402,6 +1381,14 @@ function disablePreview() {
 function updateText(component, input, outputText, defaultText) {
   $(document).on('keyup', input, function (event) {
     (!$(this).val() == "") ? $(outputText).text($(this).val()) : $(outputText).text(defaultText);
+    preview(component);
+  }).keyup();
+}
+
+// update img alt text from input, allows elements added to the DOM after page load to be identified
+function updateAltText(component, input, outputText) {
+  $(document).on('keyup', input, function (event) {
+    (!$(this).val() == "") ? $(outputText).text(' alt="' + $(this).val() + '"') : $(outputText).text("");
     preview(component);
   }).keyup();
 }

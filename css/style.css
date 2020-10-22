@@ -170,3 +170,6 @@ pre {
 #component-faqs a {
   text-decoration: underline !important;
 }
+.editing-help-box {
+  display: block !important;
+}

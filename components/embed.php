@@ -1,6 +1,12 @@
 <div class="component-content" id="component-embed">
   <div class="component-header">
     <h2 class="component-title">Embed</h2>
+    <div class="alert alert-btw" role="alert">
+      <div>
+        <p>Try the new 'YouTube' media type option for YouTube videos</p>
+      </div>
+    </div>
+    <a href="https://keats.kcl.ac.uk/mod/book/view.php?id=3072545" target="_blank">Design System guidance and examples</a>
   </div>
   <div class="component-body container">
     <div class="row">
@@ -16,8 +22,7 @@
                      <label class="input-group-text" for="em-media-type">Media type</label>
                   </div>
                   <select class="custom-select" id="em-media-type">
-                    <option value="kaltura" selected>Kaltura video</option>
-                    <option value="kaltura-playlist" selected>Kaltura video playlist</option>
+                    <option value="kaltura" selected>Video</option>
                     <option value="audio">Audio</option>
                     <option value="youtube">YouTube</option>
                   </select>
