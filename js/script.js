@@ -629,45 +629,48 @@ $(document).on("click", "#geshi-check-line-nos", function(event) {
 // change infobox type
 $("#ib-type").change(function() {
   $("#code-ib-type").text($(this).val());
-  $(this).val() == "alert-instructional"
-  ? ($("#code-ib-alert-class").text("alert "), $("#code-ib-alert-role").text('" role="alert'), $("#code-ib-title-open, #code-ib-title-text, #code-ib-title-close").empty())
-  : ($("#code-ib-alert-class").empty(), $("#code-ib-alert-role").empty());
-  $(this).val() == "alert-caution"
-  ? (
-    $("#code-ib-alert-class").text("alert "),
-    $("#ib-title-form").show(),
-    $("#code-ib-title-open").html("\n    &lt;h5&gt;"),
-    $("#code-ib-title-text").text((!$("#ib-df-title").val() == "") ? $("#ib-df-title").val() : "Caution alert title" ),
-    $("#code-ib-title-close").text("</h5>"))
-  : $("#ib-title-form").hide();
-  $(this).val() == "definition-box"
-  ? (
-    $("#ib-title-form").show(),
-    $("#code-ib-title-open").html("\n    &lt;h5&gt;"),
-    $("#code-ib-title-text").text((!$("#ib-df-title").val() == "") ? $("#ib-df-title").val() : "Definition title" ),
-    $("#code-ib-title-close").text("</h5>"))
-  : $("#ib-title-form").hide();
-  $(this).val() == "editing-help-box"
-  ? (
-    $("#ib-title-form").show(),
-    $("#code-ib-title-open").html("\n    &lt;h5&gt;"),
-    $("#code-ib-title-text").text((!$("#ib-df-title").val() == "") ? $("#ib-df-title").val() : "Editing help title" ),
-    $("#code-ib-title-close").text("</h5>"),
-    $("#code-ib-caption").text('\n    <p class="caption">Note: This help message is not displayed to students.</p>'))
-  : ($("#ib-title-form").hide(), $("#code-ib-caption").empty());
-  $(this).val() == "key-concept-box"
-  ? ($("#ib-title-form").hide(), $("#code-ib-title-open, #code-ib-title-text, #code-ib-title-close").empty())
-  : $("#ib-title-form").show();
-  if ($(this).val() == "learning-outcome-box") (
-    $("#code-ib-title-open").html("\n    &lt;h5&gt;"),
-    $("#code-ib-title-text").text("Learning outcomes"),
-    $("#code-ib-title-close").text("</h5>"));
+  $("#code-ib-alert-class, #code-ib-alert-aria-label, #code-ib-caption").empty();
+  $(this).val() == "alert-instructional" || $(this).val() == "alert-caution"
+    ? (
+      $("#code-ib-alert-class").text("alert "),
+      $("#code-ib-alert-aria-label").text('" aria-label="alert'),
+      $(this).val() == "alert-instructional"
+        ? $("#code-ib-title-open, #code-ib-title-text, #code-ib-title-close").empty()
+        : (
+          $("#ib-title-form").show(),
+          $("#code-ib-title-open").html("\n    &lt;h5&gt;"),
+          $("#code-ib-title-text").text((!$("#ib-df-title").val() == "") ? $("#ib-df-title").val() : "Caution alert title" ),
+          $("#code-ib-title-close").text("</h5>")
+        )
+      )
+    : (
+      $("#code-ib-alert-class, #code-ib-alert-aria-label").empty(),
+      $(this).val() == "key-concept-box"
+        ? (
+          $("#ib-title-form").hide(),
+          $("#code-ib-title-open, #code-ib-title-text, #code-ib-title-close").empty())
+        : (
+          $("#ib-title-form").show(),
+          $("#code-ib-title-open").html("\n    &lt;h5&gt;"),
+          $("#code-ib-title-close").text("</h5>"),
+          $(this).val() == "editing-help-box"
+            ? (
+              $("#code-ib-title-text").text((!$("#ib-df-title").val() == "") ? $("#ib-df-title").val() : "Editing help box title"),
+              $("#code-ib-caption").text('\n    <p class="caption">Note: This help message is not displayed to students.</p>'))
+            : $(this).val() == "definition-box"
+              ? $("#code-ib-title-text").text((!$("#ib-df-title").val() == "") ? $("#ib-df-title").val() : "Definition box title")
+              : $(this).val() == "learning-outcome-box"
+                ? ($("#ib-title-form").hide(), $("#code-ib-title-text").text("Learning outcomes"))
+                : $(this).val() ==  "reading-box"
+                  ? $("#code-ib-title-text").text((!$("#ib-df-title").val() == "") ? $("#ib-df-title").val() : "Reading box title")
+                  : console.log("foo")
+            ));
   preview("ib");
 });
 
 // update infobox text
 updateText("ib", "#ib-text", "#code-ib-text", "Info box body text");
-updateText("ib", "#ib-df-title", "#code-ib-title-text", "Foo");
+updateText("ib", "#ib-df-title", "#code-ib-title-text", "Info box title");
 
 /**********************************
  * list                           *
