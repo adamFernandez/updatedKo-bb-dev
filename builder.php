@@ -47,7 +47,7 @@
           <?php include('components/timeline.php'); ?>
           <?php include('components/transcript.php'); ?>
           <?php include('components/video.php'); ?>
-          <?php include('components/viewhide.php'); ?>
+          <?php //include('components/viewhide.php'); ?>
           <?php include('components/faqs.php'); ?>
         </div>
       </section>
