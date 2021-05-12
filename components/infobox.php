@@ -5,7 +5,7 @@
   </div>
   <div class="component-body container">
     <div class="row">
-      <div class="options col-md-6">
+      <div class="options col-md-6 px-4">
         <section class="options">
           <h3>Options</h3>
           <p>Select your options:</p>
@@ -37,7 +37,7 @@
           </form>
         </section>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6 px-4">
         <section class="preview">
           <h3 class="preview-title">Preview</h3>
           <div id="ib-preview-pane"></div>
@@ -49,10 +49,10 @@
           </div>
           <div class="code-box">
             <pre class="code-text">
-<span id="ib-print-code"><span class="code-open-tag">&lt;div&#32;class&#61&#34;<span id="code-ib-alert-class"></span><span id="code-ib-type">definition-box</span><span id="code-ib-alert-role"></span>&#34;&gt;</span>
+<span id="ib-print-code"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;<span id="code-ib-alert-class"></span><span id="code-ib-type">definition-box</span><span id="code-ib-alert-role"></span><span id="code-ib-alert-aria-label"></span>&#34;&gt;</span>
   <span class="code-open-tag">&lt;div&gt;</span><span id="code-ib-title-open">
-    &lt;h5&gt;</span><span id="code-ib-title-text">Definition title</span><span id="code-ib-title-close">&lt;&#47;h5&gt;</span>
-    <span id="code-ib-body">&lt;<span id="code-ib-body-open">p</span>&gt;<span id="code-ib-text">Info box body text</span>&lt;&#47;<span id="code-ib-body-close">p</span>&gt;</span><span id="code-ib-caption"></span>
+    &lt;h5&gt;</span><span id="code-ib-title-text">&lt;span role&#61;&#34;text&#34;&gt;&lt;span class&#61;&#34;sr-only&#34;&gt;Definition:&lt;/span&gt;Title</span><span id="code-ib-title-close">&lt;&#47;h5&gt;</span>
+    <span id="code-ib-body"><span id="code-ib-body-open">&lt;p&gt;</span><span id="code-ib-body-text">Info box body text</span><span id="code-ib-body-close">&lt;&#47;p&gt;</span></span><span id="code-ib-caption"></span>
   <span class="code-close-tag">&lt;&#47;div&gt;</span>
 <span class="code-close-tag">&lt;&#47;div&gt;</span></span>
             </pre>

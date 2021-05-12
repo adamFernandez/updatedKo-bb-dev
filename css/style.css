@@ -119,6 +119,7 @@ textarea {
 .code-text {
   max-height:25rem;
 }
+
 pre {
   margin: 0 !important;
   padding: unset;
@@ -128,6 +129,9 @@ pre {
   line-height: 15.75px;
 }
 
+.whiteBackground {
+  background-color: #ffffff;
+}
 /* collapse */
 .collapse-container .collapse-card .collapse-body {
   padding-right: unset;
@@ -172,4 +176,8 @@ pre {
 }
 .editing-help-box {
   display: block !important;
+}
+
+.row {
+  background-color: #ffffff;
 }

@@ -3,9 +3,9 @@
     <h2 class="component-title">Quotation</h2>
     <p><a href="https://keats.kcl.ac.uk/mod/book/view.php?id=3072535&chapterid=240598" target="_blank">Design System guidance and examples</a></p>
   </div>
-  <div class="container component-body">
+  <div class="container">
     <div class="row">
-      <div class="options col-md-5">
+      <div class="col-md-5 px-4">
         <section class="options">
           <h3>Options</h3>
           <p>Complete the following fields:</p>
@@ -21,7 +21,7 @@
           </form>
         </section>
       </div>
-      <div class="col-md-7">
+      <div class="col-md-7 px-4">
         <section class="preview">
           <h3 class="preview-title">Preview</h3>
           <div id="quo-preview-pane"></div>

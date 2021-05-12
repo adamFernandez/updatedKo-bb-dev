@@ -625,6 +625,11 @@ $(document).on("click", "#geshi-check-line-nos", function(event) {
 /**********************************
  * infobox                        *
  **********************************/
+ function cleanString(string, fromChar) { // strips a string (a name id), from everything but the first word before the choosen character and capitalize it.
+  let str = string.search(fromChar);
+  let clean = string.substr(0,str);
+  return clean[0].toUpperCase() + clean.slice(1);
+}
 
 // change infobox type
 $("#ib-type").change(function() {
@@ -633,14 +638,20 @@ $("#ib-type").change(function() {
   $(this).val() == "alert-instructional" || $(this).val() == "alert-caution"
     ? (
       $("#code-ib-alert-class").text("alert "),
-      $("#code-ib-alert-aria-label").text('" aria-label="alert'),
+      $("#code-ib-alert-aria-label").text(' aria-label="alert"'),
       $(this).val() == "alert-instructional"
-        ? $("#code-ib-title-open, #code-ib-title-text, #code-ib-title-close").empty()
+        ? (
+          $("#code-ib-title-open, #code-ib-title-text, #code-ib-title-close").empty(),
+          $("#ib-title-form").hide(),
+          $("#code-ib-body-open").html("&lt;p&gt;&lt;span role&#61;&#34;text&#34;&gt;&lt;span class&#61;&#34;sr-only&#34;&gt;Instructional: &lt;/span&gt;"),
+          $("#code-ib-body-text").text((!$("#ib-df-title").val() == "") ? $("#ib-df-title").val() : "Alert title" ),
+          $("#code-ib-body-close").text("</span></p>")
+        )
         : (
           $("#ib-title-form").show(),
-          $("#code-ib-title-open").html("\n    &lt;h5&gt;"),
-          $("#code-ib-title-text").text((!$("#ib-df-title").val() == "") ? $("#ib-df-title").val() : "Caution alert title" ),
-          $("#code-ib-title-close").text("</h5>")
+          $("#code-ib-title-open").html("\n    &lt;h5&gt;&lt;span role&#61;&#34;text&#34;&gt;&lt;span class&#61;&#34;sr-only&#34;&gt;Caution: &lt;/span&gt;"),
+          $("#code-ib-title-text").text((!$("#ib-df-title").val() == "") ? $("#ib-df-title").val() : "Alert title" ),
+          $("#code-ib-title-close").text("</span></h5>")
         )
       )
     : (
@@ -651,25 +662,27 @@ $("#ib-type").change(function() {
           $("#code-ib-title-open, #code-ib-title-text, #code-ib-title-close").empty())
         : (
           $("#ib-title-form").show(),
-          $("#code-ib-title-open").html("\n    &lt;h5&gt;"),
-          $("#code-ib-title-close").text("</h5>"),
+          $("#code-ib-title-open").html("\n    &lt;h5&gt;&lt;span role&#61;&#34;text&#34;&gt;&lt;span class&#61;&#34;sr-only&#34;&gt;"+ cleanString($(this).val(), "-") + ": &lt;/span&gt;"),
+          $("#code-ib-title-close").text("</span></h5>"),
           $(this).val() == "editing-help-box"
             ? (
-              $("#code-ib-title-text").text((!$("#ib-df-title").val() == "") ? $("#ib-df-title").val() : "Editing help box title"),
+              $("#code-ib-title-text").text((!$("#ib-df-title").val() == "") ? $("#ib-df-title").val() : "Help box title"),
+              $("#code-ib-body-open").html("&lt;p&gt;"),
               $("#code-ib-caption").text('\n    <p class="caption">Note: This help message is not displayed to students.</p>'))
             : $(this).val() == "definition-box"
-              ? $("#code-ib-title-text").text((!$("#ib-df-title").val() == "") ? $("#ib-df-title").val() : "Definition box title")
+              ? $("#code-ib-title-text").text((!$("#ib-df-title").val() == "") ? $("#ib-df-title").val() : "Box title")
               : $(this).val() == "learning-outcome-box"
-                ? ($("#ib-title-form").hide(), $("#code-ib-title-text").text("Learning outcomes"))
+              // Learning outcome box: IT IS SUPPOSED TO HAVE AN ORDERED LIST. WAITING REVIEW TO SEE HOW WE DO IT
+                ? ($("#code-ib-title-text").text("Learning outcomes"), $("#code-ib-body-open").html("&lt;p&gt;"), $("#code-ib-body-close").html("</p>"))
                 : $(this).val() ==  "reading-box"
-                  ? $("#code-ib-title-text").text((!$("#ib-df-title").val() == "") ? $("#ib-df-title").val() : "Reading box title")
+                  ? $("#code-ib-title-text").text((!$("#ib-df-title").val() == "") ? $("#ib-df-title").val() : "Box title")
                   : console.log("foo")
             ));
   preview("ib");
 });
 
 // update infobox text
-updateText("ib", "#ib-text", "#code-ib-text", "Info box body text");
+updateText("ib", "#ib-text", "#code-ib-body-text", "Info box body text");
 updateText("ib", "#ib-df-title", "#code-ib-title-text", "Info box title");
 
 /**********************************
@@ -1489,3 +1502,5 @@ function validateForms(forms) {
     }
   });
 }
+
+
