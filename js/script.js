@@ -537,12 +537,14 @@ function initialCollapseCards(maxCollapseCards) {
 function createCollapseCard(i) {
   return `<span id="code-col-card-${i}"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;collapse&#45;card&#32collapsed&#34;&gt;</span>
     <span class="code-open-tag">&lt;div&#32;class&#61;&#34;collapse&#45;header&#34;&gt;</span>
-      <span class="code-open-tag">&lt;button&#32;class&#61;&#34;btn&#32;btn&#45;link&#34;&gt;</span>
+      <span class="code-open-tag">&lt;button&#32;class&#61;&#34;btn&#32;btn&#45;link&#34;&#32;aria&#45;expanded&#61;&#34;false&#34;&gt;</span>
         <span class="code-open-tag">&lt;h5&#32;class&#61;&#34;h4&#34;&gt;</span><span id="code-col-collapse-${i}-heading">Collapse card #${i} heading</span><span class="code-close-tag">&lt;&#47;h5&gt;</span>
       <span class="code-close-tag">&lt;&#47;button&gt;</span>
     <span class="code-close-tag">&lt;&#47;div&gt;</span>
     <span class="code-open-tag">&lt;div&#32;class&#61;&#34;collapse&#45;body&#34;&gt;</span>
+    <span class="code-open-tag">&lt;p&gt;</span>
       <span id="code-col-collapse-${i}-body">Collapse card #${i} body</span>
+      <span class="code-close-tag">&lt;&#47;p&gt;</span>
     <span class="code-close-tag">&lt;&#47;div&gt;</span>
   <span class="code-close-tag">&lt;&#47;div&gt;</span></span>`;
 }
@@ -667,15 +669,20 @@ $("#ib-type").change(function() {
           $(this).val() == "editing-help-box"
             ? (
               $("#code-ib-title-text").text((!$("#ib-df-title").val() == "") ? $("#ib-df-title").val() : "Help box title"),
-              $("#code-ib-body-open").html("&lt;p&gt;"),
+              $("#code-ib-body-open").html("&lt;p&gt;"),              
+              $("#code-ib-body-close").text("</p>"),
               $("#code-ib-caption").text('\n    <p class="caption">Note: This help message is not displayed to students.</p>'))
             : $(this).val() == "definition-box"
               ? $("#code-ib-title-text").text((!$("#ib-df-title").val() == "") ? $("#ib-df-title").val() : "Box title")
               : $(this).val() == "learning-outcome-box"
               // Learning outcome box: IT IS SUPPOSED TO HAVE AN ORDERED LIST. WAITING REVIEW TO SEE HOW WE DO IT
-                ? ($("#code-ib-title-text").text("Learning outcomes"), $("#code-ib-body-open").html("&lt;p&gt;"), $("#code-ib-body-close").html("</p>"))
+                ? $("#code-ib-title-text").text("Learning outcomes")                  
                 : $(this).val() ==  "reading-box"
-                  ? $("#code-ib-title-text").text((!$("#ib-df-title").val() == "") ? $("#ib-df-title").val() : "Box title")
+                  ? (                    
+                    $("#code-ib-title-text").text((!$("#ib-df-title").val() == "") ? $("#ib-df-title").val() : "Box title"),
+                    $("#code-ib-body-open").html("&lt;p&gt;"), 
+                    $("#code-ib-body-close").html("&lt;/p&gt;")
+                  )
                   : console.log("foo")
             ));
   preview("ib");
@@ -684,6 +691,8 @@ $("#ib-type").change(function() {
 // update infobox text
 updateText("ib", "#ib-text", "#code-ib-body-text", "Info box body text");
 updateText("ib", "#ib-df-title", "#code-ib-title-text", "Info box title");
+
+
 
 /**********************************
  * list                           *

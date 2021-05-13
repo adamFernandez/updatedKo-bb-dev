@@ -1,7 +1,8 @@
 <div class="component-content" id="component-infobox">
   <div class="component-header">
     <h2 class="component-title">Info Box</h2>
-    <a href="https://keats.kcl.ac.uk/mod/book/view.php?id=3118030" target="_blank">Design System guidance and examples</a>
+    <p><a href="https://keats.kcl.ac.uk/mod/book/view.php?id=3072545&chapterid=269224" target="_blank">Design System guidance and
+    examples</a></p>
   </div>
   <div class="component-body container">
     <div class="row">
@@ -51,7 +52,7 @@
             <pre class="code-text">
 <span id="ib-print-code"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;<span id="code-ib-alert-class"></span><span id="code-ib-type">definition-box</span><span id="code-ib-alert-role"></span><span id="code-ib-alert-aria-label"></span>&#34;&gt;</span>
   <span class="code-open-tag">&lt;div&gt;</span><span id="code-ib-title-open">
-    &lt;h5&gt;</span><span id="code-ib-title-text">&lt;span role&#61;&#34;text&#34;&gt;&lt;span class&#61;&#34;sr-only&#34;&gt;Definition:&lt;/span&gt;Title</span><span id="code-ib-title-close">&lt;&#47;h5&gt;</span>
+    &lt;h5&gt;&lt;span role&#61;&#34;text&#34;&gt;&lt;span class&#61;&#34;sr-only&#34;&gt;Definition:&lt;/span&gt;</span><span id="code-ib-title-text">Title</span><span id="code-ib-title-close">&lt;&#47;h5&gt;</span>
     <span id="code-ib-body"><span id="code-ib-body-open">&lt;p&gt;</span><span id="code-ib-body-text">Info box body text</span><span id="code-ib-body-close">&lt;&#47;p&gt;</span></span><span id="code-ib-caption"></span>
   <span class="code-close-tag">&lt;&#47;div&gt;</span>
 <span class="code-close-tag">&lt;&#47;div&gt;</span></span>
