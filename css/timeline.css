@@ -1,0 +1,82 @@
+.timeline-container {
+  margin-left: 64px;
+  padding: 0 20px;
+}
+.timeline-badge-pill {
+  border-radius: 50%;
+  border: 8px solid #009ea0 !important;
+  height: 1.5rem;
+  width: 1.5rem;
+  padding: unset;
+}
+.timeline-badge-pill.fill {
+  background-color: #009ea0;
+}
+.timeline-row .border-right {
+  border-right: 3px solid #8b9296 !important;
+}
+.timeline-row .border-left {
+  border-left: 3px solid #8b9296 !important;
+}
+.timeline-card {
+  border: none;
+  border-radius: 0 6px 6px 6px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.25);
+}
+.timeline-card.no-date {
+  border-radius: 6px;
+}
+.timeline-card .card-body {
+  position: relative;
+  background-color: #edf1f2;
+  color: #333;
+}
+.timeline-card .date-tab {
+  position: absolute;
+  top: -30px;
+  left: 0;
+  background-color: #009ea0;
+  padding: 4px 8px;
+  border-radius: 6px 6px 0 0;
+  color: white;
+  font-family: 'KingsBureauGrot';
+  line-height: 1.4;
+}
+.timeline-card img {
+  width: 100%;
+}
+.timeline-card .card-image {
+  padding-right: 5px;
+}
+.timeline-card h4 {
+  line-height: 1.4;
+  color: #171717;
+}
+.timeline-card .card-text {
+}
+.timeline-card .img-reference {
+  font-size: 0.8125rem;
+  margin-top: 1.25rem;
+}
+.timeline-row.highlighted .date-tab {
+  background-color: ff5f05;
+}
+.timeline-row.highlighted .card-body {
+  background-color: #ffe0d3;
+}
+.timeline-row.highlighted .timeline-badge-pill {
+  border-color: #ff5f05 !important;
+}
+.timeline-row.highlighted .timeline-badge-pill.fill {
+  background-color: #ff5f05;
+}
+.timeline-badge-pill::after {
+  content: '';
+  position: absolute;
+  display: block;
+  top: 50%;
+  left: calc(50% + 12px);
+  border-top: 1.5px solid #8b9296;
+  border-bottom: 1.5px solid #8b9296;
+  width: 38px;
+}

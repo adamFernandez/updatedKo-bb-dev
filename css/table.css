@@ -1,0 +1,20 @@
+.table-bordered {
+  border: 1px solid #889296; 
+}
+.table.default-width {
+  width: unset;
+}
+.table th, .table td {
+  padding: 0.75rem 1.25rem;
+}
+th {
+  background-color: edf1f2;
+  font-family: 'KingsBureauGrot';
+  font-size: 1.125rem;
+  line-height: 1.4;
+  color: #171717;
+}
+td {
+  line-height: 1.375;
+  color: #333333;
+}
