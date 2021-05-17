@@ -627,20 +627,22 @@ $(document).on("click", "#geshi-check-line-nos", function(event) {
 /**********************************
  * infobox                        *
  **********************************/
- function cleanString(string, fromChar, reverse = false) { // strips a string (a name id), from everything but the first word before the choosen character and capitalize it.
+
+/*
+ strips a string (a name id), from everything but the first word before the choosen character
+  and capitalize it if 3rd parameter false(default). If true, it reverses its functionality.
+*/
+ function cleanString(string, fromChar, reverse = false) { 
   let str = string.search(fromChar);
-  if(reverse == true){
+  if(reverse){
     str ++;
     let clean = string.substr(str,string.length-1);
-    //console.log(`Clean: ${clean} \nStr: ${str} `);
     return clean[0].toUpperCase() + clean.slice(1);
   } else if (!reverse){
       let clean = string.substr(0,str);
       return clean[0].toUpperCase() + clean.slice(1);
   }
 }
-
-console.log(cleanString("alert-instructional", "-", false));
 
 // change infobox type
 $("#ib-type").change(function() {
@@ -660,6 +662,8 @@ $("#ib-type").change(function() {
         )
         : (
           $("#ib-title-form").show(),
+          $("#code-ib-body-open").text("<p>"),          
+          $("#code-ib-body-close").text("</p>"),
           $("#code-ib-title-open").html("\n    &lt;h5&gt;&lt;span role&#61;&#34;text&#34;&gt;&lt;span class&#61;&#34;sr-only&#34;&gt;" + cleanString($(this).val(), "-",true) + ": &lt;/span&gt;"),
           $("#code-ib-title-text").text((!$("#ib-df-title").val() == "") ? $("#ib-df-title").val() : "Alert title" ),
           $("#code-ib-title-close").text("</span></h5>")
@@ -684,8 +688,11 @@ $("#ib-type").change(function() {
             : $(this).val() == "definition-box"
               ? $("#code-ib-title-text").text((!$("#ib-df-title").val() == "") ? $("#ib-df-title").val() : "Box title")
               : $(this).val() == "learning-outcome-box"
-              // Learning outcome box: IT IS SUPPOSED TO HAVE AN ORDERED LIST. WAITING REVIEW TO SEE HOW WE DO IT
-                ? $("#code-ib-title-text").text("Learning outcomes")                  
+                ? (
+                  $("#code-ib-body-open").text("<p>"),          
+                  $("#code-ib-body-close").text("</p>"),
+                  $("#code-ib-title-text").text("Learning outcomes")        
+                )
                 : $(this).val() ==  "reading-box"
                   ? (                    
                     $("#code-ib-title-text").text((!$("#ib-df-title").val() == "") ? $("#ib-df-title").val() : "Box title"),
