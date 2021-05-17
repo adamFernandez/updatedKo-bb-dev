@@ -18,12 +18,12 @@
                 </div>
                 <select class="custom-select" id="ib-type">
                   <option value="definition-box">Definition</option>
-                  <option value="alert-caution">Caution alert</option>
-                  <option value="editing-help-box">Editing help</option>
                   <option value="alert-instructional">Instructional alert</option>
+                  <option value="alert-caution">Caution alert</option>
                   <option value="key-concept-box">Key concept</option>
                   <option value="learning-outcome-box">Learning outcome</option>
                   <option value="reading-box">Reading</option>
+                  <option value="editing-help-box">Editing help</option>
                 </select>
               </div>
             </div>
