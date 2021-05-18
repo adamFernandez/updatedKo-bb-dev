@@ -37,7 +37,6 @@ form {
 }
 h2 {
   margin-top: 1rem;
-  margin-left: .8rem;
 }
 section h3 {
   margin-bottom: 1rem;
@@ -193,6 +192,10 @@ pre {
 
 .ml {
   margin-left: 14px;
+}
+
+.component-header {
+  margin-left: 1rem;
 }
 
 

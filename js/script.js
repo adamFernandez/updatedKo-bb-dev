@@ -674,7 +674,10 @@ $("#ib-type").change(function() {
       $(this).val() == "key-concept-box"
         ? (
           $("#ib-title-form").hide(),
-          $("#code-ib-title-open, #code-ib-title-text, #code-ib-title-close").empty())
+          $("#code-ib-title-open, #code-ib-title-text, #code-ib-title-close").empty(),
+          $("#code-ib-body-open").html("&lt;p&gt;&lt;span role&#61;&#34;text&#34;&gt;&lt;span class&#61;&#34;sr-only&#34;&gt;Important: &lt;/span&gt;"),
+          $("#code-ib-body-close").text("</span></p>")
+        )
         : (
           $("#ib-title-form").show(),
           $("#code-ib-title-open").html("\n    &lt;h5&gt;&lt;span role&#61;&#34;text&#34;&gt;&lt;span class&#61;&#34;sr-only&#34;&gt;" + cleanString($(this).val(), "-") + ": &lt;/span&gt;"),
@@ -1335,9 +1338,12 @@ function embedTextAddVariables() {
 
 // sets type
 $("#va-type").change(function() {
+  $(".float-class").text(" float-box");  
+  console.log($(this).val() + "changed to");
   $(".code-va-type").text($(this).val());
-  // removes hyphen from model answer button text
+  // removes hyphen from model answer button 
   $("#code-va-type-button-text").text( $(this).val() == "generic" ? "" : ' ' + $(this).val().replace('-',' ') );
+  $(this).val() == "description" ? $(".float-class").text("") :  " float-box" ;
   preview("va");
 });
 

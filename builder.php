@@ -13,11 +13,11 @@
     <h1 class="ml">KO Single-platform Bootstrap Builder</h1>
     <div>
       <div>
-        <p class="ml">Select the component you wish to build:</p>
+        <p class=>Select the component you wish to build:</p>
         <ul class="nav nav-tabs">
           <?php
             $components = array('Carousel', 'Collapse', 'Timeline', 'Table', 'Transcript', 'Card', 'List', 'Quotation', 'Infobox',
-            'View/hide', 'Academic note', 'Audio', 'Video', 'Download');
+            'View/answer', 'Academic note', 'Audio', 'Video', 'Download');
             sort($components);
             foreach ($components as $component) {
               $id = strtolower(str_replace(' ','',str_replace('/','',$component)));
@@ -47,7 +47,7 @@
           <?php include('components/timeline.php'); ?>
           <?php include('components/transcript.php'); ?>
           <?php include('components/video.php'); ?>
-          <?php //include('components/viewhide.php'); ?>
+          <?php include('components/viewhide.php'); ?>
           <?php include('components/faqs.php'); ?>
         </div>
       </section>
