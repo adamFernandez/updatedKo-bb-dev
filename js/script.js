@@ -1255,6 +1255,7 @@ function updateTimelineText(timelineCardLimit) {
  * transcript                     *
  **********************************/
 
+
 $("#ts-type").change(function() {
   // if secondary style is selected, force button standard button size
   $(this).val() == "nsp"
@@ -1275,7 +1276,7 @@ $("#ts-type").change(function() {
         $("#ts-id-container").empty(),
         $(".code-ts-btn-tag").text("a"),
         $("#code-ts-view-btn-class").text(" btn-primary view-close-transcript"),
-        $("#code-ts-view-btn-role").text(' role="button"'),
+        //$("#code-ts-view-btn-role").text(' role="button"'),
         $("#code-ts-download-btn-class").text(" download-transcript"),
         $(".code-ts-id, #code-ts-id-1, #code-ts-id-2, #code-ts-id-3, #code-ts-id-4, #code-ts-id-5, #code-ts-card-collapse").empty()
      );
@@ -1333,17 +1334,14 @@ function embedTextAddVariables() {
 }
 
 /**********************************
- * view answer                    *
+ * view hide                   *
  **********************************/
 
 // sets type
 $("#va-type").change(function() {
-  $(".float-class").text(" float-box");  
-  console.log($(this).val() + "changed to");
   $(".code-va-type").text($(this).val());
-  // removes hyphen from model answer button 
+  // removes hyphen from model answer button text
   $("#code-va-type-button-text").text( $(this).val() == "generic" ? "" : ' ' + $(this).val().replace('-',' ') );
-  $(this).val() == "description" ? $(".float-class").text("") :  " float-box" ;
   preview("va");
 });
 

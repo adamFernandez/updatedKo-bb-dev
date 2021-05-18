@@ -1,7 +1,7 @@
 <div class="component-content" id="component-transcript">
   <div class="component-header">
     <h2 class="component-title">Transcript</h2>
-    <a href="https://keats.kcl.ac.uk/mod/page/view.php?id=3118027" target="_blank">Design System guidance and examples</a>
+    <p><a href="https://keats.kcl.ac.uk/mod/page/view.php?id=3118027" target="_blank">Design System guidance and examples</a></p>
   </div>
   <div class="component-body container">
     <div class="row">
@@ -10,30 +10,9 @@
           <h3>Options</h3>
           <p>Complete the following fields:</p>
           <form class="needs-validation" id="ts-form" novalidate>
-            <div class="form-group">
+             <div class="form-group">
               <div class="input-group">
-                <div class="input-group-prepend">
-                  <label class="input-group-text" for="ts-type">Course type</label>
-                </div>
-                <select class="custom-select" id="ts-type">
-                  <option value="sp" selected>Single-platform</option>
-                  <option value="nsp">Non single-platform</option>
-                </select>
               </div>
-              <div class="input-group mb-3" id="ts-id-container">
-              </div>
-<!--
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <label class="input-group-text" for="ts-link">Link*</label>
-                </div>
-                <input type="text" class="form-control" id="ts-link" aria-label="ts-link" placeholder="https://keats.kcl.ac.uk/pluginfile.php/12345/course/section/12345/transcript.pdf" required>
-                <div class="invalid-feedback" id="ts-link-invalid-feedback">
-                  Please enter the transcript link.
-                </div>
-                <small id="ts-link-help" class="form-text text-muted">The transcript must first be uploaded to Keats, where the generated link can be copied and pasted from.</small>
-              </div>
--->
             </div>
             <div class="form-group">
               <label for="ts-body">Body</label>
@@ -59,10 +38,10 @@
             <pre class="code-text">
 <span id="ts-print-code"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;transcript&#45;container&#32;collapsed&#34;&gt;</span>
   <span class="code-open-tag">&lt;div&#32;class&#61;&#34;transcript&#45;button&#45;group&#34;&gt;</span>
-    <span class="code-open-tag">&lt;<span class="code-ts-btn-tag">button</span>&#32;class&#61;&#34;btn<span id="code-ts-view-btn-class">&#32;btn&#45;primary&#32;view&#45;close&#45;transcript</span>&#34;<span id="code-ts-view-btn-role">&#32;role&#61;&#34;button&#34;</span><span id="code-ts-id-1"></span><span class="code-ts-id">modname-unitno-transcript-no</span><span id="code-ts-id-2"></span><span class="code-ts-id">modname-unitno-transcript-no</span><span id="code-ts-id-3"></span>&gt;</span>View transcript<span class="code-close-tag">&lt;&#47;<span class="code-ts-btn-tag">button</span>&gt;</span>
+    <span class="code-open-tag">&lt;<span class="code-ts-btn-tag">button</span>&#32;class&#61;&#34;btn<span id="code-ts-view-btn-class">&#32;btn&#45;primary&#32;view&#45;close&#45;transcript</span>&#34;&#32;aria-expanded&#61;&#34;false&#34;<span id="code-ts-id-1"></span><span class="code-ts-id"></span><span id="code-ts-id-2"></span><span class="code-ts-id"></span><span id="code-ts-id-3"></span>&gt;</span>View transcript<span class="code-close-tag">&lt;&#47;<span class="code-ts-btn-tag">button</span>&gt;</span>
 <!--    <span class="code-open-tag">&lt;a&#32;class&#61;&#34;btn&#32;btn&#45;secondary<span id="code-ts-download-btn-class">&#32;download&#45;transcript</span>&#34;&#32;href&#61;&#34;<span id="code-ts-link">www.example.com/transcript.pdf</span>&#34;&#32;role&#61;&#34;button&#34;&#32;target&#61;&#34;&#95;blank&#34;&gt;</span>Download transcript<span class="code-close-tag">&lt;&#47;a&gt;</span>-->
   <span class="code-close-tag">&lt;&#47;div&gt;</span>
-  <span class="code-open-tag">&lt;div&#32;class&#61;&#34;transcript&#45;card<span id="code-ts-card-collapse"></span>&#34;<span id="code-ts-id-4"></span><span class="code-ts-id">modname-unitno-transcript-no</span><span id="code-ts-id-5"></span>&gt;</span>
+  <span class="code-open-tag">&lt;div&#32;class&#61;&#34;transcript&#45;card<span id="code-ts-card-collapse"></span>&#34;<span id="code-ts-id-4"></span><span class="code-ts-id"></span><span id="code-ts-id-5"></span>&gt;</span>
     <span class="code-open-tag">&lt;div&#32;class&#61;&#34;card&#45;body&#34;&gt;</span>
       <span id="code-ts-body-text">&lt;p&gt;Transcript body...&lt;&#47;p&gt;</span>
     <span class="code-close-tag">&lt;&#47;div&gt;</span>

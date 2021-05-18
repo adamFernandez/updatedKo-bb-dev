@@ -17,7 +17,7 @@
         <ul class="nav nav-tabs">
           <?php
             $components = array('Carousel', 'Collapse', 'Timeline', 'Table', 'Transcript', 'Card', 'List', 'Quotation', 'Infobox',
-            'View/answer', 'Academic note', 'Audio', 'Video', 'Download');
+            'View/hide', 'Academic note', 'Audio', 'Video', 'Download');
             sort($components);
             foreach ($components as $component) {
               $id = strtolower(str_replace(' ','',str_replace('/','',$component)));

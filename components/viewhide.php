@@ -1,7 +1,7 @@
-<div class="component-content" id="component-viewanswer">
+<div class="component-content" id="component-viewhide">
   <div class="component-header">
-    <h2 class="component-title">View answer</h2>
-    <a href="https://keats.kcl.ac.uk/mod/book/view.php?id=3118036" target="_blank">Design System guidance and examples</a>
+    <h2 class="component-title">View hide</h2>
+    <p><a href="https://keats.kcl.ac.uk/mod/book/view.php?id=3118036" target="_blank">Design System guidance and examples</a></p>
   </div>
   <div class="component-body container">
     <div class="row">
@@ -67,7 +67,7 @@
   <span class="code-open-tag">&lt;h5&gt;</span><span id="code-va-q">Lemon drops gingerbread topping?</span><span class="code-close-tag">&lt;&#47;h5&gt;</span>
   <span class="code-open-tag">&lt;button&#32;class&#61;&#34;btn&#32;btn&#45;primary&#32;view&#45;hide&#45;<span class="code-va-type">answer</span>&#34;&#32;aria-expanded&#61;&#34;false&#34;&gt;</span>View<span class="code-va-type" id="code-va-type-button-text"> answer</span><span
   class="code-close-tag">&lt;&#47;button&gt;</span>
-  <span class="code-open-tag">&lt;div&#32;class&#61;&#34;view&#45;<span class="code-va-type">answer</span>&#45;card<span class="float-class">&#32;float&#45;box</span>&#34;&gt;</span>
+  <span class="code-open-tag">&lt;div&#32;class&#61;&#34;view&#45;<span class="code-va-type">answer</span>&#45;card&#34;&gt;</span>
     <span class="code-open-tag">&lt;div&#32;class&#61;&#34;card&#45;body&#34;&gt;</span>
       <span id="code-va-author"></span><span class="code-open-tag">&lt;div&#32;class&#61;&#34;card&#45;text&#34;&gt;</span>
         <span class="code-open-tag">&lt;p&gt;</span><span id="code-va-a">Pudding pie bonbon muffin carrot cake fruitcake macaroon. Cupcake dessert topping. Brownie cheesecake sweet jujubes. Liquorice dragée pie cookie. Soufflé lemon drops biscuit dragée biscuit macaroon cake halvah. Bonbon marzipan oat cake danish cupcake brownie chocolate bar.</span><span class="code-close-tag">&lt;&#47;p&gt;</span>
