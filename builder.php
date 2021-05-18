@@ -10,10 +10,10 @@
   </head>
   <body>
     <main>
-    <h1 class="ml">KO Single-platform Bootstrap Builder</h1>
+    <h1>KO Single-platform Bootstrap Builder</h1>
     <div>
       <div>
-        <p class=>Select the component you wish to build:</p>
+        <p>Select the component you wish to build:</p>
         <ul class="nav nav-tabs">
           <?php
             $components = array('Carousel', 'Collapse', 'Timeline', 'Table', 'Transcript', 'Card', 'List', 'Quotation', 'Infobox',
@@ -33,13 +33,10 @@
        <div id="component-builder">
           <?php include('components/academicnote.php'); ?>
           <?php include('components/audio.php'); ?>
-          <?php include('components/button.php'); ?>
           <?php include('components/card.php'); ?>
           <?php include('components/carousel.php'); ?>
           <?php include('components/collapse.php'); ?>
           <?php include('components/download.php'); ?>
-          <?php include('components/geshi.php'); ?>
-          <?php include('components/grid.php'); ?>
           <?php include('components/infobox.php'); ?>
           <?php include('components/list.php'); ?>
           <?php include('components/quotation.php'); ?>
@@ -58,4 +55,3 @@
     <script src="js/script.js"></script>
   </body>
 </html>
-

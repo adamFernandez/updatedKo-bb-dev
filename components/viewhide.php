@@ -1,6 +1,6 @@
 <div class="component-content" id="component-viewhide">
   <div class="component-header">
-    <h2 class="component-title">View hide</h2>
+    <h2 class="component-title">View/hide</h2>
     <p><a href="https://keats.kcl.ac.uk/mod/book/view.php?id=3118036" target="_blank">Design System guidance and examples</a></p>
   </div>
   <div class="component-body container">

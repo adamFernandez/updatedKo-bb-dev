@@ -915,20 +915,20 @@ function initialTable(maxTabCols, maxTabRows) {
 
 // create single table column header code
 function createTableColHeader(i) {
-  return `<span id="code-tab-col-${i}-header">\n        <span class="code-open-tag">&lt;th&#32;scope&#61;&#34;col&#34;&gt;<span id="code-tab-col-${i}-header-text">Column header</span><span class="code-close-tag">&lt;&#47;th&gt;</span></span>`;
+  return `<span id="code-tab-col-${i}-header">\n      <span class="code-open-tag">&lt;th&#32;scope&#61;&#34;col&#34;&gt;<span id="code-tab-col-${i}-header-text">Column header</span><span class="code-close-tag">&lt;&#47;th&gt;</span></span>`;
 }
 // create single table row header code
 function createTableRowHeader(i) {
-  return `<span class="code-tab-row-header">\n        <span class="code-open-tag">&lt;th&#32;scope&#61;&#34;row&#34;&gt;<span id="code-tab-row-${i}-header-text">${i == 0 ? "#" :"Row Header"}</span><span class="code-close-tag">&lt;&#47;th&gt;</span></span>`;
+  return `<span class="code-tab-row-header">\n      <span class="code-open-tag">&lt;th&#32;scope&#61;&#34;row&#34;&gt;<span id="code-tab-row-${i}-header-text">${i == 0 ? "#" :"Row Header"}</span><span class="code-close-tag">&lt;&#47;th&gt;</span></span>`;
 }
 // create single table row code
 function createTableRow(i) {
-  return `<span id="code-tab-row-${i}">\n      <span class="code-open-tag">&lt;tr&gt;<span id="code-tab-row-${i}-cols"><span id="code-tab-row-${i}-header"></span></span>
-      <span class="code-close-tag">&lt;&#47;tr&gt;</span></span>`;
+  return `<span id="code-tab-row-${i}">\n    <span class="code-open-tag">&lt;tr&gt;<span id="code-tab-row-${i}-cols"><span id="code-tab-row-${i}-header"></span></span>
+    <span class="code-close-tag">&lt;&#47;tr&gt;</span></span>`;
 }
 // create single table row column code
 function createTableRowCol(i,j) {
-  return `<span id="code-tab-row-${j}-col-${i}">\n        <span class="code-open-tag">&lt;td&gt;<span id="code-tab-row-${j}-col-${i}-text">Cell</span><span class="code-close-tag">&lt;&#47;td&gt;</span></span>`;
+  return `<span id="code-tab-row-${j}-col-${i}">\n      <span class="code-open-tag">&lt;td&gt;<span id="code-tab-row-${j}-col-${i}-text">Cell</span><span class="code-close-tag">&lt;&#47;td&gt;</span></span>`;
 }
 
 // change table width
@@ -1254,7 +1254,6 @@ function updateTimelineText(timelineCardLimit) {
 /**********************************
  * transcript                     *
  **********************************/
-
 
 $("#ts-type").change(function() {
   // if secondary style is selected, force button standard button size
