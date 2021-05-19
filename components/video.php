@@ -1,11 +1,7 @@
 <div class="component-content" id="component-video">
   <div class="component-header">
     <h2 class="component-title">Video</h2>
-<<<<<<< HEAD
-    <a href="https://keats.kcl.ac.uk/mod/book/view.php?id=3072545&chapterid=240944" target="_blank">Design System guidance and examples</a>
-=======
     <p><a href="https://keats.kcl.ac.uk/mod/book/view.php?id=3072545&chapterid=240944" target="_blank">Design System guidance and examples</a></p>
->>>>>>> 9289554f3dfeb44970627525e4219513d90041c5
   </div>
   <div class="component-body container">
     <div class="row">

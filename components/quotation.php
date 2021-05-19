@@ -33,7 +33,8 @@
           </div>
           <div class="code-box">
             <pre class="code-text">
-<span id="quo-print-code"><span class="code-open-tag">&lt;figure&#32;class&#61&#34;quote&#45;box&#34;&gt;</span>
+<span id="quo-print-code"><span
+            class="code-open-tag">&lt;figure&#32;class&#61;&#34;quote&#45;box&#34;&gt;</span>
   <span class="code-open-tag">&lt;blockquote&#32;class&#61;&#34;quote&#45;body&#34;&gt;</span>
     <span id="code-quo-body">This is the preview area where you can see what your quotation will look like.</span>
   <span class="code-close-tag">&lt;&#47;blockquote&gt;</span>
