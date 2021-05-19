@@ -38,6 +38,9 @@ form {
   padding-right: unset;
   padding-left: unset;
 }
+h1, p.header {
+  margin-left: 0.7rem;
+}
 h2 {
   margin-top: 1rem;
 }
