@@ -159,7 +159,7 @@ $("#cd-type").change(function(data){
   preview("cd");  
 });
 
-// on selet change, show only the required no of cards to edit, update code and preview
+// on select change, show only the required no of cards to edit, update code and preview
 $("#cd-card-no").on('focus', function() {
   $(this).data("previous",$(this).val());
   $(this).blur();
@@ -224,8 +224,8 @@ function createCard(i) {
   return `<span id="code-cd-card-${i}"><pre>  <span class="code-open-tag">&lt;div&#32;class&#61;&#34;<span class="code-cd-type">${ $("#cd-type").val() == "float-box" ? "float-box" : "card" }</span>&#34;&gt;</span><span id="code-cd-${i}-img">
     <span id="code-cd-${i}-img-open">&lt;<span id="code-cd-img-container-open">img</span>&#32;src&#61;&#34;</span><span id="code-cd-${i}-img-src">https:\/\/via.placeholder.com\/300</span><span id="code-cd-${i}-img-middle">&#34;</span><span id="code-cd-${i}-img-alt"></span>&gt;<span id="code-cd-img-container-close"></span></span></span>
     <span class="code-open-tag">&lt;div&#32;class&#61;&#34;<span class="code-cd-body-class">card</span>&#45;body&#34;&gt;</span><span id="code-cd-${i}-title">
-      <span>&lt;h4&gt;</span><span id="code-cd-${i}-title-text">Card #${i} title</span><span>&lt;&#47;h4&gt;</span></span>
-      <span class="code-open-tag">&lt;p&gt;</span><span id="code-cd-${i}-text">Card #${i} text</span><span class="code-close-tag">&lt;&#47;p&gt;</span>
+      <span class="code-open-tag">&lt;h4&#32;class&#61;&#34;card-text&#34;&gt;</span><span id="code-cd-${i}-title-text">Card #${i} title</span><span>&lt;&#47;h4&gt;</span></span>
+      <span class="code-open-tag">&lt;p&#32;class&#61;&#34;card-text&#34;&gt;</span><span id="code-cd-${i}-text">Card #${i} text</span><span class="code-close-tag">&lt;&#47;p&gt;</span>
     <span class="code-close-tag">&lt;&#47;div&gt;</span>
   <span class="code-close-tag">&lt;&#47;div&gt;</span></pre></span>`;
 }
@@ -637,9 +637,16 @@ $(document).on("click", "#geshi-check-line-nos", function(event) {
   if(reverse){
     str ++;
     let clean = string.substr(str,string.length-1);
-    return clean[0].toUpperCase() + clean.slice(1);
+    if (clean == "instructional") {
+      return "Note";
+    } 
+    return clean[0].toUpperCase() + clean.slice(1);    
+    
   } else if (!reverse){
       let clean = string.substr(0,str);
+      if(clean == "reading") {
+        return "Read";
+      }
       return clean[0].toUpperCase() + clean.slice(1);
   }
 }
@@ -648,6 +655,9 @@ $(document).on("click", "#geshi-check-line-nos", function(event) {
 $("#ib-type").change(function() {
   $("#code-ib-type").text($(this).val());
   $("#code-ib-alert-class, #code-ib-alert-aria-label, #code-ib-caption").empty();
+  $("#code-ib-body").show(),
+  $("#ib-body-form").show(),
+  $("#code-ib-title-text").text("Info box title");
   $(this).val() == "alert-instructional" || $(this).val() == "alert-caution"
     ? (
       $("#code-ib-alert-class").text("alert "),
@@ -657,7 +667,7 @@ $("#ib-type").change(function() {
           $("#code-ib-title-open, #code-ib-title-text, #code-ib-title-close").empty(),
           $("#ib-title-form").hide(),
           $("#code-ib-body-open").html("&lt;p&gt;&lt;span role&#61;&#34;text&#34;&gt;&lt;span class&#61;&#34;sr-only&#34;&gt;" + cleanString($(this).val(), "-",true) + ": &lt;/span&gt;"),
-          $("#code-ib-body-text").text((!$("#ib-df-title").val() == "") ? $("#ib-df-title").val() : "Alert title" ),
+          $("#code-ib-body-text").text((!$("#ib-df-title").val() == "") ? $("#ib-df-title").val() : "Info box body text" ),
           $("#code-ib-body-close").text("</span></p>")
         )
         : (
@@ -665,7 +675,6 @@ $("#ib-type").change(function() {
           $("#code-ib-body-open").text("<p>"),          
           $("#code-ib-body-close").text("</p>"),
           $("#code-ib-title-open").html("\n    &lt;h5&gt;&lt;span role&#61;&#34;text&#34;&gt;&lt;span class&#61;&#34;sr-only&#34;&gt;" + cleanString($(this).val(), "-",true) + ": &lt;/span&gt;"),
-          $("#code-ib-title-text").text((!$("#ib-df-title").val() == "") ? $("#ib-df-title").val() : "Alert title" ),
           $("#code-ib-title-close").text("</span></h5>")
         )
       )
@@ -684,21 +693,22 @@ $("#ib-type").change(function() {
           $("#code-ib-title-close").text("</span></h5>"),
           $(this).val() == "editing-help-box"
             ? (
-              $("#code-ib-title-text").text((!$("#ib-df-title").val() == "") ? $("#ib-df-title").val() : "Help box title"),
+              $("#code-ib-title-text").text((!$("#ib-df-title").val() == "") ? $("#ib-df-title").val() : "Info box title"),
               $("#code-ib-body-open").html("&lt;p&gt;"),              
               $("#code-ib-body-close").text("</p>"),
               $("#code-ib-caption").text('\n    <p class="caption">Note: This help message is not displayed to students.</p>'))
             : $(this).val() == "definition-box"
-              ? $("#code-ib-title-text").text((!$("#ib-df-title").val() == "") ? $("#ib-df-title").val() : "Box title")
+              ? $("#code-ib-title-text").text((!$("#ib-df-title").val() == "") ? $("#ib-df-title").val() : "Info box title")
               : $(this).val() == "learning-outcome-box"
                 ? (
-                  $("#code-ib-body-open").text("<p>"),          
-                  $("#code-ib-body-close").text("</p>"),
-                  $("#code-ib-title-text").text("Learning outcomes")        
+                  $("#ib-body-form").hide(),
+                  $("#code-ib-body").hide(),
+                  $("#code-ib-title-open").html("\n    &lt;h5&gt;"),                  
+                  $("#code-ib-title-close").text("</h5>")        
                 )
                 : $(this).val() ==  "reading-box"
                   ? (                    
-                    $("#code-ib-title-text").text((!$("#ib-df-title").val() == "") ? $("#ib-df-title").val() : "Box title"),
+                    $("#code-ib-body").show(),
                     $("#code-ib-body-open").html("&lt;p&gt;"), 
                     $("#code-ib-body-close").html("&lt;/p&gt;")
                   )

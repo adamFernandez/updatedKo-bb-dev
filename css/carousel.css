@@ -1,75 +1,22 @@
-@font-face {
-  font-family: 'KingsBureauGrot';
-  src: url('https://git.iddkingsonline.com/assets/fonts/KingsBureauGrot-ThreeSeven.ttf') format('truetype');
-  font-weight: bold;
-  font-style: normal;
+#region-main .new-carousel{
+  display: block !important;
 }
-.carousel {
-  margin-bottom: 4rem;
+
+.nc-caption {
+  padding: 1rem 2rem !important;
 }
-.carousel::before {
-  content: "";
-  position: absolute;
-  height: 4px;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.25);
-  z-index: 50;
+
+.nc-buttons {
+  padding: 0 2rem !important;
+  width: 100% !important;
 }
-@media only screen and (max-width: 600px) {
-  .carousel-caption {
-    position: unset;
-  }
+
+button:last-child, .btn:last-child {  
+  margin: 0.5rem 0 !important;
 }
-.carousel-caption {
-  font-family: 'KingsBureauGrot' !important;
-  font-size: 23px;
-  text-align: left;
-  background-color: rgba(11, 45, 80, 0.85);
-  right: unset;
-  left: unset;
-  width: 100%;
-  bottom: 0;
-  padding: 2.4% 11%;
+
+ul.indic-dots {
+  padding-top: 1rem !important;
 }
-.text-only .carousel-item {
-  position: relative;
-  background-color: rgba(11, 45, 80, 0.85);
-  padding-top: 33.3333%;
-}
-.text-only .carousel-caption {
-  position: absolute;
-  background-color: unset;
-  top: 25%;
-  z-index: 1;
-  padding: 2.4% 12%;
-}
-.carousel-caption h5 {
-  font-size: 32px;
-}
-.carousel-indicators {
-  bottom: -32;
-  margin: 0;
-  width: 100%;
-  background-color: rgba(11, 45, 80, 1);
-}
-.carousel-indicators li {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  border: none;
-  margin: 10px 11px;
-}
-.carousel-control-prev, .carousel-control-next {
-  opacity: 1;
-}
-.carousel-control {
-  background-color: rgba(11, 45, 80, 0.5);
-  padding: 0 15px;
-  border-radius: 4px;
-}
-.carousel-control:hover {
-  background-color: rgba(11, 45, 80, 1);
-}
-.carousel-control i {
-  font-size: 60px;
-}
+
+

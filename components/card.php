@@ -5,7 +5,7 @@
   </div>
   <div class="component-body container">
     <div class="row">
-      <div class="options col-md-6">
+      <div class="options col-md-6 px-4">
       <section class="options">
         <h3>Options</h3>
         <p>Complete the following fields:</p>

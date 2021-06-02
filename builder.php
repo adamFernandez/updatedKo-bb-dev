@@ -7,6 +7,7 @@
     <link href="https://git.iddkingsonline.com/designsystem/css/bootstrap.css" rel="stylesheet">
     <link href="https://git.iddkingsonline.com/designsystem-dev/css/main.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+    <link href="css/carousel.css" rel="stylesheet">
   </head>
   <body>
     <main>
@@ -53,5 +54,6 @@
     <script src="https://kit.fontawesome.com/ea529b88ed.js"></script>
     <script src="https://git.iddkingsonline.com/designsystem-dev/js/main.js"></script>
     <script src="js/script.js"></script>
+    <script src="js/carousel.js"></script>
   </body>
 </html>
