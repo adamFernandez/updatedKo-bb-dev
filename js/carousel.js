@@ -25,7 +25,7 @@ const addDots = (slideNum = 0, encoded) => {
 const addSlides = (toElement, slideId = 0, current = 0, encoded = false) => {
     let slide = "";
     for (let i = 0; i < slideId; i++) {
-      slide += encoded ? `\n     <span class="crs-code-remove">&#60;li${ i == 0 ? ` class="active"` : ""}&#62;\n       &#60;figure&#62; 
+      slide += encoded ? `\n     <span class="crs-code-remove">&#60;li${ i == 10 ? ` class="active"` : ""}&#62;\n       &#60;figure&#62; 
           <span class="crs-code-img">\t&#60;img&#32;src&#61;&#34;<span id="crs-code-src-${i}">http:&#47;&#47;via.placeholder.com&#47;800x400</span>&#34;&#32;alt&#61;&#34;<span id="crs-code-alt-${i}">Alternative&#32;text</span>&#34;&#32;class&#61;&#34;nc&#45;image&#34;&#32;&#62;</span>\n&#60;figcaption&#32;class&#61;&#34;nc&#45;description&#34;&#62;
             <span class="crs-code-title">&#60;h5&#62;\n<span id="crs-code-title-${i}">\tCaption&#32;title&#32;${current + i + 1}</span>\n&#60;/h5&#62;</span>
             &#60;p&#62;
@@ -35,7 +35,7 @@ const addSlides = (toElement, slideId = 0, current = 0, encoded = false) => {
        &#60;/figure&#62;
     &#60;/li&#62;</span>`  
       : 
-      `<li ${ i == 0 ? ` class="active"` : ""}><figure>
+      `<li ${ i == 10 ? ` class="active"` : ""}><figure>
       <img src="https://via.placeholder.com/800x400" alt="Alternative text" class="nc-image" id="crs-image-${i}">
       \t<figcaption class="nc-description">
       <h5>Caption title ${current + i + 1}</h5>
@@ -228,9 +228,9 @@ captionCheck.onclick = () => {
  * THIS FUNCTION IS NOT WORKING YET.
 */
 
-const prevButton = document.querySelector(".nc-previous-button");
-const nextButton = document.querySelector(".nc-next-btn");
-const indicDots = document.querySelector(".indic-dots");
+// const prevButton = document.querySelector(".nc-previous-button");
+// const nextButton = document.querySelector(".nc-next-btn");
+// const indicDots = document.querySelector(".indic-dots");
 
 // displayCrs.firstElementChild.getBoundingClientRect().width;
 
@@ -240,16 +240,16 @@ const indicDots = document.querySelector(".indic-dots");
 
 // displayCrs.forEach(setSlidePosition);
 
-//Moving slides to the right
+// //Moving slides to the right
 
-nextButton.onclick = (e) => {
-  const currentSlide = displayCrs.querySelector(".active");
-  const nextSlide = currentSlide.nextElementSibling;
-  const toMove = nextSlide.getBoundingClientRect().left;
-  // move to the next slide
-  displayCrs.style.transform = `translateX(-${toMove})`;
-  console.log(toMove,nextSlide);
-}
+// nextButton.onclick = (e) => {
+//   const currentSlide = displayCrs.querySelector(".active");
+//   const nextSlide = currentSlide.nextElementSibling;
+//   const toMove = nextSlide.getBoundingClientRect().left;
+//   // move to the next slide
+//   displayCrs.style.transform = `translateX(-${toMove})`;
+//   console.log(toMove,nextSlide);
+// }
 
 
 // Generate cards for the input forms of the collapse and Change the preview the code and the form panels on select changing value

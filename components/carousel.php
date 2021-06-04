@@ -77,7 +77,7 @@
             </ul>
         </li>
         <li>
-            <button class="nc-next-btn btn btn-primary">Next</button>
+            <button class="nc-next btn btn-primary">Next</button>
         </li>
     </ul>
 </div>
