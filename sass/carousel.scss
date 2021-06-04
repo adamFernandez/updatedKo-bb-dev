@@ -27,7 +27,7 @@
   vertical-align: top;
   border: 0px;
   position: relative;
-  padding: 0;
+  padding: 1.25rem !important;
   margin: 0;
 }
 img {
@@ -63,4 +63,19 @@ figure {
   margin-block-end: 1em;
   margin-inline-start: 40px;
   margin-inline-end: 40px;
+}
+#region-main .new-carousel.portrait-carousel .nc-gallery > li figure > .filter-ally-wrapper > img.nc-image, #region-main .new-carousel.portrait-carousel .nc-gallery > li figure img.nc-image {
+  align-self: flex-start;
+  justify-self: flex-start;
+  width: 310px;
+  height: auto;
+  padding: 0.5rem !important;
+  padding-right: 0;
+  margin-bottom: auto;
+}
+
+
+
+#region-main .new-carousel .nc-gallery {
+  position: relative !important;
 }

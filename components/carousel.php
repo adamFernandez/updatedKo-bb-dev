@@ -63,8 +63,25 @@
       <div class="col-md-7">
         <section class="preview">
           <h3 class="preview-title">Preview</h3>
-          <div class="preview-dcfs"></div>
-          <div class="preview-crs"></div>
+          <div class="preview-crs">
+          <div class="new-carousel landscape-carousel w-100" tabindex="0" role="region" aria-label="gallery">
+    <ul class="nc-gallery">        
+    </ul>
+    <ul class="nc-buttons" aria-label="gallery controls">
+        <li>
+            <button class="nc-previous btn btn-primary" disabled="">Previous</button>
+        </li>
+        <li class="indic-container">
+            <ul class="indic-dots" aria-hidden="true">
+                <li class="active"></li>               
+            </ul>
+        </li>
+        <li>
+            <button class="nc-next-btn btn btn-primary">Next</button>
+        </li>
+    </ul>
+</div>
+          </div>
         </section>
         <section class="component-code">
           <div class="code-header">
@@ -73,7 +90,25 @@
           </div>
           <div class="code-box">
 <pre class="code-text">
-  <span id="code-crs"></span>
+<span id="code-crs">&#60;div&#32;class&#61;&#34;new&#45;carousel&#32;<span class="crs-type">landscape</span>&#45;carousel&#32;w&#45;100&#34;&#32;tabindex&#61;&#34;0&#34;&#32;role&#61;&#34;region&#34;&#32;aria&#45;label&#61;&#34;gallery&#34;&#62;
+  &#60;ul&#32;class&#61;&#34;nc&#45;gallery&#34;&#62;<span id="slides-code-crs"></span>
+  &#60;/ul&#62;
+  &#60;ul&#32;class&#61;&#34;nc&#45;buttons&#34;&#32;aria&#45;label&#61;&#34;gallery&#32;controls&#34;&#62;
+    &#60;li&#62;
+      &#60;button&#32;class&#61;&#34;nc&#45;previous&#32;btn&#32;btn&#45;primary&#34;&#32;disabled&#61;&#34;&#34;&#62;Previous&#60;/button&#62;
+    &#60;/li&#62;
+    &#60;li&#32;class&#61;&#34;indic&#45;container&#34;&#62;
+      &#60;ul&#32;class&#61;&#34;indic&#45;dots&#34;&#32;aria&#45;hidden&#61;&#34;true&#34;&#62;
+        &#60;li&#32;class&#61;&#34;active&#34;&#62;&#60;/li&#62;
+        <span id="dots-code-crs"></span>
+      &#60;/ul&#62;
+    &#60;/li&#62;
+    &#60;li&#62;
+      &#60;button&#32;class&#61;&#34;nc&#45;next&#32;btn&#32;btn&#45;primary&#34;&#62;Next&#60;/button&#62;
+    &#60;/li&#62;
+  &#60;/ul&#62;
+&#60;/div&#62;
+  </span>
 </pre>
           </div>
         </section>

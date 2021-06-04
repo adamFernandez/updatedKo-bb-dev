@@ -31,7 +31,7 @@
               <label for="ib-title">Info box title</label>
               <input type="text" class="form-control" id="ib-df-title" placeholder="Info box title">
             </div>
-            <div class="form-group">
+            <div class="form-group" id="ib-body-form">
               <label for="ib-text">Info box body text</label>
               <textarea class="form-control" id="ib-text" placeholder="Info box body text" rows="3"></textarea>
             </div>
@@ -52,8 +52,8 @@
             <pre class="code-text">
 <span id="ib-print-code"><span class="code-open-tag">&lt;div&#32;class&#61;&#34;<span id="code-ib-alert-class"></span><span id="code-ib-type">definition-box</span><span id="code-ib-alert-role"></span>&#34;<span id="code-ib-alert-aria-label"></span>&gt;</span>
   <span class="code-open-tag">&lt;div&gt;</span><span id="code-ib-title-open">
-    &lt;h5&gt;&lt;span role&#61;&#34;text&#34;&gt;&lt;span class&#61;&#34;sr-only&#34;&gt;Definition:&lt;/span&gt;</span><span id="code-ib-title-text">Info box title</span><span id="code-ib-title-close">&lt;&#47;h5&gt;</span>
-    <span id="code-ib-body"><span id="code-ib-body-open">&lt;p&gt;</span><span id="code-ib-body-text">Info box body text</span><span id="code-ib-body-close">&lt;&#47;p&gt;</span></span><span id="code-ib-caption"></span>
+    &lt;h5&gt;&lt;span role&#61;&#34;text&#34;&gt;&lt;span class&#61;&#34;sr-only&#34;&gt;Definition:&lt;/span&gt;</span><span id="code-ib-title-text">Info box title</span><span id="code-ib-title-close">&lt;&#47;h5&gt;</span><span id="code-ib-body">
+      <span id="code-ib-body-open">&lt;p&gt;</span><span id="code-ib-body-text">Info box body text</span><span id="code-ib-body-close">&lt;&#47;p&gt;</span></span>
   <span class="code-close-tag">&lt;&#47;div&gt;</span>
 <span class="code-close-tag">&lt;&#47;div&gt;</span></span>
             </pre>
