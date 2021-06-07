@@ -27,7 +27,6 @@
                   <label class="input-group-text" for="crs-slide-no">No. of slides</label>
                 </div>
                 <select class="custom-select" id="crs-slide-no">
-                   <option value="1">1</option>
                    <option value="2">2</option>
                    <option value="3" selected>3</option>
                    <option value="4">4</option>

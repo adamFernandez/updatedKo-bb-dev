@@ -2,41 +2,54 @@ const diff = (a,b) => {
   return Math.abs(a - b);
 }
 
-/***** CAROUSEL GENERATOR ***** 
- *     
- *     Generating carousel
-*      type : for the type of carousel. 1 : 2 => landscape : portrait
-*      slideNum : number of slides to generate. Default 3.
-*      img & caption : adds image or caption on generation. Optional. Default : true.
-*      encoded : it encodes the generated block for the code preview area 
+
+/***** SLIDES GENERATOR ***** 
+*     
+*      addDots: 
+*             -slideNum : number of slides to generate. Default 3.
+*             -encoded : It stablishes the output ? encoded version (for the code display) : regular html output (preview display)
+*
+*       addSlides:
+*             -toElement: element to append/insert the output to.
+*             -slideId: use to give id to slides and to number them
+*             -current: used to get the current number of slides
+*             -encoded: output ? encoded version : regular html
 */
+
+
+// constants for the addDots function:
 
 const dots = document.querySelector(".indic-dots");
 const dotsCode = document.querySelector("#dots-code-crs");
 
+// adds dots to the slide for the carousel as needed
+
 const addDots = (slideNum = 0, encoded) => {
   let dot = "";
   for (let i = 0; i < slideNum; i++) {
-    dot = encoded ? `<slide class="crs-dots-remove">&#60;li&#62;&#60;/li&#62;</span>` : `<li></li>`;
+    dot = encoded ? `<slide class="crs-dots-remove">&#60;li&#62;&#60;/li&#62;</span>` : `<li></li>\n`;
   }
-  return encoded ? dotsCode.insertAdjacentHTML("beforeend", dot) : dots.insertAdjacentHTML("beforeend", dot);
+  return (encoded ? dotsCode : dots).insertAdjacentHTML("beforeend", dot);
 }
 
 const addSlides = (toElement, slideId = 0, current = 0, encoded = false) => {
     let slide = "";
-    for (let i = 0; i < slideId; i++) {
-      slide += encoded ? `\n     <span class="crs-code-remove">&#60;li${ i == 10 ? ` class="active"` : ""}&#62;\n       &#60;figure&#62; 
-          <span class="crs-code-img">\t&#60;img&#32;src&#61;&#34;<span id="crs-code-src-${i}">http:&#47;&#47;via.placeholder.com&#47;800x400</span>&#34;&#32;alt&#61;&#34;<span id="crs-code-alt-${i}">Alternative&#32;text</span>&#34;&#32;class&#61;&#34;nc&#45;image&#34;&#32;&#62;</span>\n&#60;figcaption&#32;class&#61;&#34;nc&#45;description&#34;&#62;
-            <span class="crs-code-title">&#60;h5&#62;\n<span id="crs-code-title-${i}">\tCaption&#32;title&#32;${current + i + 1}</span>\n&#60;/h5&#62;</span>
-            &#60;p&#62;
-                <span id="crs-code-body-${i}">Carousel&#32;slide&#32;${current + i + 1}&#32;body&#32;text</span>
-            &#60;/p&#62;
-          &#60;/figcaption&#62;
+    for (let i = 0; i < slideId; i++) { // for encoded generated output: code area
+      slide += encoded ? `\n     <span class="crs-code-remove">&#60;li&#62;\n       &#60;figure&#62; 
+          <span class="crs-code-img">&#60;img&#32;src&#61;&#34;<span id="crs-code-src-${i}">http:&#47;&#47;via.placeholder.com&#47;800x400?text=Landscape:+2:1</span>&#34;&#32;alt&#61;&#34;<span id="crs-code-alt-${i}">Alternative&#32;text</span>&#34;&#32;class&#61;&#34;nc&#45;image&#34;&#32;&#62;</span>
+            &#60;figcaption&#32;class&#61;&#34;nc&#45;description&#34;&#62;
+              <span class="crs-code-title">&#60;h5&#62;
+                <span id="crs-code-title-${i}">Caption&#32;title&#32;${current + i + 1}</span>
+              &#60;/h5&#62;</span>
+              &#60;p&#62;
+                  <span id="crs-code-body-${i}">Carousel&#32;slide&#32;${current + i + 1}&#32;body&#32;text</span>
+              &#60;/p&#62;
+            &#60;/figcaption&#62;
        &#60;/figure&#62;
     &#60;/li&#62;</span>`  
-      : 
-      `<li ${ i == 10 ? ` class="active"` : ""}><figure>
-      <img src="https://via.placeholder.com/800x400" alt="Alternative text" class="nc-image" id="crs-image-${i}">
+      : // not encoded generated output: preview area
+      `<li><figure>
+      <img src="https://via.placeholder.com/800x400?text=Landscape:+2:1" alt="Alternative text" class="nc-image" id="crs-image-${i}">
       \t<figcaption class="nc-description">
       <h5>Caption title ${current + i + 1}</h5>
       \n\t\t<p>Carousel slide ${current + i + 1} body text</p>\n\t</figcaption>\n\t</figure>\n\t</li>\n`;      
@@ -48,7 +61,7 @@ const addSlides = (toElement, slideId = 0, current = 0, encoded = false) => {
   return toElement.insertAdjacentHTML("beforeend",slide);
 }
 
-/* ****  REMOVE SLIDES AND DOTS **** /////
+/* ****  REMOVE SLIDES AND DOTS from every display area to update when necessary **** /////
  */
 
 const removeSlides = (cardNum) => {
@@ -125,14 +138,14 @@ const removeCard = (cardNum) => {
   }
 }
 
-/******* CHANGING THE TYPE OF CAROUSEL TO LANDSCAPE OR PORTRAIT ******/
+/******* TOOGLES CAROUSEL TYPE TO LANDSCAPE OR PORTRAIT ******/
 const type = document.getElementById("crs-type");
 let crsType = document.querySelector(".new-carousel").classList;
 const crsCodeType = document.querySelector(".crs-type");
 
 type.onchange = () => {
-  type.value == 1 ? (crsType.remove("portrait-carousel"), crsType.add("landscape-carousel"), crsCodeType.innerText = "landscape" ) 
-                  : (crsType.remove("landscape-carousel"), crsType.add("portrait-carousel"), crsCodeType.innerText = "portrait");
+  type.value == 1 ? (crsType.remove("portrait-carousel"), crsType.add("landscape-carousel"), crsCodeType.innerText = "landscape", images.forEach(img => img.src = "http://via.placeholder.com/800x400?text=Landscape:+2:1") ) 
+                  : (crsType.remove("landscape-carousel"), crsType.add("portrait-carousel"), crsCodeType.innerText = "portrait", images.forEach(img => img.src = "http://via.placeholder.com/500x500?text=Portrait:1:1-3:2"));
 }
 
 
@@ -143,9 +156,11 @@ const code = document.getElementById("slides-code-crs");
 const displayCrs = document.querySelector(".nc-gallery");
 const collapseForm = document.getElementById("crs-collapse-container");
 
+// For the Preview area
 addSlides(displayCrs,selection.value,0,false);
+// For the Code display area
 addSlides(code,selection.value,0,true);
-
+// For the form on the Options area
 addCard(selection.value);
 
 
@@ -223,34 +238,6 @@ captionCheck.onclick = () => {
 }
 
 
-/********** BUTTONS CONTROLLING FUNCTIONS ************
- * 
- * THIS FUNCTION IS NOT WORKING YET.
-*/
-
-// const prevButton = document.querySelector(".nc-previous-button");
-// const nextButton = document.querySelector(".nc-next-btn");
-// const indicDots = document.querySelector(".indic-dots");
-
-// displayCrs.firstElementChild.getBoundingClientRect().width;
-
-// const setSlidePosition = (slide, index) => {
-//   slide.style.left = slideWidth * index + 'px';
-// }
-
-// displayCrs.forEach(setSlidePosition);
-
-// //Moving slides to the right
-
-// nextButton.onclick = (e) => {
-//   const currentSlide = displayCrs.querySelector(".active");
-//   const nextSlide = currentSlide.nextElementSibling;
-//   const toMove = nextSlide.getBoundingClientRect().left;
-//   // move to the next slide
-//   displayCrs.style.transform = `translateX(-${toMove})`;
-//   console.log(toMove,nextSlide);
-// }
-
 
 // Generate cards for the input forms of the collapse and Change the preview the code and the form panels on select changing value
 
@@ -274,11 +261,10 @@ selection.onchange = () => {
     removeCard(newValue),
     removeSlides(newValue)
   )
-
 }
 
 
-/* UPDATE THE PREVIEW AND CODE ON INPUT
+/* UPDATE THE PREVIEW AND CODE ON COLLAPSE CARDS FORM INPUT
 */
 
 const collapse = document.querySelector("#crs-collapse-container");
@@ -287,70 +273,42 @@ collapse.oninput = (e) => {
   let idTag = e.target.id;
   let id = parseInt(idTag.substr(idTag.length -1));
   let value = e.target.value;
+  // get elements for the code area display
+  let captionTag = captions[id].querySelector(idTag.includes("body") ? "p" : "h5");
+  let imageTag = images[id]("." + idTag.includes("src") ? "src" : "alt");
+  let codeTag = document.getElementById(idTag.replace("-",`-code-`)).innerText;
+
   e.target !== e.currentTarget ?
    (
     idTag.includes("src") ? (
-      value == "" ? images[id].src =  "http://via.placeholder.com/800x400" 
+      value == "" ? imageTag = "http://via.placeholder.com/800x400" 
       : 
       (
-        images[id].src = value,
-        document.getElementById(`crs-code-src-${id}`).innerText = value
+        imageTag = value,
+        codeTag.innerText = value
       )
     ) :
     idTag.includes("alt") ? (
-      value == "" ? images[id].alt = "Alternative text" 
+      value == "" ? (images[id].alt = "Alternative text", codeTag.innerText = "Alternative text")
       :
       (
         images[id].alt = value,
-        document.getElementById(`crs-code-alt-${id}`).innerText = value
+        codeTag.innerText = value
       )) :
       idTag.includes("title") ? (
-        value == "" ? captions[id].querySelector("h5").innerText = `Caption title ${id++}`
+        value == "" ? (captionTag.innerText = `Caption title ${id + 1}`, codeTag.innerText = `Caption title ${id + 1}`)
         :
       (
-        captions[id].querySelector("h5").innerText = value,
-        document.getElementById(`crs-code-title-${id}`).innerHTML = value
+        captionTag.innerText = value,
+        codeTag = value
       )) : 
       idTag.includes("body") ? (
-        value == "" ? captions[id].querySelector("h5").innerText = `Carousel slide ${id++} body text`
+        value == "" ? (captionTag.innerText = `Carousel slide ${id + 1} body text`, codeTag.innerText = `Carousel slide ${id + 1} body text`)
         :
       (
-        captions[id].querySelector("p").innerText = value,
-        document.getElementById(`crs-code-body-${id}`).innerHTML = value
+        captionTag.innerText = value,
+        codeTag.innerHTML = value
       )) : console.log("problem found on input connection to target")
    )  
   : e.stopPropagation();
 }
-
-
-
-
-
-// //TESTING A UNIQUE FUNCTION TO DISPLAY IMAGE AND CAPTION
-
-// const displayElementOnClick = (e,eId,eClass,eLabel) => {
-//   let eCheck = document.getElementById(`${eId}`);
-//   eCheck.checked = true;
-//   //eCheck.nextSibling.innerHTML = `Remove ${e}`;
-//   let element = document.getElementsByClassName(eClass);
-//   let elements = Array.from(element);
-//   let label = document.querySelector(`.${eLabel}`); 
-
-//   eCheck.onclick = () => {
-//     (eCheck.checked) 
-//     ? 
-//     (
-//       code.innerHTML = generateCarousel(this.value,true,true,true),
-//       elements.forEach((elm) => { elm.style.display = "block"; label.innerHTML = `Remove ${e}`; })
-//     )       
-//     : 
-//     (
-      
-//       elements.forEach((elm) => { elm.style.display = "none"; label.innerHTML = `Add ${e}`; }),
-//       code.innerHTML = generateCarousel(this.value,false,true,true)
-//     )
-//   } 
-// }
-
-// displayElementOnClick("image","crs-check-img","nc-image","label-img");
-// displayElementOnClick("caption","crs-check-caption","nc-caption","label-caption");

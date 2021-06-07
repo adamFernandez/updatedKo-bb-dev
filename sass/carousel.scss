@@ -21,14 +21,15 @@
   display: flex;
   flex-direction: row;
 }
-#region-main .portrait-carousel .nc-gallery li figure , #region-main .portrait-carousel .nc-gallery li figure > img, #region-main .portrait-carousel .nc-gallery li figure figcaption {
-  width: 49%;
-  min-height: 1px;
-  vertical-align: top;
-  border: 0px;
-  position: relative;
-  padding: 1.25rem !important;
-  margin: 0;
+main #region-main .new-carousel.portrait-carousel .nc-gallery > li figure > .filter-ally-wrapper > img.nc-image, #region-main .new-carousel.portrait-carousel .nc-gallery > li figure img.nc-image {
+  width: 30% !important;
+  height: auto;
+  padding: 1.5rem;
+  margin-bottom: auto;
+}
+
+main #region-main .portrait-carousel .nc-gallery li figure , #region-main .portrait-carousel .nc-gallery li figure > img, #region-main .portrait-carousel .nc-gallery li figure figcaption {
+  width: 70% !important;
 }
 img {
   height: auto;
@@ -45,12 +46,7 @@ img {
 }
 #region-main .portrait-carousel .nc-gallery li figure figcaption.nc-description {
   padding: 1rem;
-}
-#region-main .portrait-carousel .nc-gallery li figure figcaption.nc-description {
-  background: transparent;
-  padding: 2.25rem;
-  font-size: 1rem;
-  line-height: 1.5;
+  width: 60% !important;
 }
 
 *, *::before, *::after {
@@ -70,7 +66,6 @@ figure {
   width: 310px;
   height: auto;
   padding: 0.5rem !important;
-  padding-right: 0;
   margin-bottom: auto;
 }
 
