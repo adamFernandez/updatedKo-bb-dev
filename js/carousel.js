@@ -32,11 +32,11 @@ const addDots = (slideNum = 0, encoded) => {
   return (encoded ? dotsCode : dots).insertAdjacentHTML("beforeend", dot);
 }
 
-const addSlides = (toElement, slideId = 0, current = 0, encoded = false) => {
+const addSlides = (toElement, slideId, current, img, caption, encoded) => {
     let slide = "";
     for (let i = 0; i < slideId; i++) { // for encoded generated output: code area
       slide += encoded ? `\n     <span class="crs-code-remove">&#60;li&#62;\n       &#60;figure&#62; 
-          <span class="crs-code-img">&#60;img&#32;src&#61;&#34;<span id="crs-code-src-${i}">http:&#47;&#47;via.placeholder.com&#47;800x400?text=Landscape:+2:1</span>&#34;&#32;alt&#61;&#34;<span id="crs-code-alt-${i}">Alternative&#32;text</span>&#34;&#32;class&#61;&#34;nc&#45;image&#34;&#32;&#62;</span>
+          <span class="crs-code-img">&#60;img&#32;src&#61;&#34;<span id="crs-code-src-${i}">http:&#47;&#47;via.placeholder.com&#47;800x400</span>&#34;&#32;alt&#61;&#34;<span id="crs-code-alt-${i}">Alternative&#32;text</span>&#34;&#32;class&#61;&#34;nc&#45;image&#34;&#32;&#62;</span>
             &#60;figcaption&#32;class&#61;&#34;nc&#45;description&#34;&#62;
               <span class="crs-code-title">&#60;h5&#62;
                 <span id="crs-code-title-${i}">Caption&#32;title&#32;${current + i + 1}</span>
@@ -49,9 +49,9 @@ const addSlides = (toElement, slideId = 0, current = 0, encoded = false) => {
     &#60;/li&#62;</span>`  
       : // not encoded generated output: preview area
       `<li><figure>
-      <img src="https://via.placeholder.com/800x400?text=Landscape:+2:1" alt="Alternative text" class="nc-image" id="crs-image-${i}">
+      <img src="https://via.placeholder.com/800x400?text=Landscape:+2:1" alt="Alternative text" class="nc-image" id="crs-image-${i + current}" style="display: ${img ? `block` : `none`};">
       \t<figcaption class="nc-description">
-      <h5>Caption title ${current + i + 1}</h5>
+      <h5  ${caption ? `style="display: block;"` : `style="display: none;"` }>Caption title ${current + i + 1}</h5>
       \n\t\t<p>Carousel slide ${current + i + 1} body text</p>\n\t</figcaption>\n\t</figure>\n\t</li>\n`;      
       
       // Adding the dots
@@ -79,62 +79,52 @@ const removeSlides = (cardNum) => {
 *         captionChecked: caption checkbox is checked : unchecked = true : false ) 
 */
 
-const generateCollapseCard = (cardId, imgChecked= true, captionChecked = true) => { 
-  parseInt(cardId);
-  let form = ""; 
-  form += `<div class="collapse-card ${cardId == 0 ? "" : "collapsed"}" id="collapse-card-${cardId}">
+const addCard = (toElement, cardId = 0, current = 0, imgChecked = true, captionChecked = true) => { 
+  let form = "";
+  for (let i = 0; i < cardId; i++){
+    form += `<div class="collapse-card ${i == 0 ? "" : "collapsed"}" id="collapse-card-${i + current}">
     <div class="collapse-header">
       <button class="btn btn-link" aria-expanded="false">
-        <h5 class="h4">Slide ${cardId + 1}</h5>
+        <h5 class="h4">Slide ${i + current + 1}</h5>
       </button>
     </div>
     <div class="collapse-body">
     <form>
     <div class="input-group mb-3">`;
-  imgChecked ? 
-    form += 
-      `<div class="form-group img-form">
-        <label for="crs-src-${cardId}">Image src:</label>
-        <input type="text" class="form-control" id="crs-src-${cardId}" aria-label="crs-img-src" placeholder="Slide ${cardId + 1} caption title"> 
-      </div>
-      <div class="form-group img-form">
-        <label class="input-group-text" for="crs-alt-${cardId}">Alternative text:</label>
-        <input type="text" class="form-control" id="crs-alt-${cardId}" aria-label="crs-img-alt" placeholder="Slide ${cardId + 1} image description"> 
-      </div>` : "";
-  captionChecked ?
-    form += 
-      `<div class="form-group caption-form">
-      <label class="input-group-text" for="crs-title-${cardId}">Caption title:</label>
-      <input type="text" class="form-control" id="crs-title-${cardId}" aria-label="crs-caption" placeholder="Slide ${cardId + 1} caption title"> 
-      </div>` : "";
-    form += 
-      `<div class="form-group">
-      <label class="input-group-text" for="crs-body-${cardId}">Slide ${cardId +1} body text:</label>
-      <textarea class="form-control" id="crs-body-${cardId}" aria-label="crs-body" placeholder="Carousel slide ${cardId + 1} body text" rows="6"></textarea> 
-      </div></div></form></div></div>`;
-
-return form;
+    form += imgChecked ?
+        `<div class="form-group img-form">
+          <label for="crs-src-${i}">Image src:</label>
+          <input type="text" class="form-control" id="crs-src-${i}" aria-label="crs-img-src" placeholder="Slide ${i + 1} caption title"> 
+        </div>
+        <div class="form-group img-form">
+          <label class="input-group-text" for="crs-alt-${i}">Alternative text:</label>
+          <input type="text" class="form-control" id="crs-alt-${i}" aria-label="crs-img-alt" placeholder="Slide ${i + 1} image description"> 
+        </div>` : "";
+      form += captionChecked ? 
+        `<div class="form-group caption-form">
+        <label class="input-group-text" for="crs-title-${i}">Caption title:</label>
+        <input type="text" class="form-control" id="crs-title-${i}" aria-label="crs-caption" placeholder="Slide ${i + 1} caption title"> 
+        </div>` : "";
+      form += 
+        `<div class="form-group">
+        <label class="input-group-text" for="crs-body-${i}">Slide ${i +1} body text:</label>
+        <textarea class="form-control" id="crs-body-${i}" aria-label="crs-body" placeholder="Carousel slide ${i + 1} body text" rows="6"></textarea> 
+        </div></div></form></div></div>`; 
+  }  
+  console.log(toElement);
+  return toElement.insertAdjacentHTML("beforeend",form);
 } 
 
-/***** CARD ADDITION OR REMOVAL ***** Add or remove cards depending on dropdown selection
-*       addCard (
-*         cardNumber: number of cards depending on selected option dropdown. Default: selected current value.
-*         current: current number of collapse cards already generated. Default: 0.
-*       )
+/***** REMOVE CARD ***** Remove cards depending on dropdown selection
 *       removeCard(
+*         el: from element
 *         cardNumber: number of cards to remove
 *       )
 */
 
-const addCard = (cardNum = 1, current = 0) => {
+const removeCard = (el, cardNum) => {
   for (let i = 0; i < cardNum; i++){
-    collapseForm.insertAdjacentHTML("beforeend",generateCollapseCard(current + i,true,true));
-  }  
-}
-
-const removeCard = (cardNum) => {
-  for (let i = 0; i < cardNum; i++){
-      collapseForm.lastChild.remove();
+      el.lastChild.remove();
   }
 }
 
@@ -157,35 +147,40 @@ const displayCrs = document.querySelector(".nc-gallery");
 const collapseForm = document.getElementById("crs-collapse-container");
 
 // For the Preview area
-addSlides(displayCrs,selection.value,0,false);
+addSlides(displayCrs,selection.value,0,true,true,false);
 // For the Code display area
-addSlides(code,selection.value,0,true);
+addSlides(code,selection.value,0,true,true,true);
 // For the form on the Options area
-addCard(selection.value);
+addCard(collapseForm,selection.value,0,true,true);
 
 
-// constants and variables for Display Remove images 
 
+// Constants and variables for state of image and caption checkboxes 
 const imageCheck = document.getElementById("crs-check-img");
-const image = document.getElementsByClassName("nc-image");
-const images = Array.from(image);
-const imageLabel = document.getElementById("label-img"); 
-const formImage = document.getElementsByClassName("img-form");
-const formImages = Array.from(formImage);
-const codeImg = document.getElementsByClassName("crs-code-img");
-const codeImgs = Array.from(codeImg);
-let captionChecked = true;
-let imageChecked = true;
-
+let captionChecked,
+    imageChecked;
+    imageChecked = true;
+    captionChecked = true;
 
 
 /******** DISPLAY OR HIDE IMAGES ON CHECKBOX CLICK ********/ 
 
 imageCheck.onclick = () => {
+  // constants and variables for Display Remove images on every section
+  const image = document.getElementsByClassName("nc-image");
+  const images = Array.from(image);
+  const imageLabel = document.getElementById("label-img"); 
+  const formImage = document.getElementsByClassName("img-form");
+  const formImages = Array.from(formImage);
+  const codeImg = document.getElementsByClassName("crs-code-img");
+  const codeImgs = Array.from(codeImg);
+
+  //checked if caption check box is checked and assign result to variable
+  captionCheck.checked ? captionChecked : !captionChecked;
+
   imageCheck.checked 
   ?
-  (
-    captionCheck.checked ? captionChecked : !captionChecked, 
+  (    
     imageChecked = true,
     images.forEach((img) => { img.style.display = "block"; imageLabel.innerHTML = "Remove Image"; }),
     formImages.forEach((fImg) => { fImg.style.display = "block"; }),
@@ -193,24 +188,16 @@ imageCheck.onclick = () => {
   ) 
   :
   (
-    captionCheck.checked ? captionChecked : !captionChecked,
     imageChecked = false,
     images.forEach((img) => { img.style.display = "none"; imageLabel.innerHTML = "Add Image";}),
     formImages.forEach((fImg) => { fImg.style.display = "none"; }),
     codeImgs.forEach((img) => { img.style.display = "none"; })
-  )
+  );
 }
 
-// Constants for display or remove captions
+
 
 const captionCheck = document.getElementById("crs-check-caption") ;
-const captionLabel = document.getElementById("label-caption"); 
-const caption = document.getElementsByClassName("nc-description");
-const captions = Array.from(caption);
-const formCaption = document.getElementsByClassName("caption-form");
-const formCaptions = Array.from(formCaption);
-const codeTitle = document.getElementsByClassName("crs-code-title");
-const codeTitles = Array.from(codeTitle);
 
 
 /******** DISPLAY OR HIDE CAPTIONS ON CHECKBOX CLICK *******
@@ -218,18 +205,28 @@ const codeTitles = Array.from(codeTitle);
 */
 
 captionCheck.onclick = () => {
-  (captionCheck.checked) 
+  // Constants for display or remove captions on every section
+  const captionLabel = document.getElementById("label-caption"); 
+  const caption = document.getElementsByClassName("nc-description");
+  const captions = Array.from(caption);
+  const formCaption = document.getElementsByClassName("caption-form");
+  const formCaptions = Array.from(formCaption);
+  const codeTitle = document.getElementsByClassName("crs-code-title");
+  const codeTitles = Array.from(codeTitle);
+
+  //check if image checkbox checked and assign result to variable imageChecked
+  imageCheck.checked ? imageChecked : !imageChecked;
+
+  captionCheck.checked 
   ? 
   (
-    imageChecked ? imageChecked : !imageChecked,
     captionChecked = true,
     captions.forEach((caption) => { caption.firstElementChild.style.display = "block"; captionLabel.innerHTML = "Remove Caption"; }),
     formCaptions.forEach((fCaption) => { fCaption.style.display = "block"; }),
     codeTitles.forEach((title) => { title.style.display = "block"; })
   )
   :
-  ( 
-    (imageChecked) ? imageChecked : !imageChecked,
+  (     
     captionChecked = false,
     captions.forEach((caption) => { caption.firstElementChild.style.display = "none"; captionLabel.innerHTML = "Add Caption";}),
     formCaptions.forEach((fCaption) => { fCaption.style.display = "none"; }),
@@ -237,28 +234,23 @@ captionCheck.onclick = () => {
   ) 
 }
 
-
-
 // Generate cards for the input forms of the collapse and Change the preview the code and the form panels on select changing value
 
-let currentSelectionValue = selection.value;
+
 selection.onchange = () => {
-  let current = collapseForm.childElementCount;
+  const current = collapseForm.childElementCount;
   const maxValue = 8;
   let newValue = diff(current, selection.value);
-  /*
-  If the difference between values is <= the maximum value(maxValue)
-   and the selected value(selection.value) is > the current number of slides
-   then add the choosen number of cards(newValue) 
-  */
+
+  //check if selection <= maximum (8) && if selection.value > current
   (newValue + current <= maxValue) && (selection.value > current) ? 
   (
-    addCard(newValue, current),
-    addSlides(code,newValue,current,true),
-    addSlides(displayCrs,newValue,current,false)
+    addCard(collapseForm,newValue, current,imageChecked,captionChecked),
+    addSlides(code,newValue,current,imageChecked,captionChecked,true),
+    addSlides(displayCrs,newValue,current,imageChecked,captionChecked,false)
   ) : 
   (
-    removeCard(newValue),
+    removeCard(collapseForm,newValue),
     removeSlides(newValue)
   )
 }
@@ -273,18 +265,16 @@ collapse.oninput = (e) => {
   let idTag = e.target.id;
   let id = parseInt(idTag.substr(idTag.length -1));
   let value = e.target.value;
-  // get elements for the code area display
+  // get elements for the preview and the code area display
   let captionTag = captions[id].querySelector(idTag.includes("body") ? "p" : "h5");
-  let imageTag = images[id]("." + idTag.includes("src") ? "src" : "alt");
-  let codeTag = document.getElementById(idTag.replace("-",`-code-`)).innerText;
-
+  let codeTag = document.getElementById(idTag.replace("-",`-code-`));
   e.target !== e.currentTarget ?
    (
     idTag.includes("src") ? (
-      value == "" ? imageTag = "http://via.placeholder.com/800x400" 
+      value == "" ? (images[id].src = "http://via.placeholder.com/800x400?text=Landscape:+2:1", codeTag.innerText = "http://via.placeholder.com/800x400")
       : 
       (
-        imageTag = value,
+        images[id].src = value,
         codeTag.innerText = value
       )
     ) :
@@ -300,14 +290,14 @@ collapse.oninput = (e) => {
         :
       (
         captionTag.innerText = value,
-        codeTag = value
+        codeTag.innerText = value
       )) : 
       idTag.includes("body") ? (
         value == "" ? (captionTag.innerText = `Carousel slide ${id + 1} body text`, codeTag.innerText = `Carousel slide ${id + 1} body text`)
         :
       (
         captionTag.innerText = value,
-        codeTag.innerHTML = value
+        codeTag.innerText = value
       )) : console.log("problem found on input connection to target")
    )  
   : e.stopPropagation();

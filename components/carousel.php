@@ -36,15 +36,6 @@
                    <option value="8">8</option>
                 </select>
               </div>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <label class="input-group-text" for="crs-id">Unique ID*</label>
-                </div>
-                <input type="text" class="form-control" id="" aria-label="crsl-id" placeholder="Please give an unique id name" aria-describedby="carousel-unique-id"> 
-                <div class="invalid-feedback" id="crsl-id-invalid-feedback">
-                  Please enter a unique ID.
-                </div>
-              </div>
             <div class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input checked" id="crs-check-img" checked>
               <label class="custom-control-label" id="label-img" for="crs-check-img">Remove image</label>

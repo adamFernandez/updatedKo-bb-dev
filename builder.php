@@ -18,7 +18,7 @@
         <ul class="nav nav-tabs">
           <?php
             $components = array('Carousel', 'Collapse', 'Timeline', 'Table', 'Transcript', 'Card', 'List', 'Quotation', 'Infobox',
-            'View/hide', 'Academic note', 'Audio', 'Video', 'Download');
+            'View/hide', 'Academic note', 'Audio', 'Video', 'Download', 'Process');
             sort($components);
             foreach ($components as $component) {
               $id = strtolower(str_replace(' ','',str_replace('/','',$component)));
@@ -40,6 +40,7 @@
           <?php include('components/download.php'); ?>
           <?php include('components/infobox.php'); ?>
           <?php include('components/list.php'); ?>
+          <?php include('components/process.php'); ?>
           <?php include('components/quotation.php'); ?>
           <?php include('components/table.php'); ?>
           <?php include('components/timeline.php'); ?>
@@ -57,5 +58,6 @@
     <script src="https://git.iddkingsonline.com/designsystem-dev/js/main.js"></script>
     <script src="js/script.js"></script>
     <script src="js/carousel.js"></script>
+    <script src="js/process.js"></script>
   </body>
 </html>
