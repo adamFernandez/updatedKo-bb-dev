@@ -1420,6 +1420,384 @@ $(document).on("click", ".view-close-transcript", function(event) {
   $(this).text($(this).text() == 'View transcript' ? 'Close transcript' : 'View transcript');
 });
 
+
+const diff = (a,b) => {
+  return Math.abs(a - b);
+}
+
+
+/**********************************
+ * new carousel                   *
+ **********************************/
+
+// constants for the addDots function:
+
+const dots = document.querySelector(".indic-dots");
+const dotsCode = document.querySelector("#dots-code-crs");
+
+// adds dots to the slide for the carousel
+//   -slideNum : number of slides to generate. Default 3.
+//   -encoded : It stablishes the output ? encoded version (for the code display) : regular html output (preview display)
+
+const addDots = (slideNum = 0, encoded) => {
+  let dot = "";
+  for (let i = 0; i < slideNum; i++) {
+    dot = encoded ? `<slide class="crs-dots-remove">&#60;li&#62;&#60;/li&#62;</span>` : `<li></li>\n`;
+  }
+  return (encoded ? dotsCode : dots).insertAdjacentHTML("beforeend", dot);
+}
+
+// addSlides to the carousel:
+//  -toElement: element to append the output to // -slideNum: number of slides to add // -current: current number of slides and update the id
+//   -img: if true image displays 'block' : displays 'none' // -encoded: output ? encoded version : regular html
+
+const addSlides = (toElement, slideNum, current, captionChecked, encoded) => {
+    let total;
+    let slide = "";
+    for (let i = 0; i < slideNum; i++) { // for encoded generated output: code area
+      total = i + current;
+      slide += encoded ? `\n     <span class="crs-code-remove">&#60;li&#62;\n       &#60;figure&#62; 
+          <span class="crs-code-img">&#60;img&#32;src&#61;&#34;<span id="crs-code-src-${total}">https:&#47;&#47;via.placeholder.com&#47;800x400</span>&#34;&#32;alt&#61;&#34;<span id="crs-code-alt-${i}">Alternative&#32;text</span>&#34;&#32;class&#61;&#34;nc&#45;image&#34;&#32;&#62;</span>
+            &#60;figcaption&#32;class&#61;&#34;nc&#45;description&#34;&#62;
+              <span class="crs-code-title">&#60;h5&#62;
+                <span id="crs-code-title-${total}">Caption&#32;title&#32;${total + 1}</span>
+              &#60;/h5&#62;</span>
+              &#60;p&#62;
+                  <span id="crs-code-body-${total}">Carousel&#32;slide&#32;${total + 1}&#32;body&#32;text</span>
+              &#60;/p&#62;
+            &#60;/figcaption&#62;
+       &#60;/figure&#62;
+    &#60;/li&#62;</span>`  
+      : // not encoded generated output: preview area
+      `<li><figure>
+      <img src="https://via.placeholder.com/800x400?text=Landscape:+2:1" alt="Alternative text" class="nc-image" id="crs-image-${total}">
+      \t<figcaption class="nc-description">
+      <h5  style="display: ${captionChecked ?  "block" : "none" }">Caption title ${total + 1}</h5>
+      \n\t\t<p>Carousel slide ${total + 1} body text</p>\n\t</figcaption>\n\t</figure>\n\t</li>\n`;      
+      
+      // Adding the dots
+      addDots(current + i, encoded);
+    }  
+  return toElement.insertAdjacentHTML("beforeend",slide);
+}
+
+ // remove slides ,dots, cards from every display area
+
+const removeSlides = (elements = [], cardNum) => {
+  for (let i = 0; i < cardNum; i++){
+    elements.forEach((e) => { e.lastElementChild.remove() });
+  }
+}
+
+// addCard collapse card 
+// -toSection: section the card/s will be appended //  -cardNum : number of cards // -component: component function is working on (crs,prcss, geshi, quo, etc)
+// ImgChecked : if true image displays 'block' : displays 'none' // captionChecked: if true caption displays 'block' : displays 'none'
+
+const addCard = (toSection, component, cardNum, current, captionChecked) => { 
+  let total;
+  let form = "";
+  for (let i = 0; i < cardNum; i++){
+    total = i + current;
+    form += `<div class="collapse-card ${total == 0 ? "" : "collapsed"}" id="${component}-collapse-card-${total}">
+    <div class="collapse-header">
+      <button class="btn btn-link" aria-expanded="false">
+        <h5 class="h4">Slide ${total + 1}</h5>
+      </button>
+    </div>
+    <div class="collapse-body">
+    <form>
+    <div class="input-group mb-3">
+        <div class="form-group ${component}-img-form">
+          <label for="${component}-src-${total}">Image src:</label>
+          <input type="text" class="form-control" id="${component}-src-${total}" aria-label="${component}-img-src" placeholder="Slide ${total + 1} caption title"> 
+        
+          <label class="input-group-text" for="${component}-alt-${total}">Alternative text:</label>
+          <input type="text" class="form-control" id="${component}-alt-${i}" aria-label="${component}-img-alt" placeholder="Slide ${total + 1} image description"> 
+        </div>
+        <div class="form-group ${component}-caption-form" style="display:${captionChecked ? "block" : "none"}">
+        <label class="input-group-text" for="${component}-title-${total}">Caption title:</label>
+        <input type="text" class="form-control" id="${component}-title-${total}" aria-label="${component}-caption" placeholder="Slide ${total + 1} caption title"> 
+        </div>
+        <div class="form-group">
+        <label class="input-group-text" for="${component}-body-${total}">Slide ${total +1} body text:</label>
+        <textarea class="form-control" id="${component}-body-${total}" aria-label="${component}-body" placeholder="Carousel slide ${total + 1} body text" rows="6"></textarea> 
+        </div></div></form></div></div>`; 
+  }  
+  return toSection.insertAdjacentHTML("beforeend",form);
+} 
+
+// Remove cards depending on selection
+//  -el: from element //  -cardNum: number of cards to remove
+const removeCard = (el, cardNum) => {
+  for (let i = 0; i < cardNum; i++){
+      el.lastChild.remove();
+  }
+}
+
+// toggles carousel type from landscape to portrait
+const type = document.getElementById("crs-type");
+let crsType = document.querySelector(".new-carousel").classList;
+const crsCodeType = document.querySelector(".crs-type");
+
+type.onchange = () => {
+  type.value == 1 ? (crsType.remove("portrait-carousel"), crsType.add("landscape-carousel"), crsCodeType.innerText = "landscape", images.forEach(img => img.src = "https://via.placeholder.com/800x400?text=Landscape:+2:1") ) 
+                  : (crsType.remove("landscape-carousel"), crsType.add("portrait-carousel"), crsCodeType.innerText = "portrait", images.forEach(img => img.src = "https://via.placeholder.com/500x500?text=Portrait:1:1-3:2"));
+}
+
+
+let imageChecked = true;
+let captionChecked = true;
+// selection dropdown 
+const selection = document.querySelector("#crs-slide-no");
+// slides will generate here in code area
+const code = document.getElementById("slides-code-crs");  
+// slides will generate here in preview area
+const displayCrs = document.querySelector(".nc-gallery");
+// form collapse cards will generate here in options area
+const collapseForm = document.getElementById("crs-collapse-container");
+
+// Initializing views:
+
+// Preview area
+addSlides(displayCrs,selection.value,0,true,false);
+// Code display area
+addSlides(code,selection.value,0,true,true);
+// Form on the Options area
+addCard(collapseForm,'crs',selection.value,0,true);
+
+const image = document.getElementsByClassName("nc-image");
+const images = Array.from(image);
+const imageLabel = document.getElementById("label-img"); 
+const formImage = document.getElementsByClassName("img-form");
+const formImages = Array.from(formImage);
+const codeImg = document.getElementsByClassName("crs-code-img");
+const codeImgs = Array.from(codeImg);
+
+// target caption checkbox
+const captionCheck = document.getElementById("crs-check-caption") ;
+
+
+
+// Toggle on checkbox checked elements in an array
+// -id: checkbox id // -elements: array of elements to show or hide // -label: label id to manipulate 
+// -message: default of Add or Remove + message.value (default(Add) + "Image caption")
+const processCheckBox = (id,elements = [],label,message) => {
+      id.onclick = () => {
+      let removeMsg = `Remove ${message}`;
+      let addMsg = `Add ${message}`;
+      
+      id.checked ?
+      ( 
+        elements.forEach((e) => { Array.from(document.querySelectorAll(e)).forEach((el) => { el.style.display = "block"; }) }),
+        document.querySelector(label).innerText = removeMsg
+      )
+        :
+      (
+        elements.forEach((e) => { Array.from(document.querySelectorAll(e)).forEach((el) => { el.style.display = "none"; }) }),
+        document.querySelector(label).innerText = addMsg
+      )
+    }    
+}
+
+// processing
+const crsCaptionElements = ['.nc-description h5','.crs-caption-form','.crs-code-title'];    
+processCheckBox(captionCheck,crsCaptionElements,'#label-caption','Caption Title');
+
+  
+//Generate cards for the input forms of the collapse and change the preview the code and the form panels on select changing value
+let elements = [code,displayCrs,collapseForm]
+selection.onchange = () => {
+  let current = collapseForm.childElementCount;
+  let maxValue = 8;
+  let newValue = diff(current, selection.value);
+  let currPlusValue
+  captionChecked = captionCheck.checked;
+  //check if selection <= maximum (8) && if selection.value > current
+  (newValue + current <= maxValue) && (selection.value > current) ? 
+  ( 
+    addCard(collapseForm,'crs',newValue, current,captionChecked),
+    addSlides(code,newValue,current,captionChecked,true),
+    addSlides(displayCrs,newValue,current,captionChecked,false)
+  ) : 
+  (
+    removeCards(collapseForm,newValue),
+    removeSlides(elements, newValue)
+  )
+}
+
+
+
+/* UPDATE THE PREVIEW AND CODE ON COLLAPSE CARDS FORM INPUT
+*/
+
+const collapse = document.querySelector("#crs-collapse-container");
+
+collapse.oninput = (e) => {
+  let idTag = e.target.id;
+  let id = parseInt(idTag.substr(idTag.length -1));
+  let value = e.target.value;
+  // get elements for the preview and the code area display
+  let captionTag = captions[id].querySelector(idTag.includes("body") ? "p" : "h5");
+  let codeTag = document.getElementById(idTag.replace("-",`-code-`));
+  e.target !== e.currentTarget ?
+   (
+    idTag.includes("src") ? (
+      value == "" ? (images[id].src = "https://via.placeholder.com/800x400?text=Landscape:+2:1", codeTag.innerText = "https://via.placeholder.com/800x400")
+      : 
+      (
+        images[id].src = value,
+        codeTag.innerText = value
+      )
+    ) :
+    idTag.includes("alt") ? (
+      value == "" ? (images[id].alt = "Alternative text", codeTag.innerText = "Alternative text")
+      :
+      (
+        images[id].alt = value,
+        codeTag.innerText = value
+      )) :
+      idTag.includes("title") ? (
+        value == "" ? (captionTag.innerText = `Caption title ${id + 1}`, codeTag.innerText = `Caption title ${id + 1}`)
+        :
+      (
+        captionTag.innerText = value,
+        codeTag.innerText = value
+      )) : 
+      idTag.includes("body") ? (
+        value == "" ? (captionTag.innerText = `Carousel slide ${id + 1} body text`, codeTag.innerText = `Carousel slide ${id + 1} body text`)
+        :
+      (
+        captionTag.innerText = value,
+        codeTag.innerText = value
+      )) : console.log("problem found on input connection to target")
+   )  
+  : e.stopPropagation();
+}
+
+/**********************************
+ * process                        *
+ **********************************/
+ 
+const addProcessCard = (toElement, cardNum, current, encoded) => {
+  cardNum = Number(cardNum);
+  let processCard = "";
+  for (let i = current; i < cardNum; i++) { // for encoded generated output: code area
+    processCard += encoded ? `&lt;div class=&quot;step&quot; role=&quot;listitem&quot;&gt; 
+      &lt;div class=&quot;card process-card&quot;&gt; 
+      <span class="prcss-code-img">&#60;img&#32;src&#61;&#34;<span id="prcss-code-src-${i}">http:&#47;&#47;via.placeholder.com&#47;300x300</span>&#34;&#32;alt&#61;&#34;<span id="prcss-code-alt-${i}">An&#32;image</span>&#34;&#62;</span>
+        &lt;div class=&quot;card-body&quot;&gt; 
+        <span class="prcss-code-title">\n&#60;h4&#62;
+          <span id="prcss-code-title-${i}">Caption&#32;title&#32;${i + 1}</span>
+        &#60;/h4&#62;</span>
+          &lt;p class=&quot;card-text&quot;&gt;<span id="prcss-code-body-${i}">Process&#32;card&#32;${i + 1}&#32;body&#32;text</span>&lt;/p&gt; 
+        &lt;/div&gt; 
+      &lt;/div&gt; 
+      ${(i+1) !== cardNum ? 
+      `&lt;div class=&quot;connector-container no-gutters&quot;&gt; 
+      &lt;div class=&quot;process-label <span class="prcss-label">sr-only</span>&quot;&gt;Leads to&lt;/div&gt; 
+        &lt;div class=&quot;icon <span class="prcss-icon-type">arrow-down</span>&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt; 
+      &lt;/div&gt; 
+    &lt;/div&gt;` : `` }`  
+    : // not encoded generated output: preview area
+    `<div class="step" role="listitem">
+      <div class="card process-card">
+        <img src="http://via.placeholder.com/300x300?text=Arrow+down:+2:1" alt="A placeholder image">
+        <div class="card-body">
+          <h4 class="card-text">Caption title ${i+ 1}</h4>
+          <p class="card-text">Process card ${i+ 1} body text</p>
+        </div>
+      </div>
+      ${(i+1) !== cardNum ?  
+      `<div class="connector-container no-gutters">
+        <div class="process-label sr-only">Leads to</div>
+        <div class="icon arrow-down" aria-hidden="true"></div>
+      </div>
+    </div>` : `` }`;
+  }
+return toElement.insertAdjacentHTML("beforeend",processCard);
+}
+
+// checkboxes elements targeting 
+const prcssCaptionCheck = document.querySelector("#prcss-check-caption");
+const prcssImageCheck = document.querySelector("#prcss-check-img");
+const prcssLabelCheck = document.querySelector("#prcss-check-label");
+
+// toggle caption show
+const prcssCaptionElements = ['h4.card-text','.prcss-caption-form','.prcss-code-title'];    
+processCheckBox(prcssCaptionCheck,prcssCaptionElements,'#prcss-label-caption','Caption Title');
+// toggle images show
+const prcssImageElements = ['.process-card img', '.prcss-img-form', '.prcss-code-img'];
+processCheckBox(prcssImageCheck,prcssImageElements,'#prcss-label-img','Image');
+
+
+// replace class name (old to new) with any checkbox on checked
+const replaceClass = (id,element,_class,label, message) => {
+  let _label = document.querySelector(label);
+  let addMsg = `Show ${message}`;
+  let removeMsg = `Hide ${message}`;
+  let el = document.querySelectorAll(element);
+  id.checked ?
+    (
+      el.forEach((e) => { e.classList.add(_class); }),
+      _label.innerText = removeMsg 
+    ) :
+    (
+      el.forEach((e) => {  e.classList.remove(_class); }),
+      _label.innerText = addMsg
+    )
+       
+}
+
+prcssLabelCheck.onclick = function() {
+  let toHide = document.querySelectorAll(".prcss-label");
+  this.checked ?
+  (
+    replaceClass(this,'.process-label','sr-only','#prcss-label-label','Label'),
+    toHide.forEach((h) => { h.style.display = "none"; })
+  )
+    
+    : replaceClass(this,'.process-label','sr-only','#prcss-label-label','Label')
+    toHide.forEach((h) => { h.style.display = "block"; })
+}
+
+
+// select element
+const prcssSelect = document.querySelector("#prcss-select");
+
+// Collapse, Preview & Code sections constants and their content generation
+const prcssCollapse  = document.querySelector("#prcss-collapse-container");
+const prcssPreview = document.querySelector(".process-container");
+const prcssCode = document.querySelector("#code-prcss");
+
+addCard(prcssCollapse,'prcss',prcssSelect.value,0,prcssCaptionCheck.checked);
+addProcessCard(prcssPreview,prcssSelect.value,0,false);
+addProcessCard(prcssCode,prcssSelect.value,0,true);
+
+// add or remove form cards or collapse cards on select change
+
+
+// process the changes
+prcssSelect.addEventListener("onchange", function() {
+  let current = prcssCollapse.childElementCount;
+  let selVal = prcssSelect.value;
+  let maxValue = 8;
+  let newValue = diff(current, selVal);
+  captionChecked = prcssCaptionCheck.checked;
+  //check if selection <= maximum (8) && if selection.value > current
+  
+  ((newValue + current <= maxValue) && (selVal > current)) ? 
+  (
+    addCard(prcssCollapse,'prcss',newValue,current,prcssCaptionCheck.checked),
+    addProcessCard(prcssPreview,newValue,current,false),
+    addProcessCard(prcssCode,newValue,current,true)
+  ) : 
+  (
+    removeCard(prcssCollapse,newValue),
+    removeSlides(newValue)
+  )
+  
+});
+
 /**********************************
  * general functions              *
  **********************************/
