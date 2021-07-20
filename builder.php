@@ -7,7 +7,6 @@
     <link href="https://git.iddkingsonline.com/designsystem/css/bootstrap.css" rel="stylesheet">
     <link href="https://git.iddkingsonline.com/designsystem-dev/css/main.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-    <link href="css/carousel.css" rel="stylesheet">
   </head>
   <body>
     <main>
