@@ -1998,7 +1998,6 @@ addProcessCard(".process-container",prcssSelect.value,0,false);
 addProcessCard("#code-prcss",prcssSelect.value,0,true);
 hideLast([".connector-container",".code-connector-container",".prcss-arrow-select",".prcss-form-checkbox-label"]);
 
-
 // process the changes on selection
 prcssSelect.onchange = function() {
   let current = prcssCollapse.childElementCount;
