@@ -1451,13 +1451,31 @@ const addDots = (slideNum = 0, encoded) => {
 //  -toElement: element to append the output to // -slideNum: number of slides to add // -current: current number of slides and update the id
 //   -img: if true image displays 'block' : displays 'none' // -encoded: output ? encoded version : regular html
 
-const addSlides = (toElement, slideNum, current, captionChecked, encoded) => {
+const addSlides = (toElement, slideNum, current, encoded) => {
+    checkBoxesChecked(["#crs-check-caption"], ["captionC"]);
+     
+    let slideType = document.querySelector("#crs-type");
+    let imgSrc = slideType.value == 1 
+      ? "https://via.placeholder.com/800x400?text=Landscape:+2:1"
+      : "https://via.placeholder.com/300x300?text=1:1";
+    let type = slideType.value == "1" ? 
+      (
+        removeClass(".new-carousel",["portrait-carousel"]),
+        addClass(".new-carousel",["landscape-carousel"],"new-carousel"),
+        writeText([".crs-type"],"landscape")        
+      ) :
+        (
+          removeClass(".new-carousel",["landscape-carousel"]),
+          addClass(".new-carousel",["portrait-carousel"],"new-carousel"),
+          writeText([".crs-type"],"portrait")        
+        )
+    
     let total;
     let slide = "";
     for (let i = 0; i < slideNum; i++) { // for encoded generated output: code area
       total = i + current;
       slide += encoded ? `\n     <span class="crs-code-remove">&#60;li&#62;\n       &#60;figure&#62; 
-          <span class="crs-code-img">&#60;img&#32;src&#61;&#34;<span id="crs-code-src-${total}">https:&#47;&#47;via.placeholder.com&#47;800x400</span>&#34;&#32;alt&#61;&#34;<span id="crs-code-alt-${i}">Alternative&#32;text</span>&#34;&#32;class&#61;&#34;nc&#45;image&#34;&#32;&#62;</span>
+          <span class="crs-code-img">&#60;img&#32;src&#61;&#34;<span id="crs-code-src-${total}">${imgSrc}</span>&#34;&#32;alt&#61;&#34;<span id="crs-code-alt-${i}">Alternative&#32;text</span>&#34;&#32;class&#61;&#34;nc&#45;image&#34;&#32;&#62;</span>
             &#60;figcaption&#32;class&#61;&#34;nc&#45;description&#34;&#62;
               <span class="crs-code-title">&#60;h5&#62;
                 <span id="crs-code-title-${total}">Caption&#32;title&#32;${total + 1}</span>
@@ -1470,10 +1488,10 @@ const addSlides = (toElement, slideNum, current, captionChecked, encoded) => {
     &#60;/li&#62;</span>`  
       : // not encoded generated output: preview area
       `<li><figure>
-      <img src="https://via.placeholder.com/800x400?text=Landscape:+2:1" alt="Alternative text" class="nc-image" id="crs-image-${total}">
+      <img src=${imgSrc} alt="Alternative text" class="nc-image" id="crs-img-${total}">
       \t<figcaption class="nc-description">
-      <h5  style="display: ${captionChecked ?  "block" : "none" }">Caption title ${total + 1}</h5>
-      \n\t\t<p>Carousel slide ${total + 1} body text</p>\n\t</figcaption>\n\t</figure>\n\t</li>\n`;      
+      <h5 id="crs-card-title-${total}" style="display: ${captionC ?  "block" : "none" }">Caption title ${total + 1}</h5>
+      \n\t\t<p id="crs-card-body-${total}">Carousel slide ${total + 1} body text</p>\n\t</figcaption>\n\t</figure>\n\t</li>\n`;      
       
       // Adding the dots
       addDots(current + i, encoded);
@@ -1491,46 +1509,77 @@ const removeSlides = (elements = [], cardNum) => {
 
 // addCard collapse card 
 // -toSection: section the card/s will be appended //  -cardNum : number of cards // -component: component function is working on (crs,prcss, geshi, quo, etc)
-// ImgChecked : if true image displays 'block' : displays 'none' // captionChecked: if true caption displays 'block' : displays 'none'
+// captionChecked: if true caption displays 'block' : displays 'none'
 
-const addCard = (toSection, component, cardNum, current, captionChecked) => { 
+const addCard = (toSection, component, cardNum, current, type = "Card") => {
+  // checks whether the checkBoxesArray is checked or not and returns/assign a name(second array[variables]) for each of the checkbox elements.
+  checkBoxesChecked(["#prcss-check-label","#prcss-check-img","#prcss-check-caption"], ["labelP","imageP","captionP"]); 
   let total;
   let form = "";
   for (let i = 0; i < cardNum; i++){
     total = i + current;
-    form += `<div class="collapse-card ${total == 0 ? "" : "collapsed"}" id="${component}-collapse-card-${total}">
+    form += `<div class="collapse-card ${total == 0 ? "" : "collapsed"} ${component}-collapse-card" id="${component}-collapse-card-${total}">
     <div class="collapse-header">
       <button class="btn btn-link" aria-expanded="false">
-        <h5 class="h4">Slide ${total + 1}</h5>
+        <h5 class="h4">${type} ${total + 1}</h5>
       </button>
     </div>
     <div class="collapse-body">
     <form>
+    ${ type == "Process Card" ?
+    `<div class="input-group mb-3 ${component}-arrow-select">
+      <div class="form-group ${component}-arrow-form">
+        <label class="input-group-text" for="${component}-arrow-${total}">Choose arrow type</label>
+      </div>
+      <select class="custom-select" id="${component}-arrow-${total}">
+          <option value="1" selected>Arrow Down</option>
+          <option value="2">Arrow Up</option>
+          <option value="3">Double Arrow</option>
+          <option value="4">Relation</option>
+      </select>                
+    </div>
+    <div class="custom-control custom-checkbox prcss-form-checkbox-label">
+      <input type="checkbox" class="custom-control-input" id="prcss-check-label-${total}" ${ labelP == true? "checked" : "unchecked"}>
+      <label class="custom-control-label" id="prcss-label-label-${total}" for="prcss-check-label-${total}">Show Label</label>
+    </div>
+    <div class="custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input" id="prcss-check-img-${total}" ${ imageP == true? "checked" : "unchecked"}>
+      <label class="custom-control-label" id="prcss-label-img-${total}" for="prcss-check-img-${total}">Remove Image</label>
+    </div>
+    <div class="custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input" id="prcss-check-caption-${total}" ${ captionP == true? "checked" : "unchecked"}>
+      <label class="custom-control-label" id="prcss-label-caption-${total}" for="prcss-check-caption-${total}">Remove Caption Title</label>
+    </div>
+    <div class="custom-control custom-checkbox prcss-form-checkbox-highlight">
+      <input type="checkbox" class="custom-control-input" id="prcss-check-highlight-${total}" unchecked>
+      <label class="custom-control-label" id="prcss-label-highlight-${total}" for="prcss-check-highlight-${total}">Highlight Card</label>
+    </div>` : "" }
     <div class="input-group mb-3">
-        <div class="form-group ${component}-img-form">
+        <div class="form-group ${component}-img-form" id="${component}-img-form-${total}">
           <label for="${component}-src-${total}">Image src:</label>
-          <input type="text" class="form-control" id="${component}-src-${total}" aria-label="${component}-img-src" placeholder="Slide ${total + 1} caption title"> 
+          <input type="text" class="form-control" id="${component}-src-${total}" aria-label="${component}-img-src" placeholder="${type} ${total + 1} Image src"> 
         
           <label class="input-group-text" for="${component}-alt-${total}">Alternative text:</label>
-          <input type="text" class="form-control" id="${component}-alt-${i}" aria-label="${component}-img-alt" placeholder="Slide ${total + 1} image description"> 
+          <input type="text" class="form-control" id="${component}-alt-${i}" aria-label="${component}-img-alt" placeholder="${type} ${total + 1} Image Description"> 
         </div>
-        <div class="form-group ${component}-caption-form" style="display:${captionChecked ? "block" : "none"}">
+        <div class="form-group ${component}-caption-form" style="display:${captionP ? "block" : "none"}" id="${component}-caption-form-${total}">
         <label class="input-group-text" for="${component}-title-${total}">Caption title:</label>
-        <input type="text" class="form-control" id="${component}-title-${total}" aria-label="${component}-caption" placeholder="Slide ${total + 1} caption title"> 
+        <input type="text" class="form-control" id="${component}-title-${total}" aria-label="${component}-caption" placeholder="${type} ${total + 1} Caption Title"> 
         </div>
         <div class="form-group">
-        <label class="input-group-text" for="${component}-body-${total}">Slide ${total +1} body text:</label>
-        <textarea class="form-control" id="${component}-body-${total}" aria-label="${component}-body" placeholder="Carousel slide ${total + 1} body text" rows="6"></textarea> 
+        <label class="input-group-text" for="${component}-body-${total}">Body text:</label>
+        <textarea class="form-control" id="${component}-body-${total}" aria-label="${component}-body" placeholder="${type} ${total + 1} Body Text" rows="6"></textarea> 
         </div></div></form></div></div>`; 
   }  
-  return toSection.insertAdjacentHTML("beforeend",form);
+  return document.querySelector(toSection).insertAdjacentHTML("beforeend",form);
 } 
 
 // Remove cards depending on selection
-//  -el: from element //  -cardNum: number of cards to remove
-const removeCard = (el, cardNum) => {
+//  -el: from element array //  -cardNum: number of cards to remove
+const removeCards = (elements = [], cardNum) => {
   for (let i = 0; i < cardNum; i++){
-      el.lastChild.remove();
+      elements.forEach((e) => { document.querySelector(e).lastElementChild.remove(); });
+      //elements.forEach((e) => { Array.from(document.querySelectorAll(e)).forEach((el) => { el.lastChild.remove(); }) });
   }
 }
 
@@ -1539,9 +1588,21 @@ const type = document.getElementById("crs-type");
 let crsType = document.querySelector(".new-carousel").classList;
 const crsCodeType = document.querySelector(".crs-type");
 
+
 type.onchange = () => {
-  type.value == 1 ? (crsType.remove("portrait-carousel"), crsType.add("landscape-carousel"), crsCodeType.innerText = "landscape", images.forEach(img => img.src = "https://via.placeholder.com/800x400?text=Landscape:+2:1") ) 
-                  : (crsType.remove("landscape-carousel"), crsType.add("portrait-carousel"), crsCodeType.innerText = "portrait", images.forEach(img => img.src = "https://via.placeholder.com/500x500?text=Portrait:1:1-3:2"));
+  type.value == "1" ? 
+  (
+    removeClass(".new-carousel",["portrait-carousel"]),
+    addClass(".new-carousel",["landscape-carousel"],"new-carousel"),
+    writeText([".crs-type"],"landscape"),
+    document.querySelectorAll(".nc-image").forEach((i) => { i.src = "https://via.placeholder.com/800x400?text=Landscape:+2:1"; })
+  ) :
+    (
+      removeClass(".new-carousel",["landscape-carousel"]),
+      addClass(".new-carousel",["portrait-carousel"],"new-carousel"),
+      writeText([".crs-type"],"portrait"),
+      document.querySelectorAll(".nc-image").forEach((i) => { i.src = "https://via.placeholder.com/500x500?text=1:1"; })
+    )
 }
 
 
@@ -1553,74 +1614,40 @@ const selection = document.querySelector("#crs-slide-no");
 const code = document.getElementById("slides-code-crs");  
 // slides will generate here in preview area
 const displayCrs = document.querySelector(".nc-gallery");
-// form collapse cards will generate here in options area
-const collapseForm = document.getElementById("crs-collapse-container");
 
 // Initializing views:
 
 // Preview area
-addSlides(displayCrs,selection.value,0,true,false);
+addSlides(displayCrs,selection.value,0,false);
 // Code display area
-addSlides(code,selection.value,0,true,true);
+addSlides(code,selection.value,0,true);
 // Form on the Options area
-addCard(collapseForm,'crs',selection.value,0,true);
+addCard("#crs-collapse-container",'crs',selection.value,0, "Slide");
 
-const image = document.getElementsByClassName("nc-image");
-const images = Array.from(image);
-const imageLabel = document.getElementById("label-img"); 
-const formImage = document.getElementsByClassName("img-form");
-const formImages = Array.from(formImage);
-const codeImg = document.getElementsByClassName("crs-code-img");
-const codeImgs = Array.from(codeImg);
-
-// target caption checkbox
-const captionCheck = document.getElementById("crs-check-caption") ;
-
-
-
-// Toggle on checkbox checked elements in an array
-// -id: checkbox id // -elements: array of elements to show or hide // -label: label id to manipulate 
-// -message: default of Add or Remove + message.value (default(Add) + "Image caption")
-const processCheckBox = (id,elements = [],label,message) => {
-      id.onclick = () => {
-      let removeMsg = `Remove ${message}`;
-      let addMsg = `Add ${message}`;
-      
-      id.checked ?
-      ( 
-        elements.forEach((e) => { Array.from(document.querySelectorAll(e)).forEach((el) => { el.style.display = "block"; }) }),
-        document.querySelector(label).innerText = removeMsg
-      )
-        :
-      (
-        elements.forEach((e) => { Array.from(document.querySelectorAll(e)).forEach((el) => { el.style.display = "none"; }) }),
-        document.querySelector(label).innerText = addMsg
-      )
-    }    
-}
 
 // processing
 const crsCaptionElements = ['.nc-description h5','.crs-caption-form','.crs-code-title'];    
-processCheckBox(captionCheck,crsCaptionElements,'#label-caption','Caption Title');
+processCheckBox("#crs-check-caption",crsCaptionElements,'#label-caption','Caption Title');
 
+const collapseForm = document.querySelector("#crs-collapse-container");
+const captionCheckBox = document.querySelector("#crs-check-caption");
   
 //Generate cards for the input forms of the collapse and change the preview the code and the form panels on select changing value
-let elements = [code,displayCrs,collapseForm]
+let elements = [code,displayCrs,dots,dotsCode]
 selection.onchange = () => {
   let current = collapseForm.childElementCount;
   let maxValue = 8;
   let newValue = diff(current, selection.value);
-  let currPlusValue
-  captionChecked = captionCheck.checked;
+  captionChecked = captionCheckBox.checked;
   //check if selection <= maximum (8) && if selection.value > current
   (newValue + current <= maxValue) && (selection.value > current) ? 
   ( 
-    addCard(collapseForm,'crs',newValue, current,captionChecked),
-    addSlides(code,newValue,current,captionChecked,true),
-    addSlides(displayCrs,newValue,current,captionChecked,false)
+    addCard("#crs-collapse-container",'crs',newValue, current, "Slide"),
+    addSlides(code,newValue,current,true),
+    addSlides(displayCrs,newValue,current,false)
   ) : 
   (
-    removeCards(collapseForm,newValue),
+    removeCards(["#crs-collapse-container"],newValue),
     removeSlides(elements, newValue)
   )
 }
@@ -1630,173 +1657,513 @@ selection.onchange = () => {
 /* UPDATE THE PREVIEW AND CODE ON COLLAPSE CARDS FORM INPUT
 */
 
-const collapse = document.querySelector("#crs-collapse-container");
+function processCollapseForm(formId, source, altText, caption, text ) {
+  document.querySelector(formId).oninput = (e) => {
+    let targetTag = e.target.id;
+    let id = targetTag.slice(-1);
+    let codeTag = document.getElementById(targetTag.replace("-","-code-"));
+    let imgTag = document.getElementById(targetTag.replace("src","img"));
+    let titleTag = document.getElementById(targetTag.replace("-", "-card-"))
+    let textTag = document.getElementById(targetTag.replace("-", "-card-"))
+    let value = document.getElementById(targetTag).value;
+    console.log(targetTag);
+    e.target !== e.currentTarget && e.target.classList.contains("form-control") ? 
+    (
+      (targetTag.includes("src") && value == "") ?
+        (
+          imgTag.src = source,
+          codeTag.innerText = source
+        ) : 
+          (
+            imgTag.src = value, codeTag.innerText = value
+          ), 
+                           
+      (targetTag.includes("alt") && value == "") ?
+      (
+        imgTag.alt = altText,
+        codeTag.innerText = altText
+      ) : (
+            imgTag.alt = value, codeTag.innerText = value
+          ),
 
-collapse.oninput = (e) => {
-  let idTag = e.target.id;
-  let id = parseInt(idTag.substr(idTag.length -1));
-  let value = e.target.value;
-  // get elements for the preview and the code area display
-  let captionTag = captions[id].querySelector(idTag.includes("body") ? "p" : "h5");
-  let codeTag = document.getElementById(idTag.replace("-",`-code-`));
-  e.target !== e.currentTarget ?
-   (
-    idTag.includes("src") ? (
-      value == "" ? (images[id].src = "https://via.placeholder.com/800x400?text=Landscape:+2:1", codeTag.innerText = "https://via.placeholder.com/800x400")
-      : 
+      targetTag.includes("title") ?
+        
+        (
+          value == "" ?
+          (
+            titleTag.innerText = `${caption} title ${+id + 1}`,
+            codeTag.innerText = `${caption} title ${+id + 1}`
+          ) : (
+                titleTag.innerText = value, codeTag.innerText = value
+              ) 
+        ) : "",
+
+      targetTag.includes("body") ?
       (
-        images[id].src = value,
-        codeTag.innerText = value
-      )
-    ) :
-    idTag.includes("alt") ? (
-      value == "" ? (images[id].alt = "Alternative text", codeTag.innerText = "Alternative text")
-      :
-      (
-        images[id].alt = value,
-        codeTag.innerText = value
-      )) :
-      idTag.includes("title") ? (
-        value == "" ? (captionTag.innerText = `Caption title ${id + 1}`, codeTag.innerText = `Caption title ${id + 1}`)
-        :
-      (
-        captionTag.innerText = value,
-        codeTag.innerText = value
-      )) : 
-      idTag.includes("body") ? (
-        value == "" ? (captionTag.innerText = `Carousel slide ${id + 1} body text`, codeTag.innerText = `Carousel slide ${id + 1} body text`)
-        :
-      (
-        captionTag.innerText = value,
-        codeTag.innerText = value
-      )) : console.log("problem found on input connection to target")
-   )  
-  : e.stopPropagation();
+        value == "" ?
+        (
+          textTag.innerText = `${text} ${+id + 1} body text`,
+          codeTag.innerText = `${text} ${+id + 1} body text`
+        ) : (
+              textTag.innerText = value, codeTag.innerText = value
+            )
+      ) : ""
+        
+
+    ) : e.stopPropagation();
+
+  }
 }
+
+processCollapseForm("#prcss-collapse-container","https://via.placeholder.com/300x300", "Alternative text", "Caption", "Process card");
+
+processCollapseForm("#crs-collapse-container","https://via.placeholder.com/800x400?text=Landscape+2:1", "Alternative text", "Caption", "Process card")
+
 
 /**********************************
  * process                        *
  **********************************/
- 
+
 const addProcessCard = (toElement, cardNum, current, encoded) => {
+  // checks whether the checkBoxesArray is checked or not and returns/assign a name(second array[variables]) for each of the checkbox elements.
+  checkBoxesChecked(["#prcss-check-label","#prcss-check-img","#prcss-check-caption"], ["labelP","imageP","captionP"]);
+  let el = document.querySelector(toElement);
   cardNum = Number(cardNum);
   let processCard = "";
-  for (let i = current; i < cardNum; i++) { // for encoded generated output: code area
-    processCard += encoded ? `&lt;div class=&quot;step&quot; role=&quot;listitem&quot;&gt; 
-      &lt;div class=&quot;card process-card&quot;&gt; 
-      <span class="prcss-code-img">&#60;img&#32;src&#61;&#34;<span id="prcss-code-src-${i}">http:&#47;&#47;via.placeholder.com&#47;300x300</span>&#34;&#32;alt&#61;&#34;<span id="prcss-code-alt-${i}">An&#32;image</span>&#34;&#62;</span>
+  for (let i = 0; i < cardNum; i++) { // for encoded generated output: code area
+    let total = i + current;
+    processCard += encoded ? `  <span class="prcss-listitem">&lt;div class=&quot;step&quot; role=&quot;listitem&quot;&gt; 
+      &lt;div class=&quot;card process-card<span id="prcss-code-highlight-${total}" style="display: none"> highlight</span>&quot;&gt; 
+        <span class="prcss-code-img" id="prcss-code-img-${total}" style="display:${imageP ? "" : "none"};">&#60;img&#32;src&#61;&#34;<span id="prcss-code-src-${total}">http:&#47;&#47;via.placeholder.com&#47;300x300</span>&#34;&#32;alt&#61;&#34;<span id="prcss-code-alt-${total}">An&#32;image</span>&#34;&#62;</span>
         &lt;div class=&quot;card-body&quot;&gt; 
-        <span class="prcss-code-title">\n&#60;h4&#62;
-          <span id="prcss-code-title-${i}">Caption&#32;title&#32;${i + 1}</span>
-        &#60;/h4&#62;</span>
-          &lt;p class=&quot;card-text&quot;&gt;<span id="prcss-code-body-${i}">Process&#32;card&#32;${i + 1}&#32;body&#32;text</span>&lt;/p&gt; 
+          <span class="prcss-code-title-tag" id="prcss-code-title-tag-${total}" style="display:${captionP ? "" : "none"};">&#60;h4 class=&quot;card-text&quot;&#62;
+            <span id="prcss-code-title-${total}">Caption&#32;title&#32;${total + 1}</span>
+          &#60;/h4&#62;</span>
+          &lt;p class=&quot;card-text&quot;&gt;
+            <span id="prcss-code-body-${total}">Process&#32;card&#32;${total + 1}&#32;body&#32;text</span>
+          &lt;/p&gt; 
         &lt;/div&gt; 
-      &lt;/div&gt; 
-      ${(i+1) !== cardNum ? 
-      `&lt;div class=&quot;connector-container no-gutters&quot;&gt; 
-      &lt;div class=&quot;process-label <span class="prcss-label">sr-only</span>&quot;&gt;Leads to&lt;/div&gt; 
-        &lt;div class=&quot;icon <span class="prcss-icon-type">arrow-down</span>&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt; 
-      &lt;/div&gt; 
-    &lt;/div&gt;` : `` }`  
+      &lt;/div&gt;  
+      <span class="code-connector-container" style="">\t&lt;div class=&quot;connector-container no-gutters&quot;&gt; 
+        &lt;div class=&quot;process-label <span class="prcss-label-sr" id="prcss-label-sr-${total}" style="display:${labelP ? "none" : ""};">sr-only</span>&quot;&gt;<span class="top-label-text" id="top-label-text-${total}">Leads to</span>&lt;/div&gt;
+        &lt;div class=&quot;icon <span class="prcss-icon-type" id="prcss-icon-type-${total}"> arrow-down</span>&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt; 
+        <span class="bottom-label">&lt;div class=&quot;process-label <span class="prcss-label-sr">sr-only</span>&quot;&gt;<span class="bottom-label-text" id="bottom-label-text-${total}">and is caused by</span>&lt;/div&gt;</span>
+      &lt;/div&gt;</span>
+    &lt;/div&gt;</span>`  
     : // not encoded generated output: preview area
     `<div class="step" role="listitem">
-      <div class="card process-card">
-        <img src="http://via.placeholder.com/300x300?text=Arrow+down:+2:1" alt="A placeholder image">
+      <div class="card process-card" id="prcss-card-${total}">
+        <img id="prcss-img-${total}" src="http://via.placeholder.com/300x300?text=Arrow+down:+2:1" alt="A placeholder image" style="display: ${imageP ? "block" : "none"};">
         <div class="card-body">
-          <h4 class="card-text">Caption title ${i+ 1}</h4>
-          <p class="card-text">Process card ${i+ 1} body text</p>
+          <h4 class="card-text" id="prcss-card-title-${total}" style="display:${captionP ? "block" : "none"};">Caption title ${total+ 1}</h4>
+          <p class="card-text" id="prcss-card-body-${total}">Process card ${total+ 1} body text</p>
         </div>
       </div>
-      ${(i+1) !== cardNum ?  
-      `<div class="connector-container no-gutters">
-        <div class="process-label sr-only">Leads to</div>
-        <div class="icon arrow-down" aria-hidden="true"></div>
+      <div class="connector-container no-gutters">
+        <div class="process-label ${labelP ? '' : 'sr-only'} top-label" id="top-label-${total}">Leads to</div>
+        <div class="icon arrow-down" id="icon-${total}" aria-hidden="true"></div>
+        <div class="process-label bottom-label ${labelP ? '' : 'sr-only'}" id="bottom-label-${total}">and is caused by</div>
       </div>
-    </div>` : `` }`;
+    </div>`;
   }
-return toElement.insertAdjacentHTML("beforeend",processCard);
+return el.insertAdjacentHTML("beforeend",processCard);
 }
 
-// checkboxes elements targeting 
-const prcssCaptionCheck = document.querySelector("#prcss-check-caption");
-const prcssImageCheck = document.querySelector("#prcss-check-img");
-const prcssLabelCheck = document.querySelector("#prcss-check-label");
 
-// toggle caption show
-const prcssCaptionElements = ['h4.card-text','.prcss-caption-form','.prcss-code-title'];    
-processCheckBox(prcssCaptionCheck,prcssCaptionElements,'#prcss-label-caption','Caption Title');
-// toggle images show
+//initializing checkboxes
+//tickCheckBoxes(["#prcss-check-caption","#prcss-check-img","#prcss-check-label"], [true,true,false]);
+
+// toggle ALL captions and individual checkboxes show on caption checkbox change
+const prcssCaptionElements = ['h4.card-text','.prcss-caption-form','.prcss-code-title-tag'];    
+processCheckBox("#prcss-check-caption",prcssCaptionElements,'#prcss-label-caption','All Caption Titles');
+// after processing the checkboxes for all elements. Check or uncheck the individual checkboxes
+
+// toggle ALL images and individual checkboxes show on image checkbox change
 const prcssImageElements = ['.process-card img', '.prcss-img-form', '.prcss-code-img'];
-processCheckBox(prcssImageCheck,prcssImageElements,'#prcss-label-img','Image');
+processCheckBox("#prcss-check-img",prcssImageElements,'#prcss-label-img','All Images');
 
 
-// replace class name (old to new) with any checkbox on checked
-const replaceClass = (id,element,_class,label, message) => {
-  let _label = document.querySelector(label);
-  let addMsg = `Show ${message}`;
-  let removeMsg = `Hide ${message}`;
-  let el = document.querySelectorAll(element);
-  id.checked ?
-    (
-      el.forEach((e) => { e.classList.add(_class); }),
-      _label.innerText = removeMsg 
-    ) :
-    (
-      el.forEach((e) => {  e.classList.remove(_class); }),
-      _label.innerText = addMsg
-    )
-       
+
+//Hide the last element of a group and show the rest -way: "block"(displays block) / "" (just override the "none")  
+function hideLast(elements, way = "block"){
+  elements.forEach((e) => { Array.from(document.querySelectorAll(e)).forEach((el,i,a) => { i < a.length -1 ? el.style.display = way : el.style.display = "none"; }) })
 }
 
+writeText([".top-label", ".top-label-text"], "leads to");
+
+const prcssLabelCheck = document.querySelector("#prcss-check-label");
+// All Process Arrow Labels show or hide or change onclick
 prcssLabelCheck.onclick = function() {
-  let toHide = document.querySelectorAll(".prcss-label");
+  
+  let collapseCheckboxes = document.querySelectorAll("#prcss-collapse-container input[type=checkbox]");
+  let arrowType = document.querySelector("#prcss-arrows");
+  
   this.checked ?
   (
-    replaceClass(this,'.process-label','sr-only','#prcss-label-label','Label'),
-    toHide.forEach((h) => { h.style.display = "none"; })
-  )
+    showElements(".bottom-label"),
+    // set all label checkboxes to true
+    console.log(this.checked, arrowType.value),
+    collapseCheckboxes.forEach((ch) => { 
+      ch.id.includes(this.id) ?  
+      (
+        ch.checked = true, 
+        document.getElementById(ch.id.replace("check","label")).innerText = "Hide Label"
+      ) : " id is not included" }),   
     
-    : replaceClass(this,'.process-label','sr-only','#prcss-label-label','Label')
-    toHide.forEach((h) => { h.style.display = "block"; })
+    replaceClass(this,'.process-label','sr-only','#prcss-label-label','All Labels'),
+    // remove sr-only class from the code area
+    hideElements(".prcss-label-sr"),
+    // hide the bottom label unless arrow is double
+    arrowType.value === "3"
+      ? (showElements(".bottom-label", "block"), writeText([".top-label",".top-label-text"], "causes"))  
+      : (hideElements(".bottom-label"), writeText([".top-label"], "Leads to")),
+    // on arrow type 4 change the top label
+    arrowType.value === "4"
+      ? (writeText([".top-label",".top-label-text"], "relates to"))  
+      : (hideElements(".bottom-label"), writeText([".top-label"], "Leads to"))
+  ) : 
+  (
+    // set all label checkboxes to false
+    collapseCheckboxes.forEach((ch) => { 
+      ch.id.includes(this.id) ?  
+      (
+        ch.checked = false, 
+        document.getElementById(ch.id.replace("check","label")).innerText = "Show Label"
+      ) : " id is not included" }),
+
+    replaceClass(this,'.process-label','sr-only','#prcss-label-label','All Labels'),
+    // add sr-only class from the code area
+    showElements(".prcss-label-sr", ""),
+    // hide the second label for the arrows
+    hideElements(".bottom-label")    
+  )
 }
 
+// All Arrows and labels manipulation
+processArrows(true, "prcss-arrows",".icon","");
+
+
+// arrow selection group or individual. elementId
+function processArrows(group, eId, target, _id){
+  
+  let bottomLabel = group == false ? `#bottom-label-${_id}` : `.bottom-label`;
+  let topLabel = group == false ? `#top-label-${_id}` : `.top-label`;
+  let topText = group == false ? `#top-label-text-${_id}` : `.top-label-text`;
+  let iconType = group == false ? `#prcss-icon-type-${_id}` : `.prcss-icon-type`;
+
+  let eTarget = group === false ?  target + "-" + _id : target; 
+  document.getElementById(eId).onchange = function () {
+    if (this.value > 0) {
+      switch(this.value) {
+        case "1":
+          //switch arrow type on preview area
+          switchClass(eTarget, ["arrow-up","relate"], "arrow-down");
+          //hide the label for the double arrow
+          hideElements(`#bottom-label-${_id}`);
+          //change label text on preview and code area
+          writeText([topText,topLabel], "leads to");
+          //change arrow class on code area
+          writeText([iconType],"arrow-down");
+          break;
+        case "2":
+          switchClass(eTarget, ["arrow-down","relate"], "arrow-up");
+          hideElements(bottomLabel);
+          writeText([topText,topLabel], "leads to");
+          writeText([iconType],"arrow-up");
+          break;
+        case "3":
+          addClass(eTarget,["arrow-up", "arrow-down"], "icon");
+          removeClass(eTarget, ["relate"]);
+          showElements(bottomLabel, "block");
+          writeText([topLabel,topText], "causes");
+          writeText([iconType],"arrow-down arrow-up");
+          break;
+        case "4":
+          switchClass(eTarget,["arrow-up", "arrow-down"], "relate");
+          hideElements(bottomLabel, "");
+          writeText([topLabel,topText], "relates to");
+          writeText([iconType],"relate");
+          break;
+        default:
+          console.log("Error on Individual Arrow Select.")
+      }
+    }
+  }
+} 
+
+//variables counter individual checkboxes checked status c=caption, i=image, l=label
+let c = 0; let i= 0; let l= 1;
+
+// collapse form control
+const prcssCollapse  = document.querySelector("#prcss-collapse-container");
+prcssCollapse.onclick = function(e) {
+  
+  let prcssElements = [];
+  let eId = e.target.id;
+  let _id = eId.slice(-1);
+  console.log(eId);
+  if (!eId) {
+    return;
+  } else {
+    // individual arrows select 
+    processArrows(false, eId,"#icon",_id),       
+    
+    // individual caption checkbox
+    eId === `prcss-check-caption-${_id}` ?
+      (
+        prcssElements = [`#prcss-card-title-${_id}`,`#prcss-caption-form-${_id}`,`#prcss-code-title-tag-${_id}`],
+        processCheckBox(`#prcss-check-caption-${_id}`,prcssElements,`#prcss-label-caption-${_id}`,`Caption Title`),
+        // get if caption is checked
+        document.querySelector(`#prcss-check-caption-${_id}`).checked ? c-- : c++  
+      ) : ""
+
+    // individual image checkbox
+    eId === `prcss-check-img-${_id}` ?
+      (
+        prcssElements = [`#prcss-img-${_id}`,`#prcss-img-form-${_id}`,`#prcss-code-img-${_id}`],
+        processCheckBox(`#prcss-check-img-${_id}`,prcssElements,`#prcss-label-img-${_id}`,`Image`),
+        // get if caption is checked
+        document.querySelector(`#prcss-check-img-${_id}`).checked ? i-- : i++  
+      ) : ""
+      
+    // individual label checkbox   
+    document.querySelector(`#prcss-check-label-${_id}`).onchange = function() {
+      let arrowType = document.querySelector("#prcss-arrows");
+      replaceClass(this,`#top-label-${_id}`,'sr-only',`#prcss-label-label-${_id}`,'Label');
+      this.checked ?
+      (
+        l++,
+        replaceClass(this,`#top-label-${_id}`,'sr-only',`#prcss-label-label-${_id}`,'Label'),
+        // remove sr-only class from the code area
+        hideElements(`#prcss-label-sr-${_id}`),
+        // hide the bottom label unless arrow is double
+        arrowType.value == "3"
+          ? (showElements(`#bottom-label-${_id}`, "block"), writeText([`#top-label-${_id}`,`#top-label-text-${_id}`], "causes"))  
+          : (hideElements(`#bottom-label-${_id}`), writeText([`#top-label-${_id}`], "leads to")),
+        arrowType.value == "4"
+          ? (writeText([`#top-label-${_id}`,`#top-label-text-${_id}`], "relates to"))  
+          : (hideElements(`#bottom-label-${_id}`), writeText([`#top-label-${_id}`], "leads to"))
+      ) : 
+      (
+        l--,
+        replaceClass(this,`#top-label-${_id}`,'sr-only',`#prcss-label-label-${_id}`,'Label'),
+        // add sr-only class from the code area
+        showElements(`#prcss-label-sr-${_id}`, ""),
+        // hide the second label for the arrows
+        hideElements(`#bottom-label-${_id}`)    
+      )
+      
+       
+    }
+
+    // individual highlight checkbox 
+    document.querySelector(`#prcss-check-highlight-${_id}`).onclick = function() {
+      
+     this.checked ?
+    (
+      showElements(`#prcss-code-highlight-${_id}`, ""),
+      addClass(`#prcss-card-${_id}`,["highlighted"],"highlighted")
+    ) : 
+      (
+        hideElements(`#prcss-code-highlight-${_id}`),
+        removeClass(`#prcss-card-${_id}`,["highlighted"])
+      )
+    }
+    
+  } 
+    
+    console.log(l,i,c);
+    // total checkboxcount
+    let totalForms = document.querySelector("#prcss-collapse-container").childElementCount;
+    l == totalForms -1 ? tickCheckBoxes(["#prcss-check-label"], [true], ["Remove All Labels"]) : l == 0 ? tickCheckBoxes(["#prcss-check-label"], [false], ["Show All Labels"]) : "",
+    i == 0 ? tickCheckBoxes(["#prcss-check-img"], [true], ["Remove All Images"]) : i == totalForms ? tickCheckBoxes(["#prcss-check-img"], [false], ["Show All Images"]) : "", 
+    c == 0 ? tickCheckBoxes(["#prcss-check-caption"], [true], ["Remove All Caption Titles"]) : c == totalForms ? tickCheckBoxes(["#prcss-check-caption"], [false], ["Show All Caption Titles"]) : "" 
+}
 
 // select element
 const prcssSelect = document.querySelector("#prcss-select");
 
 // Collapse, Preview & Code sections constants and their content generation
-const prcssCollapse  = document.querySelector("#prcss-collapse-container");
 const prcssPreview = document.querySelector(".process-container");
 const prcssCode = document.querySelector("#code-prcss");
-
-addCard(prcssCollapse,'prcss',prcssSelect.value,0,prcssCaptionCheck.checked);
-addProcessCard(prcssPreview,prcssSelect.value,0,false);
-addProcessCard(prcssCode,prcssSelect.value,0,true);
-
-// add or remove form cards or collapse cards on select change
+const prcssCaptionCheck = document.querySelector("#prcss-check-caption");
+const prcssLabelChecked = document.querySelector("#prcss-check-label");
+const prcssImgChecked = document.querySelector("#prcss-check-img");
 
 
-// process the changes
-prcssSelect.addEventListener("onchange", function() {
+
+// initializing preview areas
+addCard("#prcss-collapse-container",'prcss',prcssSelect.value,0, "Process Card");
+addProcessCard(".process-container",prcssSelect.value,0,false);
+addProcessCard("#code-prcss",prcssSelect.value,0,true);
+hideLast([".connector-container",".code-connector-container",".prcss-arrow-select",".prcss-form-checkbox-label"]);
+
+
+// process the changes on selection
+prcssSelect.onchange = function() {
   let current = prcssCollapse.childElementCount;
-  let selVal = prcssSelect.value;
+  let selVal = this.value;
   let maxValue = 8;
   let newValue = diff(current, selVal);
-  captionChecked = prcssCaptionCheck.checked;
+
   //check if selection <= maximum (8) && if selection.value > current
-  
   ((newValue + current <= maxValue) && (selVal > current)) ? 
   (
-    addCard(prcssCollapse,'prcss',newValue,current,prcssCaptionCheck.checked),
-    addProcessCard(prcssPreview,newValue,current,false),
-    addProcessCard(prcssCode,newValue,current,true)
+
+    addCard("#prcss-collapse-container",'prcss',newValue,current,"Process Card"),
+    addProcessCard(".process-container",newValue,current,false),
+    addProcessCard("#code-prcss",newValue,current,true)
+    
   ) : 
   (
-    removeCard(prcssCollapse,newValue),
-    removeSlides(newValue)
+    removeCards(["#prcss-collapse-container", ".process-container","#code-prcss"],newValue)
   )
-  
-});
+  hideLast([".connector-container",".code-connector-container",".prcss-arrow-select",".prcss-form-checkbox-label"]);
+};
+
+
+/*************************
+ * new general functions
+ * ********************** */    
+
+// Toggle on checkbox checked elements in an array
+// -id: checkbox id // -elements: array of elements to show or hide // -label: label id to manipulate 
+// -message: default of Add or Remove + message.value (default(Add) + "Image caption")
+function processCheckBox(selector,elements = [],label,message) {
+  let el = document.querySelector(selector);
+  let lastDigit = selector.slice(-1);
+  let removeMsg = `Remove ${message}`;
+  let addMsg = `Add ${message}`;
+
+  // is just one element to be changed 
+  !isNaN(lastDigit) ? 
+  (
+    el.checked ?
+    ( 
+      elements.forEach((e) => { Array.from(document.querySelectorAll(e)).forEach((el) => { el.style.display = ""; }) }),
+      document.querySelector(label).innerText = removeMsg
+    )
+      :
+    (
+      elements.forEach((e) => { Array.from(document.querySelectorAll(e)).forEach((el) => { el.style.display = "none"; }) }),
+      document.querySelector(label).innerText = addMsg
+    )
+  ) : 
+  (
+    el.onclick = (e) => {
+      let eId = e.target.id;
+      let lastDigit = eId.slice(-1);
+      // clean message for individual checkboxes
+      let msg = (eId.slice(eId.lastIndexOf("-")+1, eId.length))
+      message = msg[0].toUpperCase() + msg.slice(1);
+      message == "Img" ? message = "Image" : mesage = message;
+      
+      // selected checkbox is checked
+      el.checked ?
+      ( 
+        elements.forEach((e) => { Array.from(document.querySelectorAll(e)).forEach((el) => { el.style.display = ""; }) }),
+        document.querySelector(label).innerText = removeMsg,
+        // check every individual checkbox of the same selector
+         
+        isNaN(lastDigit) 
+          ? document.querySelectorAll("#prcss-collapse-container input[type=checkbox]")
+            .forEach((ch) => { 
+              ch.id.includes(eId) ? 
+              (
+                ch.checked = true, 
+                document.getElementById(ch.id.replace("check", "label")).innerText = `Remove ${message}`
+              ) : " id is not included" })   
+            : " it is a number."
+      )
+        : // selected checkbox is not checked
+      (
+        elements.forEach((e) => { Array.from(document.querySelectorAll(e)).forEach((el) => { el.style.display = "none"; }) }),
+        document.querySelector(label).innerText = addMsg,
+        isNaN(lastDigit) 
+          ? document.querySelectorAll("#prcss-collapse-container input[type=checkbox]")
+            .forEach((ch) => { 
+              ch.id.includes(eId) ? 
+              (
+                ch.checked = false, 
+                document.getElementById(ch.id.replace("check", "label")).innerText = `Add ${message}`
+              ) : " id is not included" })   
+            : " it is a number"
+      )
+    }
+  )
+}
+
+// check if elements array as checkBoxes is checked or not and returns variables with their values.
+function checkBoxesChecked(checkBoxes = [],names = []){
+let result = [];
+checkBoxes.forEach((ch,i)=> { document.querySelector(ch).checked ? result.push({"name": names[i], "value" : true}) : result.push({"name":  names[i], "value" : false}); })
+result.forEach((ch) => { this[`${ch.name}`] = ch.value ; return this[`${ch.name}`]; });
+}
+
+
+// remove or adds a class on check and change its label text
+function replaceClass (id,element,_class,label, message) {
+  let _label = document.querySelector(label);
+  let addMsg = `Show ${message}`;
+  let removeMsg = `Hide ${message}`;
+  let el = document.querySelectorAll(element);
+  !id.checked ?
+    (
+      el.forEach((e) => { e.classList.add(_class); }),
+      _label.innerText = addMsg 
+    ) :
+    (
+      el.forEach((e) => {  e.classList.remove(_class); }),
+      _label.innerText = removeMsg
+    )
+}
+
+// replace an oldClass with a newClas given an elementId group
+function switchClass(_element, oldClass = [], newClass) {
+  el = document.querySelectorAll(_element);
+  el.forEach((e) => { 
+    e.classList.contains(newClass) 
+    ? oldClass.forEach((oC) => { e.classList.remove(oC) }) 
+    : (e.classList.add(newClass), oldClass.forEach((oC) => { e.classList.remove(oC) })) })
+}
+
+// Adds a class/es to an element group if a given className is already contained.  
+function addClass(_element, className = [], classContained) {
+  let el = document.querySelectorAll(_element);
+  el.forEach((e) => { 
+    e.classList.contains(classContained) 
+    ? className.forEach((cN) => { e.classList.add(cN) })
+    : (e.classList.add(classContained)); });
+}
+
+// Removes a group of classes
+function removeClass(_element, classNames = []){
+  let el = document.querySelectorAll(_element);
+  el.forEach((e) => { classNames.forEach((c) => { e.classList.remove(c); }); });
+}
+
+// hide a group of elements
+function hideElements(selector) {
+  document.querySelectorAll(selector).forEach((e) => { e.style.display = "none"; });
+}
+
+// shows a group of elements
+function showElements(selector, way = "block") {
+  let el = document.querySelectorAll(selector);
+  el.length > 1 
+    ? el.forEach((e) => { e.style.display = way })
+    : document.querySelector(selector).style.display = way;
+}
+
+// writes messages to a group of elements
+function writeText(elements = [],message){
+  elements.forEach((el) => { Array.from(document.querySelectorAll(el)).forEach((e) => { e.innerText = message; }); });
+}
+
+function tickCheckBoxes(checkBoxes = [], values = [], labels = []) {
+  checkBoxes.forEach((ch,i) => { document.querySelector(ch).checked = values[i]; document.querySelector(ch.replace("check", "label")).innerText = labels[i] });
+}
+
 
 /**********************************
  * general functions              *

@@ -57,7 +57,5 @@
     <script src="https://kit.fontawesome.com/ea529b88ed.js"></script>
     <script src="https://git.iddkingsonline.com/designsystem-dev/js/main.js"></script>
     <script src="js/script.js"></script>
-    <!-- <script src="js/carousel.js"></script>
-    <script src="js/process.js"></script> -->
   </body>
 </html>

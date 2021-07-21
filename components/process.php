@@ -14,16 +14,18 @@
           <p>Complete the following fields:</p>
           <form class="needs-validation" id="prcss-form" novalidate>
             <div class="custom-control custom-checkbox mb-3">
-              <input type="checkbox" class="custom-control-input unchecked" id="prcss-check-label" checked>
-              <label class="custom-control-label" id="prcss-label-label" for="prcss-check-label">Remove label</label>
+              <input type="checkbox" class="custom-control-input" id="prcss-check-label" unchecked>
+              <label class="custom-control-label" id="prcss-label-label" for="prcss-check-label">Show All Labels</label>
             </div>
             <div class="input-group mb-3">
               <div class="input-group-prepend">
-                <label class="input-group-text" for="prcss-arrows">Choose arrow type</label>
+                <label class="input-group-text" for="prcss-arrows">Choose arrow type for all cards</label>
               </div>
               <select class="custom-select" id="prcss-arrows">
-                  <option value="1" selected>One way arrow</option>
-                  <option value="2">Two way arrows</option>
+                  <option value="1" selected>Arrow Down</option>
+                  <option value="2">Arrow Up</option>
+                  <option value="3">Double Arrow</option>
+                  <option value="4">Relation</option>
               </select>                
             </div>
             <div class="input-group mb-3">
@@ -41,12 +43,12 @@
               </select>
             </div>                
             <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input checked" id="prcss-check-img" checked>
-              <label class="custom-control-label" id="prcss-label-img" for="prcss-check-img">Remove image</label>
+              <input type="checkbox" class="custom-control-input" id="prcss-check-img" checked>
+              <label class="custom-control-label" id="prcss-label-img" for="prcss-check-img">Remove All Images</label>
             </div>
             <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input unchecked" id="prcss-check-caption" checked>
-              <label class="custom-control-label" id="prcss-label-caption" for="prcss-check-caption">Remove caption</label>
+              <input type="checkbox" class="custom-control-input" id="prcss-check-caption" checked>
+              <label class="custom-control-label" id="prcss-label-caption" for="prcss-check-caption">Remove All Caption Titles</label>
             </div>            
           </form>
           <div class="collapse-container" id="prcss-collapse-container">
@@ -59,7 +61,7 @@
           <h3 class="preview-title">Preview</h3>
           <div class="preview-prcss">
             <div class="process-container container" role="list">
-            
+            </div>
           </div>
         </section>
         <section class="component-code">
@@ -69,7 +71,8 @@
           </div>
           <div class="code-box">
 <pre class="code-text">
-&lt;div class=&quot;process-container container&quot; role=&quot;list&quot;&gt;<span id="code-prcss"></span>&lt;/div&gt;
+&lt;div class=&quot;process-container container&quot; role=&quot;list&quot;&gt;
+  <span id="code-prcss"></span>&lt;/div&gt;
 </pre>
           </div>
         </section>
