@@ -1,6 +1,6 @@
 <div class="component-content" id="component-process">
   <div class="component-header">
-    <h2 class="component-title">Carousel</h2>
+    <h2 class="component-title">Process</h2>
     <p><a href="https://keats.kcl.ac.uk/mod/page/view.php?id=3118002" target="_blank">Design System guidance and examples</a></p>
   </div>
   <div class="component-body container">
@@ -13,43 +13,43 @@
           <h3>Options</h3>
           <p>Complete the following fields:</p>
           <form class="needs-validation" id="prcss-form" novalidate>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <label class="input-group-text" for="prcss-arrows">Choose arrow typ</label>
-                </div>
-                <select class="custom-select" id="prcss-arrows">
-                   <option value="1" selected>One way arrow</option>
-                   <option value="2">Two way arrows</option>
-                </select>
-                <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input unchecked" id="prcss-check-label" checked>
-              <label class="custom-control-label" id="prcss-label-label" for="prcss-check-label">Remove label</label>
+            <div class="custom-control custom-checkbox mb-3">
+              <input type="checkbox" class="custom-control-input" id="prcss-check-label" unchecked>
+              <label class="custom-control-label" id="prcss-label-label" for="prcss-check-label">All Labels</label>
             </div>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="prcss-arrows">Choose arrow type for all cards</label>
               </div>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <label class="input-group-text" for="prcss-cards">No. of slides</label>
-                </div>
-                <select class="custom-select" id="prcss-cards">
-                   <option value="2">2</option>
-                   <option value="3" selected>3</option>
-                   <option value="4">4</option>
-                   <option value="5">5</option>
-                   <option value="6">6</option>
-                   <option value="7">7</option>
-                   <option value="8">8</option>
-                </select>
+              <select class="custom-select" id="prcss-arrows">
+                  <option value="1" selected>Arrow Down</option>
+                  <option value="2">Arrow Up</option>
+                  <option value="3">Double Arrow</option>
+                  <option value="4">Relation</option>
+              </select>                
+            </div>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="prcss-cards">No. of cards</label>
               </div>
-                
+              <select class="custom-select" id="prcss-select">
+                  <option value="2">2</option>
+                  <option value="3" selected>3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+              </select>
+            </div>                
             <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input checked" id="prcss-check-" checked>
-              <label class="custom-control-label" id="prcss-label-img" for="prcss-check-img">Remove image</label>
+              <input type="checkbox" class="custom-control-input" id="prcss-check-img" checked>
+              <label class="custom-control-label" id="prcss-label-img" for="prcss-check-img">All Images</label>
             </div>
             <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input unchecked" id="prcss-check-caption" checked>
-              <label class="custom-control-label" id="prcss-label-caption" for="prcss-check-caption">Remove caption</label>
-            </div>
-            
+              <input type="checkbox" class="custom-control-input" id="prcss-check-caption" checked>
+              <label class="custom-control-label" id="prcss-label-caption" for="prcss-check-caption">All Caption Titles</label>
+            </div>            
           </form>
           <div class="collapse-container" id="prcss-collapse-container">
           
@@ -61,19 +61,7 @@
           <h3 class="preview-title">Preview</h3>
           <div class="preview-prcss">
             <div class="process-container container" role="list">
-              <div class="step" role="listitem">
-                <div class="card process-card">
-                  <img src="http://placekitten.com/300" alt="A placeholder image">
-                  <div class="card-body">
-                    <h4 class="card-text">1Sesame snaps...</h4>
-                    <p class="card-text">Gummi bears gummies bonbon carrot cake sugar plum apple pie bonbon cake...</p>
-                  </div>
-                </div>
-                <div class="connector-container no-gutters">
-                  <div class="process-label sr-only">Leads to</div>
-                  <div class="icon arrow-down" aria-hidden="true"></div>
-                </div>
-              </div>
+            </div>
           </div>
         </section>
         <section class="component-code">
@@ -83,21 +71,8 @@
           </div>
           <div class="code-box">
 <pre class="code-text">
-<span id="code-prcss">&lt;div class=&quot;process-container container&quot; role=&quot;list&quot;&gt; 
-  &lt;div class=&quot;step&quot; role=&quot;listitem&quot;&gt; 
-    &lt;div class=&quot;card process-card&quot;&gt; 
-      &lt;img src=&quot;http://placekitten.com/300&quot; alt=&quot;A placeholder image&quot;&gt; 
-      &lt;div class=&quot;card-body&quot;&gt; 
-        &lt;h4 class=&quot;card-text&quot;&gt;1Sesame snaps...&lt;/h4&gt; 
-        &lt;p class=&quot;card-text&quot;&gt;Gummi bears gummies bonbon carrot cake sugar plum apple pie bonbon cake...&lt;/p&gt; 
-      &lt;/div&gt; 
-    &lt;/div&gt; 
-    &lt;div class=&quot;connector-container no-gutters&quot;&gt; 
-      &lt;div class=&quot;process-label sr-only&quot;&gt;Leads to&lt;/div&gt; 
-      &lt;div class=&quot;icon arrow-down&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt; 
-    &lt;/div&gt; 
-  &lt;/div&gt; 
-&lt;/div&gt;</span>
+&lt;div class=&quot;process-container container&quot; role=&quot;list&quot;&gt;
+  <span id="code-prcss"></span>&lt;/div&gt;
 </pre>
           </div>
         </section>

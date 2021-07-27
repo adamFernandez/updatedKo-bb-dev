@@ -36,13 +36,14 @@
                    <option value="8">8</option>
                 </select>
               </div>
-            <div class="custom-control custom-checkbox">
+              <!-- Option to show or display image -->
+            <!-- <div class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input checked" id="crs-check-img" checked>
               <label class="custom-control-label" id="label-img" for="crs-check-img">Remove image</label>
-            </div>
+            </div> -->
             <div class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input unchecked" id="crs-check-caption" checked>
-              <label class="custom-control-label" id="label-caption" for="crs-check-caption">Remove caption</label>
+              <label class="custom-control-label" id="crs-label-caption" for="crs-check-caption">All Caption Titles</label>
             </div>
           </form>
           <div class="collapse-container" id="crs-collapse-container">
@@ -76,7 +77,7 @@
         <section class="component-code">
           <div class="code-header">
             <h3 class="code-title">Code</h3>
-            <button class="btn btn-secondary" id="copy-crsl-code">Copy Code</button>
+            <button class="btn btn-secondary" id="copy-crs-code">Copy Code</button>
           </div>
           <div class="code-box">
 <pre class="code-text">
