@@ -43,7 +43,7 @@
             </div> -->
             <div class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input unchecked" id="crs-check-caption" checked>
-              <label class="custom-control-label" id="label-caption" for="crs-check-caption">Remove caption Title</label>
+              <label class="custom-control-label" id="crs-label-caption" for="crs-check-caption">All Caption Titles</label>
             </div>
           </form>
           <div class="collapse-container" id="crs-collapse-container">

@@ -15,7 +15,7 @@
           <form class="needs-validation" id="prcss-form" novalidate>
             <div class="custom-control custom-checkbox mb-3">
               <input type="checkbox" class="custom-control-input" id="prcss-check-label" unchecked>
-              <label class="custom-control-label" id="prcss-label-label" for="prcss-check-label">Show All Labels</label>
+              <label class="custom-control-label" id="prcss-label-label" for="prcss-check-label">All Labels</label>
             </div>
             <div class="input-group mb-3">
               <div class="input-group-prepend">
@@ -44,11 +44,11 @@
             </div>                
             <div class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input" id="prcss-check-img" checked>
-              <label class="custom-control-label" id="prcss-label-img" for="prcss-check-img">Remove All Images</label>
+              <label class="custom-control-label" id="prcss-label-img" for="prcss-check-img">All Images</label>
             </div>
             <div class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input" id="prcss-check-caption" checked>
-              <label class="custom-control-label" id="prcss-label-caption" for="prcss-check-caption">Remove All Caption Titles</label>
+              <label class="custom-control-label" id="prcss-label-caption" for="prcss-check-caption">All Caption Titles</label>
             </div>            
           </form>
           <div class="collapse-container" id="prcss-collapse-container">

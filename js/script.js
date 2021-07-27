@@ -1449,7 +1449,7 @@ const addDots = (slideNum = 0, encoded) => {
 
 // addSlides to the carousel:
 //  -toElement: element to append the output to // -slideNum: number of slides to add // -current: current number of slides and update the id
-//   -img: if true image displays 'block' : displays 'none' // -encoded: output ? encoded version : regular html
+//   -encoded: output ? encoded version : regular html
 
 const addSlides = (toElement, slideNum, current, encoded) => {
     checkBoxesChecked(["#crs-check-caption"], ["caption"]);
@@ -1458,7 +1458,8 @@ const addSlides = (toElement, slideNum, current, encoded) => {
     let imgSrc = slideType.value == 1 
       ? "https://via.placeholder.com/800x400?text=Landscape:+2:1"
       : "https://via.placeholder.com/300x300?text=1:1";
-    let type = slideType.value == "1" ? 
+    
+      slideType.value == "1" ? 
       (
         removeClass(".new-carousel",["portrait-carousel"]),
         addClass(".new-carousel",["landscape-carousel"],"new-carousel"),
@@ -1547,12 +1548,12 @@ addSlides(displayCrs,selection.value,0,false);
 // Code display area
 addSlides(code,selection.value,0,true);
 // Form on the Options area
-addCard("#crs-collapse-container",'crs',selection.value,0, "Slide");
+addCard("#crs-collapse-container",selection.value,0, "Slide");
 
 
 // processing
 const crsCaptionElements = ['.nc-description h5','.crs-caption-form','.crs-code-title'];    
-processCheckBox("#crs-check-caption",crsCaptionElements,'#label-caption','Caption Title');
+processCheckBox("#crs-check-caption",crsCaptionElements,'#crs-label-caption','All Caption Titles');
 
 const collapseForm = document.querySelector("#crs-collapse-container");
 const captionCheckBox = document.querySelector("#crs-check-caption");
@@ -1567,7 +1568,7 @@ selection.onchange = () => {
   //check if selection <= maximum (8) && if selection.value > current
   (newValue + current <= maxValue) && (selection.value > current) ? 
   ( 
-    addCard("#crs-collapse-container",'crs',newValue, current, "Slide"),
+    addCard("#crs-collapse-container", newValue, current, "Slide"),
     addSlides(code,newValue,current,true),
     addSlides(displayCrs,newValue,current,false)
   ) : 
@@ -1577,8 +1578,37 @@ selection.onchange = () => {
   )
 }
 
+// collapse form control
+const crsCollapse  = document.querySelector("#crs-collapse-container");
+crsCollapse.onclick = function(e) {
+  
+  let crsElements = [];
+  let eId = e.target.id;
+  let _id = eId.slice(-1);
+  console.log(eId);
+  if (!eId) {
+    return;
+  } else {
+    
+    // individual caption checkbox
+    eId === `crs-check-caption-${_id}` ?
+      (
+        crsElements = [`#crs-card-title-${_id}`,`#crs-caption-form-${_id}`,`#crs-code-title-tag-${_id}`],
+        processCheckBox(`#crs-check-caption-${_id}`,crsElements,`#crs-label-caption-${_id}`,`Caption Title`),
+        // get if caption is checked
+        document.querySelector(`#crs-check-caption-${_id}`).checked ? c-- : c++  
+      ) : "";
+ 
+  }     
+  console.log(c);
+    // total individual checkboxcheckedcount and check the all labels, images and caption titles checkboxes if all the individuals are checked
+    let totalForms = document.querySelector("#crs-collapse-container").childElementCount;
+    c == 0 ? tickCheckBoxes(["#crs-check-caption"], [true], ["All Caption Titles"]) : c == totalForms ? tickCheckBoxes(["#crs-check-caption"], [false], ["All Caption Titles"]) : "" 
+}
 
-processCollapseForm("#crs-collapse-container","https://via.placeholder.com/800x400?text=Landscape+2:1", "Alternative text", "Caption", "Process card")
+
+// collapse form fields control
+processCollapseForm("#crs-collapse-container","https://via.placeholder.com/800x400?text=Landscape+2:1", "Alternative text", "Caption Title", "Process card")
 
 
 /**********************************
@@ -1631,12 +1661,8 @@ return el.insertAdjacentHTML("beforeend",card);
 }
 
 
-//Hide the last element of a group and show the rest -way: "block"(displays block) / "" (just override the "none")  
-function hideLast(elements, way = "block"){
-  elements.forEach((e) => { Array.from(document.querySelectorAll(e)).forEach((el,i,a) => { i < a.length -1 ? el.style.display = way : el.style.display = "none"; }) })
-}
 
-writeText([".top-label", ".top-label-text"], "leads to");
+//writeText([".top-label", ".top-label-text"], "leads to");
 
 const prcssLabelCheck = document.querySelector("#prcss-check-label");
 // All Process Arrow Labels show or hide or change onclick
@@ -1652,7 +1678,7 @@ prcssLabelCheck.onclick = function() {
       ch.id.includes(this.id) 
       ? (
           ch.checked = true, 
-          document.getElementById(ch.id.replace("check","label")).innerText = "Hide Label"
+          document.getElementById(ch.id.replace("check","label")).innerText = "Label"
         ) : " id is not included" }),   
     
     replaceClass(this,'.process-label','sr-only','#prcss-label-label','All Labels'),
@@ -1661,7 +1687,8 @@ prcssLabelCheck.onclick = function() {
     // hide the bottom label unless arrow is double
     arrowType.value === "3"
       ? (
-        showElements(".process-label.bottom-label", ""), 
+        console.log("double arrow"),
+        showElements(".bottom-label", ""), 
         writeText([".top-label",".top-label-text"], "causes"))  
       : (
         hideElements(".bottom-label"), writeText([".top-label"], "Leads to")
@@ -1677,7 +1704,7 @@ prcssLabelCheck.onclick = function() {
       ch.id.includes(this.id) ?  
       (
         ch.checked = false, 
-        document.getElementById(ch.id.replace("check","label")).innerText = "Show Label"
+        document.getElementById(ch.id.replace("check","label")).innerText = "Label"
       ) : " id is not included" }),
 
     replaceClass(this,'.process-label','sr-only','#prcss-label-label','All Labels'),
@@ -1691,53 +1718,6 @@ prcssLabelCheck.onclick = function() {
 // All Arrows and labels manipulation
 processArrows(true, "prcss-arrows",".icon","");
 
-// arrow selection group or individual. elementId
-function processArrows(group, eId, target, _id){
-  
-  let bottomLabel = group == false ? `#bottom-label-${_id}` : `.bottom-label`;
-  let topLabel = group == false ? `#top-label-${_id}` : `.top-label`;
-  let topText = group == false ? `#top-label-text-${_id}` : `.top-label-text`;
-  let iconType = group == false ? `#prcss-icon-type-${_id}` : `.prcss-icon-type`;
-
-  let eTarget = group === false ?  target + "-" + _id : target; 
-  document.getElementById(eId).onchange = function () {
-    if (this.value > 0) {
-      switch(this.value) {
-        case "1":
-          //switch arrow type on preview area
-          switchClass(eTarget, ["arrow-up","relate"], "arrow-down");
-          //hide the label for the double arrow
-          hideElements(`#bottom-label-${_id}`);
-          //change label text on preview and code area
-          writeText([topText,topLabel], "leads to");
-          //change arrow class on code area
-          writeText([iconType],"arrow-down");
-          break;
-        case "2":
-          switchClass(eTarget, ["arrow-down","relate"], "arrow-up");
-          hideElements(bottomLabel);
-          writeText([topText,topLabel], "leads to");
-          writeText([iconType],"arrow-up");
-          break;
-        case "3":
-          addClass(eTarget,["arrow-up", "arrow-down"], "icon");
-          removeClass(eTarget, ["relate"]);
-          showElements(bottomLabel, "block");
-          writeText([topLabel,topText], "causes");
-          writeText([iconType],"arrow-down arrow-up");
-          break;
-        case "4":
-          switchClass(eTarget,["arrow-up", "arrow-down"], "relate");
-          hideElements(bottomLabel, "");
-          writeText([topLabel,topText], "relates to");
-          writeText([iconType],"relate");
-          break;
-        default:
-          console.log("Error on Individual Arrow Select.")
-      }
-    }
-  }
-} 
 
 // select element
 const prcssSelect = document.querySelector("#prcss-select");
@@ -1752,7 +1732,7 @@ prcssSelect.onchange = function() {
   //check if selection <= maximum (8) && if selection.value > current
   ((newValue + current <= maxValue) && (selVal > current)) ? 
   (
-    addCard("#prcss-collapse-container",'prcss',newValue,current,"Process Card"),
+    addCard("#prcss-collapse-container", newValue,current,"Process Card"),
     addProcessCard(".process-container",newValue,current,false),
     addProcessCard("#code-prcss",newValue,current,true)    
   ) : 
@@ -1766,12 +1746,9 @@ prcssSelect.onchange = function() {
 // toggle ALL images and individual checkboxes show on image checkbox change
 const prcssImageElements = ['.process-card img', '.prcss-img-form', '.prcss-code-img'];
 processCheckBox("#prcss-check-img",prcssImageElements,'#prcss-label-img','All Images');
-
 // toggle ALL captions and individual checkboxes show on caption checkbox change
 const prcssCaptionElements = ['h4.card-text','.prcss-caption-form','.prcss-code-title-tag'];    
 processCheckBox("#prcss-check-caption",prcssCaptionElements,'#prcss-label-caption','All Caption Titles');
-
-
 
 //variables counter individual checkboxes checked status c=caption, i=image, l=label
 let c = 0; let i= 0; let l= 1;
@@ -1852,13 +1829,13 @@ prcssCollapse.onclick = function(e) {
   }     
     // total individual checkboxcheckedcount and check the all labels, images and caption titles checkboxes if all the individuals are checked
     let totalForms = document.querySelector("#prcss-collapse-container").childElementCount;
-    l == totalForms -1 ? tickCheckBoxes(["#prcss-check-label"], [true], ["Remove All Labels"]) : l == 0 ? tickCheckBoxes(["#prcss-check-label"], [false], ["Show All Labels"]) : "",
-    i == 0 ? tickCheckBoxes(["#prcss-check-img"], [true], ["Remove All Images"]) : i == totalForms ? tickCheckBoxes(["#prcss-check-img"], [false], ["Show All Images"]) : "", 
-    c == 0 ? tickCheckBoxes(["#prcss-check-caption"], [true], ["Remove All Caption Titles"]) : c == totalForms ? tickCheckBoxes(["#prcss-check-caption"], [false], ["Show All Caption Titles"]) : "" 
+    l == totalForms -1 ? tickCheckBoxes(["#prcss-check-label"], [true], ["All Labels"]) : l == 0 ? tickCheckBoxes(["#prcss-check-label"], [false], ["All Labels"]) : "",
+    i == 0 ? tickCheckBoxes(["#prcss-check-img"], [true], ["All Images"]) : i == totalForms ? tickCheckBoxes(["#prcss-check-img"], [false], ["All Images"]) : "", 
+    c == 0 ? tickCheckBoxes(["#prcss-check-caption"], [true], ["All Caption Titles"]) : c == totalForms ? tickCheckBoxes(["#prcss-check-caption"], [false], ["All Caption Titles"]) : "" 
 }
 
 // initializing preview areas
-addCard("#prcss-collapse-container",'prcss',prcssSelect.value,0, "Process Card");
+addCard("#prcss-collapse-container", prcssSelect.value,0, "Process Card");
 addProcessCard(".process-container",prcssSelect.value,0,false);
 addProcessCard("#code-prcss",prcssSelect.value,0,true);
 hideLast([".connector-container",".code-connector-container",".prcss-arrow-select",".prcss-form-checkbox-label"]);
@@ -1866,6 +1843,56 @@ hideLast([".connector-container",".code-connector-container",".prcss-arrow-selec
 
 // process card collapse input area processing
 processCollapseForm("#prcss-collapse-container","https://via.placeholder.com/300x300", "Alternative text", "Caption", "Process card");
+
+
+// arrow selection group or individual or multiple elements
+function processArrows(group, eId, target, _id){
+  
+  let bottomLabel = group == false ? `#bottom-label-${_id}` : `.bottom-label`;
+  let topLabel = group == false ? `#top-label-${_id}` : `.top-label`;
+  let topText = group == false ? `#top-label-text-${_id}` : `.top-label-text`;
+  let iconType = group == false ? `#prcss-icon-type-${_id}` : `.prcss-icon-type`;
+
+  let eTarget = group === false ?  target + "-" + _id : target; 
+  document.getElementById(eId).onchange = function () {
+    if (this.value > 0) {
+      switch(this.value) {
+        case "1":
+          //switch arrow type on preview area
+          switchClass(eTarget, ["arrow-up","relate"], "arrow-down");
+          //hide the label for the double arrow
+          hideElements(bottomLabel);
+          //change label text on preview and code area
+          writeText([topText,topLabel], "leads to");
+          //change arrow class on code area
+          writeText([iconType],"arrow-down");
+          break;
+        case "2":
+          switchClass(eTarget, ["arrow-down","relate"], "arrow-up");
+          hideElements(bottomLabel);
+          writeText([topText,topLabel], "leads to");
+          writeText([iconType],"arrow-up");
+          break;
+        case "3":
+          addClass(eTarget,["arrow-up", "arrow-down"], "icon");
+          removeClass(eTarget, ["relate"]);
+          showElements(bottomLabel, "block");
+          writeText([topLabel,topText], "causes");
+          writeText([iconType],"arrow-down arrow-up");
+          break;
+        case "4":
+          switchClass(eTarget,["arrow-up", "arrow-down"], "relate");
+          hideElements(bottomLabel, "");
+          writeText([topLabel,topText], "relates to");
+          writeText([iconType],"relate");
+          break;
+        default:
+          console.log("Error on Individual Arrow Select.")
+      }
+    }
+  }
+} 
+
 
 
 /*************************
@@ -1917,7 +1944,7 @@ const timelineSelect = document.querySelector("#timeline-select");
 
 addTimelineCard(".timeline-container", timelineSelect.value,0,false);
 addTimelineCard("#code-timeline",timelineSelect.value,0,true);
-addCard("#timeline-collapse-container","timeline",timelineSelect.value,0,"Timeline Card");
+addCard("#timeline-collapse-container", timelineSelect.value,0,"Timeline Card");
 
 //variables counter individual checkboxes checked status c=caption, i=image, l=label
 c = 0; i= 0;
@@ -1948,7 +1975,7 @@ timelineCollapse.onclick = function(e) {
     // individual image checkbox
     eId === `timeline-check-img-${_id}` ?
       (
-        timelineElements = [`#timeline-img-${_id}`,`#timeline-img-form-${_id}`,`#timeline-code-img-${_id}`],
+        timelineElements = [`#timeline-img-${_id}`,`#timeline-img-form-${_id}`, `#timeline-card-caption-${_id}`,`#timeline-code-img-${_id}`],
         processCheckBox(`#timeline-check-img-${_id}`,timelineElements,`#timeline-label-img-${_id}`,`Image`),
         // get if caption is checked
         document.querySelector(`#timeline-check-img-${_id}`).checked ? i-- : i++  
@@ -1971,11 +1998,9 @@ timelineCollapse.onclick = function(e) {
   console.log(c,i);
     // total individual checkboxcheckedcount and check the all labels, images and caption titles checkboxes if all the individuals are checked
     let totalForms = document.querySelector("#timeline-collapse-container").childElementCount;
-    i == 0 ? tickCheckBoxes(["#timeline-check-img"], [true], ["Remove All Images"]) : i == totalForms ? tickCheckBoxes(["#timeline-check-img"], [false], ["Show All Images"]) : "", 
-    c == 0 ? tickCheckBoxes(["#timeline-check-caption"], [true], ["Remove All Caption Titles"]) : c == totalForms ? tickCheckBoxes(["#timeline-check-caption"], [false], ["Show All Caption Titles"]) : "" 
+    i == 0 ? tickCheckBoxes(["#timeline-check-img"], [true], ["All Images"]) : i == totalForms ? tickCheckBoxes(["#timeline-check-img"], [false], ["All Images"]) : "", 
+    c == 0 ? tickCheckBoxes(["#timeline-check-caption"], [true], ["All Caption Titles"]) : c == totalForms ? tickCheckBoxes(["#timeline-check-caption"], [false], ["All Caption Titles"]) : "" 
 }
-
-
 
 // process the changes on selection
 timelineSelect.onchange = function() {
@@ -1987,7 +2012,7 @@ timelineSelect.onchange = function() {
   //check if selection <= maximum (8) && if selection.value > current
   ((newValue + current <= maxValue) && (selVal > current)) ? 
   (
-    addCard("#timeline-collapse-container",'timeline',newValue,current,"Timeline Card"),
+    addCard("#timeline-collapse-container", newValue,current,"Timeline Card"),
     addTimelineCard(".timeline-container",newValue,current,false),
     addTimelineCard("#code-timeline",newValue,current,true)    
   ) : 
@@ -1995,8 +2020,6 @@ timelineSelect.onchange = function() {
     removeCards(["#timeline-collapse-container", ".timeline-container","#code-timeline"],newValue)
   )
 };
-
-
 
 // toggle ALL images and individual checkboxes show on image checkbox change
 const timelineImageElements = ['.card-image img',".card-image figcaption", '.timeline-img-form', '.timeline-code-img'];
@@ -2008,103 +2031,90 @@ processCheckBox("#timeline-check-caption",timelineCaptionElements,'#timeline-lab
 
 processCollapseForm("#timeline-collapse-container","https://via.placeholder.com/600x400", "Alternative text", "Caption", "Timeline Card")
 
-/*************************
- * new general functions
- * ********************** */  
+/* *************************************************
+ * carousel, process and timeline general functions
+ * *********************************************** */  
  
 // addCard form to collapse area 
 // -toSection: section the card/s will be appended //  -cardNum : number of cards // -component: component function is working on (crs,prcss, geshi, quo, etc)
 // captionChecked: if true caption displays 'block' : displays 'none'
 
-function addCard(toSection, component, cardNum, current, type = "Card") {
+function addCard(toSection, cardNum, current, type = "Card") {
+  let component = toSection.slice(1,toSection.indexOf("-"));
+  let total = 0;
+  let xVar = true;
   // checks whether the checkBoxesArray is checked or not and returns/assign a name(second array[variables]) for each of the checkbox elements.
-  component == "crs"  ? checkBoxesChecked([`#${component}-check-caption`], ["caption"]) : ""; 
-  component == "prcss" ? checkBoxesChecked([`#${component}-check-label`,`#${component}-check-img`,`#${component}-check-caption`], [`label`,"image","caption"]) : "";
-  component == "timeline" ? checkBoxesChecked([`#${component}-check-img`,`#${component}-check-caption`], ["image","caption"]) : ""; 
-  let total;
-  let form = "";
+  component == "crs"  ? checkBoxesChecked([`#crs-check-caption`], ["caption"]) : ""; 
+  component == "prcss" ? checkBoxesChecked([`#prcss-check-label`,`#prcss-check-img`,`#prcss-check-caption`], [`label`,"image","caption"]) : "";
+  component == "timeline" ? checkBoxesChecked([`#timeline-check-img`,`#timeline-check-caption`], ["image","caption"]) : ""; 
+  
+  let card = "";
   for (let i = 0; i < cardNum; i++){
     total = i + current;
-    form += `<div class="collapse-card ${total == 0 ? "" : "collapsed"} ${component}-collapse-card" id="${component}-collapse-card-${total}">
+    card += `<div class="collapse-card ${total == 0 ? "" : "collapsed"} ${component}-collapse-card" id="${component}-collapse-card-${total}">
     <div class="collapse-header">
       <button class="btn btn-link" aria-expanded="false">
         <h5 class="h4">${type} ${total + 1}</h5>
       </button>
     </div>
     <div class="collapse-body">
-    <form>
-    ${ component == "prcss" ?
-    `<div class="input-group mb-3 ${component}-arrow-select">
-      <div class="form-group ${component}-arrow-form">
-        <label class="input-group-text" for="${component}-arrow-${total}">Choose arrow type</label>
-      </div>
-      <select class="custom-select" id="${component}-arrow-${total}">
-          <option value="1" selected>Arrow Down</option>
-          <option value="2">Arrow Up</option>
-          <option value="3">Double Arrow</option>
-          <option value="4">Relation</option>
-      </select>                
-    </div>
-    <div class="custom-control custom-checkbox prcss-form-checkbox-label">
-      <input type="checkbox" class="custom-control-input" id="prcss-check-label-${total}" ${ label == true? "checked" : "unchecked"}>
-      <label class="custom-control-label" id="prcss-label-label-${total}" for="prcss-check-label-${total}">Show Label</label>
-    </div>
-    <div class="custom-control custom-checkbox">
-      <input type="checkbox" class="custom-control-input" id="prcss-check-img-${total}" ${ image == true? "checked" : "unchecked"}>
-      <label class="custom-control-label" id="prcss-label-img-${total}" for="prcss-check-img-${total}">Remove Image</label>
-    </div>
-    <div class="custom-control custom-checkbox">
-      <input type="checkbox" class="custom-control-input" id="prcss-check-caption-${total}" ${ caption == true? "checked" : "unchecked"}>
-      <label class="custom-control-label" id="prcss-label-caption-${total}" for="prcss-check-caption-${total}">Remove Caption Title</label>
-    </div>
-    <div class="custom-control custom-checkbox prcss-form-checkbox-highlight">
-      <input type="checkbox" class="custom-control-input" id="prcss-check-highlight-${total}" unchecked>
-      <label class="custom-control-label" id="prcss-label-highlight-${total}" for="prcss-check-highlight-${total}">Highlight Card</label>
-    </div>` : "" }
-    ${component == "timeline" ? 
-      `<div class="input-group mb-3">
-      <div class="custom-control custom-checkbox timeline-form-checkbox-highlight">
-      <input type="checkbox" class="custom-control-input" id="timeline-check-highlight-${total}" unchecked>
-      <label class="custom-control-label" id="timeline-label-highlight-${total}" for="timeline-check-highlight-${total}">Highlight Card</label>
-    </div>
-    <div class="custom-control custom-checkbox">
-      <input type="checkbox" class="custom-control-input" id="timeline-check-img-${total}" ${ image == true? "checked" : "unchecked"}>
-      <label class="custom-control-label" id="timeline-label-img-${total}" for="timeline-check-img-${total}">Remove Image</label>
-    </div>
-    <div class="custom-control custom-checkbox">
-      <input type="checkbox" class="custom-control-input" id="timeline-check-caption-${total}" ${ caption == true? "checked" : "unchecked"}>
-      <label class="custom-control-label" id="timeline-label-caption-${total}" for="timeline-check-caption-${total}">Remove Caption Title</label>
-    </div>
-    </div>` : ""}
-    <div class="input-group mb-3">
-        <div class="form-group ${component}-img-form" id="${component}-img-form-${total}">
-          <label for="${component}-src-${total}">Image src:</label>
-          <input type="text" class="form-control" id="${component}-src-${total}" aria-label="${component}-img-src" placeholder="${type} ${total + 1} Image src"> 
-        
-          <label class="input-group-text" for="${component}-alt-${total}">Alternative text:</label>
-          <input type="text" class="form-control" id="${component}-alt-${i}" aria-label="${component}-img-alt" placeholder="${type} ${total + 1} Image Description"> 
-          ${component == "timeline" ?
-         `<label class="input-group-text" for="${component}-caption-${total}">Image caption:</label>
-          <input type="text" class="form-control" id="${component}-caption-${i}" aria-label="${component}-img-caption" placeholder="${type} ${total + 1} Image Caption">` 
-          : "" }
-        </div>
-    </div>
-    <div class="input-group mb-3">
-    ${component == "timeline" ?
-        `<label class="input-group-text" for="${component}-date-${total}">Date Label:</label>
-        <input type="text" class="form-control" id="${component}-date-${i}" aria-label="${component}-date" placeholder="${type} ${total + 1} Date Label">` 
-        : "" }
-        <div class="form-group ${component}-caption-form" style="display:${caption ? "block" : "none"}" id="${component}-caption-form-${total}">
-        <label class="input-group-text" for="${component}-title-${total}">Caption title:</label>
-        <input type="text" class="form-control" id="${component}-title-${total}" aria-label="${component}-caption" placeholder="${type} ${total + 1} Caption Title"> 
-        </div>
-        <div class="form-group">
-        <label class="input-group-text" for="${component}-body-${total}">Body text:</label>
-        <textarea class="form-control" id="${component}-body-${total}" aria-label="${component}-body" placeholder="${type} ${total + 1} Body Text" rows="6"></textarea> 
-        </div></div></form></div></div>`; 
+    <form>`;
+    component == "crs" 
+      ? card += `${createCheckboxes(["caption"],component,total,[caption],["Caption Title"])}
+                ${createFields(["src","alt"],component,total,["Image source:", "Alternative text:"],["Image source", "Image description"], type)}
+                ${createFields(["title"], component, total, ["Caption title:"],["Caption title"], type, true)}`
+      : " ";
+    component == "prcss" 
+      ? card += `${createCheckboxes(["highlight","label", "img", "caption"],component,total,[false, label, image, caption],["Highlight Card", "Label", "Image", "Caption Title"])}
+                <div class="form-group ${component}-img-form" id="${component}-img-form-${total}" style="">
+                  ${createFields(["src","alt","caption"],component,total,["Image source:", "Alternative text:", "Image caption:"],["Image source", "Image description", "Caption Title"], type)}
+                </div>
+                ${createFields(["title"], component, total, ["Caption title:"],["Caption Title"],type, true)}`
+      : " ";
+    component == "timeline" 
+      ? card += `${createCheckboxes(["highlight","img", "caption"],component,total,[false, image, caption],["Highlight Card", "Image", "Caption"])}
+                ${createFields(["date", "title"], component, total, ["Date Label:", "Caption title:"],["Date Label", "Caption Title"], type, true)}
+                <div class="form-group ${component}-img-form" id="${component}-img-form-${total}" style="">
+                ${createFields(["src","alt","caption"],component,total,["Image source:", "Alternative text:", "Image caption:"],["Image source", "Image description", "Caption title"], type)}
+                </div>`
+      : " "; 
+    
+    card += `</form></div></div>`;
+
   }  
-  return document.querySelector(toSection).insertAdjacentHTML("beforeend",form);
+    return document.querySelector(toSection).insertAdjacentHTML("beforeend",card);
+  
 } 
+
+// create multiple fields
+function createFields(names = [], comp, tot, labelText =[], placeholder =[],type, bodyField = false) {
+  let field = `<div class="input-group mb-3">`;
+  names.forEach((n,i) => { 
+   field += 
+   `${n == "title" ? `<div class="form-group ${comp}-caption-form" style="display:block" id="${comp}-caption-form-${tot}">` : ""}
+    <label for="${comp}-${n}-${tot}">${labelText[i]}</label>
+    <input type="text" class="form-control" id="${comp}-${n}-${tot}" aria-label="${comp}-${n}" placeholder="${type} ${placeholder[i]} ${tot + 1}">
+    ${n == "title" ? `</div>` : ""}`      
+  })
+  bodyField 
+  ? field += `<label class="input-group-text" for="${comp}-body-${tot}">Body text:</label>
+               <textarea class="form-control" id="${comp}-body-${tot}" aria-label="${comp}-body" placeholder="${type} Body text ${tot + 1}" rows="6"></textarea>`
+  : "";     
+ return `${field} </div>`;
+}
+
+// create multiple Checkboxes 
+function createCheckboxes(names =[], comp, tot, xVar = [], messageText = []) {
+  let box = `<div class="input-group mb-3">`;
+names.forEach((n,i) => { 
+  box += 
+  `<div class="custom-control custom-checkbox ${comp}-form-checkbox-${n}">
+    <input type="checkbox" class="custom-control-input" id="${comp}-check-${n}-${tot}"${xVar[i] == true? " checked" : " unchecked"}>
+    <label class="custom-control-label" id="${comp}-label-${n}-${tot}" for="${comp}-check-${n}-${tot}">${messageText[i]}</label>
+  </div>`;
+})       
+return `${box}</div>`;
+}
 
 // Remove cards depending on selection
 //  -el: from element array //  -cardNum: number of cards to remove
@@ -2115,6 +2125,10 @@ const removeCards = (elements = [], cardNum) => {
   }
 }
 
+//Hide the last element of a group and show the rest -way: "block"(displays block) / "" (just override the "none")  
+function hideLast(elements, way = "block"){
+  elements.forEach((e) => { Array.from(document.querySelectorAll(e)).forEach((el,i,a) => { i < a.length -1 ? el.style.display = way : el.style.display = "none"; }) })
+}
 
 // Change different display areas' content on input
 
@@ -2169,66 +2183,37 @@ function processCollapseForm(formId, source, altText, caption, text ) {
 
 // Toggle on checkbox checked elements in an array
 // -id: checkbox id // -elements: array of elements to show or hide // -label: label id to manipulate 
-// -message: default of Add or Remove + message.value (default(Add) + "Image caption")
-function processCheckBox(selector,elements = [],label,message) {
+// -message: label text message,  "Image caption")
+function processCheckBox(selector,elements = []) {
   let el = document.querySelector(selector);
   let component = selector.slice(1,selector.indexOf("-"));
   let lastDigit = selector.slice(-1);
-  let removeMsg = `Remove ${message}`;
-  let addMsg = `Add ${message}`;
 
-  // is just one element to be changed 
   !isNaN(lastDigit) ? 
   (
     el.checked ?
-    ( 
-      elements.forEach((e) => { Array.from(document.querySelectorAll(e)).forEach((el) => { el.style.display = ""; }) }),
-      document.querySelector(label).innerText = removeMsg
-    )
-      :
-    (
-      elements.forEach((e) => { Array.from(document.querySelectorAll(e)).forEach((el) => { el.style.display = "none"; }) }),
-      document.querySelector(label).innerText = addMsg
-    )
+      elements.forEach((e) => { Array.from(document.querySelectorAll(e)).forEach((el) => { el.style.display = ""; }) })
+      : elements.forEach((e) => { Array.from(document.querySelectorAll(e)).forEach((el) => { el.style.display = "none"; }) })
   ) : 
   (
     el.onclick = (e) => {
       let eId = e.target.id;
       let lastDigit = eId.slice(-1);
-      // clean message for individual checkboxes
-      let msg = (eId.slice(eId.lastIndexOf("-")+1, eId.length))
-      message = msg[0].toUpperCase() + msg.slice(1);
-      message == "Img" ? message = "Image" : mesage = message;
-      
-      // selected checkbox is checked
       el.checked ?
       ( 
         elements.forEach((e) => { Array.from(document.querySelectorAll(e)).forEach((el) => { el.style.display = ""; }) }),
-        document.querySelector(label).innerText = removeMsg,
-        // check every individual checkbox of the same selector
-         
+        // check every individual checkbox of the same selector         
         isNaN(lastDigit) 
           ? document.querySelectorAll(`#${component}-collapse-container input[type=checkbox]`)
-            .forEach((ch) => { 
-              ch.id.includes(eId) ? 
-              (
-                ch.checked = true, 
-                document.getElementById(ch.id.replace("check", "label")).innerText = `Remove ${message}`
-              ) : " id is not included" })   
+            .forEach((ch) => { ch.id.includes(eId) ? ch.checked = true : " id is not included" })   
             : " it is a number."
       )
         : // selected checkbox is not checked
       (
         elements.forEach((e) => { Array.from(document.querySelectorAll(e)).forEach((el) => { el.style.display = "none"; }) }),
-        document.querySelector(label).innerText = addMsg,
         isNaN(lastDigit) 
           ? document.querySelectorAll(`#${component}-collapse-container input[type=checkbox]`)
-            .forEach((ch) => { 
-              ch.id.includes(eId) ? 
-              (
-                ch.checked = false, 
-                document.getElementById(ch.id.replace("check", "label")).innerText = `Add ${message}`
-              ) : " id is not included" })   
+            .forEach((ch) => { ch.id.includes(eId) ? ch.checked = false : " id is not included" })   
             : " it is a number"
       )
     }
@@ -2246,17 +2231,15 @@ result.forEach((ch) => { this[`${ch.name}`] = ch.value ; return this[`${ch.name}
 // remove or adds a class on check and change its label text
 function replaceClass (id,element,_class,label, message) {
   let _label = document.querySelector(label);
-  let addMsg = `Show ${message}`;
-  let removeMsg = `Hide ${message}`;
   let el = document.querySelectorAll(element);
   !id.checked ?
     (
       el.forEach((e) => { e.classList.add(_class); }),
-      _label.innerText = addMsg 
+      _label.innerText = message
     ) :
     (
       el.forEach((e) => {  e.classList.remove(_class); }),
-      _label.innerText = removeMsg
+      _label.innerText = message
     )
 }
 

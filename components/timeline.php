@@ -1,6 +1,6 @@
 <div class="component-content" id="component-timeline">
   <div class="component-header">
-    <h2 class="component-title">Process</h2>
+    <h2 class="component-title">Timeline</h2>
     <p><a href="https://keats.kcl.ac.uk/mod/page/view.php?id=3118002" target="_blank">Design System guidance and examples</a></p>
   </div>
   <div class="component-body container">
@@ -44,11 +44,11 @@
             </div>                
             <div class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input" id="timeline-check-img" checked>
-              <label class="custom-control-label" id="timeline-label-img" for="timeline-check-img">Remove All Images</label>
+              <label class="custom-control-label" id="timeline-label-img" for="timeline-check-img">All Images</label>
             </div>
             <div class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input" id="timeline-check-caption" checked>
-              <label class="custom-control-label" id="timeline-label-caption" for="timeline-check-caption">Remove All Caption Titles</label>
+              <label class="custom-control-label" id="timeline-label-caption" for="timeline-check-caption">All Caption Titles</label>
             </div>            
           </form>
           <div class="collapse-container" id="timeline-collapse-container">
