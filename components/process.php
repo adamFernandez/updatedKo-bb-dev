@@ -23,7 +23,7 @@
               </div>
               <select class="custom-select" id="prcss-arrows">
                   <option value="1" selected>Arrow Down</option>
-                  <option value="2">Arrow Up</option>
+                  <option value="2">Arrow up</option>
                   <option value="3">Double Arrow</option>
                   <option value="4">Relation</option>
               </select>                

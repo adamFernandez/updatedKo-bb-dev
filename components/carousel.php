@@ -60,7 +60,7 @@
     </ul>
     <ul class="nc-buttons" aria-label="gallery controls">
         <li>
-            <button class="nc-previous btn btn-primary" disabled="">Previous</button>
+            <button class="nc-previous btn btn-primary">Previous</button>
         </li>
         <li class="indic-container">
             <ul class="indic-dots" aria-hidden="true">
