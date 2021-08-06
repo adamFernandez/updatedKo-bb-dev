@@ -1513,6 +1513,7 @@ const removeSlides = (elements = [], cardNum) => {
 }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 // let current = document.querySelector(".active");
@@ -1522,22 +1523,32 @@ const removeSlides = (elements = [], cardNum) => {
 //   current.classList.remove("active");
 =======
 let current = document.querySelector(".active");
+=======
+// let current = document.querySelector(".active");
+>>>>>>> 048bbc2 (Corrected issues with image src on portrait)
 
 
-document.querySelector(".indic-dots").onclick = function(e) {
+// document.querySelector(".indic-dots").onclick = function(e) {
   
+<<<<<<< HEAD
   document.querySelector(".active").classList.remove("active");
   e.target.classList.add("active");
   e.target == this.firstElementChild ? console.log(1) : console.log([e.target.parentElement.childElementCount].indexOf(e.target)) ;
   console.log(e.target.previousElementSibling,e.target.nextElementSibling)
 >>>>>>> c9bfb57 (On input fields checked boxes back corrected and some other issues)
+=======
+//   document.querySelector(".active").classList.remove("active");
+//   e.target.classList.add("active");
+>>>>>>> 048bbc2 (Corrected issues with image src on portrait)
   
-}
-document.querySelector(".nc-previous").onclick = function() {
-  current.previousElementSibling.classList.add("active");
-  current.classList.remove("active");
+//   console.log([e.target.parentElement].indexOf(e.target),e.target.previousElementSibling,e.target.nextElementSibling)
   
-}
+// }
+// document.querySelector(".nc-previous").onclick = function() {
+//   current.previousElementSibling.classList.add("active");
+//   current.classList.remove("active");
+  
+// }
 
 <<<<<<< HEAD
 // document.querySelector(".nc-next").onclick = function() {
@@ -1549,12 +1560,20 @@ document.querySelector(".nc-previous").onclick = function() {
 =======
 
 
+<<<<<<< HEAD
 document.querySelector(".nc-next").onclick = function() {
   current.classList.remove("active");
   current.nextElementSibling.classList.add("active");  
   console.log(current.nextElementSibling);
 }
 >>>>>>> c9bfb57 (On input fields checked boxes back corrected and some other issues)
+=======
+// document.querySelector(".nc-next").onclick = function() {
+//   current.classList.remove("active");
+//   current.nextElementSibling.classList.add("active");  
+//   console.log(current.nextElementSibling);
+// }
+>>>>>>> 048bbc2 (Corrected issues with image src on portrait)
 
 // toggles carousel type from landscape to portrait
 const type = document.getElementById("crs-type");
