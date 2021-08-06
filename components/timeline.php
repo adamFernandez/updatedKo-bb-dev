@@ -43,13 +43,13 @@
               </select>
             </div>                
             <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="timeline-check-caption" checked>
+              <label class="custom-control-label" id="timeline-label-caption" for="timeline-check-caption">All Caption Titles</label>
+            </div> 
+            <div class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input" id="timeline-check-img" checked>
               <label class="custom-control-label" id="timeline-label-img" for="timeline-check-img">All Images</label>
             </div>
-            <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input" id="timeline-check-caption" checked>
-              <label class="custom-control-label" id="timeline-label-caption" for="timeline-check-caption">All Caption Titles</label>
-            </div>            
           </form>
           <div class="collapse-container" id="timeline-collapse-container">
           
@@ -59,7 +59,7 @@
       <div class="col-md-7">
         <section class="preview">
           <h3 class="preview-title">Preview</h3>
-          <div class="preview-timeline">
+          <div class="preview-timeline" id="timeline-preview-pane">
             <div class="timeline-container timeline-2021-container">
             </div>
           </div>
@@ -72,7 +72,8 @@
           <div class="code-box">
 <pre class="code-text">
 &lt;div class=&quot;timeline-container timeline-2021-container&quot;&gt;
-<span id="code-timeline"></span>&lt;/div&gt;
+<span id="code-timeline"></span>
+&lt;/div&gt;
 </pre>
           </div>
         </section>

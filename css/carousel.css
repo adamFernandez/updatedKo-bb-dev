@@ -14,6 +14,10 @@
 #region-main .portrait-carousel .nc-gallery li figure {
   border: 0 !important;
   width: 100%;
+<<<<<<< HEAD
+=======
+  height: 100%;
+>>>>>>> c9bfb57 (On input fields checked boxes back corrected and some other issues)
   margin: 0 !important;
   padding: 0 !important;
   display: flex;
@@ -41,16 +45,26 @@ img {
   flex: 0 0 100%; }
 
 #region-main .portrait-carousel .nc-gallery li figure figcaption.nc-description {
+<<<<<<< HEAD
   padding: 1.5rem;
   width: 60%; }
+=======
+  padding: 1.5rem; }
+>>>>>>> c9bfb57 (On input fields checked boxes back corrected and some other issues)
 
 *, *::before, *::after {
   box-sizing: inherit; }
 
+<<<<<<< HEAD
 figure {
   display: block;
   margin-block-end: 1em;
   margin-inline-end: 40px; }
+=======
+@media only screen and (max-width: 768px) {
+  #region-main .new-carousel.portrait-carousel .nc-gallery > li figure {
+    display: flex; } }
+>>>>>>> c9bfb57 (On input fields checked boxes back corrected and some other issues)
 
 #region-main .new-carousel.portrait-carousel .nc-gallery > li figure > .filter-ally-wrapper > img.nc-image, #region-main .new-carousel.portrait-carousel .nc-gallery > li figure img.nc-image {
   align-self: flex-start;

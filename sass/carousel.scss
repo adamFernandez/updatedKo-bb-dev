@@ -44,20 +44,36 @@ img {
 }
 #region-main .portrait-carousel .nc-gallery li figure figcaption.nc-description {
   padding: 1.5rem;
-  width: 60%;
 }
 
 *, *::before, *::after {
   box-sizing: inherit;
 }
 
+<<<<<<< HEAD
 figure {
   display: block;
   //margin-block-start: 1em;
   margin-block-end: 1em;
   //margin-inline-start: 40px;
   margin-inline-end: 40px;
+=======
+// figure {
+//   //display: block;
+//   // margin-block-start: 1em;
+//   // margin-block-end: 1em;
+//   // margin-inline-start: 40px;
+//   // margin-inline-end: 40px;
+// }
+
+@media only screen and (max-width: 768px)
+{
+  #region-main .new-carousel.portrait-carousel .nc-gallery > li figure {
+    display: flex;
 }
+>>>>>>> c9bfb57 (On input fields checked boxes back corrected and some other issues)
+}
+
 #region-main .new-carousel.portrait-carousel .nc-gallery > li figure > .filter-ally-wrapper > img.nc-image, #region-main .new-carousel.portrait-carousel .nc-gallery > li figure img.nc-image {
   align-self: flex-start;
   justify-self: flex-start;

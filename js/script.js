@@ -1512,6 +1512,7 @@ const removeSlides = (elements = [], cardNum) => {
   }
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 // let current = document.querySelector(".active");
@@ -1519,15 +1520,41 @@ const removeSlides = (elements = [], cardNum) => {
 // document.querySelector(".nc-previous").onclick = function() {
 //   current.previousElementSibling.classList.add("active");
 //   current.classList.remove("active");
-  
-// }
+=======
+let current = document.querySelector(".active");
 
+
+document.querySelector(".indic-dots").onclick = function(e) {
+  
+  document.querySelector(".active").classList.remove("active");
+  e.target.classList.add("active");
+  e.target == this.firstElementChild ? console.log(1) : console.log([e.target.parentElement.childElementCount].indexOf(e.target)) ;
+  console.log(e.target.previousElementSibling,e.target.nextElementSibling)
+>>>>>>> c9bfb57 (On input fields checked boxes back corrected and some other issues)
+  
+}
+document.querySelector(".nc-previous").onclick = function() {
+  current.previousElementSibling.classList.add("active");
+  current.classList.remove("active");
+  
+}
+
+<<<<<<< HEAD
 // document.querySelector(".nc-next").onclick = function() {
 //   current.classList.remove("active");
 //   current.nextElementSibling.classList.add("active");  
 //   console.log(current.nextElementSibling);
 // }
 >>>>>>> 5e3d0a8 (input field checkbox checked fixed)
+=======
+
+
+document.querySelector(".nc-next").onclick = function() {
+  current.classList.remove("active");
+  current.nextElementSibling.classList.add("active");  
+  console.log(current.nextElementSibling);
+}
+>>>>>>> c9bfb57 (On input fields checked boxes back corrected and some other issues)
 
 // toggles carousel type from landscape to portrait
 const type = document.getElementById("crs-type");
@@ -1540,14 +1567,14 @@ type.onchange = () => {
   (
     removeClass(".new-carousel",["portrait-carousel"]),
     addClass(".new-carousel",["landscape-carousel"],"new-carousel"),
-    writeText([".crs-type"],"landscape"),
-    document.querySelectorAll(".nc-image").forEach((i) => { i.src = "https://via.placeholder.com/800x400?text=Landscape:+2:1"; })
+    writeText([".crs-type"],"landscape")
+    //document.querySelectorAll(".nc-image").forEach((i) => { i.src = "https://via.placeholder.com/800x400?text=Landscape:+2:1"; })
   ) :
     (
       removeClass(".new-carousel",["landscape-carousel"]),
       addClass(".new-carousel",["portrait-carousel"],"new-carousel"),
-      writeText([".crs-type"],"portrait"),
-      document.querySelectorAll(".nc-image").forEach((i) => { i.src = "https://via.placeholder.com/500x500?text=1:1"; })
+      writeText([".crs-type"],"portrait")
+      //document.querySelectorAll(".nc-image").forEach((i) => { i.src = "https://via.placeholder.com/500x500?text=1:1"; })
     )
 }
 
@@ -1805,12 +1832,15 @@ let c = 0; let i= 0; let l= 0;
 
 
 let iP = 0; let lP = 0; let cP = 0;
+<<<<<<< HEAD
 // imgP ? iP = 3 : iP = 0; 
 // captionP ? cP = 3 : cP; 
 // labelP ? lP = 2 : lP = 0;
 // console.log(lP,iP,cP);
 
 >>>>>>> 5e3d0a8 (input field checkbox checked fixed)
+=======
+>>>>>>> c9bfb57 (On input fields checked boxes back corrected and some other issues)
 hideElements(".bottom-label", "");
 
 
@@ -1934,6 +1964,7 @@ prcssCollapse.onclick = function(e) {
       )
     }
   }     
+<<<<<<< HEAD
   
 <<<<<<< HEAD
     // total individual checkboxcheckedcount and check the all labels, images and caption titles checkboxes if all the individuals are checked
@@ -1944,6 +1975,8 @@ prcssCollapse.onclick = function(e) {
 =======
   console.log(totalForms, lP,iP,cP);
 >>>>>>> 5e3d0a8 (input field checkbox checked fixed)
+=======
+>>>>>>> c9bfb57 (On input fields checked boxes back corrected and some other issues)
 }
 
 // initializing preview areas
