@@ -86,12 +86,11 @@
   &#60;/ul&#62;
   &#60;ul&#32;class&#61;&#34;nc&#45;buttons&#34;&#32;aria&#45;label&#61;&#34;gallery&#32;controls&#34;&#62;
     &#60;li&#62;
-      &#60;button&#32;class&#61;&#34;nc&#45;previous&#32;btn&#32;btn&#45;primary&#34;&#32;disabled&#61;&#34;&#34;&#62;Previous&#60;/button&#62;
+      &#60;button&#32;class&#61;&#34;nc&#45;previous&#32;btn&#32;btn&#45;primary&#34;&#62;Previous&#60;/button&#62;
     &#60;/li&#62;
     &#60;li&#32;class&#61;&#34;indic&#45;container&#34;&#62;
       &#60;ul&#32;class&#61;&#34;indic&#45;dots&#34;&#32;aria&#45;hidden&#61;&#34;true&#34;&#62;
-        &#60;li&#32;class&#61;&#34;active&#34;&#62;&#60;/li&#62;
-        <span id="dots-code-crs"></span>
+        &#60;li&#32;class&#61;&#34;active&#34;&#62;&#60;/li&#62;<span id="dots-code-crs"></span>
       &#60;/ul&#62;
     &#60;/li&#62;
     &#60;li&#62;

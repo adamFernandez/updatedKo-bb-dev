@@ -701,8 +701,8 @@ $("#ib-type").change(function() {
               ? $("#code-ib-title-text").text((!$("#ib-df-title").val() == "") ? $("#ib-df-title").val() : "Info box title")
               : $(this).val() == "learning-outcome-box"
                 ? (
-                  $("#ib-body-form").hide(),
-                  $("#code-ib-body").hide(),
+                  // $("#ib-body-form").show(),
+                  // $("#code-ib-body").show(),
                   $("#code-ib-title-open").html("\n    &lt;h5&gt;"),                  
                   $("#code-ib-title-close").text("</h5>")        
                 )
@@ -1442,7 +1442,11 @@ const dotsCode = document.querySelector("#dots-code-crs");
 const addDots = (slideNum = 0, encoded) => {
   let dot = "";
   for (let i = 0; i < slideNum; i++) {
+<<<<<<< HEAD
     dot = encoded ? `<slide class="crs-dots-remove">&#60;li&#62;&#60;/li&#62;</span>` : `<li></li>\n`;
+=======
+    dot = encoded ? `<span class="crs-dots-remove">\n\t&#60;li&#62;&#60;/li&#62;</span>${i == slideNum -1 ? `` : `\n`}` : `<li></li>\n`;
+>>>>>>> 5e3d0a8 (input field checkbox checked fixed)
   }
   return (encoded ? dotsCode : dots).insertAdjacentHTML("beforeend", dot);
 }
@@ -1507,7 +1511,23 @@ const removeSlides = (elements = [], cardNum) => {
     elements.forEach((e) => { e.lastElementChild.remove() });
   }
 }
+<<<<<<< HEAD
 
+=======
+// let current = document.querySelector(".active");
+// let dotNum = document.querySelector(".indic-dots")
+// document.querySelector(".nc-previous").onclick = function() {
+//   current.previousElementSibling.classList.add("active");
+//   current.classList.remove("active");
+  
+// }
+
+// document.querySelector(".nc-next").onclick = function() {
+//   current.classList.remove("active");
+//   current.nextElementSibling.classList.add("active");  
+//   console.log(current.nextElementSibling);
+// }
+>>>>>>> 5e3d0a8 (input field checkbox checked fixed)
 
 // toggles carousel type from landscape to portrait
 const type = document.getElementById("crs-type");
@@ -1579,6 +1599,7 @@ selection.onchange = () => {
     removeSlides(elements, newValue)
   )
 }
+<<<<<<< HEAD
 
 // collapse form control
 const crsCollapse  = document.querySelector("#crs-collapse-container");
@@ -1588,6 +1609,17 @@ crsCollapse.onclick = function(e) {
   let eId = e.target.id;
   let _id = eId.slice(-1);
   console.log(eId);
+=======
+let cC = 0;
+// collapse form control
+const crsCollapse  = document.querySelector("#crs-collapse-container");
+crsCollapse.onclick = function(e) {
+  checkBoxesChecked(["#crs-check-caption"], ["captionC"])
+  let totalForms = this.childElementCount;
+  let crsElements = [];
+  let eId = e.target.id;
+  let _id = eId.slice(-1);
+>>>>>>> 5e3d0a8 (input field checkbox checked fixed)
   if (!eId) {
     return;
   } else {
@@ -1598,6 +1630,7 @@ crsCollapse.onclick = function(e) {
         crsElements = [`#crs-card-title-${_id}`,`#crs-caption-form-${_id}`,`#crs-code-title-tag-${_id}`],
         processCheckBox(`#crs-check-caption-${_id}`,crsElements),
         // get if caption is checked
+<<<<<<< HEAD
         document.querySelector(`#crs-check-caption-${_id}`).checked ? c-- : c++  
       ) : "";
  
@@ -1606,6 +1639,16 @@ crsCollapse.onclick = function(e) {
     // total individual checkboxcheckedcount and check the all labels, images and caption titles checkboxes if all the individuals are checked
     let totalForms = document.querySelector("#crs-collapse-container").childElementCount;
     c == 0 ? tickCheckBoxes(["#crs-check-caption"], [true], ["All Caption Titles"]) : c == totalForms ? tickCheckBoxes(["#crs-check-caption"], [false], ["All Caption Titles"]) : "" 
+=======
+        captionC ? cC = totalForms : "",
+        document.querySelector(`#crs-check-caption-${_id}`).checked 
+        ? ( cC++, cC == totalForms ? tickCheckBoxes(["#crs-check-caption"], [true], ["All Caption Titles"]) : "") 
+        : (cC--, cC < totalForms ? tickCheckBoxes(["#crs-check-caption"], [false], ["All Caption Titles"]) : "")
+      ) : "";
+ 
+  }     
+    
+>>>>>>> 5e3d0a8 (input field checkbox checked fixed)
 }
 
 
@@ -1625,7 +1668,11 @@ const addProcessCard = (toElement, cardNum, current, encoded) => {
   let card = "";
   for (let i = 0; i < cardNum; i++) { // for encoded generated output: code area
     let total = i + current;
+<<<<<<< HEAD
     card += encoded ? `<span class="prcss-listitem">&lt;div class=&quot;step&quot; role=&quot;listitem&quot;&gt; 
+=======
+    card += encoded ? `   <span class="prcss-listitem">&lt;div class=&quot;step&quot; role=&quot;listitem&quot;&gt; 
+>>>>>>> 5e3d0a8 (input field checkbox checked fixed)
       &lt;div class=&quot;card process-card<span id="prcss-code-highlight-${total}" style="display: none"> highlight</span>&quot;&gt;<span class="prcss-code-img" id="prcss-code-img-${total}" style="display:${imageP ? "" : "none"};"> 
         &#60;img&#32;src&#61;&#34;<span id="prcss-code-src-${total}">http:&#47;&#47;via.placeholder.com&#47;300x300</span>&#34;&#32;alt&#61;&#34;<span id="prcss-code-alt-${total}">Alternative&#32;text</span>&#34;&#62;</span>
         &lt;div class=&quot;card-body&quot;&gt;<span class="prcss-code-title-tag" id="prcss-code-title-tag-${total}" style="display:${captionP ? "" : "none"};"> 
@@ -1640,8 +1687,12 @@ const addProcessCard = (toElement, cardNum, current, encoded) => {
           &lt;div class=&quot;process-label<span class="prcss-label-sr" id="prcss-label-sr-${total}" style="display:${labelP ? "none" : ""};"> sr-only</span>&quot;&gt;<span class="top-label-text" id="top-label-text-${total}">Leads to</span>&lt;/div&gt;
           &lt;div class=&quot;icon<span class="prcss-icon-type" id="prcss-icon-type-${total}"> arrow-down</span>&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt;<span class="bottom-label" id="bottom-label-${total}">
           &lt;div class=&quot;process-label<span class="prcss-label-sr"> sr-only</span>&quot;&gt;<span class="bottom-label-text" id="bottom-label-text-${total}">and is caused by</span>&lt;/div&gt;</span>
+<<<<<<< HEAD
       &lt;/div&gt;\n</span>&lt;/div&gt;
     </span>`  
+=======
+      &lt;/div&gt;\n   &lt;/div&gt;</span></span>`  
+>>>>>>> 5e3d0a8 (input field checkbox checked fixed)
     : // not encoded generated output: preview area
     `<div class="step" role="listitem">
       <div class="card process-card" id="prcss-card-${total}">
@@ -1746,18 +1797,37 @@ const prcssCaptionElements = ['h4.card-text','.prcss-caption-form','.prcss-code-
 processCheckBox("#prcss-check-caption",prcssCaptionElements);
 
 //variables counter individual checkboxes checked status c=caption, i=image, l=label
+<<<<<<< HEAD
 let c = 0; let i= 0; let l= 0;
 
 
+=======
+
+
+let iP = 0; let lP = 0; let cP = 0;
+// imgP ? iP = 3 : iP = 0; 
+// captionP ? cP = 3 : cP; 
+// labelP ? lP = 2 : lP = 0;
+// console.log(lP,iP,cP);
+
+>>>>>>> 5e3d0a8 (input field checkbox checked fixed)
 hideElements(".bottom-label", "");
 
 
 // collapse form control
 const prcssCollapse  = document.querySelector("#prcss-collapse-container");
 prcssCollapse.onclick = function(e) {
+<<<<<<< HEAD
   
   let prcssElements = [];
   let eId = e.target.id;
+=======
+  checkBoxesChecked(["#prcss-check-label", "#prcss-check-img", "#prcss-check-caption"], ["labelP", "imgP", "captionP"])
+  let totalForms = this.childElementCount;
+  let prcssElements = [];
+  let eId = e.target.id;
+  console.log(eId);
+>>>>>>> 5e3d0a8 (input field checkbox checked fixed)
   let _id = eId.slice(-1);
   if (!eId) {
     return;
@@ -1767,33 +1837,67 @@ prcssCollapse.onclick = function(e) {
     
     // individual caption checkbox
     eId === `prcss-check-caption-${_id}` 
+<<<<<<< HEAD
     ? (prcssElements = [`#prcss-card-title-${_id}`,`#prcss-caption-form-${_id}`,`#prcss-code-title-tag-${_id}`],
       processCheckBox(`#prcss-check-caption-${_id}`,prcssElements),
       // get if caption is checked
       document.querySelector(`#prcss-check-caption-${_id}`).checked ? c-- : c++) 
+=======
+    ? (
+        prcssElements = [`#prcss-card-title-${_id}`,`#prcss-caption-form-${_id}`,`#prcss-code-title-tag-${_id}`],
+        processCheckBox(`#prcss-check-caption-${_id}`,prcssElements),
+        // get if caption is checked
+        captionP ? cP = totalForms : "",
+        document.querySelector(`#prcss-check-caption-${_id}`).checked 
+        ? ( cP++, cP == totalForms ? tickCheckBoxes(["#prcss-check-caption"], [true], ["All Caption Titles"]) : "") 
+        : (cP--, cP < totalForms ? tickCheckBoxes(["#prcss-check-caption"], [false], ["All Caption Titles"]) : "")
+      ) 
+>>>>>>> 5e3d0a8 (input field checkbox checked fixed)
     : ""
 
     // individual image checkbox
     eId === `prcss-check-img-${_id}` 
     ? (prcssElements = [`#prcss-img-${_id}`,`#prcss-img-form-${_id}`,`#prcss-code-img-${_id}`],
       processCheckBox(`#prcss-check-img-${_id}`,prcssElements),
+<<<<<<< HEAD
       // get if caption is checked
       document.querySelector(`#prcss-check-img-${_id}`).checked ? i-- : i++) 
+=======
+      // get if image is checked
+      imgP ? iP = totalForms : "",
+      document.querySelector(`#prcss-check-img-${_id}`).checked 
+      ? (iP++, iP == totalForms ? tickCheckBoxes(["#prcss-check-img"], [true], ["All Images"]) : "") 
+      : (iP--, iP < totalForms ? tickCheckBoxes(["#prcss-check-img"], [false], ["All Images"]) : "")
+      ) 
+>>>>>>> 5e3d0a8 (input field checkbox checked fixed)
     : ""
       
     // individual label checkbox   
     document.querySelector(`#prcss-check-label-${_id}`).onclick = function() {
       let arrowType = document.querySelector(`#prcss-arrow-${_id}`);
+<<<<<<< HEAD
       
       replaceClass(this,`#top-label-${_id}`,'sr-only',`#prcss-label-label-${_id}`,'Label');
       this.checked 
         ? (l++,
+=======
+      labelP ? lP = totalForms -1 : "",
+      replaceClass(this,`#top-label-${_id}`,'sr-only',`#prcss-label-label-${_id}`,'Label');
+      this.checked 
+        ? (
+          lP++,
+          lP == totalForms -1 ? tickCheckBoxes(["#prcss-check-label"], [true], ["All Labels"]) : "",
+>>>>>>> 5e3d0a8 (input field checkbox checked fixed)
           replaceClass(this,`#top-label-${_id}`,'sr-only',`#prcss-label-label-${_id}`,'Label'),
           // remove sr-only class from the code area
           hideElements(`#prcss-label-sr-${_id}`),
           // hide the bottom label unless arrow is double
           arrowType.value == "3"
+<<<<<<< HEAD
             ? (showElements(`#bottom-label-${_id}`, "block"),
+=======
+            ? (showElements(`#bottom-label-${_id}`, "inline"),
+>>>>>>> 5e3d0a8 (input field checkbox checked fixed)
               removeClass(`#bottom-label-${_id}`,[`sr-only`]), 
               writeText([`#top-label-${_id}`,`#top-label-text-${_id}`], "causes"))  
             : "",
@@ -1802,7 +1906,12 @@ prcssCollapse.onclick = function(e) {
             : ""
         ) : 
         (
+<<<<<<< HEAD
           l--,
+=======
+          lP--,
+          lP < totalForms ? tickCheckBoxes(["#prcss-check-label"], [false], ["All Labels"]) : "",
+>>>>>>> 5e3d0a8 (input field checkbox checked fixed)
           replaceClass(this,`#top-label-${_id}`,'sr-only',`#prcss-label-label-${_id}`,'Label'),
           // add sr-only class from the code area
           showElements(`#prcss-label-sr-${_id}`, ""),
@@ -1826,11 +1935,15 @@ prcssCollapse.onclick = function(e) {
     }
   }     
   
+<<<<<<< HEAD
     // total individual checkboxcheckedcount and check the all labels, images and caption titles checkboxes if all the individuals are checked
     let totalForms = document.querySelector("#prcss-collapse-container").childElementCount;
     l == totalForms -1 ? tickCheckBoxes(["#prcss-check-label"], [true], ["All Labels"]) : l == 0 ? tickCheckBoxes(["#prcss-check-label"], [false], ["All Labels"]) : "",
     i == 0 ? tickCheckBoxes(["#prcss-check-img"], [true], ["All Images"]) : i == totalForms ? tickCheckBoxes(["#prcss-check-img"], [false], ["All Images"]) : "", 
     c == 0 ? tickCheckBoxes(["#prcss-check-caption"], [true], ["All Caption Titles"]) : c == totalForms ? tickCheckBoxes(["#prcss-check-caption"], [false], ["All Caption Titles"]) : "" 
+=======
+  console.log(totalForms, lP,iP,cP);
+>>>>>>> 5e3d0a8 (input field checkbox checked fixed)
 }
 
 // initializing preview areas
@@ -1922,8 +2035,13 @@ function processArrows(group, eId, target, _id){
         <span id="timeline-code-body-${total}">Card&#32;${total + 1}&#32;Body&#32;text</span>
       &lt;/p&gt; 
     &lt;/div&gt;<span class="timeline-code-img" id="timeline-code-img-${total}" style="display:${image ? "" : "none"};">\n    &lt;figure class=&quot;card-image&quot;&gt;
+<<<<<<< HEAD
       &#60;img&#32;src&#61;&#34;<span id="timeline-code-src-${total}">http:&#47;&#47;via.placeholder.com&#47;300x300</span>&#34;&#32;alt&#61;&#34;<span id="timeline-code-alt-${total}">An&#32;image</span>&#34;&#62;<span class="timeline-code-img-caption" id="timeline-code-img-caption-${total}" style="display:none;">
       &lt;figcaption&gt;<span id="timeline-code-caption-${total}">Image Caption ${total+1} </span>&lt;/figcaption&gt;</span>
+=======
+      &#60;img&#32;src&#61;&#34;<span id="timeline-code-src-${total}">http:&#47;&#47;via.placeholder.com&#47;300x300</span>&#34;&#32;alt&#61;&#34;<span id="timeline-code-alt-${total}">Alternative&#32;text</span>&#34;&#62;<span class="timeline-code-img-caption" id="timeline-code-img-caption-${total}">
+      &lt;figcaption&gt;<span id="timeline-code-caption-${total}">Image Caption ${total+1}</span>&lt;/figcaption&gt;</span>
+>>>>>>> 5e3d0a8 (input field checkbox checked fixed)
     &lt;/figure&gt;</span>
   &lt;/div&gt;\n`  
     : // not encoded generated output: preview area
@@ -1948,17 +2066,33 @@ addTimelineCard(".timeline-container", timelineSelect.value,0,false);
 addTimelineCard("#code-timeline",timelineSelect.value,0,true);
 addCard("#timeline-collapse-container", timelineSelect.value,0,"Timeline Card");
 
+<<<<<<< HEAD
 //variables counter individual checkboxes checked status c=caption, i=image, l=label
 c = 0; i= 0;
+=======
+hideElements(".timeline-code-img-caption");
+
+//variables counter individual checkboxes checked status c=caption, i=image, l=label
+let cT = 0; let iT= 0;
+>>>>>>> 5e3d0a8 (input field checkbox checked fixed)
 
 // collapse form control
 const timelineCollapse  = document.querySelector("#timeline-collapse-container");
 timelineCollapse.onclick = function(e) {
+<<<<<<< HEAD
   
   let timelineElements = [];
   let eId = e.target.id;
   let _id = eId.slice(-1);
   console.log(eId);
+=======
+  checkBoxesChecked(["#timeline-check-img", "#timeline-check-caption"], ["imgT", "captionT"])
+  let totalForms = this.childElementCount;
+  let timelineElements = [];
+  let eId = e.target.id;
+  console.log(eId);
+  let _id = eId.slice(-1);
+>>>>>>> 5e3d0a8 (input field checkbox checked fixed)
   if (!eId) {
     return;
   } else {
@@ -1971,7 +2105,14 @@ timelineCollapse.onclick = function(e) {
         timelineElements = [`#timeline-card-title-${_id}`,`#timeline-caption-form-${_id}`,`#timeline-code-title-tag-${_id}`],
         processCheckBox(`#timeline-check-caption-${_id}`,timelineElements),
         // get if caption is checked
+<<<<<<< HEAD
         document.querySelector(`#timeline-check-caption-${_id}`).checked ? c-- : c++  
+=======
+        captionT ? cT = 3 : "",
+        document.querySelector(`#timeline-check-caption-${_id}`).checked 
+        ? ( cT++, cT == totalForms ? tickCheckBoxes(["#timeline-check-caption"], [true], ["All Caption Titles"]) : "") 
+        : (cT--, cT < totalForms ? tickCheckBoxes(["#timeline-check-caption"], [false], ["All Caption Titles"]) : "")
+>>>>>>> 5e3d0a8 (input field checkbox checked fixed)
       ) : "";
 
     // individual image checkbox
@@ -1980,7 +2121,14 @@ timelineCollapse.onclick = function(e) {
         timelineElements = [`#timeline-img-${_id}`,`#timeline-img-form-${_id}`,`#timeline-form-checkbox-img-caption-${_id}`, `#timeline-code-img-${_id}`],
         processCheckBox(`#timeline-check-img-${_id}`,timelineElements),
         // get if image is checked
+<<<<<<< HEAD
         document.querySelector(`#timeline-check-img-${_id}`).checked ? i-- : (i++, hideElements([`#timeline-card-caption-${_id}`,`#timeline-img-caption-form-${_id}`]), tickCheckBoxes([`#timeline-check-img-caption-${_id}`],[false],["Image caption"]))  
+=======
+        imgT ? iT = 3 : "",
+        document.querySelector(`#timeline-check-img-${_id}`).checked 
+        ? ( iT++, iT == totalForms ? tickCheckBoxes(["#timeline-check-img"], [true], ["All Images"]) : "") 
+        : (iT--, iT < totalForms ? tickCheckBoxes(["#timeline-check-img"], [false], ["All Images"]) : "")
+>>>>>>> 5e3d0a8 (input field checkbox checked fixed)
       ) : "" ;
       
     // individual image caption checkbox
@@ -2003,12 +2151,17 @@ timelineCollapse.onclick = function(e) {
           removeClass(`#timeline-card-${_id}`,["highlighted"])
         )    
     }
+<<<<<<< HEAD
   }     
   console.log(c,i);
     // total individual checkboxcheckedcount and check the all labels, images and caption titles checkboxes if all the individuals are checked
     let totalForms = document.querySelector("#timeline-collapse-container").childElementCount;
     i == 0 ? tickCheckBoxes(["#timeline-check-img"], [true], ["All Images"]) : i == totalForms ? tickCheckBoxes(["#timeline-check-img"], [false], ["All Images"]) : "", 
     c == 0 ? tickCheckBoxes(["#timeline-check-caption"], [true], ["All Caption Titles"]) : c == totalForms ? tickCheckBoxes(["#timeline-check-caption"], [false], ["All Caption Titles"]) : "" 
+=======
+  }  
+   
+>>>>>>> 5e3d0a8 (input field checkbox checked fixed)
 }
 
 // process the changes on selection
@@ -2389,6 +2542,9 @@ copyCode("ts");
 copyCode("va");
 copyCode("vd");
 copyCode("test");
+copyCode("crs");
+copyCode("prcss");
+copyCode("timeline");
 
 // on copy code button click
 function copyCode(component) {
@@ -2398,13 +2554,13 @@ function copyCode(component) {
     validity = "valid";
     altTextValidity = "valid";
     // for carousel, check alt text
-    if (component == "crsl" && $("#crsl-check-img").hasClass("checked")) {
+    if (component == "crs") {
       altTextForms = [];
-      $(".crsl-slide-form").each(function() {
+      $(".crs-slide-form").each(function() {
         altTextForms.push($(this));
       });
       validateForms(altTextForms);
-      altTextValidity == "invalid" ? $("#crsl-alt-text-alert").removeClass("d-none") : $("#crsl-alt-text-alert").addClass("d-none");            
+      altTextValidity == "invalid" ? $("#crs-alt-text-alert").removeClass("d-none") : $("#crs-alt-text-alert").addClass("d-none");            
     }
     validateForms(componentForms);
     if (validity === "invalid") return;
