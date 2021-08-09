@@ -1949,7 +1949,7 @@ function processArrows(group, eId, target, _id){
       &lt;/p&gt; 
     &lt;/div&gt;<span class="timeline-code-img" id="timeline-code-img-${total}" style="display:${image ? "" : "none"};">\n    &lt;figure class=&quot;card-image&quot;&gt;
       &#60;img&#32;src&#61;&#34;<span id="timeline-code-src-${total}">http:&#47;&#47;via.placeholder.com&#47;300x300</span>&#34;&#32;alt&#61;&#34;<span id="timeline-code-alt-${total}">Alternative&#32;text</span>&#34;&#62;<span class="timeline-code-img-caption" id="timeline-code-img-caption-${total}">
-      &lt;figcaption&gt;<span id="timeline-code-caption-${total}">Image Caption ${total+1}</span>&lt;/figcaption&gt;</span>
+      &lt;figcaption&gt;<span id="timeline-code-caption-${total}" class="timeline-code-caption">Image Caption ${total+1}</span>&lt;/figcaption&gt;</span>
     &lt;/figure&gt;</span>
   &lt;/div&gt;\n`  
     : // not encoded generated output: preview area
@@ -1961,7 +1961,7 @@ function processArrows(group, eId, target, _id){
         </div>
         <figure class="card-image">
           <img id="timeline-img-${total}" class="timeline-img" src="http://via.placeholder.com/600x400" alt="A placeholder image" style="display: ${image ? "block" : "none"};">
-          <figcaption id="timeline-card-caption-${total}" style="display:none;">Image Caption ${total + 1 }</figcaption>
+          <figcaption id="timeline-card-caption-${total}" class="timeline-card-caption" style="display:none;">Image Caption ${total + 1 }</figcaption>
         <figure>
       </div>`;
   }
@@ -2009,7 +2009,7 @@ timelineCollapse.onclick = function(e) {
     // individual image checkbox
     eId === `timeline-check-img-${_id}` ?
       (
-        timelineElements = [`#timeline-img-${_id}`,`#timeline-img-form-${_id}`,`#timeline-form-checkbox-img-caption-${_id}`, `#timeline-code-img-${_id}`],
+        timelineElements = [`#timeline-img-${_id}`,`#timeline-img-form-${_id}`,`#timeline-form-checkbox-img-caption-${_id}`,`#timeline-card-caption-${_id}`, `#timeline-code-img-${_id}`],
         processCheckBox(`#timeline-check-img-${_id}`,timelineElements),
         // get if image is checked
         imgT ? iT = 3 : "",
@@ -2061,7 +2061,7 @@ timelineSelect.onchange = function() {
 };
 
 // toggle ALL images and individual checkboxes show on image checkbox change
-const timelineImageElements = ['.card-image img', '.timeline-img-form','.timeline-form-checkbox-img-caption', '.timeline-code-img'];
+const timelineImageElements = ['.card-image img', '.timeline-img-form','.timeline-form-checkbox-img-caption', '.timeline-code-img','.timeline-code-caption'];
 processCheckBox("#timeline-check-img",timelineImageElements);
 
 // toggle ALL captions and individual checkboxes show on caption checkbox change
@@ -2258,7 +2258,7 @@ function processCheckBox(selector,elements = []) {
         // check every individual checkbox of the same selector         
         isNaN(lastDigit) 
           ? document.querySelectorAll(`#${component}-collapse-container input[type=checkbox]`)
-            .forEach((ch) => { ch.id.includes(eId) && !ch.id.includes("img-caption") ? ch.checked = true : " id is not included" })   
+            .forEach((ch) => { ch.id.includes(eId) && !ch.id.includes("img-caption") ? ch.checked = true : ch.id.includes("card-caption") })   
             : " it is a number."
       )
         : // selected checkbox is not checked
@@ -2266,7 +2266,7 @@ function processCheckBox(selector,elements = []) {
         elements.forEach((e) => { Array.from(document.querySelectorAll(e)).forEach((el) => { el.style.display = "none"; }) }),
         isNaN(lastDigit) 
           ? document.querySelectorAll(`#${component}-collapse-container input[type=checkbox]`)
-            .forEach((ch) => { ch.id.includes(eId)  ? (ch.checked = false, hideElements([".timeline-code-img-caption", ".timeline-img-caption-form"]) ) : " id is not included" })   
+            .forEach((ch) => { ch.id.includes(eId) ? (ch.checked = false, hideElements([".timeline-code-img-caption",".timeline-card-caption", ".timeline-img-caption-form"]) ) : " id is not included" })   
             : " it is a number"
       )
     }
