@@ -1507,19 +1507,41 @@ const removeSlides = (elements = [], cardNum) => {
     elements.forEach((e) => { e.lastElementChild.remove() });
   }
 }
-// let current = document.querySelector(".active");
-// let dotNum = document.querySelector(".indic-dots")
-// document.querySelector(".nc-previous").onclick = function() {
-//   current.previousElementSibling.classList.add("active");
-//   current.classList.remove("active");
-  
-// }
 
-// document.querySelector(".nc-next").onclick = function() {
-//   current.classList.remove("active");
-//   current.nextElementSibling.classList.add("active");  
-//   console.log(current.nextElementSibling);
-// }
+// controlling slide with dots
+
+let current = document.querySelector(".active");
+const crsDots = Array.from(dots.children);
+const gallery = document.querySelector('.nc-gallery');
+const slides = Array.from(gallery.children);
+
+
+document.querySelector(".nc-previous").onclick = function() {
+  current.previousElementSibling.classList.add("active");
+  current.classList.remove("active"); 
+  
+}
+
+document.querySelector(".nc-next").onclick = function() {
+  current.classList.remove("active");
+  current.nextElementSibling.classList.add("active");  
+ 
+}
+
+
+dots.onclick = function(e) {
+  const targetDot = e.target.closest('li');
+
+  if (!targetDot) return;
+  document.querySelector(".active").classList.remove("active");
+  targetDot.classList.add("active");
+  const currentSlide = e.target.id;
+  const targetIndex = crsDots.findIndex(dot => dot === targetDot);
+  console.log(targetIndex);
+
+}
+
+
 
 // toggles carousel type from landscape to portrait
 const type = document.getElementById("crs-type");
@@ -2104,7 +2126,8 @@ function addCard(toSection, cardNum, current, type = "Card") {
                 ${createFields(["title"], component, total, ["Caption title:"],["Caption title"], type, true)}`
       : " ";
     component == "prcss" 
-      ? card += `<div class="input-group mb-3 prcss-arrow-select">
+      ? card += `${createCheckboxes(["highlight", "img", "caption","label"],component,total,[false, image, caption, label],["Highlight card", "Image", "Caption title", "Label"])}
+                <div class="input-group mb-3 prcss-arrow-select">
                   <div class="form-group prcss-arrow-form">
                     <label class="input-group-text" for="prcss-arrow-${total}">Choose arrow type</label>
                   </div>
@@ -2114,8 +2137,7 @@ function addCard(toSection, cardNum, current, type = "Card") {
                       <option value="3">Double Arrow</option>
                       <option value="4">Relation</option>
                   </select>                
-                </div>
-                  ${createCheckboxes(["highlight","label", "img", "caption"],component,total,[false, label, image, caption],["Highlight card", "Label", "Image", "Caption title"])}
+                </div>                  
                 <div class="form-group ${component}-img-form" id="${component}-img-form-${total}" style="">
                   ${createFields(["src","alt","caption"],component,total,["Image source:", "Alternative text:", "Image caption:"],["Image source", "Image description", "Caption title"], type)}
                 </div>
