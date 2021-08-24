@@ -1455,20 +1455,20 @@ const addSlides = (toElement, slideNum, current, encoded) => {
     checkBoxesChecked(["#crs-check-caption"], ["caption"]);
      
     let slideType = document.querySelector("#crs-type");
-    let imgSrc = slideType.value == 1 
-      ? "https://via.placeholder.com/800x400?text=Landscape:+2:1"
-      : "https://via.placeholder.com/300x300?text=1:1";
-    
+    let imgSrc; 
+
       slideType.value == "1" ? 
       (
         removeClass(".new-carousel",["portrait-carousel"]),
         addClass(".new-carousel",["landscape-carousel"],"new-carousel"),
-        writeText([".crs-type"],"landscape")        
+        writeText([".crs-type"],"landscape"),
+        imgSrc = "https://via.placeholder.com/800x400"       
       ) :
         (
           removeClass(".new-carousel",["landscape-carousel"]),
           addClass(".new-carousel",["portrait-carousel"],"new-carousel"),
-          writeText([".crs-type"],"portrait")        
+          writeText([".crs-type"],"portrait"),
+          imgSrc = "https://via.placeholder.com/400x400"       
         )
     
     let total;
@@ -1476,7 +1476,7 @@ const addSlides = (toElement, slideNum, current, encoded) => {
     for (let i = 0; i < slideNum; i++) { // for encoded generated output: code area
       total = i + current;
       slide += encoded ? `\n     <span class="crs-code-remove">&#60;li&#62;\n       &#60;figure&#62; 
-          <span class="crs-code-img">&#60;img&#32;src&#61;&#34;<span id="crs-code-src-${total}">${imgSrc}</span>&#34;&#32;alt&#61;&#34;<span id="crs-code-alt-${i}">Alternative&#32;text</span>&#34;&#32;class&#61;&#34;nc&#45;image&#34;&#62;</span>
+          <span class="crs-code-img">&#60;img&#32;src&#61;&#34;<span id="crs-code-src-${total}" class="crs-code-src">${imgSrc}</span>&#34;&#32;alt&#61;&#34;<span id="crs-code-alt-${i}">Alternative&#32;text</span>&#34;&#32;class&#61;&#34;nc&#45;image&#34;&#62;</span>
             &#60;figcaption&#32;class&#61;&#34;nc&#45;description&#34;&#62;<span class="crs-code-title" id="crs-code-title-tag-${total}">
               &#60;h5&#62;
                 <span id="crs-code-title-${total}">Caption&#32;title&#32;${total + 1}</span>
@@ -1510,36 +1510,36 @@ const removeSlides = (elements = [], cardNum) => {
 
 // controlling slide with dots
 
-let current = document.querySelector(".active");
-const crsDots = Array.from(dots.children);
-const gallery = document.querySelector('.nc-gallery');
-const slides = Array.from(gallery.children);
+// let current = document.querySelector(".active");
+// const crsDots = Array.from(dots.children);
+// const gallery = document.querySelector('.nc-gallery');
+// const slides = Array.from(gallery.children);
 
 
-document.querySelector(".nc-previous").onclick = function() {
-  current.previousElementSibling.classList.add("active");
-  current.classList.remove("active"); 
+// document.querySelector(".nc-previous").onclick = function() {
+//   current.previousElementSibling.classList.add("active");
+//   current.classList.remove("active"); 
   
-}
+// }
 
-document.querySelector(".nc-next").onclick = function() {
-  current.classList.remove("active");
-  current.nextElementSibling.classList.add("active");  
+// document.querySelector(".nc-next").onclick = function() {
+//   current.classList.remove("active");
+//   current.nextElementSibling.classList.add("active");  
  
-}
+// }
 
 
-dots.onclick = function(e) {
-  const targetDot = e.target.closest('li');
+// dots.onclick = function(e) {
+//   const targetDot = e.target.closest('li');
 
-  if (!targetDot) return;
-  document.querySelector(".active").classList.remove("active");
-  targetDot.classList.add("active");
-  const currentSlide = e.target.id;
-  const targetIndex = crsDots.findIndex(dot => dot === targetDot);
-  console.log(targetIndex);
+//   if (!targetDot) return;
+//   document.querySelector(".active").classList.remove("active");
+//   targetDot.classList.add("active");
+//   const currentSlide = e.target.id;
+//   const targetIndex = crsDots.findIndex(dot => dot === targetDot);
+//   console.log(targetIndex);
 
-}
+// }
 
 
 
@@ -1554,13 +1554,15 @@ type.onchange = () => {
   (
     removeClass(".new-carousel",["portrait-carousel"]),
     addClass(".new-carousel",["landscape-carousel"],"new-carousel"),
-    writeText([".crs-type"],"landscape")
+    writeText([".crs-type"],"landscape"),
+    writeText([".crs-code-src"],"https://via.placeholder.com/800x400")
     //document.querySelectorAll(".nc-image").forEach((i) => { i.src = "https://via.placeholder.com/800x400?text=Landscape:+2:1"; })
   ) :
     (
       removeClass(".new-carousel",["landscape-carousel"]),
       addClass(".new-carousel",["portrait-carousel"],"new-carousel"),
-      writeText([".crs-type"],"portrait")
+      writeText([".crs-type"],"portrait"),
+      writeText([".crs-code-src"],"https://via.placeholder.com/400x400")
       //document.querySelectorAll(".nc-image").forEach((i) => { i.src = "https://via.placeholder.com/500x500?text=1:1"; })
     )
 }
@@ -1644,7 +1646,7 @@ crsCollapse.onclick = function(e) {
 
 
 // collapse form fields control
-processCollapseForm("#crs-collapse-container","https://via.placeholder.com/800x400?text=Landscape+2:1", "Alternative text")
+processCollapseForm("#crs-collapse-container","https://via.placeholder.com/800x400", "Alternative text")
 
 
 /**********************************
@@ -1889,7 +1891,7 @@ hideLast([".connector-container",".code-connector-container",".prcss-arrow-selec
 
 
 // process card collapse input area processing
-processCollapseForm("#prcss-collapse-container","https://via.placeholder.com/300x300", "Alternative text");
+processCollapseForm("#prcss-collapse-container","https://via.placeholder.com/400x400", "Alternative text");
 
 
 // arrow selection group or individual or multiple elements
