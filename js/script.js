@@ -1508,6 +1508,10 @@ const removeSlides = (elements = [], cardNum) => {
   }
 }
 
+// previous button disabled till next is pressed
+
+document.querySelector(".nc-previous").disabled = true;
+
 // controlling slide with dots
 
 // let current = document.querySelector(".active");
