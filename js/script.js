@@ -2089,7 +2089,7 @@ timelineSelect.onchange = function() {
 };
 
 // toggle ALL images and individual checkboxes show on image checkbox change
-const timelineImageElements = ['.card-image img', '.timeline-img-form','.timeline-form-checkbox-img-caption', '.timeline-code-img','.timeline-code-caption'];
+const timelineImageElements = ['.card-image', '.timeline-img-form','.timeline-form-checkbox-img-caption', '.timeline-code-img','.timeline-code-caption'];
 processCheckBox("#timeline-check-img",timelineImageElements);
 
 // toggle ALL captions and individual checkboxes show on caption checkbox change
@@ -2470,7 +2470,7 @@ function copyCode(component) {
     validateForms(componentForms);
     if (validity === "invalid") return;
     // copy code onto clipboard
-    str = $("#" + component + "-preview-pane").html();
+    str = document.querySelector("#" + component + "-print-code").innerText;
     function listener(event) {
       event.clipboardData.setData("text/html", str);
       event.clipboardData.setData("text/plain", str);
