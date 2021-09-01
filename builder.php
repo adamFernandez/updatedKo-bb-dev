@@ -17,8 +17,10 @@
         <p class="header">Select the component you wish to build:</p>
         <ul class="nav nav-tabs">
           <?php
-            $components = array('Carousel', 'Collapse', 'Timeline', 'Table', 'Transcript', 'Card', 'List', 'Quotation', 'Infobox',
-            'View/hide', 'Academic note', 'Audio', 'Video', 'Download', 'Process');
+            $components = array('Carousel', 'Collapse', 'Timeline', 'Table',
+            'Transcript', 'Card', 'List', 'Quotation', 'Infobox',
+            'View/hide', 'Academic note', 'Audio', 'Video', 'Download',
+            'Process', 'Float box');
             sort($components);
             foreach ($components as $component) {
               $id = strtolower(str_replace(' ','',str_replace('/','',$component)));
@@ -38,6 +40,7 @@
           <?php include('components/carousel.php'); ?>
           <?php include('components/collapse.php'); ?>
           <?php include('components/download.php'); ?>
+          <?php include('components/floatbox.php'); ?>
           <?php include('components/infobox.php'); ?>
           <?php include('components/list.php'); ?>
           <?php include('components/process.php'); ?>

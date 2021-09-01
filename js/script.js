@@ -7,6 +7,7 @@ $(document).ready(function() {
   // set card to show 1 card by default
   maxCards = 1;
   initialCards(maxCards);
+  initialFloatBoxCards(maxCards);
   // set carousel to show 3 slides by default
   maxSlides = 3;
   initialCarouselSlides(maxSlides);
@@ -322,6 +323,117 @@ function showCardImgs(cardCardLimit) {
       ? ' alt="' + $("#cd-" + i + "-img-alt").val() + '"'
       : "");
     $(".code-cd-img-close").text('>');
+  }
+}
+
+/**********************************
+ * float box                      *
+ **********************************/
+
+// on select change, show only the required no of cards to edit, update code and preview
+$("#fb-card-no").on('focus', function() {
+  $(this).data("previous",$(this).val());
+  $(this).blur();
+  $("#fb-card-no").change(function(){
+    newMax = Number(($(this).val()));
+    oldMax = Number(($(this).data("previous")));
+    // compare old and new max list item value
+    if (newMax > oldMax) {
+      for (let i = oldMax; i < newMax; i++) {
+        // add new items
+        card = createFloatBoxCard(i+1);
+        $("#code-fb-cards").append(card);
+        fbCard = createFloatBoxEditorCard(i+1);
+        $("#floatboxes").append(fbCard);
+      }
+    } else {
+      for (let i = newMax; i < oldMax; i++) {
+        // remove items
+        $("#code-fb-card-"+(i+1)).remove();
+        $("#fb-card-"+(i+1)).remove();
+      }
+    }
+    // reset previous value
+    $(this).removeData("previous");
+    preview("fb");
+  });
+});
+
+// create all float box editor cards and code on page load
+function initialFloatBoxCards(maxCards) {
+  for (let i = 1; i <= maxCards; i++) {
+    fbCard = createFloatBoxCard(i);
+    $("#code-fb-cards").append(fbCard);
+    fbEditorCard = createFloatBoxEditorCard(i);
+    $("#floatboxes").append(fbEditorCard);
+  }
+  preview("fb");
+}
+
+// create single float box card code
+function createFloatBoxCard(i) {
+  return `<span
+  id="code-fb-card-${i}"><pre>&lt;div&#32;class&#61;&#34;float-box<span id="$code-fb-${i}-img-side"><span>&#34;&gt;
+  &lt;div&gt;<span id="code-fb-${i}-title" class="code-fb-title">
+    &lt;h4&gt;<span id="code-fb-${i}-title-text">Float box #${i} title</span>&lt;&#47;h4&gt;</span>
+    &lt;p&gt;<span id="code-fb-${i}-text">Float box #${i} text...</span>&lt;&#47;p&gt;
+  &lt;&#47;div&gt;
+  &lt;figure&gt;
+    &lt;img src&#61;&#34;<span
+    id="code-fb-${i}-img-src">https://placekitten.com/300/200</span>&#34;<span
+    id="code-fb-${i}-img-alt"></span>&gt;
+  &lt;/figure&gt;
+&lt;&#47;div&gt;</pre></span>`;
+}
+
+// create single float box editor card, shows first card and collapses all others
+function createFloatBoxEditorCard(i) {
+  return `
+    <div class="collapse-card fb-card ${ i == 1 ? "" : "collapsed" }"
+    id="fb-card-${i}">
+      <div class="collapse-header" id="fb-card-heading-${i}">
+        <button class="btn btn-link"><h5 class="h4">Float box #${i}</h5></button>
+      </div>
+      <div class="collapse-body" id="fb-collapse-${i}">
+        <form>
+          <div class="form-group fb-img-form fb-${i}-img-form"
+          id="fb-${i}-img-src-form">
+            <label for="fb-${i}-header">Img src</label>
+            <input type="text" class="form-control" id="fb-${i}-img-src"
+            placeholder="https://via.placeholder.com/300">
+          </div>
+          <div class="form-group fb-img-form fb-${i}-img-form"
+          id="fb-${i}-img-alt-form">
+            <label for="fb-${i}-header">Img alt text</label>
+            <input type="text" class="form-control" id="fb-${i}-img-alt"
+            placeholder="Description of image">
+          </div>
+          <div class="form-group" id="fb-${i}-title-form" class="fb-title-form">
+            <label for="fb-${i}-title">Title</label>
+            <input type="text" class="form-control" id="fb-${i}-title"
+            placeholder="Float box #${i} title">
+          </div>
+          <div class="form-group">
+            <label for="fb-${i}-text">Body text</label>
+            <textarea class="form-control" id="fb-${i}-text"
+            placeholder="Float box #${i} text" rows="6"></textarea>
+          </div>
+        </form>
+      </div>
+    </div>
+  `;
+}
+
+// generate float box text from input
+updateFloatBoxes(4);
+
+function updateFloatBoxes(floatBoxCardLimit) {
+  for (let i = 1; i <= floatBoxCardLimit; i++) {
+    // update text
+    updateText("fb", "#fb-" + i + "-img-src", "#code-fb-" + i + "-img-src", "https://via.placeholder.com/300");
+    updateAltText("fb", "#fb-" + i + "-img-alt", "#code-fb-" + i + "-img-alt");
+    updateText("fb", "#fb-" + i + "-title", "#code-fb-" + i + "-title-text", "Float box #" + i + " title");
+    updateText("fb", "#fb-" + i + "-text", "#code-fb-" + i + "-text", "Float box #" + i + " text");
   }
 }
 
@@ -2409,6 +2521,7 @@ copyCode("cd");
 copyCode("crsl");
 copyCode("col");
 copyCode("dl");
+copyCode("fb");
 copyCode("geshi");
 copyCode("ib");
 copyCode("ls");

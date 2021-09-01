@@ -1,6 +1,6 @@
 <div class="component-content" id="component-card">
   <div class="component-header">
-    <h2 class="component-title">Card and Float box</h2>
+    <h2 class="component-title">Card</h2>
     <p><a href="https://keats.kcl.ac.uk/mod/book/view.php?id=3118035" target="_blank">Design System guidance and examples</a></p>
   </div>
   <div class="component-body container">
@@ -11,6 +11,7 @@
         <p>Complete the following fields:</p>
         <form>
             <div class="form-row">
+              <!--
               <div class="form-group">
                 <div class="input-group">
                   <div class="input-group-prepend">
@@ -22,6 +23,7 @@
                   </select>
                 </div>
               </div>
+              -->
               <div class="form-group col-md-4">
                 <div class="input-group">
                   <div class="input-group-prepend">
