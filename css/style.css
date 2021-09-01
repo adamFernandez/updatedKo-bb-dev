@@ -2,7 +2,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'KingsBureauGrot';
 }
 body, select, option {
-  font-family: 'KingsBureauGrotFiveOne';
+  font-family: "Open Sans";
 }
 .row {
   background: transparent;
@@ -22,6 +22,9 @@ main {
 input[type="text"] {
   height: auto;
 }
+input[type="radio"] {
+  margin-right: 0;
+}
 textarea {
   font-family: Open Sans, sans-serif;
 }
@@ -32,6 +35,7 @@ section {
   margin-bottom: 3rem;
 }
 form {
+  font-size: 14px;
   margin-bottom: 1rem;
 }
 .form-group {
@@ -39,7 +43,7 @@ form {
   padding-left: unset;
 }
 h1, p.header {
-  margin-left: 0.7rem;
+  margin-left: 0.75rem;
 }
 h2 {
   margin-top: 1rem;
@@ -64,7 +68,7 @@ img {
 }
 .component-content {
   display: none;
-  margin: 1.5rem 0.8rem;
+  margin: 1.5rem 0.75rem;
 }
 .component-content.selected {
   display: block;
@@ -143,6 +147,9 @@ pre {
   background-color: #ffffff;
 }
 /* collapse */
+.collapse-container .collapse-card .collapse-header button {
+  height: 24px;
+}
 .collapse-container .collapse-card .collapse-body {
   padding-right: unset;
 }
@@ -198,9 +205,3 @@ pre {
 .ml {
   margin-left: 14px;
 }
-
-.component-header {
-  margin-left: 1rem;
-}
-
-
