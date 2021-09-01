@@ -71,9 +71,9 @@
           </div>
           <div class="code-box">
 <pre class="code-text">
-&lt;div class=&quot;timeline-container timeline-2021-container&quot;&gt;
+<span id="timeline-print-code">&lt;div class=&quot;timeline-container timeline-2021-container&quot;&gt;
 <span id="code-timeline"></span>
-&lt;/div&gt;
+&lt;/div&gt;</span>
 </pre>
           </div>
         </section>

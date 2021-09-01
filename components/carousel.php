@@ -54,7 +54,7 @@
       <div class="col-md-7">
         <section class="preview">
           <h3 class="preview-title">Preview</h3>
-          <div class="preview-crs">
+          <div class="preview-crs" id="crs-preview-pane">
           <div class="new-carousel landscape-carousel w-100" tabindex="0" role="region" aria-label="gallery">
     <ul class="nc-gallery">        
     </ul>
@@ -81,7 +81,7 @@
           </div>
           <div class="code-box">
 <pre class="code-text">
-<span id="code-crs">&#60;div&#32;class&#61;&#34;new&#45;carousel&#32;<span class="crs-type">landscape</span>&#45;carousel&#32;w&#45;100&#34;&#32;tabindex&#61;&#34;0&#34;&#32;role&#61;&#34;region&#34;&#32;aria&#45;label&#61;&#34;gallery&#34;&#62;
+<span id="crs-print-code">&#60;div&#32;class&#61;&#34;new&#45;carousel&#32;<span class="crs-type">landscape</span>&#45;carousel&#32;w&#45;100&#34;&#32;tabindex&#61;&#34;0&#34;&#32;role&#61;&#34;region&#34;&#32;aria&#45;label&#61;&#34;gallery&#34;&#62;
   &#60;ul&#32;class&#61;&#34;nc&#45;gallery&#34;&#62;<span id="slides-code-crs"></span>
   &#60;/ul&#62;
   &#60;ul&#32;class&#61;&#34;nc&#45;buttons&#34;&#32;aria&#45;label&#61;&#34;gallery&#32;controls&#34;&#62;

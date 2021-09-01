@@ -13,21 +13,6 @@
           <h3>Options</h3>
           <p>Complete the following fields:</p>
           <form class="needs-validation" id="prcss-form" novalidate>
-            <div class="custom-control custom-checkbox mb-3">
-              <input type="checkbox" class="custom-control-input" id="prcss-check-label" unchecked>
-              <label class="custom-control-label" id="prcss-label-label" for="prcss-check-label">All Labels</label>
-            </div>
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <label class="input-group-text" for="prcss-arrows">Choose arrow type for all cards</label>
-              </div>
-              <select class="custom-select" id="prcss-arrows">
-                  <option value="1" selected>Arrow Down</option>
-                  <option value="2">Arrow up</option>
-                  <option value="3">Double Arrow</option>
-                  <option value="4">Relation</option>
-              </select>                
-            </div>
             <div class="input-group mb-3">
               <div class="input-group-prepend">
                 <label class="input-group-text" for="prcss-cards">No. of cards</label>
@@ -49,6 +34,21 @@
             <div class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input" id="prcss-check-caption" checked>
               <label class="custom-control-label" id="prcss-label-caption" for="prcss-check-caption">All Caption Titles</label>
+            </div>
+            <div class="custom-control custom-checkbox mb-3">
+              <input type="checkbox" class="custom-control-input" id="prcss-check-label" unchecked>
+              <label class="custom-control-label" id="prcss-label-label" for="prcss-check-label">All Labels</label>
+            </div>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="prcss-arrows">Choose arrow type for all cards</label>
+              </div>
+              <select class="custom-select" id="prcss-arrows">
+                  <option value="1" selected>Arrow Down</option>
+                  <option value="2">Arrow up</option>
+                  <option value="3">Double Arrow</option>
+                  <option value="4">Relation</option>
+              </select>                
             </div>            
           </form>
           <div class="collapse-container" id="prcss-collapse-container">
@@ -59,7 +59,7 @@
       <div class="col-md-7">
         <section class="preview">
           <h3 class="preview-title">Preview</h3>
-          <div class="preview-prcss">
+          <div class="preview-prcss" id="prcss-preview-pane">
             <div class="process-container container" role="list">
             </div>
           </div>
@@ -71,8 +71,8 @@
           </div>
           <div class="code-box">
 <pre class="code-text">
-&lt;div class=&quot;process-container container&quot; role=&quot;list&quot;&gt;
-  <span id="code-prcss"></span>&lt;/div&gt;
+<span id="prcss-print-code">&lt;div class=&quot;process-container container&quot; role=&quot;list&quot;&gt;
+  <span id="code-prcss"></span>&lt;/div&gt;</span>
 </pre>
           </div>
         </section>
