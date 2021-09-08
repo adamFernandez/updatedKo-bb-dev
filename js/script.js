@@ -200,7 +200,7 @@ $("#cd-layout").change(function(){
 });
 
 function cdLayout() {
-  $("#cd-layout").val() == "deck" && $("#cd-type").val() == "default"
+  $("#cd-layout").val() == "deck"
     ? ($("#code-cd-deck-open").text('<div class="card-deck">'),
       $("#code-cd-deck-close").text("</div>"),
       $(".code-cd-img-position").text("top"))
