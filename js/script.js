@@ -763,6 +763,10 @@ $(document).on("click", "#geshi-check-line-nos", function(event) {
   }
 }
 
+function replaceString(string, index, replacement) {
+  return string.substr(0, index) + replacement + string.substr(index + replacement.length);
+}
+
 // change infobox type
 $("#ib-type").change(function() {
   $("#code-ib-type").text($(this).val());
@@ -791,7 +795,7 @@ $("#ib-type").change(function() {
         )
       )
     : (
-      $("#code-ib-alert-class, #code-ib-alert-aria-label").empty(),
+      $("#code-ib-alert-class, #code-ib-alert-aria-label").empty(),        
       $(this).val() == "key-concept-box"
         ? (
           $("#ib-title-form").hide(),
@@ -824,7 +828,19 @@ $("#ib-type").change(function() {
                     $("#code-ib-body-open").html("&lt;p&gt;"), 
                     $("#code-ib-body-close").html("&lt;/p&gt;")
                   )
-                  : console.log("foo")
+                  : $(this).val().includes("feedback-box") 
+                    ? (
+                        $("#code-ib-type").text(replaceString($(this).val(), 12, " ")),
+                        $("#code-ib-title-open").html("\n    &lt;h5&gt;"),                  
+                        $("#code-ib-title-close").text("</h5>"), 
+                        $("#code-ib-body-open").text("<p>"),          
+                        $("#code-ib-body-close").text("</p>")
+                      ) 
+                      : $(this).val() == "media-box" 
+                        ? (
+                            $("#code-ib-body-open").text("<p>"),          
+                            $("#code-ib-body-close").text("</p>")
+                          ) : console.log("foo")
             ));
   preview("ib");
 });
