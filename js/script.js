@@ -1616,7 +1616,7 @@ const addSlides = (toElement, slideNum, current, encoded) => {
        &#60;/figure&#62;
     &#60;/li&#62;</span>`  
       : // not encoded generated output: preview area
-      `<li><figure>
+      `<li class="${total == 0 ? 'current-slide' : ''}"><figure>
       <img src=${imgSrc} alt="Alternative text" class="nc-image" id="crs-img-${total}">
       \t<figcaption class="nc-description">
       <h5 id="crs-card-title-${total}" style="display: ${caption ?  "" : "none" }">Caption title ${total + 1}</h5>
@@ -1637,41 +1637,58 @@ const removeSlides = (elements = [], cardNum) => {
 }
 
 // previous button disabled till next is pressed
+const carousel_slides = document.querySelector(".nc-gallery");
 
-document.querySelector(".nc-previous").disabled = true;
+
+
+
+const prevButton = document.querySelector(".nc-previous");
+const nextButton = document.querySelector(".nc-next");
+prevButton.disabled = true;
+
+const moveToSlide = (carousel, current, targetSlide, index) => {
+  // targetSlide.style = "z-index: 1000;";
+  // current.style = "z-index: -3;";
+  carousel.style.transform = 'translateX(-' + targetSlide.getBoundingClientRect().width * index + 'px)';
+  current.classList.remove('current-slide');
+  targetSlide.classList.add('current-slide');
+  const currentIndex = Array.from(current.parentElement.children).indexOf(current);
+  const targetIndex = Array.from(targetSlide.parentElement.children).indexOf(targetSlide);
+  dots.children[currentIndex].classList.remove('active');
+  dots.children[targetIndex].classList.add('active');
+}
+
+nextButton.onclick = function(e) {
+  const currentSlide = carousel_slides.querySelector('.current-slide');
+  const nextSlide = currentSlide.nextElementSibling;
+  moveToSlide(carousel_slides, currentSlide, nextSlide);
+}
+
+prevButton.onclick = function(e) {
+  const currentSlide = carousel_slides.querySelector('.current-slide'); 
+  const previousSlide = currentSlide.previousElementSibling;
+  moveToSlide(carousel_slides, currentSlide, previousSlide);
+}
 
 // controlling slide with dots
 
-// let current = document.querySelector(".active");
-// const crsDots = Array.from(dots.children);
-// const gallery = document.querySelector('.nc-gallery');
-// const slides = Array.from(gallery.children);
-
-
-// document.querySelector(".nc-previous").onclick = function() {
-//   current.previousElementSibling.classList.add("active");
-//   current.classList.remove("active"); 
+ dots.onclick = function(e) {
+  const currentSlide = carousel_slides.querySelector('.current-slide');
+  const currentDot = dots.querySelector('.active');
+  const targetDot = e.target.closest('ul.indic-dots li');
   
-// }
+  if (!targetDot) return;
 
-// document.querySelector(".nc-next").onclick = function() {
-//   current.classList.remove("active");
-//   current.nextElementSibling.classList.add("active");  
- 
-// }
+  currentDot.classList.remove('active');
+  targetDot.classList.add('active');
+  const targetIndex = Array.from(e.target.parentElement.children).indexOf(e.target);
+  
+  const targetSlide = carousel_slides.children[targetIndex];
+  console.log(targetIndex, targetSlide, targetSlide.getBoundingClientRect().width * (targetIndex));
+  moveToSlide(carousel_slides, currentSlide, targetSlide, targetIndex);
 
 
-// dots.onclick = function(e) {
-//   const targetDot = e.target.closest('li');
-
-//   if (!targetDot) return;
-//   document.querySelector(".active").classList.remove("active");
-//   targetDot.classList.add("active");
-//   const currentSlide = e.target.id;
-//   const targetIndex = crsDots.findIndex(dot => dot === targetDot);
-//   console.log(targetIndex);
-
-// }
+ }
 
 
 
@@ -1819,7 +1836,7 @@ const addProcessCard = (toElement, cardNum, current, encoded) => {
         </div>
       </div>
       <div class="connector-container no-gutters">
-        <div class="process-label ${labelP ? '' : 'sr-only'} top-label" id="top-label-${total}">Leads to</div>
+        <div class="process-label ${labelP ? '' : 'sr-only'} top-label" id="top-label-${total}"> </div>
         <div class="icon arrow-down" id="icon-${total}" aria-hidden="true"></div>
         <div class="process-label bottom-label ${labelP ? '' : 'sr-only'}" id="bottom-label-${total}">and is caused by</div>
       </div>
@@ -1851,15 +1868,17 @@ prcssLabelCheck.onclick = function() {
     replaceClass(this,'.process-label','sr-only','#prcss-label-label','All Labels'),
     // remove sr-only class from the code area
     hideElements(".prcss-label-sr"),
-    // hide the bottom label unless arrow is double
-    arrowType.value == "3"
-      ? (showElements(".bottom-label", ""), 
-        writeText([".top-label",".top-label-text"], "causes"))  
-      : (hideElements(".bottom-label"), writeText([".top-label"], "Leads to")),
-    // on arrow type 4 change the top label
-    arrowType.value == "4"
-      ? (hideElements(".bottom-label"), writeText([".top-label",".top-label-text"], "relates to"))  
-      : ("")
+    processArrows(true, "prcss-arrows",".icon",""),
+    document.querySelectorAll("#prcss-collapse-container select").forEach((s) => { s.value = arrowType.value; })
+    // hide the bottom label unless arrow is double    
+    // arrowType.value == "3"
+    //   ? (showElements(".bottom-label", "inline"), 
+    //     writeText([".top-label",".top-label-text"], "causes"))  
+    //   : (hideElements(".bottom-label"), writeText([".top-label"], "leads to")),
+    // // on arrow type 4 change the top label
+    // arrowType.value == "4"
+    //   ? (hideElements(".bottom-label"), writeText([".top-label",".top-label-text"], "relates to"))  
+    //   : ("")
   ) : 
   (
     // set all label checkboxes to false
@@ -1913,8 +1932,6 @@ const prcssCaptionElements = ['h4.card-text','.prcss-caption-form','.prcss-code-
 processCheckBox("#prcss-check-caption",prcssCaptionElements);
 
 //variables counter individual checkboxes checked status c=caption, i=image, l=label
-
-
 let iP = 0; let lP = 0; let cP = 0;
 // imgP ? iP = 3 : iP = 0; 
 // captionP ? cP = 3 : cP; 
@@ -1931,7 +1948,7 @@ prcssCollapse.onclick = function(e) {
   let totalForms = this.childElementCount;
   let prcssElements = [];
   let eId = e.target.id;
-  console.log(eId);
+  //console.log(eId);
   let _id = eId.slice(-1);
   if (!eId) {
     return;
@@ -2036,6 +2053,7 @@ function processArrows(group, eId, target, _id){
   let iconType = group == false ? `#prcss-icon-type-${_id}` : `.prcss-icon-type`;
   let eTarget = group === false ?  target + "-" + _id : target; 
   document.getElementById(eId).onchange = function () {
+    console.log(`Selected value: ${this.value}, ${this.value.innerText}`)
     if (this.value > 0) {
       switch(this.value) {
         case "1":
@@ -2053,7 +2071,7 @@ function processArrows(group, eId, target, _id){
           group ? document.querySelectorAll("#prcss-collapse-container select").forEach((s) => { s.value = "2"; }) : "";
           switchClass(eTarget, ["arrow-down","relate"], "arrow-up");
           hideElements(bottomLabel);
-          writeText([topText,topLabel], "leads to");
+          writeText([topText,topLabel], "caused by");
           writeText([iconType]," arrow-up");
           break;
         case "3":
@@ -2293,7 +2311,7 @@ function addCard(toSection, cardNum, current, type = "Card") {
   
 } 
 
-// create multiple fields
+// create multiple fields in a form
 function createFields(names = [], comp, tot, labelText =[], placeholder =[],type, bodyField = false) {
   let field = `<div class="input-group mb-3">`;
   names.forEach((n,i) => { 
@@ -2391,7 +2409,7 @@ function processCollapseForm(formId, source, altText) {
 
 
 // Toggle on checkbox checked elements in an array
-// -id: checkbox id // -elements: array of elements to show or hide // -label: label id to manipulate 
+// -selector: checkbox id // -elements: array of elements to show or hide  
 // -message: label text message,  "Image caption")
 function processCheckBox(selector,elements = []) {
   let el = document.querySelector(selector);
