@@ -2109,7 +2109,7 @@ function processArrows(group, eId, target, _id){
   cardNum = Number(cardNum);
   let card = "";
   for (let i = 0; i < cardNum; i++) { // for encoded generated output: code area
-    let total = i + current;
+    let total = i + current; 
     card += encoded ? `  &lt;div class=&quot;timeline-card<span id="timeline-code-highlight-${total}" style="display: none"> highlight</span>&quot;&gt; 
     &lt;div class=&quot;card-body&quot;&gt; 
       <span class="timeline-code-date-tag" id="timeline-code-date-tag-${total}" style="display:${caption ? "" : "none"};">&#60;h3 class=&quot;date-label&quot;&#62;
@@ -2249,13 +2249,12 @@ processCollapseForm("#timeline-collapse-container","https://via.placeholder.com/
  * *********************************************** */  
  
 // addCard form to collapse area 
-// -toSection: section the card/s will be appended //  -cardNum : number of cards // -component: component function is working on (crs,prcss, geshi, quo, etc)
-// captionChecked: if true caption displays 'block' : displays 'none'
+// -toSection: section the card/s will be appended //  -cardNum : number of cards 
+// -current: current number cards already displayed // 
 
 function addCard(toSection, cardNum, current, type = "Card") {
   let component = toSection.slice(1,toSection.indexOf("-"));
   let total = 0;
-  let xVar = true;
   // checks whether the checkBoxesArray is checked or not and returns/assign a name(second array[variables]) for each of the checkbox elements.
   component == "crs"  ? checkBoxesChecked([`#crs-check-caption`], ["caption"]) : ""; 
   component == "prcss" ? checkBoxesChecked([`#prcss-check-label`,`#prcss-check-img`,`#prcss-check-caption`], [`label`,"image","caption"]) : "";
@@ -2352,7 +2351,7 @@ const removeCards = (elements = [], cardNum) => {
   }
 }
 
-//Hide the last element of a group and show the rest -way: "block"(displays block) / "" (just override the "none")  
+//Hide the last element of a group and show the rest -way: "block"(displays block) / "" (just override the "none") / way will be the display property for the selected element  
 function hideLast(elements, way = "block"){
   elements.forEach((e) => { Array.from(document.querySelectorAll(e)).forEach((el,i,a) => { i < a.length -1 ? el.style.display = way : el.style.display = "none"; }) })
 }
